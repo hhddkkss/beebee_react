@@ -1,27 +1,79 @@
-import { React, useEffect, useState } from 'react'
+import { React, useEffect, useState, useRef } from 'react'
 import axios from 'axios'
+import '../styles/m-navbar.css'
 import '../styles/products.css'
 
 function Products() {
   //產品
   const [products, setProducts] = useState([])
   //排序
-  const [sortlist, setSortList] = useState('上架時間:最新（預設）')
+  const [sortList, setSortList] = useState('上架時間:最新(預設)')
 
   const sortOption = [
-    '上架時間:最新（預設）',
+    '上架時間:最新(預設)',
     '價格:由高到低',
     '價格:由低至高',
-    '充足大電量',
-    '尺寸不傷眼',
+    '超大電量',
+    '不傷眼大螢幕',
   ]
+
+  //產品分類
+  const productTypeOption = [
+    {
+      imgSrc: './images/class-all.jpg',
+      imgAlt: 'all',
+      title: 'All',
+      product_category_id: 4,
+    },
+    {
+      imgSrc: './images/class-phone.jpg',
+      imgAlt: 'Cellphone',
+      title: 'Cellphone',
+      product_category_id: 1,
+    },
+    {
+      imgSrc: './images/image 6.png',
+      imgAlt: 'Tablet',
+      title: 'Tablet',
+      product_category_id: 2,
+    },
+    {
+      imgSrc: './images/image7.png',
+      imgAlt: 'Earphone',
+      title: 'Earphone',
+      product_category_id: 3,
+    },
+  ]
+  const [productType, setProductType] = useState(4)
+  //品牌分類
+  const brandOption = [
+    '全部品牌',
+    'Apple',
+    'Samsung',
+    'Asus',
+    'Oppo',
+    '小米',
+    'Sony',
+    'Realme',
+    '其他品牌',
+  ]
+
+  const [brand, setBrand] = useState('')
+
+  //開關
+  const [toggleSortList, setToggleSortList] = useState(false)
+  const [toggleCartButton, setToggleCartButton] = useState(false)
+  const [toggleCompare, setToggleCompare] = useState([])
+
+  //搜尋
+  const [keyword, setKeyword] = useState('')
+  const [inputText, setInputText] = useState('')
 
   const getProductData = async () => {
     const res = await axios.get('http://localhost:3030/products/pd_api')
     const initialData = res.data.map((v, i) => {
       return { ...v, isLiked: false }
     })
-
     console.log(initialData)
     setProducts(initialData)
   }
@@ -33,6 +85,71 @@ function Products() {
         return { ...v }
       }
     })
+  }
+
+  //搜尋
+  const filterByKeyword = (arr, keyword) => {
+    return arr.filter((v, i) =>
+      v.product_name
+        .split('')
+        .filter((v) => !v.includes(' '))
+        .join('')
+        .toLowerCase()
+        .includes(keyword.toLowerCase().trim())
+    )
+  }
+
+  //篩選
+
+  const filterByPrice = (arr, sortList) => {
+    switch (sortList) {
+      case '價格:由高到低':
+        return [...arr].sort((a, b) => b.product_price - a.product_price)
+      case '價格:由低至高':
+        return [...arr].sort((a, b) => a.product_price - b.product_price)
+      default:
+        return [...arr].sort((a, b) => a.product_id - b.product_id)
+    }
+  }
+
+  //商品分類
+  const filterProductType = (arr, productType) => {
+    switch (productType) {
+      case 1:
+        return arr.filter((v) => v.product_category_id === productType)
+      case 2:
+        return arr.filter((v) => v.product_category_id === productType)
+      case 3:
+        return arr.filter((v) => v.product_category_id === productType)
+      default:
+        return arr.map((v) => v)
+    }
+  }
+  //品牌分類
+
+  const otherBrand = [5, 8, 1, 9, 2, 10]
+  const filterBrandType = (arr, brand) => {
+    switch (brand) {
+      case '全部品牌':
+        return arr.map((v) => v)
+      case 'Apple':
+        return arr.filter((v) => v.brand_category_id === 5)
+      case 'Samsung':
+        return arr.filter((v) => v.brand_category_id === 8)
+      case 'Asus':
+        return arr.filter((v) => v.brand_category_id === 1)
+      case 'Oppo':
+        return arr.filter((v) => v.brand_category_id === 9)
+      case '小米':
+        return arr.filter((v) => v.brand_category_id === 2)
+      case 'Sony':
+        return arr.filter((v) => v.brand_category_id === 10)
+      case '其他品牌':
+        return arr.filter((v) => !otherBrand.includes(v.brand_category_id))
+
+      default:
+        return arr.map((v) => v)
+    }
   }
 
   useEffect(() => {
@@ -97,7 +214,12 @@ function Products() {
                 />
               </svg>
             </button>
-            <button className="btn cart">
+            <button
+              className="btn cart"
+              onClick={() => {
+                setToggleCartButton(!toggleCartButton)
+              }}
+            >
               <svg
                 width="24"
                 height="24"
@@ -169,7 +291,13 @@ function Products() {
           </svg>
         </nav>
 
-        <div className="cart-hover-box">
+        <div
+          className={
+            toggleCartButton
+              ? 'cart-hover-box cart-hover-box-on'
+              : 'cart-hover-box cart-hover-box-off'
+          }
+        >
           <div className="triangle"></div>
 
           <div className="my-cards">
@@ -266,7 +394,7 @@ function Products() {
         </ul>
       </div>
       {/* <!-- 手機版品牌類別 --> */}
-      <div className="cotainer-fluid">
+      <div className="container-fluid">
         <ul className="p-0 m-brand-class">
           <li className="brand-active">
             <a href="#">
@@ -295,74 +423,42 @@ function Products() {
         {/* <!-- 商品類別 --> */}
         <section className="product-class">
           <div className="box-wrap">
-            <div className="box">
-              <img src="./images/class-phone.jpg" alt="phone" />
-              <a href="#">
-                <div className="mask">
-                  All Products
-                  <img src="./images/Frame 372.png" alt="focus-img" />
-                </div>
-              </a>
-            </div>
-            <div className="box">
-              <img src="./images/class-phone.jpg" alt="phone" />
-              <a href="#">
-                <div className="mask">
-                  Cellphone
-                  <img src="./images/Frame 372.png" alt="focus-img" />
-                </div>
-              </a>
-            </div>
+            {productTypeOption.map((v) => {
+              return (
+                <div className="box" key={v.title}>
+                  <img src={v.imgSrc} alt={v.imgAlt} />
 
-            <div className="box">
-              <img src="./images/image 6.png" alt="phone" />
-              <a href="#">
-                <div className="mask">
-                  Tablet
-                  <img src="./images/Frame 372.png" alt="focus-img" />
+                  <div
+                    className="mask"
+                    onClick={() => {
+                      setProductType(v.product_category_id)
+                    }}
+                  >
+                    {v.title}
+                    <img src="./images/Frame 372.png" alt="focus-img" />
+                  </div>
                 </div>
-              </a>
-            </div>
-
-            <div className="box">
-              <img src="./images/image 7.png" alt="phone" />
-              <a href="#">
-                <div className="mask">
-                  Earphone
-                  <img src="./images/Frame 372.png" alt="focus-img" />
-                </div>
-              </a>
-            </div>
+              )
+            })}
           </div>
         </section>
 
         {/* <!-- 品牌類別 --> */}
         <section className="brand-class">
           <ul className="brand-area">
-            <li className="brand-item">
-              <a href="#">Apple</a>
-            </li>
-            <li className="brand-item">
-              <a href="#">Samsung</a>
-            </li>
-            <li className="brand-item">
-              <a href="#">Asus</a>
-            </li>
-            <li className="brand-item">
-              <a href="#">Oppo</a>
-            </li>
-            <li className="brand-item">
-              <a href="#">小米</a>
-            </li>
-            <li className="brand-item">
-              <a href="#">Sony</a>
-            </li>
-            <li className="brand-item">
-              <a href="#">Realme</a>
-            </li>
-            <li className="brand-item">
-              <a href="#">其他品牌</a>
-            </li>
+            {brandOption.map((v, i) => {
+              return (
+                <li className="brand-item" key={i}>
+                  <p
+                    onClick={() => {
+                      setBrand(v)
+                    }}
+                  >
+                    {v}
+                  </p>
+                </li>
+              )
+            })}
           </ul>
         </section>
 
@@ -386,8 +482,19 @@ function Products() {
                 className="search-input"
                 placeholder="輸入要尋找的商品"
                 autoComplete="off"
+                value={inputText}
+                onChange={(e) => {
+                  setInputText(e.target.value)
+                }}
               />
-              <button className="btn btn-search">開始搜尋</button>
+              <button
+                className="btn btn-search"
+                onClick={() => {
+                  setKeyword(inputText)
+                }}
+              >
+                開始搜尋
+              </button>
             </div>
             {/* <!-- 收藏 --> */}
             <div className="wrap">
@@ -402,22 +509,34 @@ function Products() {
                 <a className="sort-to-list">
                   <i className="fa-solid fa-list"></i>
                 </a>
-                <span className="sort-selection">
-                  上架時間:最新（預設）
+                <span
+                  className="sort-selection"
+                  onClick={() => {
+                    setToggleSortList(!toggleSortList)
+                  }}
+                >
+                  {sortList}
                   <i className="fa-solid fa-caret-down"></i>
                 </span>
               </div>
             </div>
           </div>
 
-          <ul className="sort-list">
+          <ul
+            className={
+              toggleSortList
+                ? 'sort-list sort-list-on'
+                : 'sort-list sort-list-off'
+            }
+          >
             {sortOption.map((v, i) => {
               return (
                 <li
                   key={i}
                   className="sort-item"
                   onClick={() => {
-                    setSortList({ v })
+                    setSortList(v)
+                    setToggleSortList(!toggleSortList)
                   }}
                 >
                   {v}
@@ -428,7 +547,13 @@ function Products() {
 
           <div className="product-area">
             <div className="row row-cols-lg-5">
-              {products.map((v, i) => {
+              {filterBrandType(
+                filterProductType(
+                  filterByPrice(filterByKeyword(products, keyword), sortList),
+                  productType
+                ),
+                brand
+              ).map((v, i) => {
                 return (
                   <div className="col-6" key={v.product_id}>
                     <div className="my-card">
