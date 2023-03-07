@@ -14,8 +14,6 @@ function LoginPage() {
     return
   }
 
-  useEffect(() => {}, isActive)
-
   return (
     <>
       <div className="wrapper">
