@@ -4,6 +4,8 @@ import axios from 'axios'
 import './../styles/login.css'
 import Navbar from '../component/Navbar'
 import { LOGIN } from './../component/LoginApi'
+import SignipForm from './SignupForm'
+import LoginForm from './LoginForm'
 
 function LoginPage() {
   // import AuthContext from '../contexts/AuthContext'
@@ -18,6 +20,10 @@ function LoginPage() {
     console.log(isActive)
     setActive(!isActive)
     return
+  }
+
+  function setLoginFormValue(e) {
+    setLoginForm({ ...loginForm, [e.target.name]: e.target.value })
   }
 
   return (
@@ -178,7 +184,7 @@ function LoginPage() {
               <button className="">Sing Up</button>
               <button className="active">Login</button>
             </div>
-            <div
+            {/* <div
               className={isActive ? 'login_form_out form_area' : 'form_area'}
             >
               <div className="login_form_title">Welcome back</div>
@@ -268,9 +274,13 @@ function LoginPage() {
                   </button>
                 </div>
               </form>
-            </div>
-
-            <div
+            </div> */}
+            <LoginForm
+              isActive={isActive}
+              loginForm={loginForm}
+              setLoginFormValue={setLoginFormValue}
+            />
+            {/* <div
               className={isActive ? ' form_area' : 'form_area signup_form_out'}
             >
               <div className="sign_form_title">Welcome</div>
@@ -280,8 +290,8 @@ function LoginPage() {
                   <label className="label">姓名</label>
                   <input
                     type="text"
-                    placeholder="e-mail"
-                    name="email"
+                    placeholder=""
+                    name="name"
                     className="form_input"
                   />
                 </div>
@@ -323,7 +333,8 @@ function LoginPage() {
                   </button>
                 </div>
               </form>
-            </div>
+            </div> */}
+            <SignipForm isActive={isActive} />
           </div>
         </div>
       </div>
