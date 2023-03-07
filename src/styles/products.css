@@ -65,7 +65,6 @@ header {
   gap: 100px;
 }
 .nav_btn_group > button {
-  /* font-family: "Josefin Sans"; */
   font-weight: 400;
   font-size: 20px;
   line-height: 20px;
@@ -90,11 +89,11 @@ header {
 .navbar_dark > .nav_top > .btn > svg {
   stroke: #f4f4f4;
 }
-header .cart:hover .cart-hover-box {
-  /* visibility: visible;
-  height: fit-content; */
-  /* display: block */
-}
+/* header .cart:hover .cart-hover-box {
+  visibility: visible;
+  height: fit-content;
+  display: block;
+} */
 
 .m-nav {
   display: none;
@@ -109,7 +108,12 @@ header .cart:hover .cart-hover-box {
   top: -10px;
   right: 20px;
 }
-
+.cart-hover-box-on {
+  display: block;
+}
+.cart-hover-box-off {
+  display: none;
+}
 .cart-hover-box {
   width: 390px;
   height: fit-content;
@@ -120,12 +124,15 @@ header .cart:hover .cart-hover-box {
   right: 40px;
   top: 90px;
   z-index: 5;
-  display: none;
-  /* visibility: hidden;   */
+  /* display: none; */
 }
 
+.my-card:hover {
+  transform: translateY(-5px);
+  transition: all 0.5s ease-in-out;
+}
 .my-card:hover .img-wrap img {
-  transform: scale(1.1);
+  transform: scale(1.03);
   transition: all 0.5s ease-in-out;
 }
 
@@ -326,6 +333,7 @@ header .cart:hover .cart-hover-box {
   justify-content: center;
   align-items: center;
   transition: all 0.5s ease-in;
+  font-family: creamfont;
 }
 
 .product-class .mask img {
@@ -369,20 +377,23 @@ header .cart:hover .cart-hover-box {
   padding: 1rem;
 }
 
-.brand-class .brand-area .brand-item a {
+.brand-class .brand-area .brand-item p {
   color: #fff;
   text-decoration: none;
   transition: all 0.5s ease;
+  cursor: pointer;
 }
 
-.brand-class .brand-area .brand-item a:hover {
+.brand-class .brand-area .brand-item p:hover {
   color: var(--textColorWhite);
+  transform: translateY(1px);
 }
 
 /** 商品區  */
 .products {
   /* padding: 0 100px; */
   min-height: 100vh;
+  position: relative;
 }
 
 .slogan {
@@ -391,6 +402,7 @@ header .cart:hover .cart-hover-box {
 .products .slogan span {
   color: var(--deepBlue);
   font-weight: 700;
+  position: relative;
 }
 
 /** 商品區 搜尋 */
@@ -420,7 +432,7 @@ header .cart:hover .cart-hover-box {
   border: 1px solid var(--wordGray);
   background-color: var(--wordGray);
   position: absolute;
-  z-index: 10;
+  z-index: 1;
   color: #fff;
 }
 
@@ -481,14 +493,21 @@ header .cart:hover .cart-hover-box {
 
 .product-sort .sort-selection .fa-caret-down {
   transition: all 0.2s ease-in;
+  margin-left: 0.5rem;
 }
 
+.sort-list-on {
+  transform: scale(1);
+}
+.sort-list-off {
+  transform: scale(0);
+}
 .sort-list {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 1rem;
-  transform: scale(0);
+  /* transform: scale(0); */
   position: absolute;
-  right: 108px;
+  right: 0;
   border-radius: 3px;
   transition: all 0.5s ease-in-out;
   z-index: 10;
@@ -517,16 +536,21 @@ header .cart:hover .cart-hover-box {
 /** card-top */
 .product-area .my-card .card-top {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   align-items: start;
   padding: 0.5rem 0.25rem;
+  position: relative;
 }
 .fa-heart,
 .fa-cart-shopping,
 .card-bottom svg {
   cursor: pointer;
 }
-
+.product-area .fa-heart {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 .fa-solid.fa-heart {
   color: var(--orange1);
 }

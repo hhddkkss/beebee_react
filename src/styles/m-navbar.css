@@ -1,0 +1,36 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --textColorWhite: #d7d7d7;
+  --deepBlue: #233a66;
+  --wordGray: #4f4f4f;
+  --orange1: #e59069;
+  --deepYellow: #f3d775;
+  --bgGray: #727272;
+}
+
+.m-nav svg {
+  width: 100px;
+  height: 63px;
+}
+
+.m-nav .btn-back {
+  font-size: 24px;
+  transform: translate(-110px);
+}
+
+.m-nav {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.nav-dark {
+  background-color: var(--deepBlue);
+  color: #fff;
+}

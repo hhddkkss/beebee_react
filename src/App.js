@@ -1,4 +1,4 @@
-import Products from './component/Products'
+import Products from './Products/Products'
 import LoginPage from './memberLogin/LoginPage'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
@@ -11,7 +11,6 @@ function App() {
           <Route path="/member_login" element={<LoginPage />} />
         </Routes>
       </Router>
-      <Products />
     </>
   )
 }
