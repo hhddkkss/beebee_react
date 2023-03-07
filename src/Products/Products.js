@@ -1,21 +1,46 @@
 import { React, useEffect, useState, useRef } from 'react'
 import axios from 'axios'
+import Navbar from './Navbar'
 import '../styles/m-navbar.css'
 import '../styles/products.css'
 
 function Products() {
+  //輪播牆
+  const carouselRef = useRef(null)
+  const [movement, setMoveMent] = useState(0)
+  //開關
+  const [toggleSortList, setToggleSortList] = useState(false)
+  const [toggleCartButton, setToggleCartButton] = useState(false)
+  const [toggleCompare, setToggleCompare] = useState([])
+  //收藏
+  const [favorites, setFavorite] = useState([])
   //產品
   const [products, setProducts] = useState([])
+  //品牌
+  const [brand, setBrand] = useState('')
   //排序
   const [sortList, setSortList] = useState('上架時間:最新(預設)')
+  //搜尋
+  const [keyword, setKeyword] = useState('')
+  const [inputText, setInputText] = useState('')
+  //產品分類
+  const [productType, setProductType] = useState(4)
+  //比較列表
+  const [compareCount, setCompareCount] = useState(0)
 
-  const sortOption = [
-    '上架時間:最新(預設)',
-    '價格:由高到低',
-    '價格:由低至高',
-    '超大電量',
-    '不傷眼大螢幕',
-  ]
+  const carouselMove = () => {
+    setTimeout(() => {
+      setMoveMent(movement + 1)
+
+      if (movement === 3) {
+        setMoveMent(1)
+      }
+    }, 5000)
+
+    carouselRef.current.style.transform = `translateX(${-movement * 100}vw)`
+  }
+
+  const sortOption = ['上架時間:最新(預設)', '價格:由高到低', '價格:由低至高']
 
   //產品分類
   const productTypeOption = [
@@ -44,7 +69,14 @@ function Products() {
       product_category_id: 3,
     },
   ]
-  const [productType, setProductType] = useState(4)
+
+  const productNumToText = () => {
+    if (productType === 1) return '手機'
+    if (productType === 2) return '平板'
+    if (productType === 3) return '耳機'
+    if (productType === 4) return '全部商品'
+  }
+
   //品牌分類
   const brandOption = [
     '全部品牌',
@@ -58,17 +90,6 @@ function Products() {
     '其他品牌',
   ]
 
-  const [brand, setBrand] = useState('')
-
-  //開關
-  const [toggleSortList, setToggleSortList] = useState(false)
-  const [toggleCartButton, setToggleCartButton] = useState(false)
-  const [toggleCompare, setToggleCompare] = useState([])
-
-  //搜尋
-  const [keyword, setKeyword] = useState('')
-  const [inputText, setInputText] = useState('')
-
   const getProductData = async () => {
     const res = await axios.get('http://localhost:3030/products/pd_api')
     const initialData = res.data.map((v, i) => {
@@ -77,7 +98,7 @@ function Products() {
     console.log(initialData)
     setProducts(initialData)
   }
-
+  //加入收藏
   const toggleLiked = (arr, product_id) => {
     return arr.map((v, i) => {
       if (product_id === v.product_id) return { ...v, isLiked: !v.isLiked }
@@ -152,13 +173,41 @@ function Products() {
     }
   }
 
+  //收藏商品
+  const handleAddOrDeleteFavorite = (product_id) => {
+    const hasFavorite = favorites.includes(product_id)
+
+    if (hasFavorite) {
+      const newFavorites = [...favorites].filter((v) => v !== product_id)
+      setFavorite(newFavorites)
+      localStorage.setItem('favorites', JSON.stringify(newFavorites))
+    } else {
+      const newFavorites = [...favorites, product_id]
+      setFavorite(newFavorites)
+      localStorage.setItem('favorites', JSON.stringify(newFavorites))
+    }
+  }
+
   useEffect(() => {
     getProductData()
   }, [])
 
+  useEffect(() => {
+    setBrand('全部品牌')
+  }, [productType])
+
+  useEffect(() => {
+    carouselMove()
+  }, [movement])
   return (
     <>
-      <header>
+      <Navbar
+        setToggleCartButton={setToggleCartButton}
+        toggleCartButton={toggleCartButton}
+        favorites={JSON.parse(localStorage.getItem('favorites'))}
+        products={products}
+      />
+      {/* <header>
         <nav className="beebee_navbar navbar_dark">
           <div className="beebee_logo">
             <svg
@@ -330,11 +379,12 @@ function Products() {
             </a>
           </div>
         </div>
-      </header>
+      </header> */}
+
       {/* <!-- 輪播牆 --> */}
 
       <section className="my-carousel">
-        <ul className="wall">
+        <ul className="wall" ref={carouselRef}>
           <li className="my-carousel-item">
             <img src="./images/product-carousel.png" alt="" />
             <div className="advertise">
@@ -363,12 +413,24 @@ function Products() {
           <li className="my-carousel-item">
             <img src="./images/product-carousel3.png" alt="" />
             <div className="advertise">
-              <img src="./images/tape.png" className="tape" alt="" />
               <div className="advertise-text">
                 <h2>本週主打商品</h2>
                 <p>
                   擁有更快速的處理器、更優秀的攝影技術、更長效的電池續航力以及更出色的顯示屏幕。選擇
                   iPhone 14，體驗科技的極致力量！
+                </p>
+              </div>
+            </div>
+          </li>
+          <li className="my-carousel-item">
+            <img src="./images/product-carousel.png" alt="" />
+            <div className="advertise">
+              <img src="./images/tape.png" className="tape" alt="" />
+              <div className="advertise-text">
+                <h2>本週主打商品</h2>
+                <p>
+                  擁有優秀的攝影系統、高效能的處理器、長效的電池續航力以及快速的
+                  5G 上網速度。選擇 iPhone 13，讓您的生活更輕鬆、更便捷！
                 </p>
               </div>
             </div>
@@ -545,6 +607,15 @@ function Products() {
             })}
           </ul>
 
+          <p className="user-guide">
+            {'產品分類'}
+            {'  '}
+            <i className="fa-solid fa-chevron-right"></i> {productNumToText()}{' '}
+            <i className="fa-solid fa-chevron-right"></i>
+            {'  '}
+            {brand}
+          </p>
+
           <div className="product-area">
             <div className="row row-cols-lg-5">
               {filterBrandType(
@@ -565,11 +636,12 @@ function Products() {
                           />
                         </div>
 
-                        {v.isLiked ? (
+                        {/* {v.isLiked ? (
                           <i
                             className="fa-solid fa-heart"
                             onClick={() => {
                               setProducts(toggleLiked(products, v.product_id))
+                              handleAddOrDeleteFavorite(v.product_id)
                             }}
                           ></i>
                         ) : (
@@ -577,6 +649,27 @@ function Products() {
                             className="fa-regular fa-heart"
                             onClick={() => {
                               setProducts(toggleLiked(products, v.product_id))
+                              handleAddOrDeleteFavorite(v.product_id)
+                            }}
+                          ></i>
+                        )} */}
+
+                        {localStorage
+                          .getItem('favorites')
+                          .includes(v.product_id) ? (
+                          <i
+                            className="fa-solid fa-heart"
+                            onClick={() => {
+                              setProducts(toggleLiked(products, v.product_id))
+                              handleAddOrDeleteFavorite(v.product_id)
+                            }}
+                          ></i>
+                        ) : (
+                          <i
+                            className="fa-regular fa-heart"
+                            onClick={() => {
+                              setProducts(toggleLiked(products, v.product_id))
+                              handleAddOrDeleteFavorite(v.product_id)
                             }}
                           ></i>
                         )}
@@ -664,7 +757,7 @@ function Products() {
           <img src="./images/14-128G-red.png" alt="" />
         </div>
         <div className="count-wrap">
-          <span>2</span>
+          <span>{compareCount}</span>
         </div>
         <p className="start-compare">開始比較</p>
       </div>
