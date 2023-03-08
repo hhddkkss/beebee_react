@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { useState, useEffect, useContext } from 'react'
 import './../styles/login.css'
-import Navbar from '../component/Navbar'
-import { LOGIN } from './../component/LoginApi'
 import SignipForm from './SignupForm'
 import LoginForm from './LoginForm'
+import LoginInfo from './LoginInfo'
+import AuthContext from '../Contexts/AuthContext'
 
-function LoginPage() {
+function MemberLogin() {
   // import AuthContext from '../contexts/AuthContext'
   const [isActive, setActive] = useState(1)
   const [loginForm, setLoginForm] = useState({
@@ -25,10 +23,12 @@ function LoginPage() {
     address_dist: '',
     address_rd: '',
   })
+  const [infoState, setInfoState] = useState(1)
+
   // const { setMyAuth } = useContext(AuthContext)
-  // const navigate = useNavigate()
+
   function slice() {
-    isActive == 1 ? setActive(2) : setActive(1)
+    isActive === 1 ? setActive(2) : setActive(1)
   }
 
   function setLoginFormValue(e) {
@@ -43,7 +43,26 @@ function LoginPage() {
       // 登入畫面
       case 1:
         return a
-        break
+
+      //申請畫面一
+      case 2:
+        return b
+
+      //申請畫面二
+      case 3:
+        return c
+
+      default:
+        return a
+    }
+  }
+
+  function infoClass(a, b, c) {
+    switch (infoState) {
+      // 登入畫面
+      case 1:
+        return a
+
       //申請畫面一
       case 2:
         return b
@@ -102,14 +121,14 @@ function LoginPage() {
           className={activeClass(
             'ellipse_main',
             'ellipse_main ellipse_main2 ',
-            'ellipse_main ellipse_main2 '
+            'ellipse_main ellipse_main3 '
           )}
         ></div>
         <div
           className={activeClass(
             'ellipse_light',
             'ellipse_light ellipse_light2',
-            'ellipse_light ellipse_light2'
+            'ellipse_light ellipse_light3'
           )}
         ></div>
 
@@ -223,91 +242,48 @@ function LoginPage() {
             )}
           >
             <div className="mobile_switch_btn login_pc_hidden">
-              <button className="">Sing Up</button>
-              <button className="active">Login</button>
+              <button
+                className={activeClass('', 'active', 'active')}
+                onClick={(e) => {
+                  setActive(2)
+                }}
+              >
+                Sing Up
+              </button>
+              <button
+                className={activeClass('active', '', '')}
+                onClick={(e) => {
+                  setActive(1)
+                }}
+              >
+                Login
+              </button>
             </div>
 
+            {/* 登入 */}
             <LoginForm
               loginForm={loginForm}
               setLoginFormValue={setLoginFormValue}
               activeClass={activeClass}
+              setInfoState={setInfoState}
             />
 
             {/* 申請 */}
-            {/* <div
-              className={isActive ? ' form_area' : 'form_area signup_form_out'}
-            >
-              <div className="sign_form_title">Welcome</div>
-              <div className="now_page login_mobile_hidden">Sign up</div>
-              <form name="sign_form" className="login_form">
-                <div className="form_box">
-                  <label className="label">姓名</label>
-                  <input
-                    type="text"
-                    placeholder=""
-                    name="name"
-                    className="form_input"
-                    onChange={(e) => {
-                      setSingupFormValue(e)
-                    }}
-                  />
-                </div>
-                <div className="form_box">
-                  <label className="label">E-mail</label>
-                  <input
-                    type="text"
-                    placeholder="e-mail"
-                    name="email"
-                    className="form_input"
-                    onChange={(e) => {
-                      setSingupFormValue(e)
-                    }}
-                  />
-                </div>
-                <div className="form_box">
-                  <label className="label">密碼</label>
-                  <input
-                    type="text"
-                    placeholder="password"
-                    name="password"
-                    className="form_input"
-                    onChange={(e) => {
-                      setSingupFormValue(e)
-                    }}
-                  />
-                </div>
-                <div className="form_box">
-                  <label className="label">請再輸入一次密碼</label>
-                  <input
-                    type="text"
-                    placeholder="password"
-                    name="password-check"
-                    className="form_input"
-                  />
-                </div>
-                <div className="form_btn">
-                  <button className="loginPage_button google_login_btn">
-                    Google 登入
-                  </button>
-                </div>
-                <div className="form_btn">
-                  <button className="loginPage_button sign_form_btn">
-                    下一步
-                  </button>
-                </div>
-              </form>
-            </div> */}
             <SignipForm
               setSingupFormValue={setSingupFormValue}
               activeClass={activeClass}
               setActive={setActive}
               signupForm={signupForm}
+              setInfoState={setInfoState}
             />
           </div>
         </div>
+
+        {/* 彈跳視窗 */}
+        <LoginInfo infoClass={infoClass} setInfoState={setInfoState} />
       </div>
     </>
   )
 }
 
-export default LoginPage
+export default MemberLogin

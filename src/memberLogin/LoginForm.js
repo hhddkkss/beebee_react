@@ -1,9 +1,15 @@
 import axios from 'axios'
+import { useContext } from 'react'
+
 import './../styles/login.css'
 import { LOGIN } from './../component/LoginApi'
+import AuthContext from '../Contexts/AuthContext'
 
 function LoginForm(props) {
-  const { loginForm, setLoginFormValue, activeClass } = props
+  const { loginForm, setLoginFormValue, activeClass, setInfoState } = props
+
+  //引入setAuth
+  const { setMemberAuth, memberAuth } = useContext(AuthContext)
 
   return (
     <>
@@ -25,6 +31,7 @@ function LoginForm(props) {
             axios.post(LOGIN, { ...loginForm }).then((response) => {
               if (response.data.success) {
                 const { memberEmail, memberId, token } = response.data
+                //setLocalStorage
                 localStorage.setItem(
                   'myAuth',
                   JSON.stringify({
@@ -33,11 +40,18 @@ function LoginForm(props) {
                     token,
                   })
                 )
-                console.log(memberEmail, memberId)
+                //console.log(memberEmail, memberId)
+                setInfoState(2)
                 //setAuth
-                // navigate('/')
+                setMemberAuth({
+                  authorized: true,
+                  memberId: memberId,
+                  memberEmail: memberEmail,
+                  token: token,
+                })
+                //console.log(memberAuth)
               } else {
-                alert(response.data.error || '登入失敗')
+                setInfoState(3)
               }
             })
           }}
@@ -46,7 +60,7 @@ function LoginForm(props) {
             <label className="label">E-mail</label>
             <input
               type="text"
-              placeholder="e-mail"
+              placeholder="E-mail"
               name="email"
               className="form_input"
               onChange={(e) => {
@@ -58,7 +72,7 @@ function LoginForm(props) {
             <label className="label">密碼</label>
             <input
               type="text"
-              placeholder="password"
+              placeholder="Password"
               name="password"
               className="form_input"
               onChange={(e) => {
