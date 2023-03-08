@@ -13,7 +13,9 @@ function Products() {
   const [toggleCartButton, setToggleCartButton] = useState(false)
   const [toggleCompare, setToggleCompare] = useState([])
   //收藏
-  const [favorites, setFavorite] = useState([])
+  const [favorites, setFavorite] = useState(
+    JSON.stringify(localStorage.getItem('favorites')) || []
+  )
   //產品
   const [products, setProducts] = useState([])
   //品牌
@@ -635,24 +637,6 @@ function Products() {
                             alt=""
                           />
                         </div>
-
-                        {/* {v.isLiked ? (
-                          <i
-                            className="fa-solid fa-heart"
-                            onClick={() => {
-                              setProducts(toggleLiked(products, v.product_id))
-                              handleAddOrDeleteFavorite(v.product_id)
-                            }}
-                          ></i>
-                        ) : (
-                          <i
-                            className="fa-regular fa-heart"
-                            onClick={() => {
-                              setProducts(toggleLiked(products, v.product_id))
-                              handleAddOrDeleteFavorite(v.product_id)
-                            }}
-                          ></i>
-                        )} */}
 
                         {localStorage
                           .getItem('favorites')

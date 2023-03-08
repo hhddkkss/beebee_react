@@ -1,7 +1,6 @@
 import React from 'react'
 import './../styles/Navbar.css'
 import './../styles/m-navbar.css'
-import Favorites from './Favorites'
 
 function Navbar({
   setToggleCartButton,
@@ -9,7 +8,7 @@ function Navbar({
   favorites,
   products,
 }) {
-  console.log(products)
+  console.log(favorites)
   return (
     <>
       <header>
@@ -171,21 +170,6 @@ function Navbar({
                   <p className="product-price">{v.product_price}</p>
                 </div>
               ))}
-
-            {/* <div className="my-cart-card">
-              <div className="img-wrap">
-                <img src="./images/14-128G-red.png" alt="" />
-              </div>
-              <p className="product-name">Iphone14 pro</p>
-              <p className="product-price">35900</p>
-            </div>
-            <div className="my-cart-card">
-              <div className="img-wrap">
-                <img src="./images/14-128G-red.png" alt="" />
-              </div>
-              <p className="product-name">Iphone14 pro</p>
-              <p className="product-price">35900</p>
-            </div> */}
           </div>
 
           <div className="btn-check-cart">
