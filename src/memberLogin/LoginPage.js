@@ -3,15 +3,27 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './../styles/login.css'
 import Navbar from '../component/Navbar'
+import { LOGIN } from './../component/LoginApi'
+import SignipForm from './SignupForm'
+import LoginForm from './LoginForm'
 
 function LoginPage() {
   // import AuthContext from '../contexts/AuthContext'
   const [isActive, setActive] = useState(false)
-
+  const [loginForm, setLoginForm] = useState({
+    email: '',
+    password: '',
+  })
+  // const { setMyAuth } = useContext(AuthContext)
+  const navigate = useNavigate()
   const slice = () => {
     console.log(isActive)
     setActive(!isActive)
     return
+  }
+
+  function setLoginFormValue(e) {
+    setLoginForm({ ...loginForm, [e.target.name]: e.target.value })
   }
 
   return (
@@ -172,12 +184,39 @@ function LoginPage() {
               <button className="">Sing Up</button>
               <button className="active">Login</button>
             </div>
-            <div
+            {/* <div
               className={isActive ? 'login_form_out form_area' : 'form_area'}
             >
               <div className="login_form_title">Welcome back</div>
               <div className="now_page login_mobile_hidden">Log in</div>
-              <form name="login_form" className="login_form">
+              <form
+                name="login_form"
+                className="login_form"
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  //登入送去API
+                  axios
+                    .post('http://localhost:3003/login', { ...loginForm })
+                    .then((response) => {
+                      if (response.data.success) {
+                        const { memberEmail, memberId, token } = response.data
+                        localStorage.setItem(
+                          'myAuth',
+                          JSON.stringify({
+                            memberId,
+                            memberEmail,
+                            token,
+                          })
+                        )
+                        console.log(memberEmail, memberId)
+                        //setAuth
+                        // navigate('/')
+                      } else {
+                        alert(response.data.error || '登入失敗')
+                      }
+                    })
+                }}
+              >
                 <div className="form_box">
                   <label className="label">E-mail</label>
                   <input
@@ -185,6 +224,12 @@ function LoginPage() {
                     placeholder="e-mail"
                     name="email"
                     className="form_input"
+                    onChange={(e) => {
+                      setLoginForm((prev) => ({
+                        ...loginForm,
+                        email: e.target.value,
+                      }))
+                    }}
                   />
                 </div>
                 <div className="form_box">
@@ -194,25 +239,48 @@ function LoginPage() {
                     placeholder="password"
                     name="password"
                     className="form_input"
+                    onChange={(e) => {
+                      setLoginForm((prev) => ({
+                        ...loginForm,
+                        password: e.target.value,
+                      }))
+                    }}
                   />
                 </div>
                 <div className="form_btn">
-                  <button className="loginPage_button google_login_btn">
+                  <button
+                    className="loginPage_button google_login_btn"
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
                     Google 登入
                   </button>
                 </div>
                 <div className="form_btn">
-                  <button className="loginPage_button forget_pass_btn">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault()
+                    }}
+                    className="loginPage_button forget_pass_btn"
+                  >
                     忘記密碼
                   </button>
-                  <button className="loginPage_button login_form_btn">
+                  <button
+                    type="submit"
+                    className="loginPage_button login_form_btn"
+                  >
                     登入
                   </button>
                 </div>
               </form>
-            </div>
-
-            <div
+            </div> */}
+            <LoginForm
+              isActive={isActive}
+              loginForm={loginForm}
+              setLoginFormValue={setLoginFormValue}
+            />
+            {/* <div
               className={isActive ? ' form_area' : 'form_area signup_form_out'}
             >
               <div className="sign_form_title">Welcome</div>
@@ -222,8 +290,8 @@ function LoginPage() {
                   <label className="label">姓名</label>
                   <input
                     type="text"
-                    placeholder="e-mail"
-                    name="email"
+                    placeholder=""
+                    name="name"
                     className="form_input"
                   />
                 </div>
@@ -265,7 +333,8 @@ function LoginPage() {
                   </button>
                 </div>
               </form>
-            </div>
+            </div> */}
+            <SignipForm isActive={isActive} />
           </div>
         </div>
       </div>
