@@ -1,10 +1,19 @@
 import './../styles/login.css'
 import axios from 'axios'
 import { ADDRESS_LIST, SIGNUP } from '../component/LoginApi'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import AuthContext from '../Contexts/AuthContext'
 
 function SignipForm(props) {
-  const { activeClass, setSingupFormValue, setActive, signupForm } = props
+  //引入setAuth
+  const { setMemberAuth, memberAuth } = useContext(AuthContext)
+  const {
+    activeClass,
+    setSingupFormValue,
+    setActive,
+    signupForm,
+    setInfoState,
+  } = props
   const [cityList, setCityList] = useState([])
   const [allDistList, setAllDistList] = useState([])
   const [distList, setDistList] = useState([])
@@ -13,7 +22,7 @@ function SignipForm(props) {
     const resD = await axios.get(ADDRESS_LIST)
     let city = resD.data.rows
       .filter((v) => {
-        return v.parent_sid == 0
+        return v.parent_sid === 0
       })
       .map((e) => {
         return e.ct_name
@@ -56,9 +65,10 @@ function SignipForm(props) {
             <label className="label">姓名</label>
             <input
               type="text"
-              placeholder=""
+              placeholder="您的中文大名"
               name="name"
               className="form_input"
+              value={signupForm.name}
               onChange={(e) => {
                 setSingupFormValue(e)
               }}
@@ -68,9 +78,10 @@ function SignipForm(props) {
             <label className="label">E-mail</label>
             <input
               type="text"
-              placeholder="e-mail"
+              placeholder="E-mail"
               name="email"
               className="form_input"
+              value={signupForm.email}
               onChange={(e) => {
                 setSingupFormValue(e)
               }}
@@ -80,9 +91,10 @@ function SignipForm(props) {
             <label className="label">密碼</label>
             <input
               type="text"
-              placeholder="password"
+              placeholder="Password"
               name="password"
               className="form_input"
+              value={signupForm.password}
               onChange={(e) => {
                 setSingupFormValue(e)
               }}
@@ -92,7 +104,7 @@ function SignipForm(props) {
             <label className="label">請再輸入一次密碼</label>
             <input
               type="text"
-              placeholder="password"
+              placeholder=""
               name="password-check"
               className="form_input"
             />
@@ -135,15 +147,14 @@ function SignipForm(props) {
               placeholder="09XXXXXXXXX"
               name="mobile"
               className="form_input"
+              value={signupForm.mobile}
               onChange={(e) => {
                 setSingupFormValue(e)
               }}
             />
           </div>
           <div className="form_box">
-            <label htmlFor="email" className="label">
-              性別
-            </label>
+            <label className="label">性別</label>
             <div className="genderBox">
               <label className="form_input" htmlFor="male">
                 <input
@@ -186,6 +197,7 @@ function SignipForm(props) {
             <input
               type="date"
               name="birthday"
+              value={signupForm.birthday}
               className="form_input"
               onChange={(e) => {
                 setSingupFormValue(e)
@@ -203,7 +215,7 @@ function SignipForm(props) {
                   placeholder="password"
                   name="address_city"
                   className="form_input"
-                  defaultValue="none"
+                  defaultValue={signupForm.address_city}
                   onChange={(e) => {
                     changeDist(e.target.selectedIndex)
                     setSingupFormValue(e)
@@ -230,7 +242,7 @@ function SignipForm(props) {
                   placeholder="password"
                   name="address_dist"
                   className="form_input"
-                  defaultValue="none"
+                  defaultValue={signupForm.address_dist}
                   onChange={(e) => {
                     setSingupFormValue(e)
                   }}
@@ -258,6 +270,7 @@ function SignipForm(props) {
               placeholder="EX:大安路1號"
               name="address_rd"
               className="form_input"
+              value={signupForm.address_rd}
               onChange={(e) => {
                 setSingupFormValue(e)
               }}
@@ -266,18 +279,41 @@ function SignipForm(props) {
 
           <div className="form_btn">
             <button
+              onClick={(e) => {
+                e.preventDefault()
+                setActive(2)
+              }}
+              className="loginPage_button sign_form_btn forget_pass_btn"
+            >
+              上一步
+            </button>
+            <button
               className="loginPage_button sign_form_btn"
               onClick={(e) => {
                 e.preventDefault()
                 axios.post(SIGNUP, { ...signupForm }).then((response) => {
+                  console.log(response.data)
                   if (response.data.success) {
-                    const { success, dataValue } = response.data
-
-                    console.log(success, dataValue)
+                    const { success, data, token } = response.data
+                    //setLocalStorage
+                    localStorage.setItem(
+                      'myAuth',
+                      JSON.stringify({
+                        memberId: data.sid,
+                        memberEmail: data.email,
+                        token,
+                      })
+                    )
+                    setInfoState(2)
                     //setAuth
-                    // navigate('/')
+                    setMemberAuth({
+                      authorized: success,
+                      memberId: data.sid,
+                      memberEmail: data.email,
+                      token: token,
+                    })
                   } else {
-                    alert(response.data.error || '登入失敗')
+                    setInfoState(3)
                   }
                 })
               }}
