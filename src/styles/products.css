@@ -860,6 +860,13 @@ header {
   cursor: pointer;
 }
 
+/*note pagination 樣式 from material UI */
+
+.MuiPagination-root.MuiPagination-text.css-jqvi4n-MuiPagination-root
+  .MuiPagination-ul.css-wjh20t-MuiPagination-ul {
+  justify-content: center;
+  margin-bottom: 2rem;
+}
 /* 手機版 */
 @media screen and (max-width: 375px) {
   .my-carousel .advertise {

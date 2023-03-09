@@ -2,7 +2,13 @@ import React from 'react'
 import './../styles/Navbar.css'
 import './../styles/m-navbar.css'
 
-function Navbar({ setToggleCartButton, toggleCartButton, products, cartItem }) {
+function Navbar({
+  setToggleCartButton,
+  toggleCartButton,
+  products,
+  cartItem,
+  addToCartTable,
+}) {
   const cartItemPId = cartItem.map((v) => v.product_id)
 
   return (
@@ -171,7 +177,13 @@ function Navbar({ setToggleCartButton, toggleCartButton, products, cartItem }) {
           </div>
 
           <div className="btn-check-cart">
-            <a href="#" className="check-cart">
+            <a
+              href="#/"
+              className="check-cart"
+              onClick={() => {
+                addToCartTable()
+              }}
+            >
               查看購物車
             </a>
           </div>
