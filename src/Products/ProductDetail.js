@@ -1,8 +1,13 @@
 import React from 'react'
 
 function ProductDetail(props) {
-  const {} = props
-  return <></>
+  // const { dataFromProducts } = props
+  return (
+    <>
+      <p>123</p>
+      {/* {console.log(dataFromProducts)} */}
+    </>
+  )
 }
 
 export default ProductDetail
