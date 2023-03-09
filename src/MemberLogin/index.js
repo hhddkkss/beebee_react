@@ -1,29 +1,79 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { useState, useEffect, useContext } from 'react'
 import './../styles/login.css'
-import Navbar from '../component/Navbar'
-import { LOGIN } from './../component/LoginApi'
 import SignipForm from './SignupForm'
 import LoginForm from './LoginForm'
-
-function LoginPage() {
+import LoginInfo from './LoginInfo'
+import AuthContext from '../Contexts/AuthContext'
+//
+function MemberLogin() {
   // import AuthContext from '../contexts/AuthContext'
-  const [isActive, setActive] = useState(false)
+  const [isActive, setActive] = useState(1)
   const [loginForm, setLoginForm] = useState({
     email: '',
     password: '',
   })
+  const [signupForm, setSignupForm] = useState({
+    name: '',
+    email: '',
+    password: '',
+    mobile: '',
+    gender: '',
+    birthday: 0,
+    address_city: '',
+    address_dist: '',
+    address_rd: '',
+  })
+  const [infoState, setInfoState] = useState(1)
+
   // const { setMyAuth } = useContext(AuthContext)
-  const navigate = useNavigate()
-  const slice = () => {
-    console.log(isActive)
-    setActive(!isActive)
-    return
+
+  function slice() {
+    isActive === 1 ? setActive(2) : setActive(1)
   }
 
   function setLoginFormValue(e) {
     setLoginForm({ ...loginForm, [e.target.name]: e.target.value })
+  }
+  function setSingupFormValue(e) {
+    setSignupForm({ ...signupForm, [e.target.name]: e.target.value })
+  }
+
+  function activeClass(a, b, c) {
+    switch (isActive) {
+      // 登入畫面
+      case 1:
+        return a
+
+      //申請畫面一
+      case 2:
+        return b
+
+      //申請畫面二
+      case 3:
+        return c
+
+      default:
+        return a
+    }
+  }
+
+  function infoClass(a, b, c) {
+    switch (infoState) {
+      // 登入畫面
+      case 1:
+        return a
+
+      //申請畫面一
+      case 2:
+        return b
+
+      //申請畫面二
+      case 3:
+        return c
+
+      default:
+        return a
+    }
   }
 
   return (
@@ -31,8 +81,8 @@ function LoginPage() {
       <div className="wrapper">
         <div className="logoImg_solid">
           <svg
-            width="331"
-            height="63"
+            width="490"
+            height="93"
             viewBox="0 0 331 63"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -68,12 +118,18 @@ function LoginPage() {
           </svg>
         </div>
         <div
-          className={isActive ? 'ellipse_main ellipse_main2 ' : 'ellipse_main'}
+          className={activeClass(
+            'ellipse_main',
+            'ellipse_main ellipse_main2 ',
+            'ellipse_main ellipse_main3 '
+          )}
         ></div>
         <div
-          className={
-            isActive ? 'ellipse_light ellipse_light2' : 'ellipse_light'
-          }
+          className={activeClass(
+            'ellipse_light',
+            'ellipse_light ellipse_light2',
+            'ellipse_light ellipse_light3'
+          )}
         ></div>
 
         <div className="logoImg_dashed">
@@ -146,15 +202,20 @@ function LoginPage() {
         <div className="login_box">
           <button
             className={
-              isActive
-                ? 'sing_up loginPage_main_button loginPage_button login_mobile_hidden'
-                : 'loginPage_main_button loginPage_button login_mobile_hidden'
+              activeClass(
+                'loginPage_main_button loginPage_button login_mobile_hidden',
+                'sing_up loginPage_main_button loginPage_button login_mobile_hidden',
+                'd-none'
+              )
+              // isActive
+              //   ? 'sing_up loginPage_main_button loginPage_button login_mobile_hidden'
+              //   : 'loginPage_main_button loginPage_button login_mobile_hidden'
             }
             onClick={() => {
               slice()
             }}
           >
-            {isActive ? 'Login' : 'Sing up'}
+            {activeClass('Sign Up', 'Login', '')}
             <svg
               width="30"
               height="30"
@@ -174,172 +235,55 @@ function LoginPage() {
           </button>
 
           <div
-            className={
-              isActive
-                ? 'login_display_area singup_dispaly_area'
-                : 'login_display_area'
-            }
+            className={activeClass(
+              'login_display_area',
+              'login_display_area singup_dispaly_area',
+              'login_display_area  singup_step2_area'
+            )}
           >
             <div className="mobile_switch_btn login_pc_hidden">
-              <button className="">Sing Up</button>
-              <button className="active">Login</button>
-            </div>
-            {/* <div
-              className={isActive ? 'login_form_out form_area' : 'form_area'}
-            >
-              <div className="login_form_title">Welcome back</div>
-              <div className="now_page login_mobile_hidden">Log in</div>
-              <form
-                name="login_form"
-                className="login_form"
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  //登入送去API
-                  axios
-                    .post('http://localhost:3003/login', { ...loginForm })
-                    .then((response) => {
-                      if (response.data.success) {
-                        const { memberEmail, memberId, token } = response.data
-                        localStorage.setItem(
-                          'myAuth',
-                          JSON.stringify({
-                            memberId,
-                            memberEmail,
-                            token,
-                          })
-                        )
-                        console.log(memberEmail, memberId)
-                        //setAuth
-                        // navigate('/')
-                      } else {
-                        alert(response.data.error || '登入失敗')
-                      }
-                    })
+              <button
+                className={activeClass('', 'active', 'active')}
+                onClick={(e) => {
+                  setActive(2)
                 }}
               >
-                <div className="form_box">
-                  <label className="label">E-mail</label>
-                  <input
-                    type="text"
-                    placeholder="e-mail"
-                    name="email"
-                    className="form_input"
-                    onChange={(e) => {
-                      setLoginForm((prev) => ({
-                        ...loginForm,
-                        email: e.target.value,
-                      }))
-                    }}
-                  />
-                </div>
-                <div className="form_box">
-                  <label className="label">密碼</label>
-                  <input
-                    type="text"
-                    placeholder="password"
-                    name="password"
-                    className="form_input"
-                    onChange={(e) => {
-                      setLoginForm((prev) => ({
-                        ...loginForm,
-                        password: e.target.value,
-                      }))
-                    }}
-                  />
-                </div>
-                <div className="form_btn">
-                  <button
-                    className="loginPage_button google_login_btn"
-                    onClick={(e) => {
-                      e.preventDefault()
-                    }}
-                  >
-                    Google 登入
-                  </button>
-                </div>
-                <div className="form_btn">
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault()
-                    }}
-                    className="loginPage_button forget_pass_btn"
-                  >
-                    忘記密碼
-                  </button>
-                  <button
-                    type="submit"
-                    className="loginPage_button login_form_btn"
-                  >
-                    登入
-                  </button>
-                </div>
-              </form>
-            </div> */}
+                Sing Up
+              </button>
+              <button
+                className={activeClass('active', '', '')}
+                onClick={(e) => {
+                  setActive(1)
+                }}
+              >
+                Login
+              </button>
+            </div>
+
+            {/* 登入 */}
             <LoginForm
-              isActive={isActive}
               loginForm={loginForm}
               setLoginFormValue={setLoginFormValue}
+              activeClass={activeClass}
+              setInfoState={setInfoState}
             />
-            {/* <div
-              className={isActive ? ' form_area' : 'form_area signup_form_out'}
-            >
-              <div className="sign_form_title">Welcome</div>
-              <div className="now_page login_mobile_hidden">Sign up</div>
-              <form name="sign_form" className="login_form">
-                <div className="form_box">
-                  <label className="label">姓名</label>
-                  <input
-                    type="text"
-                    placeholder=""
-                    name="name"
-                    className="form_input"
-                  />
-                </div>
-                <div className="form_box">
-                  <label className="label">E-mail</label>
-                  <input
-                    type="text"
-                    placeholder="e-mail"
-                    name="email"
-                    className="form_input"
-                  />
-                </div>
-                <div className="form_box">
-                  <label className="label">密碼</label>
-                  <input
-                    type="text"
-                    placeholder="password"
-                    name="password"
-                    className="form_input"
-                  />
-                </div>
-                <div className="form_box">
-                  <label className="label">請再輸入一次密碼</label>
-                  <input
-                    type="text"
-                    placeholder="password"
-                    name="password-check"
-                    className="form_input"
-                  />
-                </div>
-                <div className="form_btn">
-                  <button className="loginPage_button google_login_btn">
-                    Google 登入
-                  </button>
-                </div>
-                <div className="form_btn">
-                  <button className="loginPage_button sign_form_btn">
-                    下一步
-                  </button>
-                </div>
-              </form>
-            </div> */}
-            <SignipForm isActive={isActive} />
+
+            {/* 申請 */}
+            <SignipForm
+              setSingupFormValue={setSingupFormValue}
+              activeClass={activeClass}
+              setActive={setActive}
+              signupForm={signupForm}
+              setInfoState={setInfoState}
+            />
           </div>
         </div>
+
+        {/* 彈跳視窗 */}
+        <LoginInfo infoClass={infoClass} setInfoState={setInfoState} />
       </div>
     </>
   )
 }
 
-export default LoginPage
+export default MemberLogin

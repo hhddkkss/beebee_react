@@ -1,12 +1,25 @@
 import axios from 'axios'
+import { useContext } from 'react'
+
 import './../styles/login.css'
+import { LOGIN } from './../component/LoginApi'
+import AuthContext from '../Contexts/AuthContext'
 
 function LoginForm(props) {
-  const { isActive, loginForm, setLoginFormValue } = props
+  const { loginForm, setLoginFormValue, activeClass, setInfoState } = props
+
+  //引入setAuth
+  const { setMemberAuth, memberAuth } = useContext(AuthContext)
 
   return (
     <>
-      <div className={isActive ? 'login_form_out form_area' : 'form_area'}>
+      <div
+        className={activeClass(
+          'form_area',
+          'login_form_out form_area',
+          'login_form_out form_area'
+        )}
+      >
         <div className="login_form_title">Welcome back</div>
         <div className="now_page login_mobile_hidden">Log in</div>
         <form
@@ -15,33 +28,39 @@ function LoginForm(props) {
           onSubmit={(e) => {
             e.preventDefault()
             //登入送去API
-            axios
-              .post('http://localhost:3003/login', { ...loginForm })
-              .then((response) => {
-                if (response.data.success) {
-                  const { memberEmail, memberId, token } = response.data
-                  localStorage.setItem(
-                    'myAuth',
-                    JSON.stringify({
-                      memberId,
-                      memberEmail,
-                      token,
-                    })
-                  )
-                  console.log(memberEmail, memberId)
-                  //setAuth
-                  // navigate('/')
-                } else {
-                  alert(response.data.error || '登入失敗')
-                }
-              })
+            axios.post(LOGIN, { ...loginForm }).then((response) => {
+              if (response.data.success) {
+                const { memberEmail, memberId, token } = response.data
+                //setLocalStorage
+                localStorage.setItem(
+                  'myAuth',
+                  JSON.stringify({
+                    memberId,
+                    memberEmail,
+                    token,
+                  })
+                )
+                //console.log(memberEmail, memberId)
+                setInfoState(2)
+                //setAuth
+                setMemberAuth({
+                  authorized: true,
+                  memberId: memberId,
+                  memberEmail: memberEmail,
+                  token: token,
+                })
+                //console.log(memberAuth)
+              } else {
+                setInfoState(3)
+              }
+            })
           }}
         >
           <div className="form_box">
             <label className="label">E-mail</label>
             <input
               type="text"
-              placeholder="e-mail"
+              placeholder="E-mail"
               name="email"
               className="form_input"
               onChange={(e) => {
@@ -53,7 +72,7 @@ function LoginForm(props) {
             <label className="label">密碼</label>
             <input
               type="text"
-              placeholder="password"
+              placeholder="Password"
               name="password"
               className="form_input"
               onChange={(e) => {
