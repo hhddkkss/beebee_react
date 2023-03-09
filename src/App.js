@@ -9,8 +9,9 @@ function App() {
       <Router>
         <AuthContextProvider>
           <Routes>
-            <Route path="/product" element={<Products />} />
             <Route path="/" element={<MemberLogin />} />
+            <Route path="/product" element={<Products />} />
+
             <Route path="/member_login" element={<MemberLogin />} />
           </Routes>
         </AuthContextProvider>
