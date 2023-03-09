@@ -4,6 +4,8 @@ import axios from 'axios'
 import Navbar from './Navbar'
 import '../styles/m-navbar.css'
 import '../styles/products.css'
+import ProductDetail from './ProductDetail'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import ProductCardForMobile from './ProductCardForMobile'
 
 function Products() {
@@ -733,6 +735,12 @@ function Products() {
       ) : (
         ''
       )}
+
+      {/* <Router>
+        <Routes>
+          <Route path="/product_detail" element={<ProductDetail />} />
+        </Routes>
+      </Router> */}
     </>
   )
 }
