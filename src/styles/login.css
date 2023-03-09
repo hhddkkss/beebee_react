@@ -14,8 +14,8 @@ body {
 
 .logoImg_solid {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 20px;
+    left: 20px;
 }
 
 .logoImg_dashed {
@@ -530,9 +530,10 @@ body {
         display: none;
     }
 
-    .login_display_area {
-        width: 270px;
-        right: auto;
+    .login_display_area,.singup_step2_area {
+        width: 330px;
+        right: 50%;
+        transform: translate(50%,-50%);
 
     }
 
@@ -559,15 +560,16 @@ body {
     }
 
     .singup_dispaly_area,.singup_step2_area {
-        height: 600px;
+        height: 560px;
     }
-    .singup_step2_area{
-        transform: translate(0%,-50%);
-    }
+    
 
     .form_area {
         padding: 10px 0;
         top: 55%;
+    }
+    .form_box{
+        gap: 0px;
     }
 
 

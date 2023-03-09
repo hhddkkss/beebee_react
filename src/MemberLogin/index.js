@@ -81,8 +81,8 @@ function MemberLogin() {
       <div className="wrapper">
         <div className="logoImg_solid">
           <svg
-            width="331"
-            height="63"
+            width="490"
+            height="93"
             viewBox="0 0 331 63"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
