@@ -2,13 +2,9 @@ import React from 'react'
 import './../styles/Navbar.css'
 import './../styles/m-navbar.css'
 
-function Navbar({
-  setToggleCartButton,
-  toggleCartButton,
-  favorites,
-  products,
-}) {
-  console.log(favorites)
+function Navbar({ setToggleCartButton, toggleCartButton, products, cartItem }) {
+  const cartItemPId = cartItem.map((v) => v.product_id)
+
   return (
     <>
       <header>
@@ -155,21 +151,23 @@ function Navbar({
 
           <div className="my-cards">
             {products
-              .filter((v) => favorites.includes(v.product_id))
-              .map((v) => (
-                <div className="my-cart-card" key={v.product_id}>
-                  <div className="my-cart-card-left">
-                    <div className="img-wrap">
-                      <img
-                        src={'images/' + v.product_pic.split(',')[0]}
-                        alt=""
-                      />
+              .filter((v) => cartItemPId.includes(v.product_id))
+              .map((v) => {
+                return (
+                  <div className="my-cart-card" key={v.product_id}>
+                    <div className="my-cart-card-left">
+                      <div className="img-wrap">
+                        <img
+                          src={'images/' + v.product_pic.split(',')[0]}
+                          alt=""
+                        />
+                      </div>
+                      <p className="product-name">{v.product_name}</p>
                     </div>
-                    <p className="product-name">{v.product_name}</p>
+                    <p className="product-price">{v.product_price}</p>
                   </div>
-                  <p className="product-price">{v.product_price}</p>
-                </div>
-              ))}
+                )
+              })}
           </div>
 
           <div className="btn-check-cart">
