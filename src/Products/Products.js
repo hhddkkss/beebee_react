@@ -721,7 +721,7 @@ function Products() {
       <div className="btn-to-top">
         <i className="fa-solid fa-chevron-up"></i>
       </div>
-
+      {/*  */}
       {comparedList.length > 3 ? (
         <div className="compared-warning-info" ref={warningRef}>
           <p>溫馨提示：比較清單最多只能加入三個商品</p>
