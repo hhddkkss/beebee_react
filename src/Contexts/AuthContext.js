@@ -2,7 +2,7 @@
 //step1: 在頁面引用
 //=>import AuthContext from '../Contexts/AuthContext'
 //step2: function裡使用useContext
-//=> const { myAuth } = useContext(AuthContext)
+//=> const { memberAuth } = useContext(AuthContext)
 //裡頭即有 memberEmail,memberId,token
 
 import { createContext, useState } from 'react'
