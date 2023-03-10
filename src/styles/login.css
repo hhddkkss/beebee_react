@@ -139,7 +139,7 @@ body {
 
     background: rgba(255, 255, 255, 0.7);
     border-radius: 30px;
-    height: 650px;
+    height: 800px;
     right: 60%;
     top: 50%;
     transform: translateY(-50%);
@@ -193,7 +193,7 @@ body {
 .sign_form_title {
     color: #1D2D64;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 30px;
     line-height: 35px;
     width: 100%;
@@ -386,7 +386,7 @@ body {
     display: none;
   }
   .info-login-success{
-    background-color: #f3d5c9;
+    background-color: rgba(255, 245, 245,0.8);
     display: flex;
   }
 
@@ -506,7 +506,16 @@ body {
   .loginpage-info .fa-xmark:hover {
     color: var(--textColorWhite);
   }
-  
+    /* 輸入錯誤警告框 */
+    .login_input_alert_info{
+        color: #FE0808;
+        margin-top: -10px;
+        display: none;
+        font-size: 14px;
+      }
+      .login_input_alert_info.input_alert_true{
+        display: block;
+      }
 
 
 /* 手機版 */
@@ -535,6 +544,11 @@ body {
         right: 50%;
         transform: translate(50%,-50%);
 
+    }
+    .login_form{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
     }
 
     .mobile_switch_btn {
@@ -565,13 +579,26 @@ body {
     
 
     .form_area {
-        padding: 10px 0;
+        padding: 5px 0;
         top: 55%;
+        gap: 0;
     }
     .form_box{
         gap: 0px;
+        padding: 2px 15px;
     }
+    .form_input{
+        height: 37px;
+    }
+    .login_input_alert_info{
+        margin-top: 0;
+        font-size: 11px;
+      }
+    .form_btn{
+        margin-top: 10px;
+        margin-bottom: 0;
 
+}
 
 
 

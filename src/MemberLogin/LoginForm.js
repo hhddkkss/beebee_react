@@ -9,7 +9,7 @@ function LoginForm(props) {
   const { loginForm, setLoginFormValue, activeClass, setInfoState } = props
 
   //引入setAuth
-  const { setMemberAuth, memberAuth } = useContext(AuthContext)
+  const { setMemberAuth } = useContext(AuthContext)
 
   return (
     <>
@@ -67,6 +67,9 @@ function LoginForm(props) {
                 setLoginFormValue(e)
               }}
             />
+            <div className="login_input_alert_info input_alert_true">
+              兩次輸入密碼不同
+            </div>
           </div>
           <div className="form_box">
             <label className="label">密碼</label>
@@ -79,6 +82,9 @@ function LoginForm(props) {
                 setLoginFormValue(e)
               }}
             />
+            <div className="login_input_alert_info input_alert_true">
+              兩次輸入密碼不同
+            </div>
           </div>
           <div className="form_btn">
             <button

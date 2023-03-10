@@ -73,6 +73,9 @@ function SignipForm(props) {
                 setSingupFormValue(e)
               }}
             />
+            <div className="login_input_alert_info input_alert_true">
+              兩次輸入密碼不同
+            </div>
           </div>
           <div className="form_box">
             <label className="label">E-mail</label>
@@ -86,6 +89,9 @@ function SignipForm(props) {
                 setSingupFormValue(e)
               }}
             />
+            <div className="login_input_alert_info input_alert_true">
+              兩次輸入密碼不同
+            </div>
           </div>
           <div className="form_box">
             <label className="label">密碼</label>
@@ -99,6 +105,9 @@ function SignipForm(props) {
                 setSingupFormValue(e)
               }}
             />
+            <div className="login_input_alert_info input_alert_true">
+              兩次輸入密碼不同
+            </div>
           </div>
           <div className="form_box">
             <label className="label">請再輸入一次密碼</label>
@@ -108,6 +117,9 @@ function SignipForm(props) {
               name="password-check"
               className="form_input"
             />
+            <div className="login_input_alert_info input_alert_true">
+              兩次輸入密碼不同
+            </div>
           </div>
           <div className="form_btn">
             <button className="loginPage_button google_login_btn">
