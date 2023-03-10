@@ -4,7 +4,7 @@ import { AuthContextProvider } from './Contexts/AuthContext'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useState } from 'react'
 import ProductDetail from './Products/ProductDetail'
-import ProductCompere from './Products/ProductCompere'
+import ProductCompare from './Products/ProductCompare'
 
 function App() {
   const [dataFromProducts, setDataFromProducts] = useState({})
@@ -24,7 +24,7 @@ function App() {
               element={<ProductDetail dataFromProducts={dataFromProducts} />}
             />
             <Route path="/member_login" element={<MemberLogin />} />
-            <Route path="/ProductCompere" element={<ProductCompere />} />
+            <Route path="/ProductCompere" element={<ProductCompare />} />
           </Routes>
         </AuthContextProvider>
       </Router>

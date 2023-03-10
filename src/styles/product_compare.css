@@ -235,6 +235,14 @@
   .add_To_Cart:hover {
     color: #fff;
   }
+  .compare_type_btn_group>.compare_type_btn.start{
+    width: 300px;
+  }
+
+
+
+ 
+
 
 
 /* 比較區 */
