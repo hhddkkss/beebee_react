@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/products.css'
 
-function ProductCardForMobile() {
+function M_productCard() {
   return (
     <div className="row row-for-m-card">
       <div className="col-12">
@@ -49,4 +49,4 @@ function ProductCardForMobile() {
   )
 }
 
-export default ProductCardForMobile
+export default M_productCard
