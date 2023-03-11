@@ -1,0 +1,375 @@
+.compare_box{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+ 
+   
+}
+
+/* 比較選單 */
+
+.compare_list_box{
+    box-sizing: content-box;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 30px;
+    border-radius: 5px;
+    width: 540px;
+    height: 703px;
+    background-color: rgb(241, 236, 225);
+}
+.compare_list_box>p{
+    font-size: 26px;
+    font-weight: 600;
+    color: #1D2D64;
+}
+.compare_type_btn_group{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+}
+
+.compare_type_btn {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s;
+    border: none;
+    width: 130px;
+    text-align: center;
+  }
+  .compare_type_btn::after {
+    width: 100%;
+    height: 100%;
+    content: "";
+    background-color:#1D2D64;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -2;
+    border-radius: 3px;
+  }
+  .compare_type_btn.compare_type_btn_hover::after {
+    width: 100%;
+    height: 100%;
+    content: "";
+    background-color:#E59069;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -2;
+    border-radius: 3px;
+  }
+  .compare_type_btn::before {
+    content: "";
+    width: 0%;
+    height: 100%;
+    background-color: #E59069;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.3s;
+    border-radius: 3px;
+  }
+  .compare_type_btn:hover {
+    color: #fff;
+  }
+  .compare_type_btn:hover:before {
+    width: 100%;
+  }
+
+  .compare_item_list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .compare_item_box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  .compare_item_list>.compare_item_box>img{
+    width: 120px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+  .compare_item_list>.compare_item_box>.item_content{
+    flex-grow: 1;
+    height: 100%;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+  }
+  .compare_item_box>.item_content>.item_name{
+    color: #1D2D64;
+    font-size: 20px;
+  }
+  .compare_item_box>.item_content>.item_price{
+    color: #E59069;
+    font-size: 20px;
+  }
+
+  .compare_item_box>.compare_box_btn_group{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+  }
+  .compare_box_btn_group>.compare_add>svg>path{
+    fill:#1D2D64;
+    transition: .3s;
+  }
+  .compare_box_btn_group>.compare_add:hover>svg>path{
+    fill:#E59069
+  }
+  /*  確定加入比較呈現"added"  */
+  .compare_box_btn_group>.compare_add.added >svg>path{
+    fill:#E59069
+  }
+  
+
+  .compare_box_btn_group>.compare_delete>svg>path{
+    fill:#4F4F4F;
+    transition: .3s;
+  }
+  .compare_box_btn_group>.compare_delete:hover>svg>path{
+    fill:#d32323
+  }
+
+/* 側邊滾輪 */
+  .compare_item_list{
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 15px;
+    overflow-y: overlay;
+}
+
+.compare_item_list::-webkit-scrollbar,.head_title::-webkit-scrollbar {
+    width: 7px;
+  
+}
+.compare_item_list::-webkit-scrollbar-button,.head_title::-webkit-scrollbar-button {
+    background: transparent;
+    border-radius: 4px;
+}
+  
+.compare_item_list::-webkit-scrollbar-track-piece,.head_title::-webkit-scrollbar-track-piece {
+    background: transparent;
+}
+  
+.compare_item_list::-webkit-scrollbar-thumb,.head_title::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid slategrey;
+  
+}
+  
+.compare_item_list::-webkit-scrollbar-track,.head_title::-webkit-scrollbar-track {
+    box-shadow: transparent;
+}
+
+/* 加入購物車 */
+.add_To_Cart{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+    gap: 20px;
+    height: 43px;
+    border-radius: 3px;
+    border: none;
+    position: relative;
+    transition: all .3s;
+    overflow: hidden;
+    z-index: 1;
+    
+}
+.add_To_Cart::after {
+    width: 100%;
+    height: 100%;
+    content: "";
+    background-color:#E59069;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -2;
+    border-radius: 3px;
+  }
+
+  .add_To_Cart::before {
+    content: "";
+    width: 0%;
+    height: 100%;
+    background-color: #b14b0756;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.3s;
+    border-radius: 3px;
+  }
+  .add_To_Cart:hover::before {
+    width: 100%;
+  }
+  .add_To_Cart:hover {
+    color: #fff;
+  }
+
+
+/* 比較區 */
+
+.compareIng_box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    
+    position: absolute;
+    width: 1600px;
+    height: 900px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    
+}
+.compareIng_head{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding:  15px 0px;
+    width: 200px;
+    height: 100%;
+    border-radius: 5px 0px 0px 5px;
+    background: #1D2D64
+}
+/* 側邊滾輪 */
+.head_title{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    flex-grow:1 ;
+    overflow-y: overlay;
+}
+.compare_item_property{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: overlay;
+
+}
+.compareIng_head p,.compare_item_property>p{
+    color: #f4f4f4;
+    text-align: center;
+    width: 100%;
+    line-height: 60px;
+}
+.compare_item_property>p{
+    color: #4F4F4F;
+}
+.compareIng_head p:nth-child(odd),.compare_item_property>p:nth-child(odd){
+    background-color: #bbb8b871;
+}
+
+.compareIng_item_card{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding: 15px 0px;
+    width: 450px;
+    height: 100%;
+    position: relative;
+    background: #FFFFFF;
+    box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    margin-left: -15px;
+}
+
+.compareIng_item_card>.item_content,.compareIng_head>.item_content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height:500px;
+    justify-content: space-between;
+    padding-bottom: 30px;
+}
+
+.compareIng_item_card>.item_content>img{
+      width: 50%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+}
+.compareIng_item_card>.item_content>.item_name{
+    font-size: 20px;
+    color: #1D2D64;
+    font-weight: 600;
+}
+.compareIng_item_card>.item_content>.item_price{
+    font-size: 20px;
+    color: #E59069;
+    font-weight: 600;
+}
+
+.compareIng_item_card>.compareIng_item_remove{
+    position: absolute;
+    background-color: transparent;
+    top: 10px;
+    right: 40px;
+    border: none;
+}
+.compareIng_item_card>.compareIng_item_remove:hover>svg>path{
+    stroke: #E59069;
+}
+
+/* 側邊滾輪 */
+
+.compare_item_property::-webkit-scrollbar {
+    width: 7px;
+  
+}
+.compare_item_property::-webkit-scrollbar-button {
+    background: transparent;
+    border-radius: 4px;
+}
+  
+.compare_item_property::-webkit-scrollbar-track-piece {
+    background: transparent;
+}
+  
+.compare_item_property::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid slategrey;
+  
+}
+  
+.compare_item_property::-webkit-scrollbar-track {
+    box-shadow: transparent;
+}
