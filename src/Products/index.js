@@ -1,4 +1,4 @@
-import { React, useEffect, useState, useRef } from 'react'
+import { React, useEffect, useState, useRef, useContext } from 'react'
 import _ from 'lodash'
 import axios from 'axios'
 import Navbar from '../component/Navbar'
@@ -13,14 +13,24 @@ import CompareListButton from './CompareListButton'
 import M_productAndBrand from './M_productAndBrand'
 import '../styles/m-navbar.css'
 import '../styles/products.css'
+import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 function Products() {
-  
+  const {
+    setToggleCartButton,
+    toggleCartButton,
+    products,
+    cartItem,
+    addToCartTable,
+    setProducts,
+    setCartItem,
+  } = useContext(ProductFunctionContext)
+
   //輪播牆
   const carouselRef = useRef(null)
   const [movement, setMoveMent] = useState(0)
   //開關
   const [toggleSortList, setToggleSortList] = useState(false)
-  const [toggleCartButton, setToggleCartButton] = useState(false)
+  // const [toggleCartButton, setToggleCartButton] = useState(false)
 
   //收藏
   let initFavorites = []
@@ -29,31 +39,32 @@ function Products() {
     initFavorites = JSON.parse(localStorage.getItem('favorites')) || []
   } catch (ex) {}
   const [favorites, setFavorite] = useState(initFavorites)
-  //加入購物車
-  let initCart = []
-  try {
-    initCart = JSON.parse(localStorage.getItem('cartItem')) || []
-  } catch (ex) {}
 
-  const [cartItem, setCartItem] = useState(initCart)
+  // //加入購物車
+  // let initCart = []
+  // try {
+  //   initCart = JSON.parse(localStorage.getItem('cartItem')) || []
+  // } catch (ex) {}
+
+  // const [cartItem, setCartItem] = useState(initCart)
 
   //寫入購物車
-  const addToCartTable = async () => {
-    const dev = 'http://localhost:3003/cart'
-    const aaron = 'http://localhost:3030/cart'
+  // const addToCartTable = async () => {
+  //   const dev = 'http://localhost:3003/cart'
+  //   const aaron = 'http://localhost:3030/cart'
 
-    await axios
-      .post(dev, {
-        member_id: 1,
-        product_id: JSON.parse(localStorage.getItem('cartItem')).map(
-          (v) => v.product_id
-        ),
-      })
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e))
-  }
+  //   await axios
+  //     .post(dev, {
+  //       member_id: 1,
+  //       product_id: JSON.parse(localStorage.getItem('cartItem')).map(
+  //         (v) => v.product_id
+  //       ),
+  //     })
+  //     .then((res) => console.log(res))
+  //     .catch((e) => console.log(e))
+  // }
   //產品
-  const [products, setProducts] = useState([])
+  // const [products, setProducts] = useState([])
   //品牌
   const [brand, setBrand] = useState('')
   //排序
@@ -81,9 +92,6 @@ function Products() {
   //呈現用的資料
 
   const [productsDisplay, setProductsDisplay] = useState([])
-
-  //警告視窗
-  const warningRef = useRef()
 
   const carouselMove = () => {
     setTimeout(() => {
@@ -321,11 +329,11 @@ function Products() {
   return (
     <>
       <Navbar
-        setToggleCartButton={setToggleCartButton}
-        toggleCartButton={toggleCartButton}
-        cartItem={cartItem}
-        products={products}
-        addToCartTable={addToCartTable}
+      // setToggleCartButton={setToggleCartButton}
+      // toggleCartButton={toggleCartButton}
+      // cartItem={cartItem}
+      // products={products}
+      // addToCartTable={addToCartTable}
       />
 
       {/* <!-- 輪播牆 --> */}

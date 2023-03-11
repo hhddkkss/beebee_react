@@ -1,17 +1,26 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import './../styles/Navbar.css'
 import './../styles/m-navbar.css'
+import ProductFunctionContext from '../Contexts/ProductFunctionContext'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-function Navbar({
-  setToggleCartButton,
-  toggleCartButton,
-  products,
-  cartItem,
-  addToCartTable,
-}) {
-  const myCartItem = cartItem || []
-  const cartItemPId = myCartItem.map((v) => v.product_id)
+function Navbar() {
+  const navigation = useNavigate()
+  const {
+    setToggleCartButton,
+    toggleCartButton,
+    products,
+    cartItem,
+    cartItemPId,
+    getProductData,
+  } = useContext(ProductFunctionContext)
 
+  // const myCartItem = cartItem || []
+  // const cartItemPId = myCartItem.map((v) => v.product_id)
+
+  useEffect(() => {
+    getProductData()
+  }, [])
   return (
     <>
       <header>
@@ -38,7 +47,14 @@ function Navbar({
           </div>
           <div className="nav_btn_list">
             <div className="nav_btn_group">
-              <button className="btn">比比精選</button>
+              <button
+                className="btn"
+                onClick={() => {
+                  navigation('/products')
+                }}
+              >
+                比比精選
+              </button>
               <button className="btn">比比論壇</button>
             </div>
             <div className="nav_btn_group">
@@ -74,6 +90,7 @@ function Navbar({
               className="btn cart"
               onClick={() => {
                 setToggleCartButton(!toggleCartButton)
+                console.log(cartItem)
               }}
             >
               <svg
@@ -182,7 +199,7 @@ function Navbar({
               href="#/"
               className="check-cart"
               onClick={() => {
-                addToCartTable()
+                navigation('/cart')
               }}
             >
               查看購物車

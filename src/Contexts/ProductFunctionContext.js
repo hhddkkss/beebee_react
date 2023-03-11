@@ -1,9 +1,42 @@
 import { createContext, useState } from 'react'
+import axios from 'axios'
 
 const ProductFunctionContext = createContext({})
 export default ProductFunctionContext
 
 export const ProductFunctionContextProvider = function ({ children }) {
+  //拿到produtct
+  const getProductData = async () => {
+    const dev = 'http://localhost:3003'
+    const aaron = 'http://localhost:3030'
+    const res = await axios.get(aaron + '/products/pd_api')
+    const initialData = res.data.map((v, i) => {
+      return { ...v, isLiked: false, isCompared: false }
+    })
+    console.log(initialData)
+    setProducts(initialData)
+  }
+
+  //開關
+  const [toggleCartButton, setToggleCartButton] = useState(false)
+
+  const [products, setProducts] = useState([])
+
+  //寫入購物車
+  const addToCartTable = async () => {
+    const dev = 'http://localhost:3003/cart'
+    const aaron = 'http://localhost:3030/cart'
+
+    await axios
+      .post(dev, {
+        member_id: 1,
+        product_id: JSON.parse(localStorage.getItem('cartItem')).map(
+          (v) => v.product_id
+        ),
+      })
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e))
+  }
   //購物車
 
   let initCart = []
@@ -12,6 +45,9 @@ export const ProductFunctionContextProvider = function ({ children }) {
   } catch (ex) {}
 
   const [cartItem, setCartItem] = useState(initCart)
+
+  const myCartItem = cartItem || []
+  const cartItemPId = myCartItem.map((v) => v.product_id)
 
   //比較列表
   let initComparedList = []
@@ -120,6 +156,13 @@ export const ProductFunctionContextProvider = function ({ children }) {
         handleAddOrDeleteCart,
         handleAddOrDeleteCompared,
         handleAddOrDeleteFavorite,
+        toggleCartButton,
+        setToggleCartButton,
+        products,
+        setProducts,
+        addToCartTable,
+        cartItemPId,
+        getProductData,
       }}
     >
       {children}
