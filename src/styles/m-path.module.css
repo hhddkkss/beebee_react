@@ -1,0 +1,21 @@
+.path {
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  display: none;
+}
+
+.path > span > a {
+  color: var(--wordGray);
+  text-decoration: none;
+}
+
+.path .path-active {
+  color: var(--deepBlue);
+}
+
+@media screen and (max-width: 375px) {
+  .path {
+    display: flex;
+  }
+}
