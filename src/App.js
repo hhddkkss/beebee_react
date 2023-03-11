@@ -1,29 +1,23 @@
-import Products from './Products/Products'
+import Products from './Products'
 import MemberLogin from './MemberLogin/'
 import { AuthContextProvider } from './Contexts/AuthContext'
+import { ProductFunctionContextProvider } from './Contexts/ProductFunctionContext'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useState } from 'react'
 import ProductDetail from './Products/ProductDetail'
 
 function App() {
-  const [dataFromProducts, setDataFromProducts] = useState({})
-
   return (
     <>
       <Router>
         <AuthContextProvider>
-          <Routes>
-            <Route path="/" element={<MemberLogin />} />
-            <Route
-              path="/products"
-              element={<Products setDataFromProducts={setDataFromProducts} />}
-            />
-            <Route
-              path="/product_detail"
-              element={<ProductDetail dataFromProducts={dataFromProducts} />}
-            />
-            <Route path="/member_login" element={<MemberLogin />} />
-          </Routes>
+          <ProductFunctionContextProvider>
+            <Routes>
+              <Route path="/" element={<MemberLogin />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/product_detail" element={<ProductDetail />} />
+              <Route path="/member_login" element={<MemberLogin />} />
+            </Routes>
+          </ProductFunctionContextProvider>
         </AuthContextProvider>
       </Router>
     </>

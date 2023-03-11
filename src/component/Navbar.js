@@ -9,7 +9,8 @@ function Navbar({
   cartItem,
   addToCartTable,
 }) {
-  const cartItemPId = cartItem.map((v) => v.product_id)
+  const myCartItem = cartItem || []
+  const cartItemPId = myCartItem.map((v) => v.product_id)
 
   return (
     <>

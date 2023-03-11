@@ -1026,13 +1026,20 @@ header {
     right: 5px;
     bottom: 5px;
   }
+
+  .card-bottom .card-text .fa-cart-shopping.active {
+    color: var(--orange1);
+  }
+
   .card-bottom .card-text .compare-and-cart svg {
     position: absolute;
     left: 5px;
     bottom: 5px;
   }
 
-  .fa-heart,
+  .fa-heart {
+    font-size: 24px;
+  }
   .fa-cart-shopping {
     font-size: 24px;
   }
