@@ -13,8 +13,8 @@ import CompareListButton from './CompareListButton'
 import M_productAndBrand from './M_productAndBrand'
 import '../styles/m-navbar.css'
 import '../styles/products.css'
+import ProductCompare from './ProductCompare'
 function Products() {
-  
   //輪播牆
   const carouselRef = useRef(null)
   const [movement, setMoveMent] = useState(0)
@@ -24,6 +24,18 @@ function Products() {
 
   //收藏
   let initFavorites = []
+
+  //比較列表顯示className
+  const [compareListClass, setCompareListClass] = useState(
+    'compare_list_box d-none'
+  )
+
+  //比較區顯示className
+  const [compareIngClass, setCompareIngClass] = useState(
+    'compareIng_box d-none'
+  )
+  //比價列表顯現按鈕
+  const popCompareBtn = useRef(null)
 
   try {
     initFavorites = JSON.parse(localStorage.getItem('favorites')) || []
@@ -107,9 +119,10 @@ function Products() {
   }
 
   const getProductData = async () => {
+    //記得修改port
     const dev = 'http://localhost:3003'
     const aaron = 'http://localhost:3030'
-    const res = await axios.get(aaron + '/products/pd_api')
+    const res = await axios.get(dev + '/products/pd_api')
     const initialData = res.data.map((v, i) => {
       return { ...v, isLiked: false, isCompared: false }
     })
@@ -379,7 +392,14 @@ function Products() {
         </section>
       </div>
 
-      <CompareListButton comparedList={comparedList} />
+      <CompareListButton
+        comparedList={comparedList}
+        setCompareListClass={setCompareListClass}
+        compareListClass={compareListClass}
+        setCompareIngClass={setCompareIngClass}
+        compareIngClass={compareIngClass}
+        popCompareBtn={popCompareBtn}
+      />
 
       <Pagination
         count={pageTotal}
@@ -389,6 +409,17 @@ function Products() {
         size={'large'}
         showFirstButton={true}
         showLastButton={true}
+      />
+      {/* 比價區 */}
+      <ProductCompare
+        setCompareListClass={setCompareListClass}
+        compareListClass={compareListClass}
+        productType={productType}
+        compareIngClass={compareIngClass}
+        setCompareIngClass={setCompareIngClass}
+        popCompareBtn={popCompareBtn}
+        comparedList={comparedList}
+        handleAddOrDeleteCompared={handleAddOrDeleteCompared}
       />
     </>
   )

@@ -114,10 +114,7 @@ function ProductCompareIngBox(props) {
                 </button>
 
                 <div className="item_content">
-                  <img
-                    src="https://cs-b.ecimg.tw/items/DYAJ3QA900FHDTK/000002_1663052522.jpg"
-                    alt=""
-                  />
+                  <img src={'/images/' + v.product_pic.split(',')[0]} alt="" />
                   <div className="item_name">{v.product_name}</div>
                   <div className="item_price">$ {v.product_price}</div>
                   <button className="add_To_Cart">
@@ -223,10 +220,7 @@ function ProductCompareIngBox(props) {
                 </button>
 
                 <div className="item_content">
-                  <img
-                    src="https://cs-b.ecimg.tw/items/DYAJ3QA900FHDTK/000002_1663052522.jpg"
-                    alt=""
-                  />
+                  <img src={'/images/' + v.product_pic.split(',')[0]} alt="" />
                   <div className="item_name">{v.product_name}</div>
                   <div className="item_price">$ {v.product_price}</div>
                   <button className="add_To_Cart">
@@ -334,10 +328,7 @@ function ProductCompareIngBox(props) {
                   </svg>
                 </button>
                 <div className="item_content">
-                  <img
-                    src="https://cs-b.ecimg.tw/items/DYAJ3QA900FHDTK/000002_1663052522.jpg"
-                    alt=""
-                  />
+                  <img src={'/images/' + v.product_pic.split(',')[0]} alt="" />
                   <div className="item_name">{v.product_name}</div>
                   <div className="item_price">$ {v.product_price}</div>
                   <button className="add_To_Cart">

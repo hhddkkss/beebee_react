@@ -11,6 +11,7 @@ function ProductCompareListBox(props) {
     setCompareListClass,
     compareListClass,
     setCompareIngList,
+    handleAddOrDeleteCompared,
   } = props
   return (
     <>
@@ -57,16 +58,18 @@ function ProductCompareListBox(props) {
           {showCompareList.map((v, i) => {
             return (
               <div key={v.product_id} className="compare_item_box">
-                <img
-                  src="https://cs-b.ecimg.tw/items/DYAJ3QA900FHDTK/000002_1663052522.jpg"
-                  alt=""
-                />
+                <img src={'/images/' + v.product_pic.split(',')[0]} alt="" />
                 <div className="item_content">
                   <div className="item_name">{v.product_name}</div>
                   <div className="item_price">{v.product_price}TWD</div>
                 </div>
                 <div className="compare_box_btn_group">
-                  <button className="btn compare_delete">
+                  <button
+                    className="btn compare_delete"
+                    onClick={() => {
+                      handleAddOrDeleteCompared(v.product_id)
+                    }}
+                  >
                     <svg
                       width="19"
                       height="19"

@@ -82,13 +82,19 @@ export const ProductFunctionContextProvider = function ({ children }) {
       setComparedList(newComparedList)
       localStorage.setItem('comparedList', JSON.stringify(newComparedList))
     } else {
-      if (comparedList.length < 3) {
-        const newComparedList = [...comparedList, product_id]
-        setComparedList(newComparedList)
-        localStorage.setItem('comparedList', JSON.stringify(newComparedList))
-      } else {
-        comparedList.length = 4
-      }
+      //不須限制只能三項進比較總表
+      // if (comparedList.length < 3) {
+      //   const newComparedList = [...comparedList, product_id]
+      //   setComparedList(newComparedList)
+      //   localStorage.setItem('comparedList', JSON.stringify(newComparedList))
+      // } else {
+      //   comparedList.length = 4
+      // }
+
+      const newComparedList = [...comparedList, product_id]
+      console.log('plus')
+      setComparedList(newComparedList)
+      localStorage.setItem('comparedList', JSON.stringify(newComparedList))
     }
   }
   //收藏商品

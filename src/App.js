@@ -17,7 +17,7 @@ function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/product_detail" element={<ProductDetail />} />
               <Route path="/member_login" element={<MemberLogin />} />
-              <Route path="/ProductCompere" element={<ProductCompare />} />
+              {/* <Route path="/123" element={<ProductCompare />} /> */}
             </Routes>
           </ProductFunctionContextProvider>
         </AuthContextProvider>
