@@ -6,28 +6,54 @@ import {
   COMPARE_ING_LIST_API,
 } from './../../component/LoginApi'
 import ProductCompareListBox from './ProductCompareListBox'
+import ProductCompareIngBox from './ProductCompareIngBox'
 
 function ProductCompare() {
+  //比較列表顯示className(要提生去product index)
+  const [compareListClass, setCompareListClass] = useState('compare_list_box')
+  //總比較列表
   const [compareList, setCompareList] = useState([])
+  //比較列表分類呈現
   const [showCompareList, setShowCompareList] = useState([])
+  //比較列表商品類型
   const [compareType, setCompareType] = useState(1)
+  //比較區清單
   const [compareIngList, setCompareIngList] = useState([])
+  //比較區總檔
   const [compareIngData, setCompareIngData] = useState([])
+  //比較區顯示className
+  const [compareIngClass, setCompareIngClass] = useState(
+    'compareIng_box d-none'
+  )
 
+  //拿比價列表資料(要傳真資料localstorage:comparedList)
   const getCompareList = () => {
-    axios.get(COMPARE_LIST_API).then((res) => {
-      console.log(res.data)
+    axios.post(COMPARE_LIST_API).then((res) => {
+      // console.log(res)
       setCompareList(res.data)
     })
   }
   // 拿取比價區資料
   const getCompareIngData = () => {
-    axios.get(COMPARE_ING_LIST_API).then((res) => {
-      console.log(res.data)
-      setCompareIngData(res.data)
-    })
+    console.log(localStorage.getItem('compareIngList'))
+    if (JSON.parse(localStorage.getItem('compareIngList')).length > 0) {
+      axios
+        .post(COMPARE_ING_LIST_API, {
+          compareIngList: localStorage.getItem('compareIngList'),
+          compareType: compareType,
+        })
+        .then((res) => {
+          // console.log('比價區:', res.data)
+          setCompareIngData(res.data)
+        })
+      return true
+    } else {
+      console.log('無加入比較區產品')
+      return false
+    }
   }
 
+  // 比價列表分類按鈕
   function setCompareListType(a) {
     let newList = compareList.filter((v, i) => {
       return v.product_category_id === a
@@ -35,6 +61,7 @@ function ProductCompare() {
     setShowCompareList(newList)
   }
 
+  //比價列表分類按鈕外觀改變
   function setCompare_type_btnClass(k) {
     if (k === compareType) {
       return 'compare_type_btn compare_type_btn_hover'
@@ -42,7 +69,7 @@ function ProductCompare() {
       return 'compare_type_btn'
     }
   }
-
+  //比價列表加入比價區按鈕外觀改變
   function setaddCompareIngClass(id) {
     if (compareIngList.includes(id)) {
       return 'btn compare_add added'
@@ -50,12 +77,13 @@ function ProductCompare() {
       return 'btn compare_add'
     }
   }
-
+  //比價區管理
   function addCompareIngList(id) {
     if (compareIngList.includes(id)) {
       let newL = compareIngList.filter((v) => {
         return v !== id
       })
+      console.log(`移除${id}`, `newL:`, newL)
       setCompareIngList(newL)
     } else {
       if (compareIngList.length > 2) {
@@ -66,13 +94,40 @@ function ProductCompare() {
     }
   }
 
+  //比價區管理加入localstorage
+  function addCompareIngToLocal() {
+    console.log(11)
+    if (compareIngList != JSON.parse(localStorage.getItem('compareIngList'))) {
+      localStorage.setItem('compareIngList', JSON.stringify(compareIngList))
+      console.log(111, compareIngList)
+    } else {
+      // if (
+      //   localStorage.getItem('compareIngList') &&
+      //   JSON.parse(localStorage.getItem('compareIngList')).length > 0
+      // ) {
+      //   console.log(12)
+
+      //   setCompareIngList(JSON.parse(localStorage.getItem('compareIngList')))
+      // } else {
+      //   console.log(13)
+
+      //   localStorage.setItem('compareIngList', JSON.stringify([]))
+      // }
+      return
+    }
+  }
   useEffect(() => {
     getCompareList()
-    console.log('2:', showCompareList)
+    addCompareIngToLocal()
   }, [])
   useEffect(() => {
     setCompareListType(1)
   }, [compareList])
+
+  useEffect(() => {
+    addCompareIngToLocal()
+    getCompareIngData()
+  }, [compareIngList])
 
   return (
     <>
@@ -86,9 +141,24 @@ function ProductCompare() {
           addCompareIngList={addCompareIngList}
           compareIngList={compareIngList}
           setaddCompareIngClass={setaddCompareIngClass}
+          addCompareIngToLocal={addCompareIngToLocal}
+          setCompareIngClass={setCompareIngClass}
+          compareListClass={compareListClass}
+          setCompareListClass={setCompareListClass}
+          setCompareIngList={setCompareIngList}
         />
         {/* 比價區 */}
-        <div className="compareIng_box ">
+
+        <ProductCompareIngBox
+          compareIngData={compareIngData}
+          compareType={compareType}
+          compareIngClass={compareIngClass}
+          addCompareIngList={addCompareIngList}
+          setCompareIngClass={setCompareIngClass}
+          setCompareListClass={setCompareListClass}
+        />
+
+        {/* <div className="compareIng_box ">
           <div className="compareIng_head">
             <div className="item_content"></div>
             <div className="head_title">
@@ -97,57 +167,53 @@ function ProductCompare() {
               <p>記憶體</p>
               <p>電池</p>
               <p>螢幕尺寸</p>
-              <p>螢幕尺寸</p>
-              <p>螢幕尺寸</p>
-              <p>螢幕尺寸</p>
-              <p>螢幕尺寸</p>
             </div>
           </div>
 
-          <div className="compareIng_item_card">
-            <button className="compareIng_item_remove">
-              <svg
-                width="20"
-                height="19"
-                viewBox="0 0 20 19"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2.66666 12H9.74999H17.6667"
-                  stroke="#4F4F4F"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
+          {compareIngData.map((v, i) => {
+            return (
+              <div key={v.product_id} className="compareIng_item_card">
+                <button className="compareIng_item_remove">
+                  <svg
+                    width="20"
+                    height="19"
+                    viewBox="0 0 20 19"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2.66666 12H9.74999H17.6667"
+                      stroke="#4F4F4F"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
 
-            <div className="item_content">
-              <img
-                src="https://cs-b.ecimg.tw/items/DYAJ3QA900FHDTK/000002_1663052522.jpg"
-                alt=""
-              />
-              <div className="item_name">iphone14</div>
-              <div className="item_price">$ 38400</div>
-              <button className="add_To_Cart">
-                <i className="fa-solid fa-cart-shopping d-inline"></i>
-                加入購物車
-              </button>
-            </div>
-            <div className="compare_item_property">
-              <p>ios</p>
-              <p>高通S8</p>
-              <p>128G</p>
-              <p>4300</p>
-              <p>5.9</p>
-              <p>5.9</p>
-              <p>5.9</p>
-              <p>5.9</p>
-              <p>5.9</p>
-            </div>
-          </div>
-        </div>
+                <div className="item_content">
+                  <img
+                    src="https://cs-b.ecimg.tw/items/DYAJ3QA900FHDTK/000002_1663052522.jpg"
+                    alt=""
+                  />
+                  <div className="item_name">{v.product_name}</div>
+                  <div className="item_price">$ {v.product_price}</div>
+                  <button className="add_To_Cart">
+                    <i className="fa-solid fa-cart-shopping d-inline"></i>
+                    加入購物車
+                  </button>
+                </div>
+                <div className="compare_item_property">
+                  <p>{v.operation_system}</p>
+                  <p>{v.prcessor}</p>
+                  <p>{v.ROM}</p>
+                  <p>{v.battery}</p>
+                  <p>{v.screen_size}</p>
+                </div>
+              </div>
+            )
+          })}
+        </div> */}
       </div>
     </>
   )

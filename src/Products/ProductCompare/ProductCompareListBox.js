@@ -5,12 +5,16 @@ function ProductCompareListBox(props) {
     showCompareList,
     setCompareType,
     addCompareIngList,
-    compareIngList,
     setaddCompareIngClass,
+    addCompareIngToLocal,
+    setCompareIngClass,
+    setCompareListClass,
+    compareListClass,
+    setCompareIngList,
   } = props
   return (
     <>
-      <div className="compare_list_box d-none">
+      <div className={compareListClass}>
         <p>選擇產品比較</p>
         <div className="compare_type_btn_group">
           {/*  選擇加"compare_type_btn_hover" */}
@@ -18,7 +22,9 @@ function ProductCompareListBox(props) {
             className={setCompare_type_btnClass(1)}
             onClick={(e) => {
               e.preventDefault()
+              setCompareType(1)
               setCompareListType(1)
+              setCompareIngList([])
             }}
           >
             手機
@@ -29,6 +35,7 @@ function ProductCompareListBox(props) {
               e.preventDefault()
               setCompareListType(2)
               setCompareType(2)
+              setCompareIngList([])
             }}
           >
             平板
@@ -39,6 +46,7 @@ function ProductCompareListBox(props) {
               e.preventDefault()
               setCompareListType(3)
               setCompareType(3)
+              setCompareIngList([])
             }}
           >
             耳機
@@ -113,10 +121,15 @@ function ProductCompareListBox(props) {
             className='compare_type_btn start"'
             onClick={(e) => {
               e.preventDefault()
-              localStorage.setItem(
-                'compareIngList',
-                JSON.stringify(compareIngList)
-              )
+              addCompareIngToLocal()
+
+              if (
+                localStorage.getItem('compareIngList') &&
+                JSON.parse(localStorage.getItem('compareIngList')).length > 1
+              ) {
+                setCompareIngClass('compareIng_box')
+                setCompareListClass('compare_list_box d-none')
+              }
             }}
           >
             開始比價!
