@@ -500,12 +500,12 @@ body {
   color: var(--textColorWhite);
 }
 
-.bottom-area {
+.m-cart-bottom-area {
   display: none;
 }
-.m-nav {
+/* .m-nav {
   display: none;
-}
+} */
 /* 手機版 */
 @media screen and (max-width: 375px) {
   /* .step {
@@ -545,8 +545,6 @@ body {
     align-items: end;
   }
 
-  .cart-item .wrap {
-  }
   .cart-name {
     width: 100%;
     transform: translateY(-30px);
@@ -635,7 +633,7 @@ body {
     left: 5px;
     bottom: 5px;
   }
-  .bottom-area {
+  .m-cart-bottom-area {
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -648,14 +646,14 @@ body {
   .bottom-total-price::before {
     content: '$';
   }
-  .bottom-area span {
+  .m-cart-bottom-area span {
     color: #fff;
   }
   .beebee_navbar {
     display: none;
   }
 
-  .m-nav {
+  /* .m-nav {
     display: flex;
-  }
+  } */
 }

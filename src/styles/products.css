@@ -95,9 +95,9 @@ header {
   display: block;
 } */
 
-.m-nav {
+/* .m-nav {
   display: none;
-}
+} */
 
 /**空的購物車 */
 .my-card:hover {
@@ -869,7 +869,7 @@ header {
     display: none;
   }
 
-  .m-nav {
+  /* .m-nav {
     display: flex;
-  }
+  } */
 }

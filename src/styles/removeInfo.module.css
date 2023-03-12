@@ -127,3 +127,10 @@
 .closeButton:hover {
   color: var(--textColorWhite);
 }
+
+@media screen and (max-width: 375px) {
+  .remove-info {
+    width: 300px;
+    height: 200px;
+  }
+}

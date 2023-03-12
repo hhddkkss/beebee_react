@@ -328,13 +328,7 @@ function Products() {
 
   return (
     <>
-      <Navbar
-      // setToggleCartButton={setToggleCartButton}
-      // toggleCartButton={toggleCartButton}
-      // cartItem={cartItem}
-      // products={products}
-      // addToCartTable={addToCartTable}
-      />
+      <Navbar />
 
       {/* <!-- 輪播牆 --> */}
 

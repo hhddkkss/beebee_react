@@ -5,7 +5,9 @@ import { ProductFunctionContextProvider } from './Contexts/ProductFunctionContex
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import ProductDetail from './Products/ProductDetail'
 import ProductCompere from './Products/ProductCompere'
-import Cart from './Cart/Cart'
+import Cart from './Cart'
+import Checkout from './Checkout'
+import DonePage from './DonePage'
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
               <Route path="/member_login" element={<MemberLogin />} />
               <Route path="/ProductCompere" element={<ProductCompere />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/donePage" element={<DonePage />} />
             </Routes>
           </ProductFunctionContextProvider>
         </AuthContextProvider>
