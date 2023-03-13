@@ -1,0 +1,26 @@
+.home_hover{
+    width: 375px;
+    height: 250px;
+
+}
+
+.home_hover_row{
+
+    margin-top: 10%;
+}
+
+.home_hover_issue{border: 0;
+background-color: white;
+margin-top: 20px;}
+
+.home_hover_word{border: 0;
+background-color: white;
+font-size: 15px;}
+
+.home_hover_img_{width:100px;}
+/* .home_hover_img_{
+   width:110px;
+height: 135px; } */
+.home_hover_img{width: 100%;
+object-fit: contain;
+margin-top: 50px;}
