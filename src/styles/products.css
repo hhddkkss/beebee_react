@@ -95,38 +95,11 @@ header {
   display: block;
 } */
 
-.m-nav {
+/* .m-nav {
   display: none;
-}
+} */
 
-/** cart-hover-box */
-.triangle {
-  border-right: 15px solid transparent;
-  border-left: 15px solid transparent;
-  border-bottom: 25px solid #727272;
-  position: absolute;
-  top: -10px;
-  right: 20px;
-}
-.cart-hover-box-on {
-  display: block;
-}
-.cart-hover-box-off {
-  display: none;
-}
-.cart-hover-box {
-  width: 390px;
-  height: fit-content;
-  background-color: #727272;
-  position: fixed;
-  border-radius: 5px;
-  padding: 1rem;
-  right: 40px;
-  top: 90px;
-  z-index: 5;
-  /* display: none; */
-}
-
+/**空的購物車 */
 .my-card:hover {
   transform: translateY(-5px);
   transition: all 0.5s ease-in-out;
@@ -135,100 +108,6 @@ header {
   transform: scale(1.03);
   transition: all 0.5s ease-in-out;
 }
-
-.cart-hover-box .my-cards {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-}
-.cart-hover-box .my-cart-card {
-  /* width: 340px; */
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 10px 3px 3px 10px;
-  background-color: #d9d9d9;
-  padding: 0.5rem 1rem 0.25rem 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.my-cart-card-left {
-  display: flex;
-  align-items: center;
-}
-.cart-hover-box .my-cart-card .img-wrap {
-  width: 55px;
-  aspect-ratio: 1/1;
-  margin-right: 1rem;
-}
-
-.cart-hover-box .my-cart-card .img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.cart-hover-box .my-cart-card .product-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
-.cart-hover-box .my-cart-card .product-price::before {
-  content: '$';
-}
-
-.cart-hover-box .btn-check-cart {
-  padding-right: 0.8rem;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-}
-
-.cart-hover-box .btn-check-cart .check-cart {
-  color: #fff;
-  text-decoration: none;
-  background-color: var(--orange1);
-  padding: 0.5rem 1.5rem;
-  border-radius: 3px;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: all 0.3s;
-}
-/* hover animation */
-.cart-hover-box .btn-check-cart .check-cart:before {
-  content: '';
-  width: 0%;
-  height: 100%;
-  background-color: #d28460;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
-  transition: all 0.3s;
-}
-.cart-hover-box .btn-check-cart .check-cart:after {
-  width: 100%;
-  content: '';
-  background-color: var(--orange1);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: -2;
-}
-.cart-hover-box .btn-check-cart .check-cart:hover {
-  color: #fff;
-}
-.cart-hover-box .btn-check-cart .check-cart:hover.check-cart:before {
-  width: 100%;
-}
-
-/**空的購物車 */
-
 .empty-msg {
   color: var(--textColorWhite);
 }
@@ -705,135 +584,6 @@ header {
   display: none;
 }
 
-.remove-info {
-  width: 500px;
-  height: 300px;
-  background-color: #222222de;
-  border-radius: 5px;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  align-items: center;
-  position: fixed;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-}
-.remove-info.remove-info-on {
-  display: flex;
-}
-.remove-info.remove-info-off {
-  display: none;
-}
-.remove-info p {
-  color: #fff;
-  cursor: pointer;
-}
-
-.remove-info .btn-mygroup {
-  width: 280px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.btn-confirm {
-  color: #fff;
-  text-decoration: none;
-  padding: 0.5rem 1.5rem;
-  border-radius: 3px;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: all 0.3s;
-  border: none;
-  width: 130px;
-  text-align: center;
-}
-.btn-confirm::after {
-  width: 100%;
-  height: 100%;
-  content: '';
-  background-color: var(--wordGray);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: -2;
-  border-radius: 3px;
-}
-.btn-confirm::before {
-  content: '';
-  width: 0%;
-  height: 100%;
-  background-color: #3a3a3a;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
-  transition: all 0.3s;
-  border-radius: 3px;
-}
-.btn-confirm:hover {
-  color: #fff;
-}
-.btn-confirm:hover:before {
-  width: 100%;
-}
-
-.btn-cancel {
-  color: #fff;
-  text-decoration: none;
-  padding: 0.5rem 1.5rem;
-  border-radius: 3px;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  transition: all 0.3s;
-  border: none;
-  width: 130px;
-  text-align: center;
-}
-.btn-cancel::after {
-  width: 100%;
-  height: 100%;
-  content: '';
-  background-color: var(--deepYellow);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: -2;
-  border-radius: 3px;
-}
-.btn-cancel::before {
-  content: '';
-  width: 0%;
-  height: 100%;
-  background-color: #c8b160;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
-  transition: all 0.3s;
-  border-radius: 3px;
-}
-.btn-cancel:hover {
-  color: #fff;
-}
-.btn-cancel:hover:before {
-  width: 100%;
-}
-
-.remove-info .fa-xmark {
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  color: #fff;
-}
-
-.remove-info .fa-xmark:hover {
-  color: var(--textColorWhite);
-}
-
 .compared-warning-info {
   width: 25%;
   height: 30%;
@@ -862,7 +612,7 @@ header {
 
 /*note pagination 樣式 from material UI */
 
-.MuiPagination-root.MuiPagination-text.css-jqvi4n-MuiPagination-root
+.MuiPagination-root.MuiPagination-text.css-1erbo3y-MuiPagination-root
   .MuiPagination-ul.css-wjh20t-MuiPagination-ul {
   justify-content: center;
   margin-bottom: 2rem;
@@ -1119,7 +869,7 @@ header {
     display: none;
   }
 
-  .m-nav {
+  /* .m-nav {
     display: flex;
-  }
+  } */
 }

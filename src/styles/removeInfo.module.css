@@ -1,0 +1,136 @@
+.remove-info {
+  width: 500px;
+  height: 300px;
+  background-color: #222222de;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+.remove-info.remove-info-on {
+  display: flex;
+}
+.remove-info.remove-info-off {
+  display: none;
+}
+
+.remove-info > p {
+  color: #fff;
+}
+
+.remove-info .btn-mygroup {
+  width: 280px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-confirm {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s;
+  border: none;
+  width: 130px;
+  text-align: center;
+}
+.btn-confirm::after {
+  width: 100%;
+  height: 100%;
+  content: '';
+  background-color: var(--wordGray);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -2;
+  border-radius: 3px;
+}
+.btn-confirm::before {
+  content: '';
+  width: 0%;
+  height: 100%;
+  background-color: #3a3a3a;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.3s;
+  border-radius: 3px;
+}
+.btn-confirm:hover {
+  color: #fff;
+}
+.btn-confirm:hover:before {
+  width: 100%;
+}
+
+.btn-cancel {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s;
+  border: none;
+  width: 130px;
+  text-align: center;
+}
+.btn-cancel::after {
+  width: 100%;
+  height: 100%;
+  content: '';
+  background-color: var(--deepYellow);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -2;
+  border-radius: 3px;
+}
+.btn-cancel::before {
+  content: '';
+  width: 0%;
+  height: 100%;
+  background-color: #c8b160;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.3s;
+  border-radius: 3px;
+}
+.btn-cancel:hover {
+  color: #fff;
+}
+.btn-cancel:hover:before {
+  width: 100%;
+}
+
+.closeButton {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: #fff;
+}
+
+.closeButton:hover {
+  color: var(--textColorWhite);
+}
+
+@media screen and (max-width: 375px) {
+  .remove-info {
+    width: 300px;
+    height: 200px;
+  }
+}

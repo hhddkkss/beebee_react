@@ -1,0 +1,776 @@
+@font-face {
+  font-family: Noto_Sans;
+  src: './../Noto_Sans_TC/NotoSansTC-Regular.otf';
+}
+
+:root {
+  --textColorWhite: #d7d7d7;
+  --deepBlue: #233a66;
+  --wordGray: #4f4f4f;
+  --orange1: #e59069;
+  --deepYellow: #f3d775;
+  --bgGray: #727272;
+}
+
+body {
+  position: relative;
+}
+
+.checkout {
+  display: flex;
+}
+
+/* 左半邊 */
+.checkout-left {
+  width: 65%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.logo-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+/** step   */
+/* transform */
+.checkout-step {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 2rem;
+  transform: translateY(10px);
+}
+
+.checkout-step .ball-wrap {
+  width: 450px;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+.checkout-step .ball {
+  width: 50px;
+  height: 50px;
+  background-color: #d9d9d9;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-step .line {
+  width: 150px;
+  height: 1px;
+  border: 0.5px solid #d9d9d9;
+}
+.checkout-step .line > span {
+  color: var(--wordGray);
+}
+/* 現在到哪個步驟 */
+
+.checkout-step .ball:nth-child(1) > span,
+.checkout-step .ball:nth-child(3) > span {
+  color: #fff;
+}
+
+.checkout-step .ball:nth-child(1),
+.checkout-step .ball:nth-child(3) {
+  background-color: var(--wordGray);
+}
+
+/** step文字部分 位置flex會跑掉  用transform修正*/
+.checkout-step .text p:nth-child(2) {
+  transform: translate(8px);
+}
+
+.checkout-step .text p:nth-child(3) {
+  transform: translate(8px);
+}
+
+.checkout-step .text {
+  width: 450px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  color: var(--wordGray);
+}
+
+.m-nav {
+  display: none;
+}
+
+/* 麵包屑 */
+.path {
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  display: none;
+}
+
+.path > span > a {
+  color: var(--wordGray);
+  text-decoration: none;
+}
+
+.path .path-active {
+  color: var(--deepBlue);
+}
+.m-top-button-area {
+  display: none;
+}
+form {
+  margin: 0 auto;
+}
+
+.form-border {
+  width: 500px;
+  border: 2px dashed var(--wordGray);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 4rem;
+  position: relative;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/** 標題壓線  */
+.form-title {
+  width: 120px;
+  text-align: center;
+  background-color: #fff;
+  font-size: 20px;
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  color: var(--deepBlue);
+  transform: translate(-50%, -50%);
+}
+.name-field {
+  display: flex;
+  gap: 1rem;
+}
+
+.field-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.form-input {
+  border: none;
+  outline: 2px solid #ccc;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 20px;
+  width: 100%;
+}
+.form-label {
+  font-size: 14px;
+}
+
+.field-wrap label {
+  position: absolute;
+  left: 10%;
+  top: 70%;
+  /* transform: translateX(-50%); */
+  background-color: #fff;
+  transition: all 0.2s ease-in;
+}
+
+.field-wrap label::before {
+  content: '=';
+  width: 0.3rem;
+  background-color: #fff;
+  color: #fff;
+}
+.field-wrap label::after {
+  content: '=';
+  width: 0.3rem;
+  background-color: #fff;
+  color: #fff;
+}
+
+.form-input:focus {
+  outline: 2px solid rgb(10, 135, 20);
+}
+
+/*-當input placeholder沒有顯示 也沒有focus 代表輸入過了 兄弟層label改變 */
+.form-input:not(:placeholder-shown).form-input:not(:focus) ~ .form-label,
+.form-input:focus ~ .form-label {
+  top: -40%;
+  left: 5%;
+  font-size: 10px;
+}
+
+.select-field {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.select-field select {
+  width: 176px;
+}
+
+.select-field option {
+  width: 176px;
+}
+
+/** 信用卡 */
+.credit-card {
+  padding-top: 200px;
+  position: relative;
+}
+
+.credit-card-front {
+  position: absolute;
+  top: -25px;
+  box-shadow: 1px 1px 10px #fff;
+  width: 250px;
+  height: 150px;
+  background: radial-gradient(
+        86.51% 264.25% at 80.7% 77.38%,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0) 59.79%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    radial-gradient(
+        53.97% 61.75% at 47.81% 36.51%,
+        rgba(255, 255, 255, 0.2) 8.85%,
+        rgba(255, 255, 255, 0.034375) 99.99%,
+        rgba(255, 255, 255, 0) 100%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #1d2d64;
+  border-radius: 5px;
+}
+.credit-card-front span {
+  color: #ccc;
+  font-size: 18px;
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  text-shadow: -1px -1px 0 white, 1px 1px 0 #333, 1px 1px 0 #444;
+}
+
+.fa-wifi {
+  color: #ccc;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transform: rotate(90deg);
+  text-shadow: -1px -1px 0 white, 1px 1px 0 #333, 1px 1px 0 #444;
+}
+
+.credit-card-front .month {
+  position: absolute;
+  top: 110px;
+  left: 20px;
+}
+.credit-card-front .year {
+  position: absolute;
+  top: 110px;
+  left: 50px;
+}
+.credit-card-front .year:before {
+  content: '/ ';
+}
+
+.credit-card-front .visa {
+  position: absolute;
+  top: 110px;
+  left: 200px;
+}
+
+.credit-card-front .lastname {
+  position: absolute;
+  top: 70px;
+  left: 20px;
+}
+.credit-card-front .firstname {
+  position: absolute;
+  top: 70px;
+  left: 90px;
+}
+
+.credit-card-back {
+  position: absolute;
+  color: #fff;
+  top: 30px;
+  left: 80px;
+  width: 250px;
+  height: 150px;
+  z-index: -5;
+  background: radial-gradient(
+      86.51% 264.25% at 80.7% 77.38%,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0) 59.79%
+    ),
+    radial-gradient(
+      53.97% 61.75% at 47.81% 36.51%,
+      rgba(255, 255, 255, 0.2) 8.85%,
+      rgba(255, 255, 255, 0.034375) 99.99%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #1d2d64;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px gray;
+}
+
+.credit-card-back div {
+  width: 100%;
+  height: 30px;
+  background-color: #f3f3f3;
+  position: absolute;
+  top: 70px;
+}
+.credit-card-back span {
+  color: black;
+  position: absolute;
+  right: 10px;
+  top: 70px;
+  z-index: 10;
+  text-align: right;
+}
+
+.note textarea {
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 20px;
+  border: none;
+  outline: 2px solid #ccc;
+}
+.note textarea:focus {
+  outline: 2px solid rgb(10, 135, 20);
+}
+
+/** checkout right */
+.checkout-right {
+  padding: 2rem;
+  background-color: var(--bgGray);
+  width: 35%;
+}
+.checkout-right p {
+  color: var(--textColorWhite);
+}
+.checkout-item-card {
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}
+.coupon {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.coupon-code {
+  border: none;
+  outline: 1px solid #ccc;
+  font-size: 20px;
+  width: 60%;
+  padding-left: 1rem;
+  border-radius: 3px;
+}
+.btn-coupon {
+  /* width: 112px; */
+  width: 20%;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s;
+  border: none;
+  display: block;
+}
+.btn-coupon::after {
+  width: 100%;
+  height: 100%;
+  content: '';
+  background-color: var(--deepBlue);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -2;
+  border-radius: 3px;
+}
+.btn-coupon::before {
+  content: '';
+  width: 0%;
+  height: 100%;
+  background-color: #1b2d4f;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.3s;
+  border-radius: 3px;
+}
+.btn-coupon:hover {
+  color: #fff;
+}
+.btn-coupon:hover:before {
+  width: 100%;
+}
+
+.checkout-items {
+  margin-bottom: 1rem;
+}
+.checkout-item {
+  display: flex;
+}
+.checkout-item .img-wrap {
+  width: 56px;
+  height: 56px;
+  /* background-image: url('../images/14-128G-red.png'); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  position: relative;
+}
+
+.checkout-item .img-wrap .amount {
+  width: 20px;
+  height: 20px;
+  background-color: var(--deepBlue);
+  border-radius: 50%;
+  font-size: 14px;
+  color: #fff;
+  /* 置中用 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-item-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-item-info p:nth-child(1) {
+  text-align: left;
+  margin: 0;
+}
+.checkout-item-info p:nth-child(2) {
+  text-align: right;
+  margin: 0;
+}
+
+.checkout-item-info p:nth-child(2)::before {
+  content: 'NT$ ';
+}
+.checkout-detail {
+  padding: 0 1rem;
+}
+.checkout-cal,
+.checkout-fee,
+.checkout-total,
+.checkout-discount {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.checkout-cal p:nth-child(2)::before,
+.checkout-fee p:nth-child(2)::before,
+.checkout-total p:nth-child(2)::before {
+  content: 'NT$ ';
+}
+.checkout-discount p:nth-child(2)::before {
+  content: 'NT$ -';
+}
+
+.checkout-total {
+  border-top: 1px solid var(--textColorWhite);
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+/** a -> block  */
+.is-login {
+  display: block;
+  text-align: center;
+  color: var(--textColorWhite);
+  margin-bottom: 1rem;
+}
+.is-login:active,
+.is-login:hover {
+  color: #fff;
+}
+
+/**註冊按鈕  */
+.btn-to-register {
+  /* width: 112px; */
+  width: 60%;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s;
+  border: none;
+  display: block;
+  margin: 0 auto;
+}
+.btn-to-register::after {
+  width: 100%;
+  height: 100%;
+  content: '';
+  background-color: var(--deepBlue);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -2;
+  border-radius: 3px;
+}
+.btn-to-register::before {
+  content: '';
+  width: 0%;
+  height: 100%;
+  background-color: #1b2d4f;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.3s;
+  border-radius: 3px;
+}
+.btn-to-register:hover {
+  color: #fff;
+}
+.btn-to-register:hover:before {
+  width: 100%;
+}
+
+/* 標語 */
+.bottom-slogan {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+/**結帳按鈕 */
+.btn-to-checkout {
+  /* width: 112px; */
+  width: 30%;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s;
+  border: none;
+  display: block;
+  margin-left: auto;
+}
+.btn-to-checkout::after {
+  width: 100%;
+  height: 100%;
+  content: '';
+  background-color: var(--orange1);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -2;
+  border-radius: 3px;
+}
+.btn-to-checkout::before {
+  content: '';
+  width: 0%;
+  height: 100%;
+  background-color: #d28460;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.3s;
+  border-radius: 3px;
+}
+.btn-to-checkout:hover {
+  color: #fff;
+}
+.btn-to-checkout:hover:before {
+  width: 100%;
+}
+
+.btn-to-checkout.m-btn-to-checkout {
+  display: none;
+}
+
+/** 手機版 */
+
+@media screen and (max-width: 375px) {
+  .checkout-left {
+    width: 100%;
+  }
+  .checkout-left .logo-wrap {
+    display: none;
+  }
+
+  .checkout-right {
+    display: none;
+  }
+
+  .path {
+    display: flex;
+  }
+
+  .m-top-button-area {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+  }
+  .m-top-button-area .order-detail-collapse {
+    /* display: flex;
+      justify-content: space-between; */
+    background-color: var(--wordGray);
+    padding: 0.5rem 1.5rem;
+  }
+  .m-top-button-area .order-detail-collapse .order-detail {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  .m-top-button-area .order-detail-collapse .order-detail p,
+  .m-top-button-area .order-detail-collapse .product-price {
+    color: #fff;
+    margin: 0;
+  }
+  .m-top-button-area .order-detail-collapse .product-price::before {
+    content: 'NT $';
+    margin-right: 0.5rem;
+  }
+  .m-top-button-area .order-detail-collapse .order-detail p i {
+    color: #fff;
+    margin-left: 0.5rem;
+  }
+
+  .m-top-button-area a {
+    display: block;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    background-color: var(--orange1);
+  }
+  .m-top-button-area a:nth-child(2) {
+    background-color: var(--deepBlue);
+  }
+
+  form {
+    margin: 0;
+  }
+
+  .form-border {
+    width: 100%;
+    padding: 1.5rem 1rem;
+    gap: 2rem;
+  }
+
+  .form-border input {
+    font-size: 16px;
+  }
+
+  .form-title {
+    font-size: 20px;
+  }
+  .name-field {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .field-wrap {
+    width: 100%;
+  }
+
+  .field-wrap label {
+    left: 10%;
+    top: 70%;
+  }
+  .input-address {
+    padding: 0.25rem;
+  }
+  .select-field {
+    width: 100%;
+    gap: 1rem;
+  }
+  .select-field select {
+    width: 100%;
+  }
+
+  .form-input:not(:placeholder-shown).form-input:not(:focus) ~ .form-label,
+  .form-input:focus ~ .form-label {
+    top: -50%;
+    left: 5%;
+    font-size: 10px;
+  }
+
+  .credit-card-front {
+    display: none;
+  }
+  .m-bottom-btn {
+    padding: 0 2rem;
+  }
+
+  .btn-to-checkout.m-btn-to-checkout {
+    width: 100%;
+  }
+
+  .m-order-detail-info .coupon {
+    padding: 0;
+    margin-bottom: 1rem;
+  }
+
+  /* .m-order-detail-info .coupon .coupon-code {
+      width: 60%;
+    } */
+  .m-order-detail-info .coupon .btn-coupon {
+    width: 40%;
+  }
+
+  .m-order-detail-info .checkout-item-card,
+  .m-order-detail-info .checkout-cal,
+  .m-order-detail-info .checkout-fee,
+  .m-order-detail-info .checkout-discount,
+  .m-order-detail-info .checkout-total {
+    padding: 0;
+  }
+
+  .m-order-detail-info .checkout-item-card .checkout-item-info > p,
+  .m-order-detail-info .checkout-cal > p,
+  .m-order-detail-info .checkout-fee > p,
+  .m-order-detail-info .checkout-discount > p,
+  .m-order-detail-info .checkout-total > p {
+    color: #fff;
+  }
+
+  .m-order-detail-info .checkout-total {
+    padding-top: 1rem;
+  }
+
+  .m-nav {
+    display: flex;
+  }
+  .m-bottom-btn {
+    margin-bottom: 2rem;
+  }
+  .btn-to-checkout.m-btn-to-checkout {
+    display: block;
+  }
+}

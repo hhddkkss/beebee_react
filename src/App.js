@@ -4,7 +4,10 @@ import { AuthContextProvider } from './Contexts/AuthContext'
 import { ProductFunctionContextProvider } from './Contexts/ProductFunctionContext'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import ProductDetail from './Products/ProductDetail'
-import ProductCompare from './Products/ProductCompare'
+import ProductCompere from './Products/ProductCompere'
+import Cart from './Cart'
+import Checkout from './Checkout'
+import DonePage from './DonePage'
 
 function App() {
   return (
@@ -17,7 +20,10 @@ function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/product_detail" element={<ProductDetail />} />
               <Route path="/member_login" element={<MemberLogin />} />
-              {/* <Route path="/123" element={<ProductCompare />} /> */}
+              <Route path="/ProductCompere" element={<ProductCompere />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/donePage" element={<DonePage />} />
             </Routes>
           </ProductFunctionContextProvider>
         </AuthContextProvider>
