@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/home.css'
 import '../styles/Home_Navbar.css'
-import '../styles/home_|||.css'
+import '../styles/home_ver3.css'
 import '../styles/mobile_navbar.css'
 import axios from 'axios'
 
@@ -16,7 +16,7 @@ function HomePage() {
     })
     console.log(initialData)
   }
-  
+
   return (
     <>
       <div className="home">
