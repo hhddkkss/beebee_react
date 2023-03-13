@@ -1,22 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-function DefaultCard({
-  productsDisplay,
-  pageNow,
-  favorites,
-  setProducts,
-  toggleLiked,
-  products,
-  handleAddOrDeleteFavorite,
-  comparedList,
-  toggleCompared,
-  handleAddOrDeleteCompared,
-  cartItem,
-  handleAddOrDeleteCart,
-}) {
+import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
+function DefaultCard({ productsDisplay }) {
+  const {
+    pageNow,
+    favorites,
+    setProducts,
+    toggleLiked,
+    products,
+    handleAddOrDeleteFavorite,
+    comparedList,
+    toggleCompared,
+    handleAddOrDeleteCompared,
+    cartItem,
+    handleAddOrDeleteCart,
+  } = useContext(ProductFunctionContext)
   return (
     <>
       <div className="row row-cols-lg-5">
+        {/* {console.log(productsDisplay, 'defaultCard',pageNow)} */}
+
         {productsDisplay[pageNow - 1] &&
           productsDisplay[pageNow - 1].map((v, i) => {
             return (
@@ -112,14 +115,14 @@ function DefaultCard({
                           <i
                             className="fa-solid fa-cart-shopping active"
                             onClick={() => {
-                              handleAddOrDeleteCart(v.product_id, 1)
+                              handleAddOrDeleteCart(v.product_id)
                             }}
                           ></i>
                         ) : (
                           <i
                             className="fa-solid fa-cart-shopping"
                             onClick={() => {
-                              handleAddOrDeleteCart(v.product_id, 1)
+                              handleAddOrDeleteCart(v.product_id)
                             }}
                           ></i>
                         )}

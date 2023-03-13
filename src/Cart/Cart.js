@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import '../styles/cart.css'
 import Navbar_light from '../component/Navbar-light'
 import StepInfomation from '../component/StepInfomation'
@@ -12,7 +12,8 @@ import Remove_info from '../component/Remove_info'
 import NoCartItem from './NoCartItem'
 
 function Cart() {
-  
+  const [toggleRemove, setToggleRemove] = useState(false)
+
   return (
     <>
       {/* <!-- navbar --> */}
@@ -122,7 +123,7 @@ function Cart() {
           </div>
         </section>
       </div> */}
-      {/* <CartItem /> */}
+      <CartItem />
       <NoCartItem />
 
       {/* <!-- 結帳按鈕 商品總價計算 幾樣商品 --> */}

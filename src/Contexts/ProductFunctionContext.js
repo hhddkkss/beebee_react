@@ -8,7 +8,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
   //拿到produtct
   const getProductData = async () => {
     const dev = 'http://localhost:3003'
-    const aaron = 'http://localhost:3030'
+    const aaron = 'http://localhost:3003'
     const res = await axios.get(aaron + '/products/pd_api')
     const initialData = res.data.map((v, i) => {
       return { ...v, isLiked: false, isCompared: false }
@@ -17,6 +17,9 @@ export const ProductFunctionContextProvider = function ({ children }) {
     setProducts(initialData)
   }
 
+  const [pageNow, setPageNow] = useState(1) //預設第一頁
+  const [perPage, setPerPage] = useState(25) // 一頁25個
+  const [pageTotal, setPageTotal] = useState(0) // 預設總筆數是0
   //開關
   const [toggleCartButton, setToggleCartButton] = useState(false)
 
@@ -45,9 +48,6 @@ export const ProductFunctionContextProvider = function ({ children }) {
   } catch (ex) {}
 
   const [cartItem, setCartItem] = useState(initCart)
-
-  const myCartItem = cartItem || []
-  const cartItemPId = myCartItem.map((v) => v.product_id)
 
   //比較列表
   let initComparedList = []
@@ -85,22 +85,23 @@ export const ProductFunctionContextProvider = function ({ children }) {
   }
 
   //加入購物車
-  const handleAddOrDeleteCart = (product_id, count) => {
+  const handleAddOrDeleteCart = (product_id) => {
     //判斷購物車內有沒有這個商品
-    const inCart = cartItem.find((v) => v.product_id === product_id)
+    console.log(product_id)
+    const inCart = cartItem.includes(product_id)
 
     //有的話
     if (inCart) {
-      const newCart = cartItem.filter((v) => v.product_id !== product_id)
-
-      setCartItem(newCart)
-      //轉成字串寫進localStorage
-      localStorage.setItem('cartItem', JSON.stringify(newCart))
+      // const newCart = cartItem.filter((v) => v.product_id !== product_id)
+      // setCartItem(newCart)
+      // //轉成字串寫進localStorage
+      // localStorage.setItem('cartItem', JSON.stringify(newCart))
     }
 
     //沒有的話
     else {
-      const newCart = [...cartItem, { product_id: product_id, count: count }]
+      const newCart = [...cartItem, product_id]
+      console.log(newCart)
       setCartItem(newCart)
       //轉成字串寫進localStorage
       localStorage.setItem('cartItem', JSON.stringify(newCart))
@@ -167,8 +168,8 @@ export const ProductFunctionContextProvider = function ({ children }) {
         products,
         setProducts,
         addToCartTable,
-        cartItemPId,
         getProductData,
+        pageNow,
       }}
     >
       {children}
