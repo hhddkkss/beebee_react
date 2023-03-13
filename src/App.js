@@ -7,7 +7,7 @@ import ProductDetail from './Products/ProductDetail'
 import Cart from './Cart'
 import Checkout from './Checkout'
 import DonePage from './DonePage'
-import HomePage from './Home'
+import HomePage from './Home/HomePage'
 
 function App() {
   return (
