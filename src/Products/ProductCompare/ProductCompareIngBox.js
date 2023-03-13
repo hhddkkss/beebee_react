@@ -253,7 +253,6 @@ function ProductCompareIngBox(props) {
                       className="add_To_Cart"
                       onClick={() => {
                         handleAddOrDeleteCart(v.product_id, 1)
-                        console.log('t')
                       }}
                     >
                       <i className="fa-solid fa-cart-shopping d-inline"></i>
