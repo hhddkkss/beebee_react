@@ -1,6 +1,4 @@
-import React from 'react'
 import '../styles/cart.css'
-import Navbar_light from '../component/Navbar-light'
 import StepInfomation from '../component/StepInfomation'
 import M_Path from '../component/M_Path'
 import CartInformation from './CartInformation'
@@ -10,13 +8,19 @@ import CartRecommend from './CartRecommend'
 import M_CartBottom from './M_CartBottom'
 import Remove_info from '../component/Remove_info'
 import NoCartItem from './NoCartItem'
+import Navbar from '../component/Navbar'
+import AuthContext from '../Contexts/AuthContext'
+import { useContext, useEffect } from 'react'
 
 function Cart() {
+  const { setNavbarType } = useContext(AuthContext)
+  useEffect(() => {
+    setNavbarType('light')
+  }, [])
   return (
     <>
       {/* <!-- navbar --> */}
-      <Navbar_light />
-
+      <Navbar />
       {/* <!-- step information --> */}
       {/* <div className="container">
         <section className={styles['step']}>

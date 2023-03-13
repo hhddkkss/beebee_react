@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react'
 import './../styles/Navbar.css'
-import ProductFunctionContext from '../Contexts/ProductFunctionContext'
+import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
 import { useNavigate } from 'react-router-dom'
 
-function Navbar() {
+function Navbar_l() {
   const navigation = useNavigate()
 
   const {
@@ -248,4 +248,4 @@ function Navbar() {
   )
 }
 
-export default Navbar
+export default Navbar_l

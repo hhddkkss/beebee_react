@@ -7,6 +7,7 @@ import ProductDetail from './Products/ProductDetail'
 import Cart from './Cart'
 import Checkout from './Checkout'
 import DonePage from './DonePage'
+import HomePage from './Home/HomePage'
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <AuthContextProvider>
           <ProductFunctionContextProvider>
             <Routes>
-              <Route path="/" element={<MemberLogin />} />
+              <Route path="/" element={<HomePage />} />
               <Route path="/products" element={<Products />} />
               <Route path="/product_detail" element={<ProductDetail />} />
               <Route path="/member_login" element={<MemberLogin />} />

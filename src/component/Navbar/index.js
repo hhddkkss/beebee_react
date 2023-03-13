@@ -1,14 +1,28 @@
+//README!!!!
+//每一頁都要加上的!
+//1: import AuthContext from '...你的路徑'
+//2: const { setNavbarType } = useContext(AuthContext)
+//3: useEffect(()=<{setNavbarType('白的話是light；深藍的話是dark')},[])
+
+import AuthContext from '../../Contexts/AuthContext'
 import React, { useContext, useEffect } from 'react'
-import './../styles/Navbar.css'
-import './../styles/m-navbar.css'
-import ProductFunctionContext from '../Contexts/ProductFunctionContext'
+import './../../styles/Navbar.css'
+import './../../styles/m-navbar.css'
+import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-function Navbar({ getProductData }) {
+function Navbar() {
   const navigation = useNavigate()
-  const { setToggleCartButton, toggleCartButton, products, cartItem } =
-    useContext(ProductFunctionContext)
+  const {
+    setToggleCartButton,
+    toggleCartButton,
+    products,
+    cartItem,
+    cartItemPId,
+    getProductData,
+  } = useContext(ProductFunctionContext)
 
+  const { navbarType } = useContext(AuthContext)
   // const myCartItem = cartItem || []
   // const cartItemPId = myCartItem.map((v) => v.product_id)
 
@@ -18,7 +32,13 @@ function Navbar({ getProductData }) {
   return (
     <>
       <header>
-        <nav className="beebee_navbar navbar_dark">
+        <nav
+          className={
+            navbarType == 'light'
+              ? 'beebee_navbar'
+              : 'beebee_navbar navbar_dark'
+          }
+        >
           <div className="beebee_logo">
             <svg
               width="129"
@@ -169,7 +189,7 @@ function Navbar({ getProductData }) {
 
           <div className="my-cards">
             {products
-              .filter((v) => cartItem.includes(v.product_id))
+              .filter((v) => cartItemPId.includes(v.product_id))
               .map((v) => {
                 return (
                   <div className="my-cart-card" key={v.product_id}>

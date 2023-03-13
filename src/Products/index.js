@@ -15,6 +15,7 @@ import '../styles/m-navbar.css'
 import '../styles/products.css'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 import ProductCompare from './ProductCompare'
+import AuthContext from '../Contexts/AuthContext'
 function Products() {
   const {
     setToggleCartButton,
@@ -25,6 +26,11 @@ function Products() {
     setProducts,
     setCartItem,
   } = useContext(ProductFunctionContext)
+
+  const { setNavbarType } = useContext(AuthContext)
+  useEffect(() => {
+    setNavbarType('dark')
+  }, [])
 
   //輪播牆
   const carouselRef = useRef(null)
