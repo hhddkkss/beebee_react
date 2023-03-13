@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react'
 import axios from 'axios'
+import { HOST } from '../component/LoginApi'
 
 const ProductFunctionContext = createContext({})
 export default ProductFunctionContext
@@ -8,8 +9,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
   //拿到produtct
   const getProductData = async () => {
     const dev = 'http://localhost:3003'
-    const aaron = 'http://localhost:3030'
-    const res = await axios.get(aaron + '/products/pd_api')
+    const res = await axios.get(dev + '/products/pd_api')
     const initialData = res.data.map((v, i) => {
       return { ...v, isLiked: false, isCompared: false }
     })

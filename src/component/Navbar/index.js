@@ -23,6 +23,7 @@ function Navbar() {
   } = useContext(ProductFunctionContext)
 
   const { navbarType } = useContext(AuthContext)
+
   // const myCartItem = cartItem || []
   // const cartItemPId = myCartItem.map((v) => v.product_id)
 
