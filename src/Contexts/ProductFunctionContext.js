@@ -9,7 +9,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
   const getProductData = async () => {
     const dev = 'http://localhost:3003'
     const aaron = 'http://localhost:3030'
-    const res = await axios.get(aaron + '/products/pd_api')
+    const res = await axios.get(dev + '/products/pd_api')
     const initialData = res.data.map((v, i) => {
       return { ...v, isLiked: false, isCompared: false }
     })

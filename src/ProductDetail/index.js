@@ -1,6 +1,6 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
-import { useContext } from 'react'
+import { useLocation, useParams } from 'react-router-dom'
+import { useContext, useEffect } from 'react'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 
 function ProductDetail(props) {
@@ -17,21 +17,14 @@ function ProductDetail(props) {
     handleAddOrDeleteCompared,
     handleAddOrDeleteFavorite,
   } = useContext(ProductFunctionContext)
+
+  const { product_id } = useParams()
+
+  useEffect(() => {
+    console.log('product_id:', product_id)
+  }, [])
   return (
     <>
-      {console.log({
-        cartItem,
-        setCartItem,
-        comparedList,
-        setComparedList,
-        favorites,
-        setFavorite,
-        toggleLiked,
-        toggleCompared,
-        handleAddOrDeleteCart,
-        handleAddOrDeleteCompared,
-        handleAddOrDeleteFavorite,
-      })}
       <p>123</p>
     </>
   )

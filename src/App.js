@@ -3,7 +3,7 @@ import MemberLogin from './MemberLogin/'
 import { AuthContextProvider } from './Contexts/AuthContext'
 import { ProductFunctionContextProvider } from './Contexts/ProductFunctionContext'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import ProductDetail from './Products/ProductDetail'
+import ProductDetail from './ProductDetail'
 import Cart from './Cart'
 import Checkout from './Checkout'
 import DonePage from './DonePage'
@@ -17,7 +17,10 @@ function App() {
             <Routes>
               <Route path="/" element={<MemberLogin />} />
               <Route path="/products" element={<Products />} />
-              <Route path="/product_detail" element={<ProductDetail />} />
+              <Route
+                path="/product_detail/:product_id"
+                element={<ProductDetail />}
+              />
               <Route path="/member_login" element={<MemberLogin />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
