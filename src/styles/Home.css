@@ -1,6 +1,11 @@
+@font-face {
+    font-family:Noto_Sans_TC ;
+    src: url(../../public/font/Noto_Sans_TC/NotoSansTC-Medium.otf);
+}
+
 .home {
     width: 100%;
-    height: 860px;
+    height: 690px;
     background: url('../../public/images/Home/home1.png');
     background-size: cover;
     background-position-y: -120px;
@@ -16,7 +21,7 @@
     }
   }
 
-  .home_word {
+  .Home_Word {
     position: absolute;
     right: 190px;
     bottom: 400px;
@@ -26,7 +31,7 @@
   }
 
   @media screen and (max-width: 375px) {
-    .home_word{
+    .Home_Word{
     font-size: 25px;
     right: 8%;
     bottom: 55%;
@@ -45,12 +50,14 @@
     line-height: 50px;
     background-color: white;
     position: absolute;
+    font-family: Noto Sans TC;
   }
 
   @media screen and (max-width: 375px) {.home_search {
     width: 140px;
     height: 40px;
-    right:10%
+    right:10%;
+    font-family: Noto Sans TC;
   }}
 
   .home_beebeechoose{
@@ -67,7 +74,8 @@
     left: 13%;
     top: 18%;
     font-size: 36px;
-    color: #00199B 
+    color: #00199B;
+    font-family: Noto Sans TC;
   }
 
   .home_beebeechoose_word_issue{
@@ -119,6 +127,7 @@ font-size: 50px;
 margin-top: 50px;
 margin-bottom: 40px;
 border-right: solid 1px #C1C1C1;
+
   }
 
    .home_four_picture2{
@@ -133,12 +142,14 @@ margin-bottom: 40px;
     /* border-right: solid 1px #C1C1C1; */
     font-size: 43px;
     color: #00199B;
+    font-family: Noto Sans TC;
   }
 
   .home_four_word2{
     text-align: center;
     font-size: 23px;
     margin-top:-20px;
+    
   }
   @media screen and (max-width: 375px) {
     .home_four_picture{font-size: 18px;}
