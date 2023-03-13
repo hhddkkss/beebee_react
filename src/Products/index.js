@@ -14,6 +14,7 @@ import M_productAndBrand from './M_productAndBrand'
 import '../styles/m-navbar.css'
 import '../styles/products.css'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
+import ProductCompare from './ProductCompare'
 function Products() {
   const {
     setToggleCartButton,
