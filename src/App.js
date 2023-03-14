@@ -8,6 +8,7 @@ import Cart from './Cart'
 import Checkout from './Checkout'
 import DonePage from './DonePage'
 import HomePage from './Home/HomePage'
+import Home4ads from './Home/Home_4ads'
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <AuthContextProvider>
           <ProductFunctionContextProvider>
             <Routes>
-              <Route path="/" element={<HomePage />} />
+              <Route path="/" element={<Home4ads />} />
               <Route path="/products" element={<Products />} />
               <Route path="/product_detail" element={<ProductDetail />} />
               <Route path="/member_login" element={<MemberLogin />} />
