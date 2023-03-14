@@ -10,6 +10,8 @@ import axios from 'axios'
 import Dayjs from 'dayjs'
 import ProductDetailsBasic from './ProductDetailsBasic'
 import Rating from '@mui/material/Rating'
+import ProductCompare from '../component/ProductCompare'
+import CompareListButton from '../Products/CompareListButton'
 
 function ProductDetail(props) {
   const { setNavbarType } = useContext(AuthContext)
@@ -41,12 +43,12 @@ function ProductDetail(props) {
   }
 
   useEffect(() => {
-    // console.log(
-    //   'product_id:',
-    //   product_id,
-    //   'product_category:',
-    //   product_category
-    // )
+    console.log(
+      'product_id:',
+      product_id,
+      'product_category:',
+      product_category
+    )
     getProductDetails()
     setNavbarType('dark')
   }, [])
@@ -54,6 +56,8 @@ function ProductDetail(props) {
   return (
     <>
       <Navbar />
+      <CompareListButton />
+      <ProductCompare productType={product_category} />
       <ProductDetailsBasic p_detailData={p_detailData} />
 
       {/* 評論區bar */}
