@@ -63,7 +63,14 @@ function DefaultCard({ productsDisplay }) {
                   <div className="card-bottom">
                     <h3>{v.product_name}</h3>
                     <div className="card-text">
-                      <p className="original">{v.product_price}</p>
+                      <p
+                        className="original"
+                        onClick={() => {
+                          console.log(v.isCompared)
+                        }}
+                      >
+                        {v.product_price}
+                      </p>
                       <p className="discount">{v.product_price}</p>
                       <div className="compare-and-cart">
                         {v.isCompared? (

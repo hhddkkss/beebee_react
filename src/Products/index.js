@@ -14,8 +14,9 @@ import M_productAndBrand from './M_productAndBrand'
 import '../styles/m-navbar.css'
 import '../styles/products.css'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
-import ProductCompare from './ProductCompare'
+import ProductCompare from '../component/ProductCompare'
 import AuthContext from '../Contexts/AuthContext'
+import CompareContext from '../Contexts/CompareContext'
 function Products() {
   const {
     products,
@@ -30,6 +31,13 @@ function Products() {
     pageTotal,
     setPageTotal
   } = useContext(ProductFunctionContext)
+  const {
+    compareListClass,
+    setCompareListClass,
+    compareIngClass,
+    setCompareIngClass,
+    popCompareBtn,
+  } = useContext(CompareContext)
 
   const { setNavbarType } = useContext(AuthContext)
   useEffect(() => {
@@ -47,17 +55,17 @@ function Products() {
 
  
 
-  //比較列表顯示className
-  const [compareListClass, setCompareListClass] = useState(
-    'compare_list_box d-none'
-  )
+  // //比較列表顯示className
+  // const [compareListClass, setCompareListClass] = useState(
+  //   'compare_list_box d-none'
+  // )
 
-  //比較區顯示className
-  const [compareIngClass, setCompareIngClass] = useState(
-    'compareIng_box d-none'
-  )
-  //比價列表顯現按鈕
-  const popCompareBtn = useRef(null)
+  // //比較區顯示className
+  // const [compareIngClass, setCompareIngClass] = useState(
+  //   'compareIng_box d-none'
+  // )
+  // //比價列表顯現按鈕
+  // const popCompareBtn = useRef(null)
 
 
  //收藏
@@ -432,15 +440,13 @@ function Products() {
       />
       {/* 比價區 */}
       <ProductCompare
-        setCompareListClass={setCompareListClass}
-        compareListClass={compareListClass}
+        // setCompareListClass={setCompareListClass}
+        // compareListClass={compareListClass}
         productType={productType}
-        compareIngClass={compareIngClass}
-        setCompareIngClass={setCompareIngClass}
-        popCompareBtn={popCompareBtn}
-        // 註解 by aaron 
+        // compareIngClass={compareIngClass}
+        // setCompareIngClass={setCompareIngClass}
+        // popCompareBtn={popCompareBtn}
         // comparedList={comparedList}
-        // handleAddOrDeleteCompared={handleAddOrDeleteCompared}
       />
     </>
   )

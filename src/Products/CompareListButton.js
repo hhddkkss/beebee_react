@@ -1,18 +1,17 @@
-import React,{useContext} from 'react'
+import React, { useContext } from 'react'
+import CompareContext from '../Contexts/CompareContext'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 
+function CompareListButton() {
+  const {
+    compareListClass,
+    setCompareListClass,
+    compareIngClass,
+    setCompareIngClass,
+    popCompareBtn,
+  } = useContext(CompareContext)
 
-function CompareListButton({
-  // comparedList,
-  setCompareListClass,
-  compareListClass,
-  setCompareIngClass,
-  compareIngClass,
-  popCompareBtn,
-}) {
-
-  const {comparedList} =useContext(ProductFunctionContext)
-  
+  const { comparedList } = useContext(ProductFunctionContext)
   return (
     <>
       <div
@@ -32,7 +31,7 @@ function CompareListButton({
       >
         <p>比較列表</p>
         <div className="img-wrap">
-          <img src="./images/14-128G-red.png" alt="" />
+          <img src="/images/14-128G-red.png" alt="" />
         </div>
         <div className="count-wrap">
           <span>{comparedList.length}</span>
