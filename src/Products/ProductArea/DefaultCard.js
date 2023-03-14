@@ -66,7 +66,7 @@ function DefaultCard({ productsDisplay }) {
                       <p className="original">{v.product_price}</p>
                       <p className="discount">{v.product_price}</p>
                       <div className="compare-and-cart">
-                        {comparedList && comparedList.includes(v.product_id) ? (
+                        {v.isCompared? (
                           <svg
                             width="20"
                             height="20"

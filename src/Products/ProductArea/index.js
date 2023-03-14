@@ -1,38 +1,38 @@
-import React from 'react'
+import React ,{useContext}from 'react'
 import { Link } from 'react-router-dom'
+import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
 import DefaultCard from './DefaultCard'
 
 function ProductArea({
   productsDisplay,
-  pageNow,
-  favorites,
-  setProducts,
+  // pageNow,
+  // favorites,
+  // setProducts,
   toggleLiked,
   products,
-  handleAddOrDeleteFavorite,
-  comparedList,
+  // handleAddOrDeleteFavorite,
   toggleCompared,
-  handleAddOrDeleteCompared,
-  cartItem,
-  handleAddOrDeleteCart,
+  // cartItem,
+  // handleAddOrDeleteCart,
 }) {
+  const {comparedList,favorites,handleAddOrDeleteFavorite,handleAddOrDeleteCart,cartItem,pageNow,setProducts,} = useContext(ProductFunctionContext)
+
   return (
     <>
-      
+      {/* {pageNow,favorites,setProducts,products,toggleLiked,handleAddOrDeleteFavorite,toggleCompared,cartItem,handleAddOrDeleteCart} */}
       <div className="product-area">
         <DefaultCard
           productsDisplay={productsDisplay}
-          pageNow={pageNow}
-          favorites={favorites}
-          setProducts={setProducts}
-          toggleLiked={toggleLiked}
-          products={products}
-          handleAddOrDeleteFavorite={handleAddOrDeleteFavorite}
-          comparedList={comparedList}
-          toggleCompared={toggleCompared}
-          handleAddOrDeleteCompared={handleAddOrDeleteCompared}
+          // pageNow={pageNow}
+          // favorites={favorites}
+          // setProducts={setProducts}
+          // toggleLiked={toggleLiked}
+          // products={products}
+          // handleAddOrDeleteFavorite={handleAddOrDeleteFavorite}
+          // comparedList={comparedList}
+          // toggleCompared={toggleCompared}
           cartItem={cartItem}
-          handleAddOrDeleteCart={handleAddOrDeleteCart}
+          // handleAddOrDeleteCart={handleAddOrDeleteCart}
         />
 
         {/* <!-- 手機版的橫向卡片--> */}

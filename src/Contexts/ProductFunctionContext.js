@@ -9,10 +9,6 @@ export const ProductFunctionContextProvider = function ({ children }) {
   //拿到produtct
   const getProductData = async () => {
     const dev = 'http://localhost:3003'
-<<<<<<< HEAD
-=======
-    const aaron = 'http://localhost:3030'
->>>>>>> olar
     const res = await axios.get(dev + '/products/pd_api')
     const initialData = res.data.map((v, i) => {
       return { ...v, isLiked: false, isCompared: false }
@@ -61,6 +57,8 @@ export const ProductFunctionContextProvider = function ({ children }) {
     initComparedList = JSON.parse(localStorage.getItem('comparedList')) || []
   } catch (ex) {}
   const [comparedList, setComparedList] = useState(initComparedList)
+
+  
   //收藏
   let initFavorites = []
 
@@ -198,8 +196,13 @@ export const ProductFunctionContextProvider = function ({ children }) {
         setProducts,
         addToCartTable,
         getProductData,
-        pageNow,
         cartItemPId,
+        pageNow,
+        setPageNow,
+        perPage,
+        setPerPage,
+        pageTotal,
+        setPageTotal
       }}
     >
       {children}

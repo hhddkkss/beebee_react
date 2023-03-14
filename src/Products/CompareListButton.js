@@ -1,13 +1,18 @@
-import React from 'react'
+import React,{useContext} from 'react'
+import ProductFunctionContext from '../Contexts/ProductFunctionContext'
+
 
 function CompareListButton({
-  comparedList,
+  // comparedList,
   setCompareListClass,
   compareListClass,
   setCompareIngClass,
   compareIngClass,
   popCompareBtn,
 }) {
+
+  const {comparedList} =useContext(ProductFunctionContext)
+  
   return (
     <>
       <div
