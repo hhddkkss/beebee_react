@@ -40,7 +40,6 @@ export const AuthContextProvider = function ({ children }) {
   } catch (ex) {}
 
   const [memberAuth, setMemberAuth] = useState(initAuth)
-  const [navbarType, setNavbarType] = useState('light')
 
   const Logout = () => {
     localStorage.removeItem('myAuth')
@@ -49,9 +48,7 @@ export const AuthContextProvider = function ({ children }) {
   }
 
   return (
-    <AuthContext.Provider
-      value={{ memberAuth, setMemberAuth, Logout, navbarType, setNavbarType }}
-    >
+    <AuthContext.Provider value={{ memberAuth, setMemberAuth, Logout }}>
       {/* value才是預設值 */}
       {children}
     </AuthContext.Provider>

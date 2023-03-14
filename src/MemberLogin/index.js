@@ -202,11 +202,16 @@ function MemberLogin() {
 
         <div className="login_box">
           <button
-            className={activeClass(
-              'loginPage_main_button loginPage_button login_mobile_hidden',
-              'sing_up loginPage_main_button loginPage_button login_mobile_hidden',
-              'd-none'
-            )}
+            className={
+              activeClass(
+                'loginPage_main_button loginPage_button login_mobile_hidden',
+                'sing_up loginPage_main_button loginPage_button login_mobile_hidden',
+                'd-none'
+              )
+              // isActive
+              //   ? 'sing_up loginPage_main_button loginPage_button login_mobile_hidden'
+              //   : 'loginPage_main_button loginPage_button login_mobile_hidden'
+            }
             onClick={() => {
               slice()
             }}

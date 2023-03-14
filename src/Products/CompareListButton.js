@@ -1,30 +1,9 @@
 import React from 'react'
 
-function CompareListButton({
-  comparedList,
-  setCompareListClass,
-  compareListClass,
-  setCompareIngClass,
-  compareIngClass,
-  popCompareBtn,
-}) {
+function CompareListButton({ comparedList }) {
   return (
     <>
-      <div
-        className="compare-list"
-        ref={popCompareBtn}
-        onClick={(e) => {
-          if (
-            compareListClass === 'compare_list_box d-none' &&
-            compareIngClass === 'compareIng_box d-none'
-          ) {
-            setCompareListClass('compare_list_box')
-          } else {
-            setCompareListClass('compare_list_box d-none')
-            setCompareIngClass('compareIng_box d-none')
-          }
-        }}
-      >
+      <div className="compare-list">
         <p>比較列表</p>
         <div className="img-wrap">
           <img src="./images/14-128G-red.png" alt="" />

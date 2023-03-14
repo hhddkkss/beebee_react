@@ -127,7 +127,7 @@ function Navbar() {
           </div>
         </nav>
 
-        <nav className="m-nav">
+        <nav className={`m-nav `}>
           <i className="fa-solid fa-chevron-left btn-back "></i>
           {/* <svg
             width="67"

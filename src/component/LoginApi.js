@@ -10,9 +10,3 @@ export const SIGNUP = `${HOST}/signUp`
 
 //地址LIST
 export const ADDRESS_LIST = `${HOST}/address_list`
-
-//比價列表
-export const COMPARE_LIST_API = `${HOST}/product_compare`
-
-//比價區
-export const COMPARE_ING_LIST_API = `${HOST}/product_compare/compareIng`
