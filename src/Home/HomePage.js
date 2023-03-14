@@ -1,9 +1,5 @@
 import React from 'react'
 import '../styles/Home.css'
-<<<<<<< HEAD
-import '../styles/Home_Navbar.css'
-=======
->>>>>>> emelie
 import '../styles/home_ver3.css'
 import '../styles/mobile_navbar.css'
 import axios from 'axios'
