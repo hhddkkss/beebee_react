@@ -1,38 +1,66 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 
 function CartItem() {
-  const imgPath = 'iphone-14promax-256G-deeppurple.png'
-  const imagesPath = '/public/images/'
+  const navigation = useNavigate()
+
+  const { cartItemPId, products } = useContext(ProductFunctionContext)
+
   return (
     <>
       <div className="container">
         <section className="cart-items">
-          <div className="cart-item">
-            <div className="wrap">
-              <div
-                className="img"
-                style={{
-                  backgroundImage: `url(${imagesPath}${imgPath})`,
-                }}
-              ></div>
-              <span className="cart-name">iphone14 128GB 紅色</span>
-            </div>
-            <span className="cart-price">39000</span>
-            <div className="cart-control">
-              <a href="#">
-                <i className="fa-solid fa-minus"></i>
-              </a>
-              <span>1</span>
-              <a href="#">
-                <i className="fa-solid fa-plus"></i>
-              </a>
-              <a href="#">
-                <i className="fa-solid fa-trash-can"></i>
-              </a>
-            </div>
-            <span className="cart-total">39000</span>
-          </div>
+          {console.log(cartItemPId)}
+          {products
+            .filter((v) => cartItemPId.includes(v.product_id))
+            .map((v) => (
+              <div className="cart-item" key={v.product_id}>
+                <div className="wrap">
+                  <div
+                    className="img"
+                    style={{
+                      backgroundImage: `url('/public/images/iphone-14promax-256G-deeppurple.png')`,
+                    }}
+                  ></div>
+                  <span className="cart-name">{v.product_name}</span>
+                </div>
+                <span className="cart-price">{v.product_price}</span>
+                <div className="cart-control">
+                  <a href="#">
+                    <i className="fa-solid fa-minus"></i>
+                  </a>
+                  <span>1</span>
+                  <a href="#">
+                    <i className="fa-solid fa-plus"></i>
+                  </a>
+                  <a href="#">
+                    <i className="fa-solid fa-trash-can"></i>
+                  </a>
+                </div>
+                <span className="cart-total">39000</span>
+              </div>
+            ))}
         </section>
+      </div>
+
+      <div className="container">
+        <div className="cart-bottom">
+          <p>
+            購物車內總共有<span>{cartItemPId.length}</span>樣商品
+          </p>
+          <p>
+            合計：<span className="total-price">104700</span>
+          </p>
+          <button
+            className="btn btn-checkout"
+            onClick={() => {
+              navigation('/checkout')
+            }}
+          >
+            我要結帳
+          </button>
+        </div>
       </div>
     </>
   )

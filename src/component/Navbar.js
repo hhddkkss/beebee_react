@@ -1,16 +1,17 @@
 import React, { useContext, useEffect } from 'react'
 import './../styles/Navbar.css'
 import './../styles/m-navbar.css'
-import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
+import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-function Navbar({ getProductData }) {
+function Navbar() {
   const navigation = useNavigate()
   const {
     setToggleCartButton,
     toggleCartButton,
     products,
     cartItem,
+    cartItemPId,
     getProductData,
   } = useContext(ProductFunctionContext)
 
@@ -173,9 +174,8 @@ function Navbar({ getProductData }) {
           <div className="triangle"></div>
 
           <div className="my-cards">
-            {console.log(cartItem)}
             {products
-              .filter((v) => cartItem.includes(v.product_id))
+              .filter((v) => cartItemPId.includes(v.product_id))
               .map((v) => {
                 return (
                   <div className="my-cart-card" key={v.product_id}>
@@ -211,4 +211,4 @@ function Navbar({ getProductData }) {
   )
 }
 
-export default Navbar_d
+export default Navbar

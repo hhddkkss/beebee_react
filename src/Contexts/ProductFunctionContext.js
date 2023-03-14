@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react'
 import axios from 'axios'
+import { HOST } from '../component/LoginApi'
 
 const ProductFunctionContext = createContext({})
 export default ProductFunctionContext
@@ -8,8 +9,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
   //拿到produtct
   const getProductData = async () => {
     const dev = 'http://localhost:3003'
-    const aaron = 'http://localhost:3003'
-    const res = await axios.get(aaron + '/products/pd_api')
+    const res = await axios.get(dev + '/products/pd_api')
     const initialData = res.data.map((v, i) => {
       return { ...v, isLiked: false, isCompared: false }
     })
@@ -33,12 +33,12 @@ export const ProductFunctionContextProvider = function ({ children }) {
     await axios
       .post(dev, {
         member_id: 1,
-        product_id: JSON.parse(localStorage.getItem('cartItem')).map(
-          (v) => v.product_id
-        ),
+        product_id:
+          localStorage.getItem('cartItem') &&
+          JSON.parse(localStorage.getItem('cartItem')).map((v) => v.product_id),
       })
       .then((res) => console.log(res))
-      .catch((e) => console.log(e))
+      .catch((e) => console.log(e.error))
   }
   //購物車
 

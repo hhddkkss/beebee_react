@@ -22,9 +22,9 @@ function Products() {
     toggleCartButton,
     products,
     cartItem,
-    addToCartTable,
     setProducts,
     setCartItem,
+    getProductData,
   } = useContext(ProductFunctionContext)
 
   const { setNavbarType } = useContext(AuthContext)
@@ -133,17 +133,17 @@ function Products() {
     if (productType === 4) return '全部商品'
   }
 
-  const getProductData = async () => {
-    //記得修改port
-    const dev = 'http://localhost:3003'
-    // const aaron = 'http://localhost:3030'
-    const res = await axios.get(dev + '/products/pd_api')
-    const initialData = res.data.map((v, i) => {
-      return { ...v, isLiked: false, isCompared: false }
-    })
-    console.log(initialData)
-    setProducts(initialData)
-  }
+  // const getProductData = async () => {
+  //   //記得修改port
+  //   const dev = 'http://localhost:3003'
+  //   const res = await axios.get(dev + '/products/pd_api')
+  //   const initialData = res.data.map((v, i) => {
+  //     return { ...v, isLiked: false, isCompared: false }
+  //   })
+  //   console.log(initialData)
+  //   setProducts(initialData)
+  // }
+
   //加入收藏(外觀)
   const toggleLiked = (arr, product_id) => {
     return arr.map((v, i) => {
@@ -341,6 +341,12 @@ function Products() {
 
     // setProductsDisplay(newProducts)
   }, [products, keyword, sortList, productType, brand])
+
+  useEffect(() => {
+    return () => {
+      console.log('跳頁')
+    }
+  }, [])
 
   return (
     <>
