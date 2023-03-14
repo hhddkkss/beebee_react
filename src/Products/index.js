@@ -14,16 +14,23 @@ import M_productAndBrand from './M_productAndBrand'
 import '../styles/m-navbar.css'
 import '../styles/products.css'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
+import ProductCompare from './ProductCompare'
+import AuthContext from '../Contexts/AuthContext'
 function Products() {
   const {
     setToggleCartButton,
     toggleCartButton,
     products,
     cartItem,
-    addToCartTable,
     setProducts,
     setCartItem,
+    getProductData,
   } = useContext(ProductFunctionContext)
+
+  const { setNavbarType } = useContext(AuthContext)
+  useEffect(() => {
+    setNavbarType('dark')
+  }, [])
 
   //輪播牆
   const carouselRef = useRef(null)
@@ -34,6 +41,18 @@ function Products() {
 
   //收藏
   let initFavorites = []
+
+  //比較列表顯示className
+  const [compareListClass, setCompareListClass] = useState(
+    'compare_list_box d-none'
+  )
+
+  //比較區顯示className
+  const [compareIngClass, setCompareIngClass] = useState(
+    'compareIng_box d-none'
+  )
+  //比價列表顯現按鈕
+  const popCompareBtn = useRef(null)
 
   try {
     initFavorites = JSON.parse(localStorage.getItem('favorites')) || []
@@ -114,16 +133,17 @@ function Products() {
     if (productType === 4) return '全部商品'
   }
 
-  const getProductData = async () => {
-    const dev = 'http://localhost:3003'
-    const aaron = 'http://localhost:3030'
-    const res = await axios.get(aaron + '/products/pd_api')
-    const initialData = res.data.map((v, i) => {
-      return { ...v, isLiked: false, isCompared: false }
-    })
-    console.log(initialData)
-    setProducts(initialData)
-  }
+  // const getProductData = async () => {
+  //   //記得修改port
+  //   const dev = 'http://localhost:3003'
+  //   const res = await axios.get(dev + '/products/pd_api')
+  //   const initialData = res.data.map((v, i) => {
+  //     return { ...v, isLiked: false, isCompared: false }
+  //   })
+  //   console.log(initialData)
+  //   setProducts(initialData)
+  // }
+
   //加入收藏(外觀)
   const toggleLiked = (arr, product_id) => {
     return arr.map((v, i) => {
@@ -326,6 +346,12 @@ function Products() {
     // setProductsDisplay(newProducts)
   }, [products, keyword, sortList, productType, brand])
 
+  useEffect(() => {
+    return () => {
+      console.log('跳頁')
+    }
+  }, [])
+
   return (
     <>
       <Navbar />
@@ -381,7 +407,14 @@ function Products() {
         </section>
       </div>
 
-      <CompareListButton comparedList={comparedList} />
+      <CompareListButton
+        comparedList={comparedList}
+        setCompareListClass={setCompareListClass}
+        compareListClass={compareListClass}
+        setCompareIngClass={setCompareIngClass}
+        compareIngClass={compareIngClass}
+        popCompareBtn={popCompareBtn}
+      />
 
       <Pagination
         count={pageTotal}
@@ -391,6 +424,17 @@ function Products() {
         size={'large'}
         showFirstButton={true}
         showLastButton={true}
+      />
+      {/* 比價區 */}
+      <ProductCompare
+        setCompareListClass={setCompareListClass}
+        compareListClass={compareListClass}
+        productType={productType}
+        compareIngClass={compareIngClass}
+        setCompareIngClass={setCompareIngClass}
+        popCompareBtn={popCompareBtn}
+        comparedList={comparedList}
+        handleAddOrDeleteCompared={handleAddOrDeleteCompared}
       />
     </>
   )

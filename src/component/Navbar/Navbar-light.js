@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react'
 import './../styles/Navbar.css'
-import ProductFunctionContext from '../Contexts/ProductFunctionContext'
+import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
 import { useNavigate } from 'react-router-dom'
 
-function Navbar() {
+function Navbar_l() {
   const navigation = useNavigate()
 
   const {
@@ -127,7 +127,7 @@ function Navbar() {
           </div>
         </nav>
 
-        <nav className="m-nav">
+        <nav className={`m-nav `}>
           <i className="fa-solid fa-chevron-left btn-back "></i>
           {/* <svg
             width="67"
@@ -250,4 +250,4 @@ function Navbar() {
   )
 }
 
-export default Navbar
+export default Navbar_l

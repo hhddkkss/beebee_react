@@ -1,8 +1,9 @@
 .compare_box{
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
+    z-index: 1;
  
    
 }
@@ -235,6 +236,14 @@
   .add_To_Cart:hover {
     color: #fff;
   }
+  .compare_type_btn_group>.compare_type_btn.start{
+    width: 300px;
+  }
+
+
+
+ 
+
 
 
 /* 比較區 */
@@ -248,7 +257,7 @@
     
     position: absolute;
     width: 1600px;
-    height: 900px;
+    height: 700px;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
@@ -316,10 +325,12 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height:500px;
+    height:670px;
     justify-content: space-between;
     padding-bottom: 30px;
 }
+.compareIng_head>.item_content>.btn:hover>svg>path,.compareIng_head>.item_content>.btn:hover>svg>circle{
+  stroke: #E59069;}
 
 .compareIng_item_card>.item_content>img{
       width: 50%;
