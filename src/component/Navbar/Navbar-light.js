@@ -11,17 +11,15 @@ function Navbar_l() {
     toggleCartButton,
     products,
     cartItem,
-    addToCartTable,
-    cartItemPId,
     getProductData,
   } = useContext(ProductFunctionContext)
 
   // const myCartItem = cartItem || []
   // const cartItemPId = myCartItem.map((v) => v.product_id)
 
-  useEffect(() => {
-    getProductData()
-  }, [])
+  // useEffect(() => {
+  //   getProductData()
+  // }, [])
 
   return (
     <>
@@ -92,8 +90,6 @@ function Navbar_l() {
               className="btn cart"
               onClick={() => {
                 setToggleCartButton(!toggleCartButton)
-                console.log(cartItem)
-                console.log(products)
               }}
             >
               <svg
@@ -213,8 +209,10 @@ function Navbar_l() {
           <div className="triangle"></div>
 
           <div className="my-cards">
+            {console.log(cartItem)}
+            {console.log(products)}
             {products
-              .filter((v) => cartItemPId.includes(v.product_id))
+              .filter((v) => cartItem.includes(v.product_id))
               .map((v) => {
                 return (
                   <div className="my-cart-card" key={v.product_id}>

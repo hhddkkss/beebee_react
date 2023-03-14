@@ -20,9 +20,11 @@ function Navbar() {
     cartItem,
     cartItemPId,
     getProductData,
+    addToCartTable,
   } = useContext(ProductFunctionContext)
 
   const { navbarType } = useContext(AuthContext)
+
   // const myCartItem = cartItem || []
   // const cartItemPId = myCartItem.map((v) => v.product_id)
 
@@ -214,6 +216,7 @@ function Navbar() {
               className="check-cart"
               onClick={() => {
                 navigation('/cart')
+                addToCartTable()
               }}
             >
               查看購物車

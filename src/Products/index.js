@@ -22,9 +22,9 @@ function Products() {
     toggleCartButton,
     products,
     cartItem,
-    addToCartTable,
     setProducts,
     setCartItem,
+    getProductData,
   } = useContext(ProductFunctionContext)
 
   const { setNavbarType } = useContext(AuthContext)
@@ -34,7 +34,7 @@ function Products() {
 
   //輪播牆
   const carouselRef = useRef(null)
-  const [movement, setMoveMent] = useState(0)
+  // const [movement, setMoveMent] = useState(0)
   //開關
   const [toggleSortList, setToggleSortList] = useState(false)
   // const [toggleCartButton, setToggleCartButton] = useState(false)
@@ -112,17 +112,17 @@ function Products() {
 
   const [productsDisplay, setProductsDisplay] = useState([])
 
-  const carouselMove = () => {
-    setTimeout(() => {
-      setMoveMent(movement + 1)
+  // const carouselMove = () => {
+  //   setTimeout(() => {
+  //     setMoveMent(movement + 1)
 
-      if (movement === 3) {
-        setMoveMent(1)
-      }
-    }, 3500)
+  //     if (movement === 3) {
+  //       setMoveMent(1)
+  //     }
+  //   }, 3500)
 
-    carouselRef.current.style.transform = `translateX(${-movement * 100}vw)`
-  }
+  //   carouselRef.current.style.transform = `translateX(${-movement * 100}vw)`
+  // }
 
   const sortOption = ['上架時間:最新(預設)', '價格:由高到低', '價格:由低至高']
 
@@ -133,17 +133,17 @@ function Products() {
     if (productType === 4) return '全部商品'
   }
 
-  const getProductData = async () => {
-    //記得修改port
-    const dev = 'http://localhost:3003'
-    const aaron = 'http://localhost:3030'
-    const res = await axios.get(dev + '/products/pd_api')
-    const initialData = res.data.map((v, i) => {
-      return { ...v, isLiked: false, isCompared: false }
-    })
-    console.log(initialData)
-    setProducts(initialData)
-  }
+  // const getProductData = async () => {
+  //   //記得修改port
+  //   const dev = 'http://localhost:3003'
+  //   const res = await axios.get(dev + '/products/pd_api')
+  //   const initialData = res.data.map((v, i) => {
+  //     return { ...v, isLiked: false, isCompared: false }
+  //   })
+  //   console.log(initialData)
+  //   setProducts(initialData)
+  // }
+
   //加入收藏(外觀)
   const toggleLiked = (arr, product_id) => {
     return arr.map((v, i) => {
@@ -304,10 +304,6 @@ function Products() {
   }, [productType])
 
   useEffect(() => {
-    carouselMove()
-  }, [movement])
-
-  useEffect(() => {
     //* 如果要根據篩選的東西重新搜尋 就把註解的打開 或是搜尋選取到的
     // setProductType(4)
     // setBrand('全部品牌')
@@ -346,9 +342,15 @@ function Products() {
     // setProductsDisplay(newProducts)
   }, [products, keyword, sortList, productType, brand])
 
+  useEffect(() => {
+    return () => {
+      console.log('跳頁')
+    }
+  }, [])
+
   return (
     <>
-      <Navbar />
+      <Navbar getProductData={getProductData} />
 
       {/* <!-- 輪播牆 --> */}
 
@@ -384,6 +386,7 @@ function Products() {
             sortOption={sortOption}
           />
           {/* 產品 */}
+
           <ProductArea
             productsDisplay={productsDisplay}
             pageNow={pageNow}

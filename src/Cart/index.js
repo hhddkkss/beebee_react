@@ -10,13 +10,27 @@ import Remove_info from '../component/Remove_info'
 import NoCartItem from './NoCartItem'
 import Navbar from '../component/Navbar'
 import AuthContext from '../Contexts/AuthContext'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 
 function Cart() {
+  //----- UseContext -----
   const { setNavbarType } = useContext(AuthContext)
   useEffect(() => {
     setNavbarType('light')
   }, [])
+
+  const { cartItemPId } = useContext(ProductFunctionContext)
+
+  //判斷有沒有商品
+  const [hasCartItem, SetHasCartItem] = useState(true)
+
+  useEffect(() => {
+    if (cartItemPId && cartItemPId.length > 0) {
+      SetHasCartItem(true)
+    }
+  }, [cartItemPId])
+
   return (
     <>
       {/* <!-- navbar --> */}
@@ -125,8 +139,8 @@ function Cart() {
           </div>
         </section>
       </div> */}
-      {/* <CartItem /> */}
-      <NoCartItem />
+
+      {hasCartItem ? <CartItem /> : <NoCartItem />}
 
       {/* <!-- 結帳按鈕 商品總價計算 幾樣商品 --> */}
       {/* <div className="container">
@@ -140,7 +154,6 @@ function Cart() {
           <button className="btn btn-checkout">我要結帳</button>
         </div>
       </div> */}
-      <CartBottom />
       {/* 
       <div className="container-lg container-fluid recommend-fixed">
         <div className="recommend">BeE.推薦專區</div>

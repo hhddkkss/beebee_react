@@ -18,6 +18,7 @@ function ProductArea({
 }) {
   return (
     <>
+      {/* {console.log(productsDisplay, 'productArea')} */}
       <div className="product-area">
         <DefaultCard
           productsDisplay={productsDisplay}
