@@ -51,6 +51,21 @@ function ProductDetailsBasic({ p_detailData }) {
                         src={detailMainPic}
                         alt="product_picture"
                       />
+                      {localStorage.getItem('favorites') && JSON.parse(localStorage.getItem('favorites')).includes(v.product_id) ? (
+                      <i
+                        className="fa-solid fa-heart fa-xl"
+                        onClick={() => {
+                          handleAddOrDeleteFavorite(v.product_id)
+                        }}
+                      ></i>
+                    ) : (
+                      <i
+                        className="fa-regular fa-heart fa-xl"
+                        onClick={() => {
+                          handleAddOrDeleteFavorite(v.product_id)
+                        }}
+                      ></i>
+                    )}
                     </div>
                     <div className="row g-0 product_picture_little">
                       <div className="col-2 p-0">
