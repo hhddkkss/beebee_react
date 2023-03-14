@@ -17,7 +17,7 @@ function App() {
         <AuthContextProvider>
           <ProductFunctionContextProvider>
             <Routes>
-              <Route path="/" element={<Home4ads />} />
+              <Route path="/" element={<HomePage />} />
               <Route path="/products" element={<Products />} />
               <Route path="/product_detail" element={<ProductDetail />} />
               <Route path="/member_login" element={<MemberLogin />} />
