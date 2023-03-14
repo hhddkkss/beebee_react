@@ -10,7 +10,8 @@ body {
   gap: 163px;
   width: 100%;
   height: 95px;
-
+  background-color: white;
+/* 最後有需要可以寫成不要黏在上方 */
 }
 .beebee_logo {
   position: absolute;

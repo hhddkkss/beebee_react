@@ -202,7 +202,7 @@ function Navbar() {
                     <div className="my-cart-card-left">
                       <div className="img-wrap">
                         <img
-                          src={'images/' + v.product_pic.split(',')[0]}
+                          src={'/images/' + v.product_pic.split(',')[0]}
                           alt=""
                         />
                       </div>

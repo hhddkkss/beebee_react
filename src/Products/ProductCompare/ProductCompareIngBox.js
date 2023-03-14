@@ -1,4 +1,7 @@
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync'
+import { useContext } from 'react'
+import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
+import { logDOM } from '@testing-library/react'
 
 function ProductCompareIngBox(props) {
   const {
@@ -9,6 +12,7 @@ function ProductCompareIngBox(props) {
     setCompareListClass,
     setCompareIngClass,
   } = props
+  const { handleAddOrDeleteCart } = useContext(ProductFunctionContext)
   const compareHeadTiile = [
     ['作業系統', '處理器', '記憶體', '電池', '螢幕尺寸'],
     [
@@ -125,7 +129,12 @@ function ProductCompareIngBox(props) {
                     />
                     <div className="item_name">{v.product_name}</div>
                     <div className="item_price">$ {v.product_price}</div>
-                    <button className="add_To_Cart">
+                    <button
+                      className="add_To_Cart"
+                      onClick={() => {
+                        handleAddOrDeleteCart(v.product_id, 1)
+                      }}
+                    >
                       <i className="fa-solid fa-cart-shopping d-inline"></i>
                       加入購物車
                     </button>
@@ -240,7 +249,12 @@ function ProductCompareIngBox(props) {
                     />
                     <div className="item_name">{v.product_name}</div>
                     <div className="item_price">$ {v.product_price}</div>
-                    <button className="add_To_Cart">
+                    <button
+                      className="add_To_Cart"
+                      onClick={() => {
+                        handleAddOrDeleteCart(v.product_id, 1)
+                      }}
+                    >
                       <i className="fa-solid fa-cart-shopping d-inline"></i>
                       加入購物車
                     </button>
@@ -357,7 +371,12 @@ function ProductCompareIngBox(props) {
                     />
                     <div className="item_name">{v.product_name}</div>
                     <div className="item_price">$ {v.product_price}</div>
-                    <button className="add_To_Cart">
+                    <button
+                      className="add_To_Cart"
+                      onClick={() => {
+                        handleAddOrDeleteCart(v.product_id, 1)
+                      }}
+                    >
                       <i className="fa-solid fa-cart-shopping d-inline"></i>
                       加入購物車
                     </button>
