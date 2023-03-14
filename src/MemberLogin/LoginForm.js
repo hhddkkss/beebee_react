@@ -27,33 +27,7 @@ function LoginForm(props) {
           className="login_form"
           onSubmit={(e) => {
             e.preventDefault()
-            //登入送去API
-            axios.post(LOGIN, { ...loginForm }).then((response) => {
-              if (response.data.success) {
-                const { memberEmail, memberId, token } = response.data
-                //setLocalStorage
-                localStorage.setItem(
-                  'myAuth',
-                  JSON.stringify({
-                    memberId,
-                    memberEmail,
-                    token,
-                  })
-                )
-                //console.log(memberEmail, memberId)
-                setInfoState(2)
-                //setAuth
-                setMemberAuth({
-                  authorized: true,
-                  memberId: memberId,
-                  memberEmail: memberEmail,
-                  token: token,
-                })
-                //console.log(memberAuth)
-              } else {
-                setInfoState(3)
-              }
-            })
+            
           }}
         >
           <div className="form_box">
@@ -105,7 +79,36 @@ function LoginForm(props) {
             >
               忘記密碼
             </button>
-            <button type="submit" className="loginPage_button login_form_btn">
+            <button 
+            onClick={(e)=>{e.preventDefault()
+            //登入送去API
+            axios.post(LOGIN, { ...loginForm }).then((response) => {
+              if (response.data.success) {
+                const { memberEmail, memberId, token } = response.data
+                //setLocalStorage
+                localStorage.setItem(
+                  'myAuth',
+                  JSON.stringify({
+                    memberId,
+                    memberEmail,
+                    token,
+                  })
+                )
+                //console.log(memberEmail, memberId)
+                setInfoState(2)
+                //setAuth
+                setMemberAuth({
+                  authorized: true,
+                  memberId: memberId,
+                  memberEmail: memberEmail,
+                  token: token,
+                })
+                //console.log(memberAuth)
+              } else {
+                setInfoState(3)
+              }
+            })
+            }} type="submit" className="loginPage_button login_form_btn">
               登入
             </button>
           </div>
