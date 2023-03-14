@@ -19,7 +19,7 @@ function App() {
           <ProductFunctionContextProvider>
             <CompareContextProvider>
               <Routes>
-                <Route path="/" element={<MemberLogin />} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/products" element={<Products />} />
                 <Route
                   path="/product_detail/:product_id/:product_category"
