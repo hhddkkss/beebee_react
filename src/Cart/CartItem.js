@@ -15,9 +15,9 @@ function CartItem() {
           {products
             .filter((v) => cartItemPId.includes(v.product_id))
             .map((v) => (
-              <div className="cart-item">
+              <div className="cart-item" key={v.product_id}>
                 <div className="wrap">
-                  <div  
+                  <div
                     className="img"
                     style={{
                       backgroundImage: `url('/public/images/iphone-14promax-256G-deeppurple.png')`,
@@ -47,7 +47,7 @@ function CartItem() {
       <div className="container">
         <div className="cart-bottom">
           <p>
-            購物車內總共有<span>3</span>樣商品
+            購物車內總共有<span>{cartItemPId.length}</span>樣商品
           </p>
           <p>
             合計：<span className="total-price">104700</span>
