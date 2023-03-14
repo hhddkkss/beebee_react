@@ -1,0 +1,14 @@
+.mobile_nav{
+    width: 375px;
+    height: 50px;
+    border-top: solid 1px #F4F4F4;
+    background-color: white;
+}
+
+.mobile_navcol{
+    text-align: center;
+    font-size: 17px;
+    margin-top: 6px;
+}
+.mobile_word{text-align: center;
+font-size: 10px;}
