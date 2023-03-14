@@ -1,9 +1,14 @@
 import React from 'react'
 import '../styles/Home.css'
+<<<<<<< HEAD
 import '../styles/Home_Navbar.css'
+=======
+>>>>>>> emelie
 import '../styles/home_ver3.css'
 import '../styles/mobile_navbar.css'
 import axios from 'axios'
+import Home_4ads from './Home_4ads'
+import Navbar from '../component/Navbar'
 
 function HomePage() {
   const getProductData = async () => {
@@ -19,8 +24,9 @@ function HomePage() {
 
   return (
     <>
+      <Navbar />
       <div className="home">
-        <nav className="beebee_navbar">
+        {/* <nav className="beebee_navbar">
           <div className="beebee_logo">
             <svg
               width="129"
@@ -108,7 +114,7 @@ function HomePage() {
               <i className="fa-solid fa-bars"></i>
             </button>
           </div>
-        </nav>
+        </nav> */}
         <div className="Home_Word">
           我的選擇，
           <br />
@@ -157,6 +163,7 @@ function HomePage() {
           </div>
         </div>
       </div>
+      {/* <Home_4ads /> */}
     </>
   )
 }
