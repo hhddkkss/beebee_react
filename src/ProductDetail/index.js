@@ -115,12 +115,12 @@ function ProductDetail(props) {
       <div className="container product_comment_area">
         {p_detailData.length > 1
           ? p_detailData.map((v, i) => {
-              {
+            {
                 /* 評論卡片 */
               }
 
               return (
-                <div kay={v.p_comment_id} className="row product_memeber_row">
+                <div key={v.p_comment_id} className="row product_memeber_row">
                   <div className="col-2 product_memeber">
                     <img
                       className="comment_card_avatar"
