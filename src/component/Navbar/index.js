@@ -18,9 +18,9 @@ function Navbar() {
     toggleCartButton,
     products,
     cartItem,
-    cartItemPId,
     getProductData,
     addToCartTable,
+    cartItemPId,
   } = useContext(ProductFunctionContext)
 
   const { navbarType } = useContext(AuthContext)
@@ -33,6 +33,7 @@ function Navbar() {
   }, [])
   return (
     <>
+      {console.log(cartItemPId)}
       <header>
         <nav
           className={
@@ -41,7 +42,10 @@ function Navbar() {
               : 'beebee_navbar navbar_dark'
           }
         >
-          <div className="beebee_logo">
+          <div className="beebee_logo" onClick={()=>{
+            navigation('/')
+
+          }}>
             <svg
               width="129"
               height="25"

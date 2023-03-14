@@ -233,19 +233,19 @@ function Products() {
   }
 
   //收藏商品
-  const handleAddOrDeleteFavorite = (product_id) => {
-    const hasFavorite = favorites && favorites.includes(product_id)
+  // const handleAddOrDeleteFavorite = (product_id) => {
+  //   const hasFavorite = favorites && favorites.includes(product_id)
 
-    if (hasFavorite) {
-      const newFavorites = [...favorites].filter((v) => v !== product_id)
-      setFavorite(newFavorites)
-      localStorage.setItem('favorites', JSON.stringify(newFavorites))
-    } else {
-      const newFavorites = [...favorites, product_id]
-      setFavorite(newFavorites)
-      localStorage.setItem('favorites', JSON.stringify(newFavorites))
-    }
-  }
+  //   if (hasFavorite) {
+  //     const newFavorites = [...favorites].filter((v) => v !== product_id)
+  //     setFavorite(newFavorites)
+  //     localStorage.setItem('favorites', JSON.stringify(newFavorites))
+  //   } else {
+  //     const newFavorites = [...favorites, product_id]
+  //     setFavorite(newFavorites)
+  //     localStorage.setItem('favorites', JSON.stringify(newFavorites))
+  //   }
+  // }
 
   //加入購物車
   const handleAddOrDeleteCart = (product_id, count) => {
@@ -350,7 +350,7 @@ function Products() {
 
   return (
     <>
-      <Navbar getProductData={getProductData} />
+      <Navbar />
 
       {/* <!-- 輪播牆 --> */}
 
@@ -394,12 +394,12 @@ function Products() {
             setProducts={setProducts}
             toggleLiked={toggleLiked}
             products={products}
-            handleAddOrDeleteFavorite={handleAddOrDeleteFavorite}
+            // handleAddOrDeleteFavorite={handleAddOrDeleteFavorite}
             comparedList={comparedList}
             toggleCompared={toggleCompared}
             handleAddOrDeleteCompared={handleAddOrDeleteCompared}
             cartItem={cartItem}
-            handleAddOrDeleteCart={handleAddOrDeleteCart}
+            // handleAddOrDeleteCart={handleAddOrDeleteCart}
           />
         </section>
       </div>
