@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
+import AuthContext from '../Contexts/AuthContext'
 import Rating from '@mui/material/Rating'
 import { PRODUCT_DETAIL_ADD_CART_API } from '../component/LoginApi'
 import axios from 'axios'
@@ -21,6 +22,7 @@ function ProductDetailsBasic({ p_detailData }) {
     handleAddOrDeleteCompared,
     handleAddOrDeleteFavorite,
   } = useContext(ProductFunctionContext)
+  const{memberAuth} = useContext(AuthContext)
 
   // 點擊圖片更換大圖url
   const changeMainPic = (e) => {
@@ -94,40 +96,44 @@ function ProductDetailsBasic({ p_detailData }) {
                       <div className="col-2 p-0">
                         <img
                           className="product_small_pic"
-                          src={'/images/' + v.product_pic.split(',')[1]}
+                          src={v.product_pic.split(',')[1]?'/images/' + v.product_pic.split(',')[1]:'/images/detailNoPic.png'}
                           alt="product_picture2 product_picture_little1"
                           onClick={(e) => {
-                            changeMainPic(e)
+                            v.product_pic.split(',')[1]?
+                            changeMainPic(e):''
                           }}
                         />
                       </div>
                       <div className="col-2 p-0">
                         <img
                           className="product_small_pic"
-                          src={'/images/' + v.product_pic.split(',')[2]}
+                          src={v.product_pic.split(',')[2]?'/images/' + v.product_pic.split(',')[2]:'/images/detailNoPic.png'}
                           alt="product_picture3"
                           onClick={(e) => {
-                            changeMainPic(e)
+                            v.product_pic.split(',')[2]?
+                            changeMainPic(e):''
                           }}
                         />
                       </div>
                       <div className="col-2 p-0">
                         <img
                           className="product_small_pic"
-                          src={'/images/' + v.product_pic.split(',')[3]}
+                          src={ v.product_pic.split(',')[3]?'/images/' + v.product_pic.split(',')[3]:'/images/detailNoPic.png'}
                           alt="product_picture4"
                           onClick={(e) => {
-                            changeMainPic(e)
+                            v.product_pic.split(',')[3]?
+                            changeMainPic(e):''
                           }}
                         />
                       </div>
                       <div className="col-2 p-0">
                         <img
                           className="product_small_pic"
-                          src={'/images/' + v.product_pic.split(',')[4]}
+                          src={v.product_pic.split(',')[4]?'/images/' + v.product_pic.split(',')[4]:'/images/detailNoPic.png'}
                           alt="product_picture5"
                           onClick={(e) => {
-                            changeMainPic(e)
+                            v.product_pic.split(',')[4]?
+                            changeMainPic(e):''
                           }}
                         />
                       </div>
@@ -183,9 +189,14 @@ function ProductDetailsBasic({ p_detailData }) {
                           className="add_To_Cart"
                           onClick={() => {
                           handleAddOrDeleteCart(v.product_id, productCount)
-                          axios.post(PRODUCT_DETAIL_ADD_CART_API,{memberId:1,productId:v.product_id,count:productCount}).then((res)=>{
+                          if(memberAuth.memberId!==0){
+                          axios.post(PRODUCT_DETAIL_ADD_CART_API,{
+                            memberId:memberAuth.memverId,
+                            productId:v.product_id,
+                            count:productCount
+                            }).then((res)=>{
                             console.log('addCartResult',res.data)
-                          })
+                          })}else{console.log('用戶未登入')}
                           }}
                         >
                           <i className="fa-solid fa-cart-shopping d-inline"></i>
