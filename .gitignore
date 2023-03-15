@@ -23,3 +23,9 @@ yarn-debug.log*
 yarn-error.log*
 
 /.vscode
+package-lock.json
+
+.eslintrc_tmp
+.eslintignore_tmp
+.eslintrc
+.eslintignore

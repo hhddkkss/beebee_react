@@ -1,6 +1,25 @@
-import React from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 
-function Carousel({carouselRef}) {
+function Carousel() {
+  const carouselRef = useRef(null)
+  const [movement, setMoveMent] = useState(0)
+
+  useEffect(() => {
+    carouselMove()
+  }, [movement])
+
+  const carouselMove = () => {
+    setTimeout(() => {
+      setMoveMent(movement + 1)
+
+      if (movement === 3) {
+        setMoveMent(1)
+      }
+    }, 3500)
+
+    carouselRef.current.style.transform = `translateX(${-movement * 100}vw)`
+  }
+
   return (
     <>
       <section className="my-carousel">

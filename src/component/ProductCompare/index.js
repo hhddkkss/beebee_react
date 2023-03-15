@@ -8,6 +8,7 @@ import {
 import ProductCompareListBox from './ProductCompareListBox'
 import ProductCompareIngBox from './ProductCompareIngBox'
 import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
+import CompareContext from '../../Contexts/CompareContext'
 
 function ProductCompare(props) {
   const { comparedList, handleAddOrDeleteCompared } = useContext(
@@ -17,11 +18,13 @@ function ProductCompare(props) {
   const {
     compareListClass,
     setCompareListClass,
-    productType,
     compareIngClass,
     setCompareIngClass,
     popCompareBtn,
-  } = props
+  } = useContext(CompareContext)
+
+  //商品頁的商品類型
+  const { productType } = props
   //總比較列表
   const [compareList, setCompareList] = useState([])
   //比較列表分類呈現
@@ -167,11 +170,13 @@ function ProductCompare(props) {
   //拿到比較列表資料後做分類顯示
   useEffect(() => {
     if (compareListClass == 'compare_list_box d-none') {
+      console.log('S01', compareType, ':', productType)
+
       productType === 4
         ? setCompareListType(1)
         : setCompareListType(productType)
     } else {
-      // console.log('S02', compareType)
+      console.log('S02', compareType)
       setCompareListType(compareType)
     }
   }, [compareList])

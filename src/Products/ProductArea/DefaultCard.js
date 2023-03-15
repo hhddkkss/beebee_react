@@ -1,22 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-function DefaultCard({
-  productsDisplay,
-  pageNow,
-  favorites,
-  setProducts,
-  toggleLiked,
-  products,
-  handleAddOrDeleteFavorite,
-  comparedList,
-  toggleCompared,
-  handleAddOrDeleteCompared,
-  cartItem,
-  handleAddOrDeleteCart,
-}) {
+import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
+function DefaultCard({ productsDisplay }) {
+  const {
+    pageNow,
+    favorites,
+    setProducts,
+    toggleLiked,
+    products,
+    handleAddOrDeleteFavorite,
+    comparedList,
+    toggleCompared,
+    handleAddOrDeleteCompared,
+    cartItem,
+    handleAddOrDeleteCart,
+  } = useContext(ProductFunctionContext)
   return (
     <>
       <div className="row row-cols-lg-5">
+        {/* {console.log(productsDisplay, 'defaultCard',pageNow)} */}
+
         {productsDisplay[pageNow - 1] &&
           productsDisplay[pageNow - 1].map((v, i) => {
             return (
@@ -24,7 +27,14 @@ function DefaultCard({
                 <div className="my-card">
                   <div className="card-top">
                     <div className="img-wrap">
-                      <Link to={'/product_detail/' + v.product_id}>
+                      <Link
+                        to={
+                          '/product_detail/' +
+                          v.product_id +
+                          '/' +
+                          v.product_category_id
+                        }
+                      >
                         <img
                           src={'/images/' + v.product_pic.split(',')[0]}
                           alt=""
@@ -53,10 +63,17 @@ function DefaultCard({
                   <div className="card-bottom">
                     <h3>{v.product_name}</h3>
                     <div className="card-text">
-                      <p className="original">{v.product_price}</p>
+                      <p
+                        className="original"
+                        onClick={() => {
+                          console.log(v.isCompared)
+                        }}
+                      >
+                        {v.product_price}
+                      </p>
                       <p className="discount">{v.product_price}</p>
                       <div className="compare-and-cart">
-                        {comparedList && comparedList.includes(v.product_id) ? (
+                        {localStorage.getItem('comparedList') && JSON.parse(localStorage.getItem('comparedList')).includes(v.product_id)?  (
                           <svg
                             width="20"
                             height="20"
@@ -112,14 +129,14 @@ function DefaultCard({
                           <i
                             className="fa-solid fa-cart-shopping active"
                             onClick={() => {
-                              handleAddOrDeleteCart(v.product_id, 1)
+                              handleAddOrDeleteCart(v.product_id)
                             }}
                           ></i>
                         ) : (
                           <i
                             className="fa-solid fa-cart-shopping"
                             onClick={() => {
-                              handleAddOrDeleteCart(v.product_id, 1)
+                              handleAddOrDeleteCart(v.product_id)
                             }}
                           ></i>
                         )}

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react'
 import './../styles/Navbar.css'
-import ProductFunctionContext from '../Contexts/ProductFunctionContext'
+import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
 import { useNavigate } from 'react-router-dom'
 
-function Navbar() {
+function Navbar_l() {
   const navigation = useNavigate()
 
   const {
@@ -11,17 +11,15 @@ function Navbar() {
     toggleCartButton,
     products,
     cartItem,
-    addToCartTable,
-    cartItemPId,
     getProductData,
   } = useContext(ProductFunctionContext)
 
   // const myCartItem = cartItem || []
   // const cartItemPId = myCartItem.map((v) => v.product_id)
 
-  useEffect(() => {
-    getProductData()
-  }, [])
+  // useEffect(() => {
+  //   getProductData()
+  // }, [])
 
   return (
     <>
@@ -92,8 +90,6 @@ function Navbar() {
               className="btn cart"
               onClick={() => {
                 setToggleCartButton(!toggleCartButton)
-                console.log(cartItem)
-                console.log(products)
               }}
             >
               <svg
@@ -127,7 +123,7 @@ function Navbar() {
           </div>
         </nav>
 
-        <nav className="m-nav">
+        <nav className={`m-nav `}>
           <i className="fa-solid fa-chevron-left btn-back "></i>
           {/* <svg
             width="67"
@@ -213,8 +209,10 @@ function Navbar() {
           <div className="triangle"></div>
 
           <div className="my-cards">
+            {console.log(cartItem)}
+            {console.log(products)}
             {products
-              .filter((v) => cartItemPId.includes(v.product_id))
+              .filter((v) => cartItem.includes(v.product_id))
               .map((v) => {
                 return (
                   <div className="my-cart-card" key={v.product_id}>
@@ -250,4 +248,4 @@ function Navbar() {
   )
 }
 
-export default Navbar
+export default Navbar_l

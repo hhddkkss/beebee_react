@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react'
 import axios from 'axios'
+import { HOST } from '../component/LoginApi'
 
 const ProductFunctionContext = createContext({})
 export default ProductFunctionContext
@@ -8,8 +9,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
   //拿到produtct
   const getProductData = async () => {
     const dev = 'http://localhost:3003'
-    const aaron = 'http://localhost:3030'
-    const res = await axios.get(aaron + '/products/pd_api')
+    const res = await axios.get(dev + '/products/pd_api')
     const initialData = res.data.map((v, i) => {
       return { ...v, isLiked: false, isCompared: false }
     })
@@ -17,6 +17,9 @@ export const ProductFunctionContextProvider = function ({ children }) {
     setProducts(initialData)
   }
 
+  const [pageNow, setPageNow] = useState(1) //預設第一頁
+  const [perPage, setPerPage] = useState(25) // 一頁25個
+  const [pageTotal, setPageTotal] = useState(0) // 預設總筆數是0
   //開關
   const [toggleCartButton, setToggleCartButton] = useState(false)
 
@@ -30,12 +33,12 @@ export const ProductFunctionContextProvider = function ({ children }) {
     await axios
       .post(dev, {
         member_id: 1,
-        product_id: JSON.parse(localStorage.getItem('cartItem')).map(
-          (v) => v.product_id
-        ),
+        product_id:
+          localStorage.getItem('cartItem') &&
+          JSON.parse(localStorage.getItem('cartItem')).map((v) => v.product_id),
       })
       .then((res) => console.log(res))
-      .catch((e) => console.log(e))
+      .catch((e) => console.log(e.error))
   }
   //購物車
 
@@ -45,7 +48,6 @@ export const ProductFunctionContextProvider = function ({ children }) {
   } catch (ex) {}
 
   const [cartItem, setCartItem] = useState(initCart)
-
   const myCartItem = cartItem || []
   const cartItemPId = myCartItem.map((v) => v.product_id)
 
@@ -55,6 +57,8 @@ export const ProductFunctionContextProvider = function ({ children }) {
     initComparedList = JSON.parse(localStorage.getItem('comparedList')) || []
   } catch (ex) {}
   const [comparedList, setComparedList] = useState(initComparedList)
+
+  
   //收藏
   let initFavorites = []
 
@@ -85,22 +89,44 @@ export const ProductFunctionContextProvider = function ({ children }) {
   }
 
   //加入購物車
+  // const handleAddOrDeleteCart = (product_id) => {
+  //   //判斷購物車內有沒有這個商品
+  //   console.log(product_id)
+  //   const inCart = cartItem.includes(product_id)
+
+  //   //有的話
+  //   if (inCart) {
+  //     // const newCart = cartItem.filter((v) => v.product_id !== product_id)
+  //     // setCartItem(newCart)
+  //     // //轉成字串寫進localStorage
+  //     // localStorage.setItem('cartItem', JSON.stringify(newCart))
+  //   }
+
+  //   //沒有的話
+  //   else {
+  //     const newCart = [...cartItem, product_id]
+  //     console.log(newCart)
+  //     setCartItem(newCart)
+  //     //轉成字串寫進localStorage
+  //     localStorage.setItem('cartItem', JSON.stringify(newCart))
+  //   }
+  // }
+
   const handleAddOrDeleteCart = (product_id, count) => {
     //判斷購物車內有沒有這個商品
     const inCart = cartItem.find((v) => v.product_id === product_id)
 
     //有的話
     if (inCart) {
-      const newCart = cartItem.filter((v) => v.product_id !== product_id)
-
-      setCartItem(newCart)
-      //轉成字串寫進localStorage
-      localStorage.setItem('cartItem', JSON.stringify(newCart))
+      // const newCart = cartItem.filter((v) => v.product_id !== product_id)
+      // setCartItem(newCart)
+      // //轉成字串寫進localStorage
+      // localStorage.setItem('cartItem', JSON.stringify(newCart))
     }
 
     //沒有的話
     else {
-      const newCart = [...cartItem, { product_id: product_id, count: count }]
+      const newCart = [...cartItem, { product_id: product_id, count: 1 }]
       setCartItem(newCart)
       //轉成字串寫進localStorage
       localStorage.setItem('cartItem', JSON.stringify(newCart))
@@ -133,6 +159,8 @@ export const ProductFunctionContextProvider = function ({ children }) {
       localStorage.setItem('comparedList', JSON.stringify(newComparedList))
     }
   }
+
+  
   //收藏商品
   const handleAddOrDeleteFavorite = (product_id) => {
     const hasFavorite = favorites.includes(product_id)
@@ -167,8 +195,14 @@ export const ProductFunctionContextProvider = function ({ children }) {
         products,
         setProducts,
         addToCartTable,
-        cartItemPId,
         getProductData,
+        cartItemPId,
+        pageNow,
+        setPageNow,
+        perPage,
+        setPerPage,
+        pageTotal,
+        setPageTotal
       }}
     >
       {children}
