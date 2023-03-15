@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Fragment } from 'react'
 import '../styles/Home.css'
 import axios from 'axios'
 
@@ -26,25 +26,31 @@ function HomeNews() {
             console.log(v.article_pic_main)
             return (
               <>
-                <div className="col-sm-4 p-2 col-5">
-                  <div className="home_news_card">
-                    <div className="column">
-                      <div className="home_news_card1">
-                        <img src={`images/${v.article_pic_main}`} alt="news1" />
-                      </div>
-                      <div className="home_news_word">
-                        <div className="home_news_word1">{v.title}</div>
-                        <div className="home_news_word2">{v.title}</div>
-                        <div className="home_news_word3">{v.content_1}</div>
+                <Fragment key={v.id}>
+                  <div className="col-sm-4 p-2 col-5">
+                    <div className="home_news_card">
+                      <div className="column">
+                        <div className="home_news_card1">
+                          <img
+                            src={`images/${v.article_pic_main}`}
+                            alt="news1"
+                          />
+                        </div>
+                        <div className="home_news_word">
+                          <div className="home_news_word1">{v.title}</div>
+                          <div className="home_news_word2">{v.title}</div>
+                          <div className="home_news_word3">{v.content_1}</div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </Fragment>
               </>
             )
           })}
         </div>
       </div>
+
       {/* <div className="home_news_button">
         <button className="home_news_button1"></button>
         <button className="home_news_button2"></button>

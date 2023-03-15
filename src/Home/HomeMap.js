@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Key } from './' // 引入 API key
+import { Key } from '../../src/Home/mapkey' // 引入 API key
 import GoogleMapReact from 'google-map-react'
 import '../../src/styles/Home.css'
 
@@ -18,9 +18,9 @@ class SimpleMap extends Component {
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div class="home_map">
-        <div class="home_map_issue">BEEbeE在哪裡，絕對難不倒你</div>
-        <div class="home_map_google">
+      <div className="home_map">
+        <div className="home_map_issue">BEEbeE在哪裡，絕對難不倒你</div>
+        <div className="home_map_google">
           <GoogleMapReact
             bootstrapURLKeys={{ key: Key }}
             defaultCenter={this.props.center}
