@@ -33,7 +33,6 @@ function Navbar() {
   }, [])
   return (
     <>
-      {console.log(cartItemPId)}
       <header>
         <nav
           className={
@@ -42,10 +41,12 @@ function Navbar() {
               : 'beebee_navbar navbar_dark'
           }
         >
-          <div className="beebee_logo" onClick={()=>{
-            navigation('/')
-
-          }}>
+          <div
+            className="beebee_logo"
+            onClick={() => {
+              navigation('/')
+            }}
+          >
             <svg
               width="129"
               height="25"
@@ -110,7 +111,6 @@ function Navbar() {
               className="btn cart"
               onClick={() => {
                 setToggleCartButton(!toggleCartButton)
-                console.log(cartItem)
               }}
             >
               <svg

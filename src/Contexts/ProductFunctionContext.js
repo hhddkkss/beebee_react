@@ -1,6 +1,6 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useContext } from 'react'
 import axios from 'axios'
-import { HOST } from '../component/LoginApi'
+import { HOST, GET_CART_ITEM_API } from '../component/LoginApi'
 
 const ProductFunctionContext = createContext({})
 export default ProductFunctionContext
@@ -16,6 +16,9 @@ export const ProductFunctionContextProvider = function ({ children }) {
     console.log(initialData)
     setProducts(initialData)
   }
+
+  //
+  const [showRemove, setShowRemove] = useState(false)
 
   const [pageNow, setPageNow] = useState(1) //預設第一頁
   const [perPage, setPerPage] = useState(25) // 一頁25個
@@ -58,7 +61,6 @@ export const ProductFunctionContextProvider = function ({ children }) {
   } catch (ex) {}
   const [comparedList, setComparedList] = useState(initComparedList)
 
-  
   //收藏
   let initFavorites = []
 
@@ -160,7 +162,6 @@ export const ProductFunctionContextProvider = function ({ children }) {
     }
   }
 
-  
   //收藏商品
   const handleAddOrDeleteFavorite = (product_id) => {
     const hasFavorite = favorites.includes(product_id)
@@ -174,6 +175,31 @@ export const ProductFunctionContextProvider = function ({ children }) {
       setFavorite(newFavorites)
       localStorage.setItem('favorites', JSON.stringify(newFavorites))
     }
+  }
+
+  //購物車拿資料
+  const [cartData, setCartData] = useState([])
+  //購物車幾樣商品
+  const [cartTotalRows, setCarTotalRows] = useState(0)
+
+  //拿到某會員的購物車 getCartData
+
+  const getCartData = async () => {
+    const member_id =
+      localStorage.getItem('myAuth') &&
+      JSON.parse(localStorage.getItem('myAuth')).memberId
+
+    // console.log(member_id)
+
+    //data :{rows,totalRows}
+    const res = await axios
+      .get(`${GET_CART_ITEM_API}/${member_id}`)
+      .then((r) => {
+        console.log(r.data)
+        setCartData(r.data.rows) //把購物車檔案新增進狀態中
+        setCarTotalRows(r.data.totalRows)
+      })
+      .catch((e) => console.log(e))
   }
 
   return (
@@ -202,7 +228,14 @@ export const ProductFunctionContextProvider = function ({ children }) {
         perPage,
         setPerPage,
         pageTotal,
-        setPageTotal
+        setPageTotal,
+        getCartData,
+        cartData,
+        setCartData,
+        getCartData,
+        cartTotalRows,
+        showRemove,
+        setShowRemove,
       }}
     >
       {children}

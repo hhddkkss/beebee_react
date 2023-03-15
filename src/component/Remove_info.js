@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 import styles from '../styles/removeInfo.module.css'
 
-function Remove_info({ setShowRemove, showRemove }) {
+function Remove_info({ deleteCartItem, productsSid }) {
+  const { setShowRemove, showRemove } = useContext(ProductFunctionContext)
   return (
     <>
       {/* <!-- 刪除視窗 --> */}
@@ -18,8 +20,11 @@ function Remove_info({ setShowRemove, showRemove }) {
           <a
             href="#"
             className={styles['btn-confirm']}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
+              console.log('yes')
               setShowRemove(false)
+              deleteCartItem(productsSid)
             }}
           >
             確定
@@ -27,7 +32,9 @@ function Remove_info({ setShowRemove, showRemove }) {
           <a
             href="#"
             className={styles['btn-cancel']}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
+              console.log('no')
               setShowRemove(false)
             }}
           >
@@ -37,7 +44,9 @@ function Remove_info({ setShowRemove, showRemove }) {
         <a href="#">
           <i
             className={`${'fa-solid fa-xmark'} ${styles.closeButton}`}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
+              console.log('x')
               setShowRemove(false)
             }}
           ></i>

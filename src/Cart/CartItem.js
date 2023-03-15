@@ -1,14 +1,32 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { ADD_CART_QUANTITY, MINUS_CART_QUANTITY } from '../component/LoginApi'
+import { json, useNavigate } from 'react-router-dom'
+import {
+  ADD_CART_QUANTITY,
+  MINUS_CART_QUANTITY,
+  DELETE_CART_ITEM,
+} from '../component/LoginApi'
+import Remove_info from '../component/Remove_info'
 import axios from 'axios'
 import { useRef } from 'react'
+import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 
-function CartItem({ cartData, setCartData, getCartData, cartTotalRows }) {
+function CartItem() {
+  const {
+    cartData,
+    setCartData,
+    getCartData,
+    cartTotalRows,
+    setShowRemove,
+    showRemove,
+  } = useContext(ProductFunctionContext)
   const navigation = useNavigate()
 
-  //前端算總價
-  const [totalPrice, setTotalPrice] = useState(0)
+  //重新渲染 使用布林值
+  const [render, setRender] = useState(false)
+
+  //每次點到購物車內商品 更換商品的sid把他傳進去remove_info裡
+  const [productsSid, setProductsSid] = useState(0)
+
   // addQuantity 到資料庫
 
   const addQuantity = async (sid, quantity) => {
@@ -21,6 +39,7 @@ function CartItem({ cartData, setCartData, getCartData, cartTotalRows }) {
         quantity: myQuantity,
       })
       console.log(res)
+      setRender(!render)
     } catch (e) {
       console.log('新增失敗')
     }
@@ -37,7 +56,7 @@ function CartItem({ cartData, setCartData, getCartData, cartTotalRows }) {
         sid: sid,
         quantity: myQuantity,
       })
-
+      setRender(!render)
       console.log(res)
     } catch (e) {
       console.log('減少失敗')
@@ -46,13 +65,29 @@ function CartItem({ cartData, setCartData, getCartData, cartTotalRows }) {
 
   // deleteCartItem 到資料庫
 
+  const deleteCartItem = async (sid) => {
+    try {
+      const res = await axios.delete(`${DELETE_CART_ITEM}/${sid}`, {
+        sid: parseInt(sid),
+      })
+      setRender(!render)
+      console.log(res)
+    } catch (e) {
+      console.log('刪除失敗')
+    }
+  }
+
   // RemoveWholeCartItem By member_Id 到資料庫
 
-  //新增或減少重新render
+  //算出總價
+  const totalPrice = cartData
+    .map((v) => v.product_price * v.quantity)
+    .reduce((a, c) => a + c)
 
+  //新增或減少重新render 相依性陣列放render
   useEffect(() => {
     getCartData()
-  }, [])
+  }, [render])
 
   return (
     <>
@@ -77,7 +112,8 @@ function CartItem({ cartData, setCartData, getCartData, cartTotalRows }) {
                   <a href="#">
                     <i
                       className="fa-solid fa-minus"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.preventDefault()
                         minusQuantity(v.sid, v.quantity)
                       }}
                     ></i>
@@ -86,13 +122,22 @@ function CartItem({ cartData, setCartData, getCartData, cartTotalRows }) {
                   <a href="#">
                     <i
                       className="fa-solid fa-plus"
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.preventDefault()
                         addQuantity(v.sid, v.quantity)
                       }}
                     ></i>
                   </a>
                   <a href="#">
-                    <i className="fa-solid fa-trash-can"></i>
+                    <i
+                      className="fa-solid fa-trash-can"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        setShowRemove(true)
+                        setProductsSid(v.sid)
+                        // deleteCartItem(v.sid)
+                      }}
+                    ></i>
                   </a>
                 </div>
                 <span className="cart-total">
@@ -110,7 +155,7 @@ function CartItem({ cartData, setCartData, getCartData, cartTotalRows }) {
             購物車內總共有<span>{cartTotalRows}</span>樣商品
           </p>
           <p>
-            合計：<span className="total-price">{}</span>
+            合計：<span className="total-price">{totalPrice}</span>
           </p>
           <button
             className="btn btn-checkout"
@@ -122,6 +167,14 @@ function CartItem({ cartData, setCartData, getCartData, cartTotalRows }) {
           </button>
         </div>
       </div>
+      {showRemove ? (
+        <Remove_info
+          deleteCartItem={deleteCartItem}
+          productsSid={productsSid}
+        />
+      ) : (
+        ''
+      )}
     </>
   )
 }

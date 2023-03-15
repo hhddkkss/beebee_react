@@ -25,5 +25,7 @@ export const GET_CART_ITEM_API = `${HOST}/cart/api`
 
 //新增進購物車
 export const ADD_CART_QUANTITY = `${HOST}/cart/plus`
-//新增進購物車
+//減少進購物車
 export const MINUS_CART_QUANTITY = `${HOST}/cart/minus`
+//減少進購物車
+export const DELETE_CART_ITEM = `${HOST}/cart/delete`
