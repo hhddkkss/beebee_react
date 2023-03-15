@@ -174,25 +174,26 @@ margin-bottom: 40px;
 
   .home_ad_1-issue{
     position: absolute;
-    font-size: 33px;
+    font-size: 25px;
     left:20%;
-    top:40%
+    top:40%;
+    font-family: Noto Sans TC;
     }
 
 .home_ad_1-price{
     font-size: 20px;
     position: absolute;
-    left: 20%;
-    top:50%
+    left:20%;
+    top:70%
     }
-.home_ad1_right_picture{width: 60%;
-margin-top: 50px;
-margin-right: 30px;}
+.home_ad1_right_picture{width: 100%;
+margin-top: -40px;
+}
 
+.home_ad_1-price::before {content:"$"}
 
-.home_ad_1-price{top:60%;}
-
-.home_ad1_img{width: 100%;}
+.home_ad1_img{width: 100%;
+margin-top: 15px;}
 
 .home_ad_1_check{
     background-color:#4F4F4F ;
@@ -206,11 +207,14 @@ margin-right: 30px;}
     top: 80%;}
 
 @media screen and (max-width: 375px) {
-    .home_ad_1-issue{font-size: 20px;}
+    .home_ad_1-issue{font-size: 20px;
+        left:100%;}
 .home_ad1_right_picture{margin-top:20px;
     margin-right: 10px;
 width: 260%;}
-.home_ad_1_check{width:120px}}
+.home_ad_1_check{width:110px;
+margin-left: 4px;}
+.home_ad_1-price{left:50%}}
 
 .home_ad_2{position:relative;
     height: 210px;
@@ -226,33 +230,37 @@ object-fit: contain;}
 
 .home_ad_2_issue{
     position: absolute;
-    font-size: 33px;
+    font-size: 28px;
     left: 10%;
     top: 0%;
+    font-family: Noto Sans TC;
 }
 
 .home_ad_2_price{
     font-size: 20px;
     position: absolute;
     left: 10%;
-    top:25%
+    top:47%
 }
+.home_ad_2_price::before {content:"$"}
 
 .home_ad_2-check{
     background-color:#4F4F4F ;
-    width: 240px;
+    width: 230px;
     height: 30px;
     border:#4f4f4f;
     border-radius: 3px;
     color:white;
     position: absolute;
-    left:10%;
+    left:12%;
     top:65%}
 
 @media screen and (max-width: 375px) {
-    .home_ad_2_issue{font-size: 20px;}
-    .home_ad_2_price{top:28%}
-    .home_ad_2-check{width: 87px;}}
+    .home_ad_2_issue{font-size: 20px;
+    top:-9%;}
+    .home_ad_2_price{top: 45%}
+    .home_ad_2-check{width: 85px;
+    top:64.5%}}
 
 .home_ad3{
     height: 379px;
@@ -266,9 +274,9 @@ object-fit: contain;}
 .home_ad_3_issue{ font-size: 33px;
 position: absolute;
 left:10%;
-top:20%;
+top:10%;
+font-family: Noto Sans TC;
 }
-
 
 .home_ad_3_word{font-size: 20px;
     position: absolute;
@@ -279,8 +287,9 @@ top:32%
 .home_ad_3_price{font-size: 20px;
     position: absolute;
     left:10%;
-    top:50%
+    top:30%
 }
+.home_ad_3_price::before {content:"$"}
 
 .home_ad_3-check{
         background-color:#4F4F4F ;
@@ -293,23 +302,38 @@ top:32%
         left:10%;
         top:80%;} 
 
-@media screen and (max-width: 375px) {
-    .home_ad_3_issue{font-size: 18px;}
-    .home_ad_3_word{font-size: 15px;}
-    .home_ad_3-check{width: 100px;}
-}
 .home_ad3_picture{width:50%;}
+.home_ad3_img{width: 100%;
+aspect-ratio: 1/1.8;
+object-fit: contain;}
+
+@media screen and (max-width: 375px) {
+    .home_ad_3_issue{font-size: 20px;
+    margin-top: 89%;}
+    .home_ad_3_word{font-size: 15px;
+        margin-top: 73%;}
+    .home_ad_3_price{margin-top: 120%;}
+    .home_ad_3-check{width: 100px;}
+    .home_ad3_img{position: absolute;
+        width: 100px;
+        left: 10%;
+        top:-3%;
+    }
+}
+
 
 .home_ad4{height: 379px;
     background-color: #D6E2FA;
 position: relative;}
 
-.home_ad_4{width: 50%;}
+.home_ad_4{width: 100%;}
 
-.home_ad_4_issue{font-size: 33px;
+.home_ad_4_issue{font-size: 25px;
 position: absolute;
 left: 10%;
-top:20%}
+top:20%;
+margin-right: 400px;
+font-family: Noto Sans TC;}
 
 .home_ad_4_word{font-size: 20px;
     position: absolute;
@@ -320,6 +344,8 @@ top:32%}
     position: absolute;
     left:10%;
     top:50%}
+
+.home_ad_4_price::before {content:"$"}
 
 .home_ad_4_check{
     background-color:#4F4F4F ;
@@ -337,44 +363,48 @@ top:32%}
 
 .home_ad4_img{object-fit: cover;
 width: 100%;
-margin-left:150px;}
+margin-left:300px;
+aspect-ratio: 1/1;
+object-fit: contain;}
 
 @media screen and (max-width: 375px) {
     .home_ad_4_issue{font-size: 20px;
-    top:30%}
+    top:40%}
     .home_ad_4_word{font-size: 16px;
     top:40%}
-    .home_ad_4_price{top:60%}
+    .home_ad_4_price{top:70%}
     .home_ad_4_check{width: 100px;}
     .home_ad4_img{width: 100%;
-    margin-left: 20px;}
+    margin-left: 0px;
+position: absolute;}
 }
 .home_ad5{height: 379px;
     width: 100%;
-    background-color: #F4F4F4;}
+    background-color: #F4F4F4;position: relative;}
 
-.home_ad_5{width: 100%;}
+.home_ad_5{width: 100%;
+}
 
-.home_ad_5_issue{font-size: 33px;
+.home_ad_5_issue{font-size: 20px;
     position: absolute;
-    left: 20%;
-    top:58%}
-
-.home_ad_5_word{font-size: 20px;
-    position: absolute;
-    left:20%;
-top:52%}
+    left:10%;
+    top:61%;
+    font-family: Noto Sans TC;}
 
 .home_ad_5_price{font-size: 20px;
     position: absolute;
-    left:20%;
+    left:43%;
     top:70%}
+
+.home_ad_5_price::before {content:"$"}
 
 .home_ad5_picture{width:100%;}
 
 .home_ad5_img{object-fit: cover;
-width: 130%;
-height: 100%;}
+width: 100%;
+aspect-ratio: 1/1.2;
+margin-left: 33%;
+}
 .home_ad_5_check{
     background-color:#4F4F4F ;
         width: 150px;
@@ -383,7 +413,7 @@ height: 100%;}
         border-radius: 3px;
         color:white;
         position: absolute;
-        left:20%;
+        left:25%;
         top:80%;
 }
 
@@ -391,25 +421,33 @@ height: 100%;}
 
 @media screen and (max-width: 375px) {
     .home_ad_5_issue{font-size: 20px;
-    top:30%}
-    .home_ad_5_word{font-size: 16px;
-        top:40%}
-    .home_ad_5_price{top:60%}
-    .home_ad_5_check{width: 85px;}
+    top:40%}
+    .home_ad_5_issue{left: 10%;}
+    .home_ad_5_price{top:70%;
+        left:10%}
+    .home_ad_5_check{width: 90px;
+    left:10%}
     .home_ad5_picture{width:100%;}
+    .home_ad5_img{width: 100%;
+        margin-left: 0%
+    }
 }
-.home_ad_61{background-color: #D6E2FA;}
+.home_ad_61{background-color: #D6E2FA;
+    position: relative;}
 .home_ad_6{width: 100%;height: 50%;}
 
-.home_ad_6_issue{font-size: 30px;
-    position: absolute;
-    left: 24%;
-    top:60%}
+.home_ad_6_issue{font-size: 20px;
+   display:flex;
+justify-content: center;
+font-family: Noto Sans TC;
+}
 
 .home_ad_6_price{font-size: 20px;
-    position: absolute;
-    left: 25%;
-    top:70%}
+    display:flex;
+    justify-content: center;
+margin-top: -4%;}
+
+.home_ad_6_price::before {content:"$"}
 
 .home_ad_6-check{background-color:#4F4F4F ;
     width: 150px;
@@ -418,268 +456,41 @@ height: 100%;}
     border-radius: 3px;
     color:white;
     position: absolute;
-    left:25%;
+    left:27%;
     top:80%;}
 
-.home_ad6_div{width: 90%;}
+.home_ad6_div{width: 100%;}
 .home_ad6_img{object-fit: cover;
         width: 100%;
+        aspect-ratio: 1/0.7;
     }
     .home_word_div{height: 50%;}
 
 @media screen and (max-width: 375px) {
     .home_ad_6_issue{font-size: 20px;
-    top:2%}
-    .home_ad_6_price{top:33%;}
-    .home_ad_6-check{top:54%;
+    margin-top: 21%;
+margin-left: 10%;
+margin-right: 10%;}
+    .home_ad_6_price{margin-top: 20%;
+        justify-content: start;
+        margin-left: 15%;
+    }
+    .home_ad_6-check{top:80%;
     width: 90px;
 left:20px}
+.home_ad6_img{width: 100%;
+    aspect-ratio: 1/1;
 }
-
-/* .home_ad_1{
-width:auto;
-height: 379px;
-background-color:#FFF0D2 ;
-position: relative;}
-
-.home_ad_1-issue{
-position: absolute;
-left: 20%;
-top: 40%;
-font-size: 33px;
 }
-
-.home_ad1_right_picture{
-    padding-right: 23px;
-}
-
-.home_ad_1-price{
-position: absolute;
-left: 20%;
-top: 55%;
-font-size: 20px;
-}
-
-.home_ad_1-check{
-background-color:#4F4F4F ;
-width: 150px;
-height: 30px;
-border:#4f4f4f;
-border-radius: 3px;
-color:white;
-position: absolute;
-left: 20%;
-top: 80%;
-}
-
-.home_ad_1-picture{
-object-fit:contain
-}
-
-.home_ad_2{
-width:auto;
-height: 379px;
-background-color:#F4F4F4 ;
-position: relative;}
-
-.home_ad_2-issue{
-position: absolute;
-left: 15%;
-top: 40%;
-font-size: 33px;
-}
-
-.home_ad_2-price{
-    position: absolute;
-    left: 15%;
-    top: 55%;
-    font-size: 20px;
-    }
-
-.home_ad_2-check{
-    background-color:#4F4F4F ;
-    width: 220px;
-    height: 30px;
-    border:#4f4f4f;
-    border-radius: 3px;
-    color:white;
-    position: absolute;
-    left: 15%;
-    top: 80%;
-    }
-
-.home_ad_3{
-width:100%;
-height: 379px;
-background-color:#FFF4DF ;
-position: relative;}
-.home_ad_3-issue{
-    position: absolute;
-    left: 10%;
-    top: 15%;
-    font-size: 33px;
-    }
-.home_ad_3-word{
-    position: absolute;
-    left: 10%;
-    top: 29%;
-    font-size: 20px;
-    }
-.home_ad_3-price{
-    position: absolute;
-    left: 10%;
-    top: 49%;
-    font-size: 20px;
-    }
-.home_ad_3-check{
-    background-color:#4F4F4F ;
-    width: 220px;
-    height: 30px;
-    border:#4f4f4f;
-    border-radius: 3px;
-    color:white;
-    position: absolute;
-    left: 10%;
-    top: 80%;}
-
-.ad_picture1{margin-top: 10%;}
-
-.ad_picture{width: 100%;
-height: 100%;
-margin-top: 10px;}
-
-.ad_picture2{width: 100%;
-    height: 100%;
-    margin-top: 20px;}
-
-@media screen and (max-width: 375px) {.home_ad_1{width:120px;}
-.home_ad_1-issue{font-size: 20px;}
-.home_ad_1-check{width: 100px;
-    height: 25px;
-left:10%}
-.home_ad_2{width:120px;
-right:-2%}
-.home_ad_2-issue{font-size: 20px;}
-.home_ad_2-check{width: 100px;
-    height: 25px;
-left:10%}
-.home_ad_3{width:120px;
-right:-35%;}
-.home_ad_3-issue{font-size: 20px;
-top:40%}
-.home_ad_3-word{display: none;}
-.home_ad_3-price{top:55%}
-.home_ad_3-check{width: 100px;
-    height: 25px;}
-.ad_picture1{width: 100%;
-        height: 100%;
-    margin-top: 10px;}}
-
-    
-.home_ad_4{
-    width:auto;
-height: 379px;
-background-color:#FFF4DF ;
-position: relative;}
-
-.home_ad_4-issue{
-    position: absolute;
-    left: 10%;
-    top: 20%;
-    font-size: 33px;
-    }
-.home_ad_4-word{
-    position: absolute;
-    left: 10%;
-    top: 33%;
-    font-size: 20px;}
-.home_ad_4-price{
-    position: absolute;
-    left: 10%;
-    top: 55%;
-    font-size: 20px;}
-    .home_ad_4-check{
-        background-color:#4F4F4F ;
-        width: 300px;
-        height: 30px;
-        border:#4f4f4f;
-        border-radius: 3px;
-        color:white;
-        position: absolute;
-        left: 10%;
-        top: 80%;}
-
-.home_ad_5{
-    width:auto;
-height: 379px;
-background-color:#FFF4DF ;
-position: relative;}
-.home_ad_5-issue{
-    position: absolute;
-    left: 10%;
-    top: 20%;
-    font-size: 33px;
-    }
-.home_ad_5-word{
-    position: absolute;
-    left: 10%;
-    top: 47%;
-    font-size: 20px;}
-.home_ad_5-price{
-    position: absolute;
-    left: 10%;
-    top: 57%;
-    font-size: 20px;}
-.home_ad_5-check{
-        background-color:#4F4F4F ;
-        width: 300px;
-        height: 30px;
-        border:#4f4f4f;
-        border-radius: 3px;
-        color:white;
-        position: absolute;
-        left: 10%;
-        top: 80%;}
-
-.home_ad_6{
-width:auto;
-height: 379px;
-background-color:#F4F4F4 ;
-position: relative;}
-.home_ad_6-issue{
-    position: absolute;
-    left: 10%;
-    top: 50%;
-    font-size: 33px;
-    }
-.home_ad_6-word{
-    position: absolute;
-    left: 10%;
-    top: 65%;
-    font-size: 20px;}
-.home_ad_6-price{
-    position: absolute;
-    left: 10%;
-    top: 57%;
-    font-size: 20px;}
-.home_ad_6-check{
-        background-color:#4F4F4F ;
-        width: 300px;
-        height: 30px;
-        border:#4f4f4f;
-        border-radius: 3px;
-        color:white;
-        position: absolute;
-        left: 10%;
-        top: 80%;} */
 
 .home_show_ad{
 width: auto;
-height: 860px;
+height: 960px;
 background-image: url('../../public/images/Home/home_3.jpg');
 background-position: 50%;
 background-size: cover;
 position: relative;
+margin-top: 50px;
 }
 
 
@@ -766,8 +577,8 @@ height:300px ;
 }
 .home_news_word{
 position: relative;
-width: auto;
-height:200px
+width:100%;
+height:200px;
 }
 .home_news_word1{
 font-size: 20px;
@@ -792,7 +603,11 @@ margin-right: 10px;
  position: absolute;
  top:35%;
  margin-left: 10px;
- margin-right: 10px;}
+ margin-right: 10px;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ display:-webkit-box;
+ -webkit-box-orient: vertical;-webkit-line-clamp: 6;}
 
  @media screen and (max-width: 375px) {.home_news_button{margin-left: -16%;}
 .home_news_word1{font-size: 10px;}
@@ -901,6 +716,7 @@ background-size: cover;
     font-size: 40px;
     top:10%;
     left:33%;
+    font-family: Noto Sans TC;
 }
 
 .home_map_google{
@@ -910,6 +726,7 @@ background-size: cover;
     top:20%;
     display: flex;
     justify-content: center;
+    font-family: Noto Sans TC;
 }
 
 @media screen and (max-width: 375px) {.home_map_issue{font-size: 23px;

@@ -24,3 +24,6 @@ yarn-error.log*
 
 /.vscode
 package-lock.json
+
+# key
+mapkey.js

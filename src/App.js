@@ -8,7 +8,6 @@ import Cart from './Cart'
 import Checkout from './Checkout'
 import DonePage from './DonePage'
 import HomePage from './Home/HomePage'
-import Home4ads from './Home/Home_4ads'
 
 function App() {
   return (
