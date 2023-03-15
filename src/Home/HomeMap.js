@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Key } from './mapkey' // 引入 API key
+import { Key } from './' // 引入 API key
 import GoogleMapReact from 'google-map-react'
 import '../../src/styles/Home.css'
 
