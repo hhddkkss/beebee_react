@@ -19,3 +19,6 @@ export const COMPARE_ING_LIST_API = `${HOST}/product_compare/compareIng`
 
 //商品詳細頁商品資料
 export const PRODUCT_DETAIL_API = `${HOST}/product_detail/product_detail_api`
+
+//商品詳細頁加入購物車API
+export const PRODUCT_DETAIL_ADD_CART_API = `${HOST}/cart/detailAddCart`
