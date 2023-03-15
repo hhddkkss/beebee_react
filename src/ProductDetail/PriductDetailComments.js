@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import Dayjs from 'dayjs'
 import Rating from '@mui/material/Rating'
 
@@ -17,7 +17,43 @@ function PriductDetailComments({p_detailData}) {
         }
         return parseFloat(all.toFixed(2))
     }
-    
+//顯示出來的留言
+    const [showComment,setShowComment]=useState([])
+
+    const starsChange = (stars)=>{
+      switch(stars){
+        case 1:
+           setShowComment(p_detailData.filter((v,i)=>v.star=='1')) 
+           break
+          
+        case 2:
+          setShowComment(p_detailData.filter((v,i)=>v.star=='2')) 
+          break
+          
+        case 3:
+          setShowComment(p_detailData.filter((v,i)=>v.star=='3')) 
+          break
+        case 4:
+          setShowComment(p_detailData.filter((v,i)=>v.star=='4')) 
+          break
+        case 5:
+          setShowComment(p_detailData.filter((v,i)=>v.star=='5')) 
+          break
+        default:
+          setShowComment(p_detailData) 
+          break
+                  
+      }
+    }
+
+    const commentChange = ()=>{
+      setShowComment(p_detailData.filter((v,i)=>v.content !=='')) 
+    }
+
+    useEffect(()=>{
+      console.log('ComDe',p_detailData);
+      setShowComment(p_detailData)
+    },[p_detailData])
     
 
   return (<>
@@ -35,37 +71,65 @@ function PriductDetailComments({p_detailData}) {
           <div className="product_commentarea_position">
             <div className=" product_commentarea_selectors">
               <div className="">
-                <button className="btn select product_commentarea_tatal">
+                <button className="btn select product_commentarea_tatal"
+                  onClick={(e)=>{
+                  e.preventDefault()
+                  starsChange()
+                }}>
                   全部
                 </button>
               </div>
               <div className=" d-none d-sm-block">
-                <button className="btn select product_commentarea_tatal">
+                <button className="btn select product_commentarea_tatal"
+                  onClick={(e)=>{
+                  e.preventDefault()
+                  starsChange(1)
+                }}>
                   1星
                 </button>
               </div>
               <div className=" d-none d-sm-block">
-                <button className="btn select product_commentarea_tatal">
+                <button className="btn select product_commentarea_tatal"
+                  onClick={(e)=>{
+                  e.preventDefault()
+                  starsChange(2)
+                }}>
                   2星
                 </button>
               </div>
               <div className="d-none d-sm-block">
-                <button className="btn select product_commentarea_tatal">
+                <button className="btn select product_commentarea_tatal"
+                  onClick={(e)=>{
+                  e.preventDefault()
+                  starsChange(3)
+                }}>
                   3星
                 </button>
               </div>
               <div className=" d-none d-sm-block">
-                <button className="btn select product_commentarea_tatal">
+                <button className="btn select product_commentarea_tatal"
+                  onClick={(e)=>{
+                  e.preventDefault()
+                  starsChange(4)
+                }}>
                   4星
                 </button>
               </div>
               <div className=" d-none d-sm-block">
-                <button className="btn select product_commentarea_tatal">
+                <button className="btn select product_commentarea_tatal"
+                  onClick={(e)=>{
+                  e.preventDefault()
+                  starsChange(5)
+                }}>
                   5星
                 </button>
               </div>
               <div className="">
-                <button className="btn select product_commentarea_tatal">
+                <button className="btn select product_commentarea_tatal"
+                  onClick={(e)=>{
+                  e.preventDefault()
+                  commentChange()
+                }}>
                   附上評論
                 </button>
               </div>
@@ -76,8 +140,8 @@ function PriductDetailComments({p_detailData}) {
 
       {/* 評論卡片區 */}
       <div className="container product_comment_area">
-        {p_detailData.length > 1
-          ? p_detailData.map((v, i) => {
+        {showComment.length > 0 && showComment[0].p_comment_id!==null
+          ? showComment.map((v, i) => {
 
             {/* 評論卡片 */}
               return (

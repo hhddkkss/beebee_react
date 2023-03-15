@@ -36,7 +36,7 @@ function ProductDetail(props) {
     axios
       .post(PRODUCT_DETAIL_API, { product_id, product_category })
       .then((res) => {
-        // console.log('detailData',res.data)
+         console.log('detailData',res.data)
         setP_detailData(res.data)
       })
   }
