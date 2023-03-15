@@ -4,10 +4,10 @@ import SignipForm from './SignupForm'
 import LoginForm from './LoginForm'
 import LoginInfo from './LoginInfo'
 import AuthContext from '../Contexts/AuthContext'
-import Navbar from '../component/Navbar'
-//
+
+
 function MemberLogin() {
-  // import AuthContext from '../contexts/AuthContext'
+
   const [isActive, setActive] = useState(1)
   const [loginForm, setLoginForm] = useState({
     email: '',
@@ -19,7 +19,7 @@ function MemberLogin() {
     password: '',
     mobile: '',
     gender: '',
-    birthday: 0,
+    birthday: '1990-01-01',
     address_city: '',
     address_dist: '',
     address_rd: '',
@@ -60,15 +60,15 @@ function MemberLogin() {
 
   function infoClass(a, b, c) {
     switch (infoState) {
-      // 登入畫面
+      // 未叫出
       case 1:
         return a
 
-      //申請畫面一
+      //成功
       case 2:
         return b
 
-      //申請畫面二
+      //失敗
       case 3:
         return c
 
@@ -276,7 +276,7 @@ function MemberLogin() {
         </div>
 
         {/* 彈跳視窗 */}
-        <LoginInfo infoClass={infoClass} setInfoState={setInfoState} />
+        <LoginInfo infoClass={infoClass} setInfoState={setInfoState} infoState={infoState} />
       </div>
     </>
   )

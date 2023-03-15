@@ -6,30 +6,49 @@ import CartItem from './CartItem'
 import CartBottom from './CartBottom'
 import CartRecommend from './CartRecommend'
 import M_CartBottom from './M_CartBottom'
-import Remove_info from '../component/Remove_info'
+// import Remove_info from '../component/Remove_info'
 import NoCartItem from './NoCartItem'
 import Navbar from '../component/Navbar'
 import AuthContext from '../Contexts/AuthContext'
 import { useContext, useEffect, useState } from 'react'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
+import axios from 'axios'
+
+
 
 function Cart() {
   //----- UseContext -----
   const { setNavbarType } = useContext(AuthContext)
+  const { getCartData, cartData} = useContext(
+    ProductFunctionContext
+  )
+
   useEffect(() => {
     setNavbarType('light')
   }, [])
 
-  const { cartItemPId } = useContext(ProductFunctionContext)
+  // //拿到某會員的購物車 getCartData
 
-  //判斷有沒有商品
-  const [hasCartItem, SetHasCartItem] = useState(true)
+  // const getCartData = async () => {
+  //   const member_id =
+  //     localStorage.getItem('myAuth') &&
+  //     JSON.parse(localStorage.getItem('myAuth')).memberId
 
+  //   // console.log(member_id)
+
+  //   //data :{rows,totalRows}
+  //   const res = await axios
+  //     .get(`${GET_CART_ITEM_API}/${member_id}`)
+  //     .then((r) => {
+  //       console.log(r.data)
+  //       setCartData(r.data.rows) //把購物車檔案新增進狀態中
+  //       setCarTotalRows(r.data.totalRows)
+  //     })
+  //     .catch((e) => console.log(e))
+  // }
   useEffect(() => {
-    if (cartItemPId && cartItemPId.length > 0) {
-      SetHasCartItem(true)
-    }
-  }, [cartItemPId])
+    getCartData()
+  }, [])
 
   return (
     <>
@@ -140,7 +159,7 @@ function Cart() {
         </section>
       </div> */}
 
-      {hasCartItem ? <CartItem /> : <NoCartItem />}
+      {cartData.length === 0 ? <NoCartItem /> : <CartItem />}
 
       {/* <!-- 結帳按鈕 商品總價計算 幾樣商品 --> */}
       {/* <div className="container">
@@ -295,7 +314,7 @@ function Cart() {
           <i className="fa-solid fa-xmark"></i>
         </a>
       </div> */}
-      <Remove_info />
+     
     </>
   )
 }

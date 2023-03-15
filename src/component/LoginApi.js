@@ -19,3 +19,15 @@ export const COMPARE_ING_LIST_API = `${HOST}/product_compare/compareIng`
 
 //商品詳細頁商品資料
 export const PRODUCT_DETAIL_API = `${HOST}/product_detail/product_detail_api`
+
+//拿到購物車內的商品項目
+export const GET_CART_ITEM_API = `${HOST}/cart/api`
+
+//新增進購物車
+export const ADD_CART_QUANTITY = `${HOST}/cart/plus`
+//減少進購物車
+export const MINUS_CART_QUANTITY = `${HOST}/cart/minus`
+//減少進購物車
+export const DELETE_CART_ITEM = `${HOST}/cart/delete`
+//商品詳細頁加入購物車API
+export const PRODUCT_DETAIL_ADD_CART_API = `${HOST}/cart/detailAddCart`
