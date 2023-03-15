@@ -71,9 +71,12 @@ function DefaultCard({ productsDisplay }) {
                       >
                         {v.product_price}
                       </p>
-                      <p className="discount">{v.product_price}</p>
+                      <p className="discount">{v.product_price - 1000}</p>
                       <div className="compare-and-cart">
-                        {localStorage.getItem('comparedList') && JSON.parse(localStorage.getItem('comparedList')).includes(v.product_id)?  (
+                        {localStorage.getItem('comparedList') &&
+                        JSON.parse(
+                          localStorage.getItem('comparedList')
+                        ).includes(v.product_id) ? (
                           <svg
                             width="20"
                             height="20"
