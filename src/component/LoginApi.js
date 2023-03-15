@@ -29,3 +29,5 @@ export const ADD_CART_QUANTITY = `${HOST}/cart/plus`
 export const MINUS_CART_QUANTITY = `${HOST}/cart/minus`
 //減少進購物車
 export const DELETE_CART_ITEM = `${HOST}/cart/delete`
+//商品詳細頁加入購物車API
+export const PRODUCT_DETAIL_ADD_CART_API = `${HOST}/cart/detailAddCart`

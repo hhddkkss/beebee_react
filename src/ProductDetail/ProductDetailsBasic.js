@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 import Rating from '@mui/material/Rating'
+import { PRODUCT_DETAIL_ADD_CART_API } from '../component/LoginApi'
+import axios from 'axios'
 
 function ProductDetailsBasic({ p_detailData }) {
   //   const { p_detailData } = props
@@ -26,6 +28,17 @@ function ProductDetailsBasic({ p_detailData }) {
     setDetailMainPic(e.target.src)
   }
 
+  // 商品數量state
+  const [productCount,setProductCount]=useState(1)
+  //加按鈕
+  function addCount(){
+    setProductCount(productCount+1)
+  }
+   //減按鈕
+   function minusCount(){
+    setProductCount(productCount-1)
+  }
+
   useEffect(() => {
     if (p_detailData.length > 0) {
       setDetailMainPic('/images/' + p_detailData[0].product_pic.split(',')[0])
@@ -35,7 +48,7 @@ function ProductDetailsBasic({ p_detailData }) {
   return (
     <>
       {p_detailData
-        .filter((v, i) => {
+        .filter((v1, i) => {
           return i === 0
         })
         .map((v, y) => {
@@ -51,6 +64,21 @@ function ProductDetailsBasic({ p_detailData }) {
                         src={detailMainPic}
                         alt="product_picture"
                       />
+                      {localStorage.getItem('favorites') && JSON.parse(localStorage.getItem('favorites')).includes(v.product_id) ? (
+                      <i
+                        className="fa-solid fa-heart fa-xl"
+                        onClick={() => {
+                          handleAddOrDeleteFavorite(v.product_id)
+                        }}
+                      ></i>
+                    ) : (
+                      <i
+                        className="fa-regular fa-heart fa-xl"
+                        onClick={() => {
+                          handleAddOrDeleteFavorite(v.product_id)
+                        }}
+                      ></i>
+                    )}
                     </div>
                     <div className="row g-0 product_picture_little">
                       <div className="col-2 p-0">
@@ -118,11 +146,19 @@ function ProductDetailsBasic({ p_detailData }) {
                       <div className="product_count">
                         <span className="">數量</span>
                         <span className="product_count1">
-                          <button className="product_count_button">
+                          <button className="product_count_button"
+                          onClick={(e)=>{
+                            e.preventDefault()
+                            minusCount()
+                          }}>
                             <i className="fa-solid fa-minus"></i>
                           </button>
-                          <span>1</span>
-                          <button className="product_count_button">
+                          <span>{productCount}</span>
+                          <button className="product_count_button"
+                          onClick={(e)=>{
+                            e.preventDefault()
+                            addCount()
+                          }}>
                             <i className="fa-solid fa-plus"></i>
                           </button>
                         </span>
@@ -136,13 +172,20 @@ function ProductDetailsBasic({ p_detailData }) {
                         </button>
                       </div>
                       <div className="product_add">
-                        <button className="compare_type_btn start">
-                          開始比價!
+                        <button className="compare_type_btn start"
+                        onClick={() => {
+                          handleAddOrDeleteCompared(v.product_id)
+                          }}
+                        >
+                          開始比價
                         </button>
                         <button
                           className="add_To_Cart"
                           onClick={() => {
-                            handleAddOrDeleteCart(v.product_id, 1)
+                          handleAddOrDeleteCart(v.product_id, productCount)
+                          axios.post(PRODUCT_DETAIL_ADD_CART_API,{memberId:1,productId:v.product_id,count:productCount}).then((res)=>{
+                            console.log('addCartResult',res.data)
+                          })
                           }}
                         >
                           <i className="fa-solid fa-cart-shopping d-inline"></i>

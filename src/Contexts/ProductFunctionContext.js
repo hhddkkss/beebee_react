@@ -13,7 +13,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
     const initialData = res.data.map((v, i) => {
       return { ...v, isLiked: false, isCompared: false }
     })
-    console.log(initialData)
+    // console.log(initialData)
     setProducts(initialData)
   }
 

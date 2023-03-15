@@ -1,8 +1,10 @@
 import React from 'react'
 import './../styles/login.css'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 function LoginInfo(props) {
-  const { infoClass, setInfoState } = props
+  const navigation = useNavigate()
+  const { infoClass, setInfoState,infoState } = props
   return (
     <div
       className={infoClass(
@@ -13,17 +15,34 @@ function LoginInfo(props) {
     >
       <p>{infoClass('', '登入成功！BEEbeE歡迎您', 'Oops! 登入失敗')}</p>
       <div className="btn-mygroup">
-        <button
+      {infoState === 2 ? <button
           href="#"
           className="btn-confirm"
           onClick={(e) => {
             e.preventDefault()
             setInfoState(1)
+            navigation('/')
+            //導回首頁
+          }}
+        >
+          確定
+        </button>:
+          <button
+          href="#"
+          className="btn-confirm"
+          onClick={(e) => {
+            e.preventDefault()
+            setInfoState(1)
+            navigation('')
             //導回首頁
           }}
         >
           確定
         </button>
+        }
+       
+
+        
       </div>
     </div>
   )

@@ -24,7 +24,10 @@ yarn-error.log*
 
 /.vscode
 package-lock.json
+yarn.lock
 
+# key
+mapkey.js
 .eslintrc_tmp
 .eslintignore_tmp
 .eslintrc
