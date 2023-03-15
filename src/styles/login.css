@@ -386,7 +386,7 @@ body {
     display: none;
   }
   .info-login-success{
-    background-color: rgba(255, 245, 245,0.8);
+    background-color: rgba(255, 245, 245,0.99);
     display: flex;
   }
 

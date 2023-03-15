@@ -30,7 +30,7 @@ function ProductCompareIngBox(props) {
       '防水係數',
     ],
   ]
-  console.log('Q01', compareIngClass)
+  // console.log('Q01', compareIngClass)
   // 手機
   if (compareType === 1) {
     return (

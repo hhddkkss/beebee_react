@@ -25,6 +25,7 @@ function ProductCompare(props) {
 
   //商品頁的商品類型
   const { productType } = props
+  // console.log('V01:',productType);
   //總比較列表
   const [compareList, setCompareList] = useState([])
   //比較列表分類呈現
@@ -75,16 +76,17 @@ function ProductCompare(props) {
   // 比價列表分類按鈕
   function setCompareListType(a) {
     let newList = compareList.filter((v, i) => {
-      return v.product_category_id === a
+      return v.product_category_id == a
     })
 
-    // console.log('分類', a, 'oL', compareList, 'nL', newList)
+    // console.log('分類號:', a,typeof a, '舊資料:', compareList, '新資料:', newList)
     setShowCompareList(newList)
   }
 
   //比價列表分類按鈕外觀改變
   function setCompare_type_btnClass(k) {
-    if (k === compareType) {
+    // console.log('V04:',compareType);
+    if (k == compareType) {
       return 'compare_type_btn compare_type_btn_hover'
     } else {
       return 'compare_type_btn'
@@ -170,13 +172,13 @@ function ProductCompare(props) {
   //拿到比較列表資料後做分類顯示
   useEffect(() => {
     if (compareListClass == 'compare_list_box d-none') {
-      console.log('S01', compareType, ':', productType)
+      //  console.log('S01', compareType, ':', productType)
 
       productType === 4
         ? setCompareListType(1)
         : setCompareListType(productType)
     } else {
-      console.log('S02', compareType)
+      //  console.log('S02', compareType,':', productType)
       setCompareListType(compareType)
     }
   }, [compareList])
@@ -188,14 +190,21 @@ function ProductCompare(props) {
 
   //商品頁切換分類跟著切換比價列表分類
   useEffect(() => {
+    // console.log('V02',productType);
     if (productType === 4) {
+    // console.log('V02-2',productType);
+
       setCompareType(1)
       setCompareListType(1)
     } else {
+    // console.log('V02-3',productType);
+
       setCompareType(productType)
       setCompareListType(productType)
-    }
+    } 
+    // console.log('V03',compareType);
   }, [productType])
+ 
 
   return (
     <>
