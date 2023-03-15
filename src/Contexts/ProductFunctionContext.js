@@ -48,6 +48,8 @@ export const ProductFunctionContextProvider = function ({ children }) {
   } catch (ex) {}
 
   const [cartItem, setCartItem] = useState(initCart)
+  const myCartItem = cartItem || []
+  const cartItemPId = myCartItem.map((v) => v.product_id)
 
   //比較列表
   let initComparedList = []
@@ -55,6 +57,8 @@ export const ProductFunctionContextProvider = function ({ children }) {
     initComparedList = JSON.parse(localStorage.getItem('comparedList')) || []
   } catch (ex) {}
   const [comparedList, setComparedList] = useState(initComparedList)
+
+  
   //收藏
   let initFavorites = []
 
@@ -85,10 +89,32 @@ export const ProductFunctionContextProvider = function ({ children }) {
   }
 
   //加入購物車
-  const handleAddOrDeleteCart = (product_id) => {
+  // const handleAddOrDeleteCart = (product_id) => {
+  //   //判斷購物車內有沒有這個商品
+  //   console.log(product_id)
+  //   const inCart = cartItem.includes(product_id)
+
+  //   //有的話
+  //   if (inCart) {
+  //     // const newCart = cartItem.filter((v) => v.product_id !== product_id)
+  //     // setCartItem(newCart)
+  //     // //轉成字串寫進localStorage
+  //     // localStorage.setItem('cartItem', JSON.stringify(newCart))
+  //   }
+
+  //   //沒有的話
+  //   else {
+  //     const newCart = [...cartItem, product_id]
+  //     console.log(newCart)
+  //     setCartItem(newCart)
+  //     //轉成字串寫進localStorage
+  //     localStorage.setItem('cartItem', JSON.stringify(newCart))
+  //   }
+  // }
+
+  const handleAddOrDeleteCart = (product_id, count) => {
     //判斷購物車內有沒有這個商品
-    console.log(product_id)
-    const inCart = cartItem.includes(product_id)
+    const inCart = cartItem.find((v) => v.product_id === product_id)
 
     //有的話
     if (inCart) {
@@ -100,8 +126,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
 
     //沒有的話
     else {
-      const newCart = [...cartItem, product_id]
-      console.log(newCart)
+      const newCart = [...cartItem, { product_id: product_id, count: 1 }]
       setCartItem(newCart)
       //轉成字串寫進localStorage
       localStorage.setItem('cartItem', JSON.stringify(newCart))
@@ -134,6 +159,8 @@ export const ProductFunctionContextProvider = function ({ children }) {
       localStorage.setItem('comparedList', JSON.stringify(newComparedList))
     }
   }
+
+  
   //收藏商品
   const handleAddOrDeleteFavorite = (product_id) => {
     const hasFavorite = favorites.includes(product_id)
@@ -169,7 +196,13 @@ export const ProductFunctionContextProvider = function ({ children }) {
         setProducts,
         addToCartTable,
         getProductData,
+        cartItemPId,
         pageNow,
+        setPageNow,
+        perPage,
+        setPerPage,
+        pageTotal,
+        setPageTotal
       }}
     >
       {children}

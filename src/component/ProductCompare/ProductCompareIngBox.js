@@ -1,17 +1,12 @@
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync'
 import { useContext } from 'react'
 import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
-import { logDOM } from '@testing-library/react'
+import CompareContext from '../../Contexts/CompareContext'
 
 function ProductCompareIngBox(props) {
-  const {
-    compareIngData,
-    compareType,
-    compareIngClass,
-    addCompareIngList,
-    setCompareListClass,
-    setCompareIngClass,
-  } = props
+  const { compareIngData, compareType, addCompareIngList } = props
+  const { setCompareListClass, setCompareIngClass, compareIngClass } =
+    useContext(CompareContext)
   const { handleAddOrDeleteCart } = useContext(ProductFunctionContext)
   const compareHeadTiile = [
     ['作業系統', '處理器', '記憶體', '電池', '螢幕尺寸'],
@@ -35,7 +30,7 @@ function ProductCompareIngBox(props) {
       '防水係數',
     ],
   ]
-
+  console.log('Q01', compareIngClass)
   // 手機
   if (compareType === 1) {
     return (

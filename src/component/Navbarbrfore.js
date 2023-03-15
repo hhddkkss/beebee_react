@@ -174,6 +174,7 @@ function Navbar() {
           <div className="triangle"></div>
 
           <div className="my-cards">
+            {console.log(products, 2, cartItemPId, 1)}
             {products
               .filter((v) => cartItemPId.includes(v.product_id))
               .map((v) => {

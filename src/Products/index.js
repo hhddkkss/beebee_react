@@ -14,50 +14,66 @@ import M_productAndBrand from './M_productAndBrand'
 import '../styles/m-navbar.css'
 import '../styles/products.css'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
-import ProductCompare from './ProductCompare'
+import ProductCompare from '../component/ProductCompare'
 import AuthContext from '../Contexts/AuthContext'
+import CompareContext from '../Contexts/CompareContext'
 function Products() {
   const {
-    setToggleCartButton,
-    toggleCartButton,
     products,
     cartItem,
     setProducts,
     setCartItem,
     getProductData,
+    pageNow,
+    setPageNow,
+    perPage,
+    setPerPage,
+    pageTotal,
+    setPageTotal
   } = useContext(ProductFunctionContext)
+  const {
+    compareListClass,
+    setCompareListClass,
+    compareIngClass,
+    setCompareIngClass,
+    popCompareBtn,
+  } = useContext(CompareContext)
 
   const { setNavbarType } = useContext(AuthContext)
   useEffect(() => {
     setNavbarType('dark')
   }, [])
 
+  
   //輪播牆
-  const carouselRef = useRef(null)
+  // const carouselRef = useRef(null)
+
   // const [movement, setMoveMent] = useState(0)
   //開關
   const [toggleSortList, setToggleSortList] = useState(false)
   // const [toggleCartButton, setToggleCartButton] = useState(false)
 
-  //收藏
-  let initFavorites = []
+ 
 
-  //比較列表顯示className
-  const [compareListClass, setCompareListClass] = useState(
-    'compare_list_box d-none'
-  )
+  // //比較列表顯示className
+  // const [compareListClass, setCompareListClass] = useState(
+  //   'compare_list_box d-none'
+  // )
 
-  //比較區顯示className
-  const [compareIngClass, setCompareIngClass] = useState(
-    'compareIng_box d-none'
-  )
-  //比價列表顯現按鈕
-  const popCompareBtn = useRef(null)
+  // //比較區顯示className
+  // const [compareIngClass, setCompareIngClass] = useState(
+  //   'compareIng_box d-none'
+  // )
+  // //比價列表顯現按鈕
+  // const popCompareBtn = useRef(null)
 
-  try {
-    initFavorites = JSON.parse(localStorage.getItem('favorites')) || []
-  } catch (ex) {}
-  const [favorites, setFavorite] = useState(initFavorites)
+
+ //收藏
+  // let initFavorites = []
+  // try {
+  //   initFavorites = JSON.parse(localStorage.getItem('favorites')) || []
+  // } catch (ex) {}
+  // const [favorites, setFavorite] = useState(initFavorites)
 
   // //加入購物車
   // let initCart = []
@@ -94,16 +110,17 @@ function Products() {
   //產品分類
   const [productType, setProductType] = useState(4)
   //比較列表
-  let initComparedList = []
+  // let initComparedList = []
 
-  try {
-    initComparedList = JSON.parse(localStorage.getItem('comparedList')) || []
-  } catch (ex) {}
-  const [comparedList, setComparedList] = useState(initComparedList)
+  // try {
+  //   initComparedList = JSON.parse(localStorage.getItem('comparedList')) || []
+  // } catch (ex) {}
+  // const [comparedList, setComparedList] = useState(initComparedList)
   //分頁用
-  const [pageNow, setPageNow] = useState(1) //預設第一頁
-  const [perPage, setPerPage] = useState(25) // 一頁25個
-  const [pageTotal, setPageTotal] = useState(0) // 預設總筆數是0
+
+  // const [pageNow, setPageNow] = useState(1) //預設第一頁
+  // const [perPage, setPerPage] = useState(25) // 一頁25個
+  // const [pageTotal, setPageTotal] = useState(0) // 預設總筆數是0
 
   //卡片樣式切換
   const [cardType, setCardType] = useState(1)
@@ -233,62 +250,62 @@ function Products() {
   }
 
   //收藏商品
-  const handleAddOrDeleteFavorite = (product_id) => {
-    const hasFavorite = favorites && favorites.includes(product_id)
+  // const handleAddOrDeleteFavorite = (product_id) => {
+  //   const hasFavorite = favorites && favorites.includes(product_id)
 
-    if (hasFavorite) {
-      const newFavorites = [...favorites].filter((v) => v !== product_id)
-      setFavorite(newFavorites)
-      localStorage.setItem('favorites', JSON.stringify(newFavorites))
-    } else {
-      const newFavorites = [...favorites, product_id]
-      setFavorite(newFavorites)
-      localStorage.setItem('favorites', JSON.stringify(newFavorites))
-    }
-  }
+  //   if (hasFavorite) {
+  //     const newFavorites = [...favorites].filter((v) => v !== product_id)
+  //     setFavorite(newFavorites)
+  //     localStorage.setItem('favorites', JSON.stringify(newFavorites))
+  //   } else {
+  //     const newFavorites = [...favorites, product_id]
+  //     setFavorite(newFavorites)
+  //     localStorage.setItem('favorites', JSON.stringify(newFavorites))
+  //   }
+  // }
 
   //加入購物車
-  const handleAddOrDeleteCart = (product_id, count) => {
-    //判斷購物車內有沒有這個商品
-    console.log('1', cartItem)
-    const inCart = cartItem && cartItem.find((v) => v.product_id === product_id)
+  // const handleAddOrDeleteCart = (product_id, count) => {
+  //   //判斷購物車內有沒有這個商品
+  //   console.log('1', cartItem)
+  //   const inCart = cartItem && cartItem.find((v) => v.product_id === product_id)
 
-    //有的話
-    if (inCart) {
-      /*
-      const newCart = cartItem.filter((v) => v.product_id !== product_id)
+  //   //有的話
+  //   if (inCart) {
+  //     /*
+  //     const newCart = cartItem.filter((v) => v.product_id !== product_id)
 
-      setCartItem(newCart)
-      //轉成字串寫進localStorage
-      localStorage.setItem('cartItem', JSON.stringify(newCart))
-      */
-    }
+  //     setCartItem(newCart)
+  //     //轉成字串寫進localStorage
+  //     localStorage.setItem('cartItem', JSON.stringify(newCart))
+  //     */
+  //   }
 
-    //沒有的話
-    else {
-      const newCart = [...cartItem, { product_id: product_id, count: count }]
-      setCartItem(newCart)
-      //轉成字串寫進localStorage
-      localStorage.setItem('cartItem', JSON.stringify(newCart))
-    }
-  }
+  //   //沒有的話
+  //   else {
+  //     const newCart = [...cartItem, { product_id: product_id, count: count }]
+  //     setCartItem(newCart)
+  //     //轉成字串寫進localStorage
+  //     localStorage.setItem('cartItem', JSON.stringify(newCart))
+  //   }
+  // }
 
   //加入比較清單
-  const handleAddOrDeleteCompared = (product_id) => {
-    const isOnComparedList = comparedList && comparedList.includes(product_id)
+  // const handleAddOrDeleteCompared = (product_id) => {
+  //   const isOnComparedList = comparedList && comparedList.includes(product_id)
 
-    if (isOnComparedList) {
-      const newComparedList = [...comparedList].filter((v) => {
-        return v !== product_id
-      })
-      setComparedList(newComparedList)
-      localStorage.setItem('comparedList', JSON.stringify(newComparedList))
-    } else {
-      const newComparedList = [...comparedList, product_id]
-      setComparedList(newComparedList)
-      localStorage.setItem('comparedList', JSON.stringify(newComparedList))
-    }
-  }
+  //   if (isOnComparedList) {
+  //     const newComparedList = [...comparedList].filter((v) => {
+  //       return v !== product_id
+  //     })
+  //     setComparedList(newComparedList)
+  //     localStorage.setItem('comparedList', JSON.stringify(newComparedList))
+  //   } else {
+  //     const newComparedList = [...comparedList, product_id]
+  //     setComparedList(newComparedList)
+  //     localStorage.setItem('comparedList', JSON.stringify(newComparedList))
+  //   }
+  // }
 
   //分頁用
   const handleChangePageNow = (e, p) => {
@@ -350,11 +367,11 @@ function Products() {
 
   return (
     <>
-      <Navbar getProductData={getProductData} />
+      <Navbar />
 
       {/* <!-- 輪播牆 --> */}
 
-      <Carousel carouselRef={carouselRef} />
+      <Carousel  />
 
       {/* <!-- 手機版商品類別 --> */}
 
@@ -389,23 +406,22 @@ function Products() {
 
           <ProductArea
             productsDisplay={productsDisplay}
-            pageNow={pageNow}
-            favorites={favorites}
-            setProducts={setProducts}
+            // pageNow={pageNow}
+            // favorites={favorites}
+            // setProducts={setProducts}
             toggleLiked={toggleLiked}
-            products={products}
-            handleAddOrDeleteFavorite={handleAddOrDeleteFavorite}
-            comparedList={comparedList}
+            // products={products}
+            // handleAddOrDeleteFavorite={handleAddOrDeleteFavorite}
+            // comparedList={comparedList}
             toggleCompared={toggleCompared}
-            handleAddOrDeleteCompared={handleAddOrDeleteCompared}
-            cartItem={cartItem}
-            handleAddOrDeleteCart={handleAddOrDeleteCart}
+            // cartItem={cartItem}
+            // handleAddOrDeleteCart={handleAddOrDeleteCart}
           />
         </section>
       </div>
 
       <CompareListButton
-        comparedList={comparedList}
+        // comparedList={comparedList}
         setCompareListClass={setCompareListClass}
         compareListClass={compareListClass}
         setCompareIngClass={setCompareIngClass}
@@ -424,14 +440,13 @@ function Products() {
       />
       {/* 比價區 */}
       <ProductCompare
-        setCompareListClass={setCompareListClass}
-        compareListClass={compareListClass}
+        // setCompareListClass={setCompareListClass}
+        // compareListClass={compareListClass}
         productType={productType}
-        compareIngClass={compareIngClass}
-        setCompareIngClass={setCompareIngClass}
-        popCompareBtn={popCompareBtn}
-        comparedList={comparedList}
-        handleAddOrDeleteCompared={handleAddOrDeleteCompared}
+        // compareIngClass={compareIngClass}
+        // setCompareIngClass={setCompareIngClass}
+        // popCompareBtn={popCompareBtn}
+        // comparedList={comparedList}
       />
     </>
   )

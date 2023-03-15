@@ -20,7 +20,7 @@ function CartItem() {
                   <div
                     className="img"
                     style={{
-                      backgroundImage: `url('/public/images/iphone-14promax-256G-deeppurple.png')`,
+                      backgroundImage: `url('/images/${v.product_pic}')`,
                     }}
                   ></div>
                   <span className="cart-name">{v.product_name}</span>
