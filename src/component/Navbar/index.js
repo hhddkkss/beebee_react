@@ -32,6 +32,11 @@ function Navbar() {
   useEffect(() => {
     getProductData()
   }, [])
+
+  useEffect(() => {
+    setToggleCartButton(false)
+  }, [])
+
   return (
     <>
       <header>
@@ -247,7 +252,7 @@ function Navbar() {
                       </div>
                       <p className="product-name">{v.product_name}</p>
                     </div>
-                    <p className="product-price">{v.product_price}</p>
+                    <p className="product-price">{v.product_price - 1000}</p>
                   </div>
                 )
               })}
@@ -257,10 +262,10 @@ function Navbar() {
             <a
               href="#/"
               className="check-cart"
-              onClick={(e) => {
+              onClick={async (e) => {
                 e.preventDefault()
-                addToCartTable()
-                getCartData()
+                await addToCartTable()
+                await getCartData()
                 navigation('/cart')
               }}
             >

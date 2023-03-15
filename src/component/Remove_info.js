@@ -3,7 +3,9 @@ import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 import styles from '../styles/removeInfo.module.css'
 
 function Remove_info({ deleteCartItem, productsSid }) {
-  const { setShowRemove, showRemove } = useContext(ProductFunctionContext)
+  const { setShowRemove, showRemove, getCartData } = useContext(
+    ProductFunctionContext
+  )
   return (
     <>
       {/* <!-- 刪除視窗 --> */}
@@ -25,6 +27,7 @@ function Remove_info({ deleteCartItem, productsSid }) {
               console.log('yes')
               setShowRemove(false)
               deleteCartItem(productsSid)
+              getCartData()
             }}
           >
             確定

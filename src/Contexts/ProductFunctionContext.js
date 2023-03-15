@@ -17,7 +17,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
     setProducts(initialData)
   }
 
-  //
+  // forRemoveInfo
   const [showRemove, setShowRemove] = useState(false)
 
   const [pageNow, setPageNow] = useState(1) //預設第一頁
@@ -28,7 +28,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
 
   const [products, setProducts] = useState([])
 
-  //寫入購物車
+  //寫入資料庫購物車
   const addToCartTable = async () => {
     const dev = 'http://localhost:3003/cart'
     const aaron = 'http://localhost:3030/cart'
@@ -114,7 +114,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
   //   }
   // }
 
-  const handleAddOrDeleteCart = (product_id, count) => {
+  const handleAddOrDeleteCart = (product_id) => {
     //判斷購物車內有沒有這個商品
     const inCart = cartItem.find((v) => v.product_id === product_id)
 
@@ -126,7 +126,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
       // localStorage.setItem('cartItem', JSON.stringify(newCart))
     }
 
-    //沒有的話
+    //沒有的話 寫進localStorage
     else {
       const newCart = [...cartItem, { product_id: product_id, count: 1 }]
       setCartItem(newCart)
@@ -182,6 +182,16 @@ export const ProductFunctionContextProvider = function ({ children }) {
   //購物車幾樣商品
   const [cartTotalRows, setCarTotalRows] = useState(0)
 
+  //覆蓋local storage
+  const coverCartItems = (arr) => {
+    const readyToCartItem = arr.map((v) => {
+      return { product_id: v, count: 1 }
+    })
+    setCartItem(readyToCartItem)
+    //json轉字串 再複寫
+    localStorage.setItem('cartItem', JSON.stringify(readyToCartItem))
+    console.log(readyToCartItem)
+  }
   //拿到某會員的購物車 getCartData
 
   const getCartData = async () => {
@@ -195,8 +205,9 @@ export const ProductFunctionContextProvider = function ({ children }) {
     const res = await axios
       .get(`${GET_CART_ITEM_API}/${member_id}`)
       .then((r) => {
-        console.log(r.data)
-        setCartData(r.data.rows) //把購物車檔案新增進狀態中
+        setCartData(r.data.rows) //拉資料庫購物車 新增進狀態中
+        const itemData = r.data.rows.map((v) => v.product_id) //拉到的資料變成為儲存 product_id 的陣列
+        coverCartItems(itemData) //轉好格式{product_id,count} 轉字串 複寫localStorage
         setCarTotalRows(r.data.totalRows)
       })
       .catch((e) => console.log(e))
