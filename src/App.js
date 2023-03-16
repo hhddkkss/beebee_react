@@ -9,6 +9,7 @@ import Cart from './Cart'
 import Checkout from './Checkout'
 import DonePage from './DonePage'
 import HomePage from './Home/HomePage'
+import Articles from './Articles'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/donePage" element={<DonePage />} />
+                <Route path="/articles/:nowPage" element={<Articles />} />
               </Routes>
             </CompareContextProvider>
           </ProductFunctionContextProvider>
