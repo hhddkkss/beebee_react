@@ -1,4 +1,4 @@
-import Products from './Products'
+import Products from './Products/index'
 import MemberLogin from './MemberLogin/'
 import { AuthContextProvider } from './Contexts/AuthContext'
 import { ProductFunctionContextProvider } from './Contexts/ProductFunctionContext'

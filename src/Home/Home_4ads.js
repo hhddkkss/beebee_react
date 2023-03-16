@@ -6,7 +6,7 @@ function Home4ads() {
   const [data, setDate] = useState([])
   useEffect(() => {
     ;(async () => {
-      const r = await axios.get('http://localhost:3009/home_page/home_product')
+      const r = await axios.get('http://localhost:3003/home_page/home_product')
       console.log(r.data)
       setDate(r.data)
     })()
