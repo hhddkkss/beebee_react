@@ -1,0 +1,119 @@
+.level_area{
+    margin: 100px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.level_map{
+    position: relative;
+    width: 50%;
+}
+.level_map>img{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.ellipse_pink{
+    position: absolute;
+    width: 438px;
+    height: 438px;
+    left: calc(50% - 438px/2 - 75px);
+    top: calc(50% - 438px/2 - 51px);
+
+    background: #FFD4D9;
+    filter: blur(50px);
+}
+
+.ellipse_blue{
+    position: absolute;
+    width: 356px;
+    height: 356px;
+    left: calc(50% - 356px/2 + 41px);
+    top: calc(50% - 356px/2 + 103px);
+
+    background: rgba(95, 121, 209, 0.5);
+    filter: blur(50px)
+}
+
+.level_card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 50px;
+    gap: 30px;
+
+    width: 449px;
+    height: 518px;
+
+    background: #233A66;
+    /* orange1 */
+
+    border-width: 2px 0px;
+    border-style: solid;
+    border-color: #E59069;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+
+}
+
+.level_title{
+    width: 257px;
+height: 81px;
+display: flex;
+justify-content: center;
+align-items: center;
+
+background: #FFD686;
+border-radius: 15px;
+
+}
+
+.title_name{
+    box-sizing: border-box;
+    position: absolute;
+    width: 139px;
+    height: 44px;
+    line-height:44px ;
+    text-align: center;
+   color: #233A66;
+   border-image-source: radial-gradient(60% 60%, transparent 0px, transparent 100%, #233A66 100%);
+    border-image-slice:5;
+    border-width: 4px;
+    border-style: solid;
+
+    }
+
+.level_box{
+        width: 90%;
+      
+    }
+.level_box>label{
+        color: #F3D775;
+    }
+.level_box>div{
+    margin-top: 10px;
+    width: 100%;
+    height: 44px;
+    border: 1px solid #F3D775;
+    border-radius: 5px;
+    color: #f4f4f4;
+    line-height: 44px;
+    padding-left: 10px;
+    }
+
+
+    /* 手機版 */
+
+@media screen and (max-width: 375px ){
+
+    .level_area{
+        width: 70%;
+        margin: 0px;
+        transform: translateX(-18%);
+    }
+
+
+
+
+}

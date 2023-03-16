@@ -1,0 +1,149 @@
+.chat_area{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px 50px;
+    margin: auto;
+    gap: 10px;
+    width: 1200px;
+    height: 720px;
+    background: #FDF3EA;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+.content_area{
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 15px;
+    overflow-y: overlay;
+}
+.content_area::-webkit-scrollbar {
+    width: 7px;
+  
+}
+.content_area::-webkit-scrollbar-button {
+    background: transparent;
+    border-radius: 4px;
+}
+  
+.content_area::-webkit-scrollbar-track-piece {
+    background: transparent;
+}
+  
+.content_area::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid slategrey;
+  
+}
+  
+.content_area::-webkit-scrollbar-track {
+    box-shadow: transparent;
+}
+
+
+.chat_box{
+    width: 80%;
+   
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+
+.content_area>.official{
+     background: rgba(255, 214, 134, 0.8);
+     margin-right: auto;
+}
+.content_area>.customer{
+    background: #233A66;
+    color: #f4f4f4;
+    margin-left: auto;
+    text-align: end;
+}
+
+
+.chat_box_name{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    
+}
+
+.content_area>.customer>.chat_box_name{
+   justify-content: end;
+}
+
+.chat_avatar{
+    width: 40px;
+    height: 40px;
+    border: 2px dashed #EFB7A5;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-right: 20px;
+    
+
+}
+
+.chat_content{
+    width: 100%;
+}
+
+.common_problem_area{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.common_problem_box{
+    align-items: center;
+    padding: 5px 10px;
+    margin-right: 10px;
+    height: 35px;
+    border: 1px solid rgba(79, 79, 79, 0.8);
+    border-radius: 15px;
+}
+
+.messenger_box{
+    width: 100%;
+    position: relative;
+}
+.messenger_box>input{
+    width: 100%;
+    background-color: transparent;
+    height: 60px;
+    border: 1px solid #1D2D64;
+    border-radius: 20px;
+    padding: 10px;
+}
+.messenger_box>.btn{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+}
+
+/* 手機板 */
+
+@media screen and (max-width: 376px) {
+
+    .chat_area{
+        width: 90%;
+        padding: 10px;
+        overflow: hidden;
+ }
+    .common_problem_area{
+        width: 700px;
+    }
+
+}

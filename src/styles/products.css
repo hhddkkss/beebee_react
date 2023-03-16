@@ -438,7 +438,7 @@ header {
   top: 0;
   right: 0;
 }
-.fa-solid.fa-heart {
+.product-area .fa-solid.fa-heart {
   color: var(--orange1);
 }
 

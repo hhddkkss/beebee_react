@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Fragment } from 'react'
 import '../styles/Home.css'
 import axios from 'axios'
 
@@ -25,7 +25,7 @@ function HomeNews() {
           {data.map((v, i) => {
             console.log(v.article_pic_main)
             return (
-              <>
+              <Fragment key={v.id}>
                 <div className="col-sm-4 p-2 col-5">
                   <div className="home_news_card">
                     <div className="column">
@@ -40,11 +40,12 @@ function HomeNews() {
                     </div>
                   </div>
                 </div>
-              </>
+              </Fragment>
             )
           })}
         </div>
       </div>
+
       {/* <div className="home_news_button">
         <button className="home_news_button1"></button>
         <button className="home_news_button2"></button>

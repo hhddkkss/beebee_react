@@ -271,23 +271,9 @@ line-height: 35px;
         display: inline-block; 
       }
 
-.product_commentarea_tatal{
-    display: block;
-    text-align: center;
-    width: 100px;
-    padding: 8px 10px;
-    border: 2px solid #ccc;
-        border-radius: 3px;;}
 
-/* .input_0 {opacity: 0;} */
-.input_0 {appearance: none;}
 
-.input_0:checked+.product_commentarea_tatal {
-    border-color: #E59069;}
 
-.input_0:disabled+.product_commentarea_tatal {
-background: #eee;
-color: #999;}
 
 
 
@@ -347,6 +333,65 @@ border-radius: 3px;} */
 
 
 }
+
+/* .product_commentarea_tatal{
+    display: block;
+    text-align: center;
+    width: 100px;
+    padding: 8px 10px;
+    border: 2px solid #ccc;
+        border-radius: 3px;;} */
+
+/* 分留言按鈕 */
+.product_commentarea_tatal {
+    color: #4f4f4f;
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s;
+    border: none;
+    width: 115px;
+    text-align: center;
+  }
+  .product_commentarea_tatal::after {
+    width: 100%;
+    height: 100%;
+    content: "";
+    border: 2px solid #ccc;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -2;
+    border-radius: 3px;
+  }
+  .product_commentarea_tatal:focus:before {
+    width: 100%;
+    
+  }
+  .product_commentarea_tatal:focus{
+    color: #fff;
+  }
+  .product_commentarea_tatal::before {
+    content: "";
+    width: 0%;
+    height: 100%;
+    background-color: #062d7ab2;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.3s;
+    border-radius: 3px;
+  }
+  .product_commentarea_tatal:hover {
+    color: #fff;
+  }
+  .product_commentarea_tatal:hover:before {
+    width: 100%;
+  }
 
 
 /* 手機板 */

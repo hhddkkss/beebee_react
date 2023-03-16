@@ -85,8 +85,8 @@ function HomePage() {
       </div>
       <HomeNews />
       <HomeMap />
-      <div class="home_end">
-        <div class="home_end_word">
+      <div className="home_end">
+        <div className="home_end_word">
           星期一至星期五(正常上班日) :AM 8:30 至 PM 20:00
           <br />
           非服務時間請在語音留言或官網登記，我們將於服務時間盡速與您聯繫其它服務時間如有異動請詳見官網公告,
@@ -97,59 +97,56 @@ function HomePage() {
           (行動電話請改撥 (02) 2567-3456)
         </div>
         <br />
-        <div class="row home_end_button g-0 w-100">
-          <div class="col-1">
-            <button class="home_end_button1">常見問題</button>
+        <div className="row home_end_button g-0 w-100">
+          <div className="col-1">
+            <button className="home_end_button1">常見問題</button>
           </div>
-          <div class="col-2">
-            <button class="home_end_button2">聯絡我們</button>
+          <div className="col-2">
+            <button className="home_end_button2">聯絡我們</button>
           </div>
-          <div class="home_end_button3 col-8">
+          <div className="home_end_button3 col-8">
             <p>版權所有©2009-2023 BEEbeE。</p>
           </div>
         </div>
       </div>
 
-      <nav class="mobile_nav navbar-fixed-bottom d-sm-none">
-        <div class="row g-0">
-          <div class="col-3">
-            <div class="mobile_navcol">
-              <p class="m-0">
-                <i class="fa-solid fa-house-chimney"></i>
+      <nav className="mobile_nav navbar-fixed-bottom d-sm-none">
+        <div className="row g-0">
+          <div className="col-3">
+            <div className="mobile_navcol">
+              <p className="m-0">
+                <i className="fa-solid fa-house-chimney"></i>
               </p>
-              <p class="mobile_word">首頁</p>
+              <p className="mobile_word">首頁</p>
             </div>
           </div>
-          <div class="col-3">
-            <div class="mobile_navcol">
-              <p class="m-0">
-                <i class="fa-solid fa-heart"></i>
+          <div className="col-3">
+            <div className="mobile_navcol">
+              <p className="m-0">
+                <i className="fa-solid fa-heart"></i>
               </p>
-              <p class="mobile_word">收藏清單</p>
+              <p className="mobile_word">收藏清單</p>
             </div>
           </div>
-          <div class="col-3">
-            <div class="mobile_navcol">
-              <p class="m-0">
-                <i class="fa-solid fa-cart-shopping"></i>
+          <div className="col-3">
+            <div className="mobile_navcol">
+              <p className="m-0">
+                <i className="fa-solid fa-cart-shopping"></i>
               </p>
-              <p class="mobile_word">購物車</p>
+              <p className="mobile_word">購物車</p>
             </div>
           </div>
 
-          <div class="col-3">
-            <div class="mobile_navcol">
-              <p class="m-0">
-                <i class="fa-solid fa-user"></i>
+          <div className="col-3">
+            <div className="mobile_navcol">
+              <p className="m-0">
+                <i className="fa-solid fa-user"></i>
               </p>
-              <p class="mobile_word">會員</p>
+              <p className="mobile_word">會員</p>
             </div>
           </div>
         </div>
       </nav>
-
-      <script src="https://code.jquery.com/jquery.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </>
   )
 }

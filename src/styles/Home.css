@@ -363,8 +363,8 @@ top:32%}
 
 .home_ad4_img{object-fit: cover;
 width: 100%;
-margin-left:300px;
-aspect-ratio: 1/1;
+margin-left:250px;
+aspect-ratio: 1/0.9;
 object-fit: contain;}
 
 @media screen and (max-width: 375px) {
@@ -461,8 +461,9 @@ margin-top: -4%;}
 
 .home_ad6_div{width: 100%;}
 .home_ad6_img{object-fit: cover;
-        width: 100%;
-        aspect-ratio: 1/0.7;
+        width: 70%;
+        aspect-ratio: 1/1;
+        margin-left:50px;
     }
     .home_word_div{height: 50%;}
 
@@ -480,6 +481,7 @@ margin-right: 10%;}
 left:20px}
 .home_ad6_img{width: 100%;
     aspect-ratio: 1/1;
+    margin-left:0px;
 }
 }
 
@@ -492,8 +494,6 @@ background-size: cover;
 position: relative;
 margin-top: 50px;
 }
-
-
 
 .home_show_issue{
     font-size: 60px;

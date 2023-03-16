@@ -20,11 +20,12 @@ export const AuthContextProvider = function ({ children }) {
     authorized: false,
     memberId: 0,
     memberEmail: '',
+    memberName:'',
     token: '',
   }
   let initAuth = { ...unAuth }
 
-  const str = localStorage.getItem('myAuth')
+  const str = localStorage.getItem('beebeeMemberAuth')
   try {
     if (str) {
       const localAuth = JSON.parse(str)
@@ -33,6 +34,7 @@ export const AuthContextProvider = function ({ children }) {
           authorized: true,
           memberId: localAuth.memberId,
           memberEmail: localAuth.memberEmail,
+          memberName: localAuth.memberName,
           token: localAuth.token,
         }
       }
@@ -41,16 +43,17 @@ export const AuthContextProvider = function ({ children }) {
 
   const [memberAuth, setMemberAuth] = useState(initAuth)
   const [navbarType, setNavbarType] = useState('light')
+  const [memberBoxToggle, setMemberBoxToggle] = useState(false)
 
   const Logout = () => {
-    localStorage.removeItem('myAuth')
+    localStorage.removeItem('beebeeMemberAuth')
     setMemberAuth(unAuth)
-    navigate('/')
+    // navigate('/')
   }
 
   return (
     <AuthContext.Provider
-      value={{ memberAuth, setMemberAuth, Logout, navbarType, setNavbarType }}
+      value={{ memberAuth, setMemberAuth, Logout, navbarType, setNavbarType,memberBoxToggle,setMemberBoxToggle }}
     >
       {/* value才是預設值 */}
       {children}
