@@ -219,10 +219,28 @@ form {
   width: 176px;
 }
 
+/* 消除數字內建的箭頭 */
+/* Chrome, Safari, Edge, Opera */
+.payment-form input::-webkit-outer-spin-button,
+.payment-form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.payment-form input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 /** 信用卡 */
 .credit-card {
-  padding-top: 200px;
   position: relative;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .credit-card-front {

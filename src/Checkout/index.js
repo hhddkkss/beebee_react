@@ -513,8 +513,12 @@ function Checkout() {
 
           {/* <!-- 標語 --> */}
 
-          <CheckoutRightLogin />
-          <CheckoutRight />
+          {localStorage.getItem('myAuth') &&
+          JSON.parse(localStorage.getItem('myAuth')).memberId ? (
+            <CheckoutRightLogin />
+          ) : (
+            <CheckoutRight />
+          )}
 
           <div className="bottom-slogan">
             <svg

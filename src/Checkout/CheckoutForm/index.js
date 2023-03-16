@@ -4,6 +4,7 @@ import RecipientAddress from './RecipientAddress'
 import Payment from './Payment'
 import CreditCard from './CreditCard'
 import Note from './Note'
+import PaymentForm from './PaymentForm'
 
 function CheckoutForm() {
   return (
@@ -12,7 +13,8 @@ function CheckoutForm() {
         <RecipientInfo />
         <RecipientAddress />
         <Payment />
-        <CreditCard />
+        {/* <CreditCard /> */}
+        <PaymentForm />
         <Note />
       </form>
     </>
