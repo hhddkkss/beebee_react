@@ -51,6 +51,12 @@ function CartItem() {
 
     console.log(quantity, 'minus')
 
+    if (quantity === 1) {
+      setShowRemove(true)
+      setProductsSid(sid)
+      return
+    }
+
     try {
       const res = await axios.put(`${MINUS_CART_QUANTITY}/${sid}`, {
         sid: sid,

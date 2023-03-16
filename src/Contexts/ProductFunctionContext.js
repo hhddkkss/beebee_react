@@ -196,7 +196,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
   //算出總價
   const totalPrice = cartData
     .map((v) => (v.product_price - 1000) * v.quantity)
-    .reduce((a, c) => a + c)
+    .reduce((a, c) => a + c, 0)
   //拿到某會員的購物車 getCartData
 
   const getCartData = async () => {
