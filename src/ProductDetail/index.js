@@ -8,7 +8,7 @@ import Navbar from '../component/Navbar'
 import { PRODUCT_DETAIL_API } from '../component/LoginApi'
 import axios from 'axios'
 import ProductDetailsBasic from './ProductDetailsBasic'
-import PriductDetailComments from './PriductDetailComments'
+import PruductDetailComments from './PruductDetailComments'
 import ProductCompare from '../component/ProductCompare'
 import CompareListButton from '../Products/CompareListButton'
 
@@ -58,7 +58,7 @@ function ProductDetail(props) {
       />
       <ProductDetailsBasic p_detailData={p_detailData} />
 
-      <PriductDetailComments p_detailData={p_detailData}/>
+      <PruductDetailComments p_detailData={p_detailData}/>
 
  
     </>

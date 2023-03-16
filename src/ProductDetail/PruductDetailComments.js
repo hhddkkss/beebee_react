@@ -4,7 +4,7 @@ import Rating from '@mui/material/Rating'
 
 
 
-function PriductDetailComments({p_detailData}) {
+function PruductDetailComments({p_detailData}) {
 
     const averageStar = ()=>{
          let all = 0
@@ -149,7 +149,7 @@ function PriductDetailComments({p_detailData}) {
                   <div className="col-2 product_memeber">
                     <img
                       className="comment_card_avatar"
-                      src="https://teameowdev.files.wordpress.com/2016/04/avatar24-01.png?w=640"
+                      src={'/images/'+v.member_pic}
                       alt="member"
                     />
                   </div>
@@ -172,4 +172,4 @@ function PriductDetailComments({p_detailData}) {
   )
 }
 
-export default PriductDetailComments
+export default PruductDetailComments
