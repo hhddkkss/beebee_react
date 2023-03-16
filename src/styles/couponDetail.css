@@ -1,0 +1,73 @@
+.coupon_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 730px;
+   
+}
+
+.coupon_box_detail{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    
+    
+}
+.coupon_box_detail>thead{
+    width: 20%;
+}
+.coupon_box_detail>tbody{
+    width: 75%;
+    height: 100%;
+    border-width: 2px 0px;
+    border-style: solid;
+    border-color: #F3D775;
+    padding-left: 30px;
+}
+.coupon_box_detail>thead>tr{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: start;
+    background-color:#1D2D64;
+    color: #F4F4F4;
+    gap: 40px;
+    
+
+}
+.coupon_box_detail>tbody>tr{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    height: 100%;
+    width: 100%;
+    gap: 40px;
+    justify-content: start;
+    padding-left: 30px;
+    
+}
+.member_bill_detail>thead>tr>th:first-child,.member_bill_detail>tbody>tr>td:first-child{
+    height: 100px;
+}
+
+.member_shipping_detail>thead>tr>th:first-child,.member_shipping_detail>tbody>tr>td:first-child{
+    height: 130px;
+}
+.coupon_legle{
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 20px;
+    color: #4F4F4F;
+}
+
+.comment_all{
+    padding: 20px 10px;
+    gap: 10px;
+    width: 80%;
+    border: 0.5px solid #000000;
+    border-radius: 15px;
+    }

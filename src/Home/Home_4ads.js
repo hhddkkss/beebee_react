@@ -26,7 +26,7 @@ function Home4ads() {
   return (
     <>
       {data.length > 0 ? (
-        <Fragment>
+        <Fragment key={data.product_total}>
           <div className="container p-0">
             <div className="row g-0 my-2">
               <div className="col-4">
