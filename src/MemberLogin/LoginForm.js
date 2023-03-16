@@ -84,13 +84,14 @@ function LoginForm(props) {
             //登入送去API
             axios.post(LOGIN, { ...loginForm }).then((response) => {
               if (response.data.success) {
-                const { memberEmail, memberId, token } = response.data
+                const { memberEmail, memberId,memberName, token } = response.data
                 //setLocalStorage
                 localStorage.setItem(
-                  'myAuth',
+                  'beebeeMemberAuth',
                   JSON.stringify({
                     memberId,
                     memberEmail,
+                    memberName,
                     token,
                   })
                 )
@@ -101,6 +102,7 @@ function LoginForm(props) {
                   authorized: true,
                   memberId: memberId,
                   memberEmail: memberEmail,
+                  memberName:memberName,
                   token: token,
                 })
                 //console.log(memberAuth)

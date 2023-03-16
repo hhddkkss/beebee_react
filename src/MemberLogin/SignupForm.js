@@ -309,10 +309,11 @@ function SignipForm(props) {
                     const { success, data, token } = response.data
                     //setLocalStorage
                     localStorage.setItem(
-                      'myAuth',
+                      'beebeeMemberAuth',
                       JSON.stringify({
                         memberId: data.sid,
                         memberEmail: data.email,
+                        memberName:data.name,
                         token,
                       })
                     )
