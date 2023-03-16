@@ -33,7 +33,6 @@ export const ProductFunctionContextProvider = function ({ children }) {
     const dev = 'http://localhost:3003/cart'
     const aaron = 'http://localhost:3030/cart'
 
-    
     await axios
       .post(dev, {
         member_id: 1,
@@ -193,6 +192,11 @@ export const ProductFunctionContextProvider = function ({ children }) {
     localStorage.setItem('cartItem', JSON.stringify(readyToCartItem))
     console.log(readyToCartItem)
   }
+
+  //算出總價
+  const totalPrice = cartData
+    .map((v) => (v.product_price - 1000) * v.quantity)
+    .reduce((a, c) => a + c)
   //拿到某會員的購物車 getCartData
 
   const getCartData = async () => {
@@ -244,10 +248,10 @@ export const ProductFunctionContextProvider = function ({ children }) {
         getCartData,
         cartData,
         setCartData,
-        getCartData,
         cartTotalRows,
         showRemove,
         setShowRemove,
+        totalPrice,
       }}
     >
       {children}

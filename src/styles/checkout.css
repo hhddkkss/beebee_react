@@ -373,7 +373,7 @@ form {
   background-color: var(--bgGray);
   width: 35%;
 }
-.checkout-right p {
+.checkout-right {
   color: var(--textColorWhite);
 }
 .checkout-item-card {
@@ -454,19 +454,10 @@ form {
   position: relative;
 }
 
-.checkout-item .img-wrap .amount {
-  width: 20px;
-  height: 20px;
-  background-color: var(--deepBlue);
-  border-radius: 50%;
-  font-size: 14px;
-  color: #fff;
-  /* 置中用 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.err-msg {
+  padding-left: 1rem;
+  color: rgb(220, 72, 72);
 }
-
 .checkout-item-info {
   width: 100%;
   display: flex;

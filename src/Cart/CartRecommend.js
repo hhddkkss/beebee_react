@@ -11,7 +11,7 @@ function CartRecommend() {
     for (let i = 0; i < 5; i++) {
       NumArray.push(Math.ceil(Math.random() * 311))
     }
-
+    console.log(NumArray, '隨機數')
     return NumArray
   }
   const [recommend, setRecommend] = useState(getRandomNum())

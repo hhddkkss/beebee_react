@@ -43,7 +43,7 @@ const PaymentForm = () => {
           cvc={state.cvc}
           name={state.name}
           focused={state.focus}
-          callback={(...a) => console.log(a)}
+          // callback={(...a) => console.log(a)}
         />
         <div className="field-wrap">
           <input
@@ -76,14 +76,14 @@ const PaymentForm = () => {
           <input
             type="expiry"
             name="expiry"
-            placeholder="ex: 03/25"
+            placeholder="year/month"
             value={state.expiry}
             onChange={handleInputChange}
             onFocus={handleInputFocus}
             className="form-input"
             autoComplete="off"
           />
-          <label className="form-label">到期日</label>
+          <label className="form-label">到期年</label>
         </div>
         <div className="field-wrap">
           <input
