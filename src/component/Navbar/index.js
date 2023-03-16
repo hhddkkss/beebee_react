@@ -5,11 +5,12 @@
 //3: useEffect(()=<{setNavbarType('白的話是light；深藍的話是dark')},[])
 
 import AuthContext from '../../Contexts/AuthContext'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect,useRef } from 'react'
 import './../../styles/Navbar.css'
 import './../../styles/m-navbar.css'
 import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
 import { useLocation, useNavigate } from 'react-router-dom'
+import NavbarMemberBox from './NavbarMemberBox'
 
 function Navbar() {
   const navigation = useNavigate()
@@ -23,14 +24,30 @@ function Navbar() {
     cartItemPId,
   } = useContext(ProductFunctionContext)
 
-  const { navbarType } = useContext(AuthContext)
+  const { navbarType,memberAuth,memberBoxToggle,setMemberBoxToggle,Logout  } = useContext(AuthContext)
+  const memberBoxRef = useRef(null)
+  const memberIconRef = useRef(null)
 
   // const myCartItem = cartItem || []
   // const cartItemPId = myCartItem.map((v) => v.product_id)
 
+  //點畫面其他區域會使會員區消失
+  function handleOutMemberBox(event) {
+    if (
+      memberBoxRef.current &&
+      !memberIconRef.current.contains(event.target)
+    ) {
+      setMemberBoxToggle(false)
+    }else{
+      setMemberBoxToggle(true)
+    }
+  }
+
   useEffect(() => {
     getProductData()
+    document.addEventListener('click', handleOutMemberBox)
   }, [])
+  console.log(memberBoxRef,memberIconRef);
   return (
     <>
       <header>
@@ -84,14 +101,17 @@ function Navbar() {
             </div>
           </div>
           <div className="nav_top">
-          {localStorage.getItem('myAuth') && JSON.parse(localStorage.getItem('myAuth')).token ?
-            <button className="btn member"
-            onClick={() => {
-                  navigation('/member_page')
+         
+            <button
+            ref={memberIconRef}
+            className="btn member"
+            onClick={(e) => {
+              e.preventDefault()
+              // setMemberBoxToggle(!memberBoxToggle)
                 }}
             >
               <svg
-                width="24"
+                width="24" 
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -111,33 +131,7 @@ function Navbar() {
                   strokeLinejoin="round"
                 />
               </svg>
-            </button>:<button className="btn member"
-            onClick={() => {
-                  navigation('/member_login')
-                }}
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="black"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>}
+            </button>
 
 
 
@@ -263,6 +257,11 @@ function Navbar() {
             </a>
           </div>
         </div>
+
+      <NavbarMemberBox memberBoxRef={memberBoxRef}/>
+
+
+       
       </header>
     </>
   )
