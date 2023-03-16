@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Cards from 'react-credit-cards-2'
 import 'react-credit-cards-2/es/styles-compiled.css'
 
-const PaymentForm = () => {
+const PaymentForm = ({ inputs, setInputs, handleChange, handleSubmit }) => {
   const [state, setState] = useState({
     number: '',
     expiry: '',
