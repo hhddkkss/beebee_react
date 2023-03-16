@@ -13,8 +13,11 @@ function Home4ads() {
       })
   }
   useEffect(() => {
-    console.log('A01', data)
-    geHometData()
+    ;(async () => {
+      const r = await axios.get('http://localhost:3003/home_page/home_product')
+      console.log(r.data)
+      setDate(r.data)
+    })()
   }, [])
   useEffect(() => {
     console.log('A02', data.length)
