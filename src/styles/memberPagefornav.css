@@ -1,0 +1,10 @@
+.member_body_nav{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 20px;
+    width: 475px;
+    height: 1000px;
+   
+}

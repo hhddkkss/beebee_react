@@ -84,6 +84,27 @@ function HomePage() {
         </button>
       </div>
       <HomeNews />
+      <div class="row home_wecare g-0">
+        <div class="col-6 p-0">
+          <div class="home_wecare_left_picture">
+            <div class="home_wecare_left_word">WE CARE !</div>
+            <div class="home_wecare_left_word2">
+              我們在乎每一位客人，
+              <br />
+              在乎每一個想法，
+              <br />
+              我們只想給您最好的，
+              <br />
+              相信您的選擇，
+              <br />
+              最好的都在BEEbeE。
+            </div>
+          </div>
+        </div>
+        <div class="col-6 p-0 d-none d-sm-block">
+          <div class="home_wecare_right"></div>
+        </div>
+      </div>
       <HomeMap />
       <div className="home_end">
         <div className="home_end_word">
