@@ -191,7 +191,7 @@ function ProductDetailsBasic({ p_detailData }) {
                           handleAddOrDeleteCart(v.product_id, productCount)
                           if(memberAuth.memberId!==0){
                           axios.post(PRODUCT_DETAIL_ADD_CART_API,{
-                            memberId:memberAuth.memverId,
+                            memberId:memberAuth.memberId,
                             productId:v.product_id,
                             count:productCount
                             }).then((res)=>{
