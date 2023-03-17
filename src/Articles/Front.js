@@ -2,9 +2,11 @@ import React,{useState,useEffect} from 'react'
 import {GET_FRONT_ARTICLES } from '../component/LoginApi'
 import axios from 'axios'
 import Dayjs from 'dayjs'
+import { useLocation, useParams,useNavigate } from 'react-router-dom'
+
 
 function Front({hashtagColor,frontData}) {
-
+    const navigation = useNavigate()
     
 
 
@@ -21,7 +23,7 @@ function Front({hashtagColor,frontData}) {
                         </svg>
                     </div>
                     <div className="description article_mb_hidden">為網友提供專業的最新時事動態，為您提供最新、最完整的時事報導。</div>
-                    <img src={"/images/article/article_orange.png"} alt="" className="article_mb_hidden"/>
+                    <img  src={"/images/article/article_orange.png"} alt="" className="article_mb_hidden"/>
                 </div>
 
                 <div className="latest_article">
@@ -46,7 +48,7 @@ function Front({hashtagColor,frontData}) {
                             </div>
                         </div>
                     </div>
-                    <img src={'/images/article/'+frontData[0].article_pic_main} alt=""/>
+                    <img onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[0].article_id)}} src={'/images/article/'+frontData[0].article_pic_main} alt=""/>
                 </div>
 
             </div>
@@ -65,7 +67,7 @@ function Front({hashtagColor,frontData}) {
 
                 <div className="latest_article">
                     
-                    <img src={'/images/article/'+frontData[1].article_pic_main} alt=""/>
+                    <img onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[1].article_id)}} src={'/images/article/'+frontData[1].article_pic_main} alt=""/>
                     <div className="article">
                         <div className="title">{frontData[1].title}</div>
                         <div className="content article_mb_hidden">{frontData[1].content_1}</div>
@@ -129,7 +131,7 @@ function Front({hashtagColor,frontData}) {
                             </div>
                         </div>
                     </div>
-                    <img src={'/images/article/'+frontData[2].article_pic_main}alt=""/>
+                    <img onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[2].article_id)}} src={'/images/article/'+frontData[2].article_pic_main}alt=""/>
                 </div>
 
             </div>
