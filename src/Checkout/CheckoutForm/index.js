@@ -8,7 +8,7 @@ import PaymentForm from './PaymentForm'
 
 function CheckoutForm({ inputs, setInputs, handleChange, handleSubmit }) {
   //確認付款方式狀態
-  const [paymentMethod, setPaymentMethod] = useState(0)
+  const [paymentMethod, setPaymentMethod] = useState('')
 
   //checkout error msg
 
@@ -43,7 +43,7 @@ function CheckoutForm({ inputs, setInputs, handleChange, handleSubmit }) {
           setPaymentMethod={setPaymentMethod}
         />
         {/* <CreditCard /> */}
-        {paymentMethod === 1 ? (
+        {paymentMethod === '1' ? (
           <PaymentForm
             inputs={inputs}
             setInputs={setInputs}
