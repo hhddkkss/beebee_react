@@ -433,12 +433,12 @@ header {
 .card-bottom svg {
   cursor: pointer;
 }
-.product-area .fa-heart {
+.product-area .fa-solid.fa-heart {
   position: absolute;
   top: 0;
   right: 0;
 }
-.product-area .fa-solid.fa-heart {
+.product-area .fa-solid.fa-heart.active {
   color: var(--orange1);
 }
 

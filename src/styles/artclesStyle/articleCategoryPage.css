@@ -1,0 +1,222 @@
+.article_page{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1440px;
+    margin: auto;
+}
+
+.articles_container{
+   width: 78%;
+   display: flex;
+   flex-direction: column;
+   gap: 30px;
+   margin-bottom: 30px;
+   margin-top: 10px;
+}
+
+.article_like_button{
+    padding: 0;
+    margin-left:auto ;
+    margin-right: 5px;
+    background-color: transparent;
+    border: none;
+}
+
+.articles_container>.latest_article>img{
+    width: 60%;
+}
+.articles_container>.latest_article>.article{
+    width: 40%;
+    margin-right: 30px;
+}
+.articles_container>.latest_article>.article>.content{
+    margin-top: 30px;
+    height: 300px;
+    -webkit-line-clamp: 12;}
+
+.artcles_area{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap:30px ;
+    margin-top: 30px;
+}
+
+.article_control_btn{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+}
+.article_control_btn>div>select{
+    border: none;
+}
+
+.artcles_area>.article_list{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+
+}
+.article_card{
+    width: 30%;
+}
+.article_card>img{
+    width: 100%;
+    aspect-ratio: 3.3/2;
+    object-fit: cover;
+}
+.article_card>.article{
+    width: 100%;
+}
+
+.article_card>.article>.title{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.latest_article>.article>.title{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.latest_article>.article>.title>span{
+    width: 80%;
+   
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+}
+
+.article_card>.article>.title>span{
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    font-size: 22px;
+    line-height: 24px;   
+    
+}
+.article_side_bar{
+    margin-top: 10px;
+    width: 18%;
+}
+.category_side_title{
+    width:100% ;
+    height: 464px;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    padding:50px 5px  ;
+    position: relative;
+}
+
+.article_side_bar>.news{
+    background-color:#E59069
+}
+.article_side_bar>.reccomend{
+    background-color:#233A66
+}
+.article_side_bar>.review {
+    background-color:#EFB7A5
+}
+
+.article_side_bar>.category_side_title>.title{
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 111%;
+    
+}
+
+.article_side_bar>.category_side_title>.dashed_logo{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.suggest_articles{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 60px;
+    
+}
+
+.suggest_articles>.title{
+    width: 100%;
+    padding: 10px;
+    border-bottom:1px solid #4f4f4f ;
+    font-size: 15px;
+    line-height: 15px;
+    text-align: center;
+    letter-spacing: 0.075em;
+    color: #4F4F4F;
+}
+.suggest_articles>.suggest_articles_card{
+    width: 100%;
+    position: relative;
+    
+}
+.suggest_articles>.suggest_articles_card>.articleTitle{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 111%;
+    color: #000000;
+    margin-bottom: 15px;
+    width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+}
+.suggest_articles>.suggest_articles_card>.articleWritter{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    
+}
+.suggest_articles>.suggest_articles_card>.articleWritter>img{
+    width: 30px;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+
+}
+
+.suggest_articles>.suggest_articles_card>img{
+    height: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+@media screen and (max-width: 376px) {
+
+    .article_page{
+        width: 100%;
+    }
+    .articles_container{
+        width: 100%;
+    }
+    .artcles_area>.article_list{
+        flex-direction: column;
+    }
+    .article_card{
+        width: 100%;
+    }
+    .article_card>.article {
+   padding: 5px;
+   
+    }
+    
+}

@@ -15,6 +15,8 @@ import MemberCoupon_List from './MemberPage/MemberCoupon_List'
 import MemberShopping_List from './MemberPage/MemberShopping_List'
 import MemberLevel from './MemberPage/MemberLevel'
 import MemberCustomerService from './MemberPage/MemberCustomerService'
+import Articles from './Articles'
+
 function App() {
   return (
     <>
@@ -46,6 +48,8 @@ function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/donePage" element={<DonePage />} />
+                <Route path="/articles/:nowPage" element={<Articles />} />
+                <Route path="/articles/:nowPage/:article_id" element={<Articles />} />
               </Routes>
             </CompareContextProvider>
           </ProductFunctionContextProvider>

@@ -11,7 +11,7 @@ function CartRecommend() {
     for (let i = 0; i < 5; i++) {
       NumArray.push(Math.ceil(Math.random() * 311))
     }
-
+    console.log(NumArray, '隨機數')
     return NumArray
   }
   const [recommend, setRecommend] = useState(getRandomNum())
@@ -28,6 +28,8 @@ function CartRecommend() {
     handleAddOrDeleteCompared,
     cartItem,
     handleAddOrDeleteCart,
+    addToCartTable,
+    getCartData,
   } = useContext(ProductFunctionContext)
 
   return (
@@ -136,15 +138,22 @@ function CartRecommend() {
                             ) ? (
                               <i
                                 className="fa-solid fa-cart-shopping active"
-                                onClick={() => {
-                                  handleAddOrDeleteCart(v.product_id, 1)
+                                onClick={async () => {
+                                  //寫進localStorage
+                                  await handleAddOrDeleteCart(v.product_id)
+                                  //寫到資料庫
+                                  await addToCartTable()
+                                  //從資料庫拿購物車
+                                  await getCartData()
                                 }}
                               ></i>
                             ) : (
                               <i
                                 className="fa-solid fa-cart-shopping"
-                                onClick={() => {
-                                  handleAddOrDeleteCart(v.product_id, 1)
+                                onClick={async () => {
+                                  await handleAddOrDeleteCart(v.product_id)
+                                  await addToCartTable()
+                                  await getCartData()
                                 }}
                               ></i>
                             )}

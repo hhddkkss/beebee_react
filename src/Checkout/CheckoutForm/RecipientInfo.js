@@ -1,6 +1,6 @@
 import React from 'react'
 
-function RecipientInfo() {
+function RecipientInfo({ inputs, setInputs, handleChange, handleSubmit }) {
   return (
     <>
       <div className="form-border recipient-info">
@@ -10,57 +10,69 @@ function RecipientInfo() {
           <div className="field-wrap">
             <input
               type="text"
-              id="last-name"
               autoComplete="off"
-              name="last-name"
+              name="lastName"
               placeholder=" "
               className="form-input"
+              value={inputs.lastName || ''}
+              onChange={(e) => {
+                handleChange(e)
+              }}
             />
-            <label htmlFor="last-name" className="form-label">
-              姓
-            </label>
+            <label className="form-label">姓</label>
           </div>
+
           <div className="field-wrap">
             <input
               type="text"
-              id="first-name"
-              name="first-name"
+              name="firstName"
               autoComplete="off"
               className="form-input"
               placeholder=" "
+              value={inputs.firstName || ''}
+              onChange={(e) => {
+                handleChange(e)
+              }}
             />
-            <label htmlFor="first-name" className="form-label">
-              名
-            </label>
+
+            <label className="form-label">名</label>
           </div>
+          <span className="checkout-error">456</span>
         </div>
 
         <div className="field-wrap">
           <input
             type="text"
-            id="mobile"
             autoComplete="off"
             name="mobile"
             className="form-input"
             placeholder=" "
+            maxLength={10}
+            value={inputs.mobile || ''}
+            onChange={(e) => {
+              handleChange(e)
+            }}
           />
           <label htmlFor="mobile" className="form-label">
             手機號碼
           </label>
+          <span className="checkout-error">456</span>
         </div>
 
         <div className="field-wrap">
           <input
             type="email"
-            id="email"
             name="email"
             autoComplete="off"
             className="form-input"
             placeholder=" "
+            value={inputs.email || ''}
+            onChange={(e) => {
+              handleChange(e)
+            }}
           />
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
+          <label className="form-label">Email</label>
+          <span className="checkout-error">456</span>
         </div>
       </div>
     </>

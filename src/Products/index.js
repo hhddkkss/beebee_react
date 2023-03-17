@@ -29,7 +29,7 @@ function Products() {
     perPage,
     setPerPage,
     pageTotal,
-    setPageTotal
+    setPageTotal,
   } = useContext(ProductFunctionContext)
   const {
     compareListClass,
@@ -44,21 +44,7 @@ function Products() {
     setNavbarType('dark')
   }, [])
 
-  
-  //輪播牆
-  // const carouselRef = useRef(null)
-
-  // const [movement, setMoveMent] = useState(0)
-  //開關
   const [toggleSortList, setToggleSortList] = useState(false)
-  // const [toggleCartButton, setToggleCartButton] = useState(false)
-
- 
-
-  // //比較列表顯示className
-  // const [compareListClass, setCompareListClass] = useState(
-  //   'compare_list_box d-none'
-  // )
 
   // //比較區顯示className
   // const [compareIngClass, setCompareIngClass] = useState(
@@ -67,39 +53,6 @@ function Products() {
   // //比價列表顯現按鈕
   // const popCompareBtn = useRef(null)
 
-
- //收藏
-  // let initFavorites = []
-  // try {
-  //   initFavorites = JSON.parse(localStorage.getItem('favorites')) || []
-  // } catch (ex) {}
-  // const [favorites, setFavorite] = useState(initFavorites)
-
-  // //加入購物車
-  // let initCart = []
-  // try {
-  //   initCart = JSON.parse(localStorage.getItem('cartItem')) || []
-  // } catch (ex) {}
-
-  // const [cartItem, setCartItem] = useState(initCart)
-
-  //寫入購物車
-  // const addToCartTable = async () => {
-  //   const dev = 'http://localhost:3003/cart'
-  //   const aaron = 'http://localhost:3030/cart'
-
-  //   await axios
-  //     .post(dev, {
-  //       member_id: 1,
-  //       product_id: JSON.parse(localStorage.getItem('cartItem')).map(
-  //         (v) => v.product_id
-  //       ),
-  //     })
-  //     .then((res) => console.log(res))
-  //     .catch((e) => console.log(e))
-  // }
-  //產品
-  // const [products, setProducts] = useState([])
   //品牌
   const [brand, setBrand] = useState('')
   //排序
@@ -109,18 +62,6 @@ function Products() {
   const [inputText, setInputText] = useState('')
   //產品分類
   const [productType, setProductType] = useState(4)
-  //比較列表
-  // let initComparedList = []
-
-  // try {
-  //   initComparedList = JSON.parse(localStorage.getItem('comparedList')) || []
-  // } catch (ex) {}
-  // const [comparedList, setComparedList] = useState(initComparedList)
-  //分頁用
-
-  // const [pageNow, setPageNow] = useState(1) //預設第一頁
-  // const [perPage, setPerPage] = useState(25) // 一頁25個
-  // const [pageTotal, setPageTotal] = useState(0) // 預設總筆數是0
 
   //卡片樣式切換
   const [cardType, setCardType] = useState(1)
@@ -128,18 +69,6 @@ function Products() {
   //呈現用的資料
 
   const [productsDisplay, setProductsDisplay] = useState([])
-
-  // const carouselMove = () => {
-  //   setTimeout(() => {
-  //     setMoveMent(movement + 1)
-
-  //     if (movement === 3) {
-  //       setMoveMent(1)
-  //     }
-  //   }, 3500)
-
-  //   carouselRef.current.style.transform = `translateX(${-movement * 100}vw)`
-  // }
 
   const sortOption = ['上架時間:最新(預設)', '價格:由高到低', '價格:由低至高']
 
@@ -149,17 +78,6 @@ function Products() {
     if (productType === 3) return '耳機'
     if (productType === 4) return '全部商品'
   }
-
-  // const getProductData = async () => {
-  //   //記得修改port
-  //   const dev = 'http://localhost:3003'
-  //   const res = await axios.get(dev + '/products/pd_api')
-  //   const initialData = res.data.map((v, i) => {
-  //     return { ...v, isLiked: false, isCompared: false }
-  //   })
-  //   console.log(initialData)
-  //   setProducts(initialData)
-  // }
 
   //加入收藏(外觀)
   const toggleLiked = (arr, product_id) => {
@@ -248,21 +166,6 @@ function Products() {
         return arr.map((v) => v)
     }
   }
-
-  //收藏商品
-  // const handleAddOrDeleteFavorite = (product_id) => {
-  //   const hasFavorite = favorites && favorites.includes(product_id)
-
-  //   if (hasFavorite) {
-  //     const newFavorites = [...favorites].filter((v) => v !== product_id)
-  //     setFavorite(newFavorites)
-  //     localStorage.setItem('favorites', JSON.stringify(newFavorites))
-  //   } else {
-  //     const newFavorites = [...favorites, product_id]
-  //     setFavorite(newFavorites)
-  //     localStorage.setItem('favorites', JSON.stringify(newFavorites))
-  //   }
-  // }
 
   //加入購物車
   // const handleAddOrDeleteCart = (product_id, count) => {
@@ -371,7 +274,7 @@ function Products() {
 
       {/* <!-- 輪播牆 --> */}
 
-      <Carousel  />
+      <Carousel />
 
       {/* <!-- 手機版商品類別 --> */}
 
@@ -419,7 +322,6 @@ function Products() {
           />
         </section>
       </div>
-
       <CompareListButton
         // comparedList={comparedList}
         setCompareListClass={setCompareListClass}

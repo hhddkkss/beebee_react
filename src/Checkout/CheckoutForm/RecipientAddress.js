@@ -1,6 +1,11 @@
 import React from 'react'
 
-function RecipientAddress() {
+function RecipientAddress({ inputs, setInputs, handleChange, handleSubmit }) {
+  //城市
+  const cities = async () => {}
+  //區
+  const disc = async () => {}
+
   return (
     <>
       <div className="form-border recipient-address">
@@ -9,65 +14,80 @@ function RecipientAddress() {
         <div className="field-wrap">
           <input
             type="text"
-            id="mobile"
             autoComplete="off"
-            name="mobile"
+            name="country"
             className="form-input"
             placeholder=" "
-            value="台灣"
+            value={inputs.country || '台灣'}
+            onChange={(e) => {
+              handleChange(e)
+            }}
             readOnly
           />
-          <label htmlFor="mobile" className="form-label">
-            國家
-          </label>
+          <label className="form-label">國家</label>
         </div>
         <div className="select-field">
           <div className="field-wrap">
-            <select name="city" id="city" className="form-input">
+            <select
+              name="city"
+              className="form-input"
+              defaultValue={0}
+              onChange={(e) => {
+                handleChange(e)
+              }}
+            >
               <option value="0">請選擇</option>
               {/* <!-- <option value="1"></option> --> */}
             </select>
-            <label htmlFor="city" className="form-label">
-              縣市
-            </label>
+            <label className="form-label">縣市</label>
           </div>
           <div className="field-wrap">
-            <select name="disc" id="disc" className="form-input">
+            <select
+              name="disc"
+              className="form-input"
+              defaultValue={0}
+              onChange={(e) => {
+                handleChange(e)
+              }}
+            >
               <option value="0">請選擇</option>
               {/* <!-- <option value="1"></option> --> */}
             </select>
-            <label htmlFor="disc" className="form-label">
-              區
-            </label>
+            <label className="form-label">區</label>
           </div>
+          <span className="checkout-error">456</span>
         </div>
 
         <div className="field-wrap">
           <input
             type="text"
-            id="address"
             autoComplete="off"
             name="address"
             className="form-input"
             placeholder=" "
+            value={inputs.address}
+            onChange={(e) => {
+              handleChange(e)
+            }}
           />
-          <label htmlFor="address" className="form-label">
-            詳細地址
-          </label>
+          <label className="form-label">詳細地址</label>
+          <span className="checkout-error">456</span>
         </div>
 
         <div className="field-wrap">
           <input
             type="text"
-            id="postal-code"
-            name="postal-code"
+            name="postalCode"
             autoComplete="off"
             className="form-input"
             placeholder=" "
+            value={inputs.postalCode}
+            onChange={(e) => {
+              handleChange(e)
+            }}
           />
-          <label htmlFor="postal-code" className="form-label">
-            郵遞區號
-          </label>
+          <label className="form-label">郵遞區號</label>
+          <span className="checkout-error">456</span>
         </div>
       </div>
     </>

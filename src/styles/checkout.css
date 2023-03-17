@@ -135,6 +135,14 @@ form {
   gap: 2rem;
   margin-bottom: 2rem;
 }
+.checkout-error {
+  font-size: 12px;
+  color: #dc4848;
+  position: absolute;
+  left: 50%;
+  top: 130%;
+  transform: translate(-50%);
+}
 
 /** 標題壓線  */
 .form-title {
@@ -151,6 +159,7 @@ form {
 .name-field {
   display: flex;
   gap: 1rem;
+  position: relative;
 }
 
 .field-wrap {
@@ -195,7 +204,8 @@ form {
 }
 
 .form-input:focus {
-  outline: 2px solid rgb(10, 135, 20);
+  /* outline: 2px solid rgb(10, 135, 20); */
+  outline: 2px solid #727272;
 }
 
 /*-當input placeholder沒有顯示 也沒有focus 代表輸入過了 兄弟層label改變 */
@@ -206,10 +216,15 @@ form {
   font-size: 10px;
 }
 
+/* .form-input[name='firstName'] {
+  outline: 2px solid red;
+} */
+
 .select-field {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+  position: relative;
 }
 .select-field select {
   width: 176px;
@@ -219,10 +234,28 @@ form {
   width: 176px;
 }
 
+/* 消除數字內建的箭頭 */
+/* Chrome, Safari, Edge, Opera */
+.payment-form input::-webkit-outer-spin-button,
+.payment-form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.payment-form input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 /** 信用卡 */
 .credit-card {
-  padding-top: 200px;
   position: relative;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .credit-card-front {
@@ -355,7 +388,7 @@ form {
   background-color: var(--bgGray);
   width: 35%;
 }
-.checkout-right p {
+.checkout-right {
   color: var(--textColorWhite);
 }
 .checkout-item-card {
@@ -436,19 +469,10 @@ form {
   position: relative;
 }
 
-.checkout-item .img-wrap .amount {
-  width: 20px;
-  height: 20px;
-  background-color: var(--deepBlue);
-  border-radius: 50%;
-  font-size: 14px;
-  color: #fff;
-  /* 置中用 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.err-msg {
+  padding-left: 1rem;
+  color: rgb(220, 72, 72);
 }
-
 .checkout-item-info {
   width: 100%;
   display: flex;
@@ -703,6 +727,7 @@ form {
     left: 10%;
     top: 70%;
   }
+
   .input-address {
     padding: 0.25rem;
   }

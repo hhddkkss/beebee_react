@@ -22,7 +22,7 @@ function ProductDetailsBasic({ p_detailData }) {
     handleAddOrDeleteCompared,
     handleAddOrDeleteFavorite,
   } = useContext(ProductFunctionContext)
-  const{memberAuth} = useContext(AuthContext)
+  const { memberAuth } = useContext(AuthContext)
 
   // 點擊圖片更換大圖url
   const changeMainPic = (e) => {
@@ -31,14 +31,14 @@ function ProductDetailsBasic({ p_detailData }) {
   }
 
   // 商品數量state
-  const [productCount,setProductCount]=useState(1)
+  const [productCount, setProductCount] = useState(1)
   //加按鈕
-  function addCount(){
-    setProductCount(productCount+1)
+  function addCount() {
+    setProductCount(productCount + 1)
   }
-   //減按鈕
-   function minusCount(){
-    setProductCount(productCount-1)
+  //減按鈕
+  function minusCount() {
+    setProductCount(productCount - 1)
   }
 
   useEffect(() => {
@@ -66,21 +66,24 @@ function ProductDetailsBasic({ p_detailData }) {
                         src={detailMainPic}
                         alt="product_picture"
                       />
-                      {localStorage.getItem('favorites') && JSON.parse(localStorage.getItem('favorites')).includes(v.product_id) ? (
-                      <i
-                        className="fa-solid fa-heart fa-xl"
-                        onClick={() => {
-                          handleAddOrDeleteFavorite(v.product_id)
-                        }}
-                      ></i>
-                    ) : (
-                      <i
-                        className="fa-regular fa-heart fa-xl"
-                        onClick={() => {
-                          handleAddOrDeleteFavorite(v.product_id)
-                        }}
-                      ></i>
-                    )}
+                      {localStorage.getItem('favorites') &&
+                      JSON.parse(localStorage.getItem('favorites')).includes(
+                        v.product_id
+                      ) ? (
+                        <i
+                          className="fa-solid fa-heart fa-xl"
+                          onClick={() => {
+                            handleAddOrDeleteFavorite(v.product_id)
+                          }}
+                        ></i>
+                      ) : (
+                        <i
+                          className="fa-regular fa-heart fa-xl"
+                          onClick={() => {
+                            handleAddOrDeleteFavorite(v.product_id)
+                          }}
+                        ></i>
+                      )}
                     </div>
                     <div className="row g-0 product_picture_little">
                       <div className="col-2 p-0">
@@ -96,44 +99,56 @@ function ProductDetailsBasic({ p_detailData }) {
                       <div className="col-2 p-0">
                         <img
                           className="product_small_pic"
-                          src={v.product_pic.split(',')[1]?'/images/' + v.product_pic.split(',')[1]:'/images/detailNoPic.png'}
+                          src={
+                            v.product_pic.split(',')[1]
+                              ? '/images/' + v.product_pic.split(',')[1]
+                              : '/images/detailNoPic.png'
+                          }
                           alt="product_picture2 product_picture_little1"
                           onClick={(e) => {
-                            v.product_pic.split(',')[1]?
-                            changeMainPic(e):''
+                            v.product_pic.split(',')[1] ? changeMainPic(e) : ''
                           }}
                         />
                       </div>
                       <div className="col-2 p-0">
                         <img
                           className="product_small_pic"
-                          src={v.product_pic.split(',')[2]?'/images/' + v.product_pic.split(',')[2]:'/images/detailNoPic.png'}
+                          src={
+                            v.product_pic.split(',')[2]
+                              ? '/images/' + v.product_pic.split(',')[2]
+                              : '/images/detailNoPic.png'
+                          }
                           alt="product_picture3"
                           onClick={(e) => {
-                            v.product_pic.split(',')[2]?
-                            changeMainPic(e):''
+                            v.product_pic.split(',')[2] ? changeMainPic(e) : ''
                           }}
                         />
                       </div>
                       <div className="col-2 p-0">
                         <img
                           className="product_small_pic"
-                          src={ v.product_pic.split(',')[3]?'/images/' + v.product_pic.split(',')[3]:'/images/detailNoPic.png'}
+                          src={
+                            v.product_pic.split(',')[3]
+                              ? '/images/' + v.product_pic.split(',')[3]
+                              : '/images/detailNoPic.png'
+                          }
                           alt="product_picture4"
                           onClick={(e) => {
-                            v.product_pic.split(',')[3]?
-                            changeMainPic(e):''
+                            v.product_pic.split(',')[3] ? changeMainPic(e) : ''
                           }}
                         />
                       </div>
                       <div className="col-2 p-0">
                         <img
                           className="product_small_pic"
-                          src={v.product_pic.split(',')[4]?'/images/' + v.product_pic.split(',')[4]:'/images/detailNoPic.png'}
+                          src={
+                            v.product_pic.split(',')[4]
+                              ? '/images/' + v.product_pic.split(',')[4]
+                              : '/images/detailNoPic.png'
+                          }
                           alt="product_picture5"
                           onClick={(e) => {
-                            v.product_pic.split(',')[4]?
-                            changeMainPic(e):''
+                            v.product_pic.split(',')[4] ? changeMainPic(e) : ''
                           }}
                         />
                       </div>
@@ -152,19 +167,23 @@ function ProductDetailsBasic({ p_detailData }) {
                       <div className="product_count">
                         <span className="">數量</span>
                         <span className="product_count1">
-                          <button className="product_count_button"
-                          onClick={(e)=>{
-                            e.preventDefault()
-                            minusCount()
-                          }}>
+                          <button
+                            className="product_count_button"
+                            onClick={(e) => {
+                              e.preventDefault()
+                              minusCount()
+                            }}
+                          >
                             <i className="fa-solid fa-minus"></i>
                           </button>
                           <span>{productCount}</span>
-                          <button className="product_count_button"
-                          onClick={(e)=>{
-                            e.preventDefault()
-                            addCount()
-                          }}>
+                          <button
+                            className="product_count_button"
+                            onClick={(e) => {
+                              e.preventDefault()
+                              addCount()
+                            }}
+                          >
                             <i className="fa-solid fa-plus"></i>
                           </button>
                         </span>
@@ -178,9 +197,10 @@ function ProductDetailsBasic({ p_detailData }) {
                         </button>
                       </div>
                       <div className="product_add">
-                        <button className="compare_type_btn start"
-                        onClick={() => {
-                          handleAddOrDeleteCompared(v.product_id)
+                        <button
+                          className="compare_type_btn start"
+                          onClick={() => {
+                            handleAddOrDeleteCompared(v.product_id)
                           }}
                         >
                           開始比價
@@ -188,15 +208,20 @@ function ProductDetailsBasic({ p_detailData }) {
                         <button
                           className="add_To_Cart"
                           onClick={() => {
-                          handleAddOrDeleteCart(v.product_id, productCount)
-                          if(memberAuth.memberId!==0){
-                          axios.post(PRODUCT_DETAIL_ADD_CART_API,{
-                            memberId:memberAuth.memverId,
-                            productId:v.product_id,
-                            count:productCount
-                            }).then((res)=>{
-                            console.log('addCartResult',res.data)
-                          })}else{console.log('用戶未登入')}
+                            handleAddOrDeleteCart(v.product_id, productCount)
+                            if (memberAuth.memberId !== 0) {
+                              axios
+                                .post(PRODUCT_DETAIL_ADD_CART_API, {
+                                  memberId: memberAuth.memverId,
+                                  productId: v.product_id,
+                                  count: productCount,
+                                })
+                                .then((res) => {
+                                  console.log('addCartResult', res.data)
+                                })
+                            } else {
+                              console.log('用戶未登入')
+                            }
                           }}
                         >
                           <i className="fa-solid fa-cart-shopping d-inline"></i>

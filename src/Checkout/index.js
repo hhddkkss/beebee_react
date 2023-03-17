@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../styles/checkout.css'
 import Navbar from '../component/CheckoutNavBarLight'
 import StepInfomation from '../component/StepInfomation'
@@ -11,17 +11,35 @@ import CheckoutRight from './CheckoutRight'
 import BtnLoginAndSignUp from './BtnLoginAndSignUp'
 
 function Checkout() {
+  //表單資料
+  const [inputs, setInputs] = useState({})
+
+  //折扣
+  const [discount, setDiscount] = useState(0)
+  const [hasDiscount, setHasDiscount] = useState(false)
+  //有沒有優惠券
+  //note: {output:有優惠券 沒有優惠券 還沒檢查 }控制要不要顯示錯誤訊息
+  const [hasCoupon, setHasCoupon] = useState('還沒檢查')
+
+  //控制表單輸入欄用
+  const handleChange = (event) => {
+    const name = event.target.name
+    const value = event.target.value
+
+    setInputs({ ...inputs, [name]: value })
+    console.log(inputs)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log(inputs)
+  }
+
+  //拿優惠券
+  const getCoupon = async () => {}
   return (
     <>
       <Navbar />
-
-      {/* <div className="path">
-        <span>購物車</span>
-        <i className="fa-solid fa-chevron-right"></i>
-        <span className="path-active">填寫資料</span>
-        <i className="fa-solid fa-chevron-right"></i>
-        <span>完成訂單</span>
-      </div> */}
 
       {/* 給狀態改顏色 */}
       <M_Path />
@@ -175,346 +193,29 @@ function Checkout() {
             </section>
           </div>
 
-          {/* <!-- form --> */}
-          {/* <form> */}
-          {/* <!-- 收件人資料 --> */}
-          {/* <div className="form-border recipient-info">
-              <h3 className="form-title">收件人資料</h3>
-
-              <div className="name-field">
-                <div className="field-wrap">
-                  <input
-                    type="text"
-                    id="last-name"
-                    autoComplete="off"
-                    name="last-name"
-                    placeholder=" "
-                    className="form-input"
-                  />
-                  <label htmlFor="last-name" className="form-label">
-                    姓
-                  </label>
-                </div>
-                <div className="field-wrap">
-                  <input
-                    type="text"
-                    id="first-name"
-                    name="first-name"
-                    autoComplete="off"
-                    className="form-input"
-                    placeholder=" "
-                  />
-                  <label htmlFor="first-name" className="form-label">
-                    名
-                  </label>
-                </div>
-              </div>
-
-              <div className="field-wrap">
-                <input
-                  type="text"
-                  id="mobile"
-                  autoComplete="off"
-                  name="mobile"
-                  className="form-input"
-                  placeholder=" "
-                />
-                <label htmlFor="mobile" className="form-label">
-                  手機號碼
-                </label>
-              </div>
-
-              <div className="field-wrap">
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  autoComplete="off"
-                  className="form-input"
-                  placeholder=" "
-                />
-                <label htmlFor="email" className="form-label">
-                  Email
-                </label>
-              </div>
-            </div> */}
-
-          {/* <!-- 收件人地址  --> */}
-          {/* <div className="form-border recipient-address">
-              <h3 className="form-title">收件地址</h3>
-
-              <div className="field-wrap">
-                <input
-                  type="text"
-                  id="mobile"
-                  autoComplete="off"
-                  name="mobile"
-                  className="form-input"
-                  placeholder=" "
-                  value="台灣"
-                  readOnly
-                />
-                <label htmlFor="mobile" className="form-label">
-                  國家
-                </label>
-              </div>
-              <div className="select-field">
-                <div className="field-wrap">
-                  <select name="city" id="city" className="form-input">
-                    <option value="0">請選擇</option>
-                   
-                  </select>
-                  <label htmlFor="city" className="form-label">
-                    縣市
-                  </label>
-                </div>
-                <div className="field-wrap">
-                  <select name="disc" id="disc" className="form-input">
-                    <option value="0">請選擇</option>
-            
-                  </select>
-                  <label htmlFor="disc" className="form-label">
-                    區
-                  </label>
-                </div>
-              </div>
-
-              <div className="field-wrap">
-                <input
-                  type="text"
-                  id="address"
-                  autoComplete="off"
-                  name="address"
-                  className="form-input"
-                  placeholder=" "
-                />
-                <label htmlFor="address" className="form-label">
-                  詳細地址
-                </label>
-              </div>
-
-              <div className="field-wrap">
-                <input
-                  type="text"
-                  id="postal-code"
-                  name="postal-code"
-                  autoComplete="off"
-                  className="form-input"
-                  placeholder=" "
-                />
-                <label htmlFor="postal-code" className="form-label">
-                  郵遞區號
-                </label>
-              </div>
-            </div> */}
-
-          {/* <div className="form-border payment">
-              <h3 className="form-title">付款方式</h3>
-              <div className="field-wrap">
-                <select name="payment" id="payment" className="form-input">
-                  <option value="0">請選擇</option>
-                  <option value="1">金融卡 / 信用卡</option>
-                  <option value="2">貨到付款</option>
-                  <option value="3">LinePay</option>
-                </select>
-                <label htmlFor="payment" className="form-label">
-                  付款方式
-                </label>
-              </div>
-            </div> */}
-          {/* <!-- 信用卡本人 --> */}
-          {/* <div className="form-border credit-card">
-            
-
-              <div className="credit-card-front">
-                <span>xxxx/xxxx/xxxx/xxxx</span>
-                <span className="month">12</span>
-                <span className="year">25</span>
-                <span className="visa">VISA</span>
-                <span className="lastname">Chang</span>
-                <span className="firstname">XiaoMing</span>
-                <i className="fa-solid fa-wifi"></i>
-                <div className="credit-card-back">
-                  <div></div>
-                  <span>123</span>
-                </div>
-              </div>
-
-              <div className="field-wrap">
-                <input
-                  type="text"
-                  id="mobile"
-                  autoComplete="off"
-                  name="mobile"
-                  className="form-input"
-                  maxLength="16"
-                  placeholder="xxxx-xxxx-xxxx-xxxx"
-                  value=""
-                />
-                <label htmlFor="mobile" className="form-label">
-                  信用卡卡號
-                </label>
-              </div>
-              <div className="select-field">
-                <div className="field-wrap">
-                  <select name="month" id="month" className="form-input">
-                    <option value="0">請選擇</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                  </select>
-                  <label htmlFor="month" className="form-label">
-                    到期月
-                  </label>
-                </div>
-                <div className="field-wrap">
-                  <select name="year" id="year" className="form-input">
-                    <option value="0">請選擇</option>
-                    <option value="1">22</option>
-                    <option value="2">23</option>
-                    <option value="3">24</option>
-                    <option value="4">25</option>
-                  </select>
-                  <label htmlFor="year" className="form-label">
-                    到期年
-                  </label>
-                </div>
-              </div>
-
-              <div className="name-field">
-                <div className="field-wrap">
-                  <input
-                    type="text"
-                    id="credit-last-name"
-                    autoComplete="off"
-                    name="credit-last-name"
-                    placeholder=" "
-                    className="form-input"
-                  />
-                  <label htmlFor="credit-last-name" className="form-label">
-                    持卡人姓
-                  </label>
-                </div>
-                <div className="field-wrap">
-                  <input
-                    type="text"
-                    id="credit-first-name"
-                    name="credit-first-name"
-                    autoComplete="off"
-                    className="form-input"
-                    placeholder=" "
-                  />
-                  <label htmlFor="credit-first-name" className="form-label">
-                    持卡人名
-                  </label>
-                </div>
-              </div>
-
-              <div className="field-wrap">
-                <input
-                  type="text"
-                  id="credit-card-type"
-                  autoComplete="off"
-                  name="credit-card-type"
-                  className="form-input"
-                  placeholder=" "
-                  value="VISA"
-                  readOnly
-                />
-                <label htmlFor="credit-card-type" className="form-label">
-                  信用卡類別
-                </label>
-              </div>
-
-              <div className="field-wrap">
-                <input
-                  type="text"
-                  id="cvc"
-                  name="cvc"
-                  autoComplete="off"
-                  className="form-input"
-                  placeholder=" "
-                  maxLength="3"
-                />
-                <label htmlFor="cvc" className="form-label">
-                  安全碼
-                </label>
-              </div>
-            </div> */}
-
-          {/* <!-- 訂單備註 --> */}
-          {/* <div className="form-border note">
-              <h3 className="form-title">商品備註</h3>
-              <textarea
-                name="note"
-                id="note"
-                cols="10"
-                rows="3"
-                placeholder="輸入商品備註"
-              ></textarea>
-            </div> */}
-          {/* </form> */}
-
-          <CheckoutForm />
+          <CheckoutForm
+            inputs={inputs}
+            setInputs={setInputs}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
         </div>
         {/* <!-- 右半邊 --> */}
         <div className="checkout-right">
-          {/* <!-- 商品清單 --> */}
-          {/* <div className="checkout-items">
-            <div className="checkout-item-card">
-              <div className="checkout-item">
-                <div className="img-wrap">
-                  <div className="amount">1</div>
-                </div>
-                <div className="checkout-item-info">
-                  <p>Iphone14 Pro</p>
-                  <p>34900</p>
-                </div>
-              </div>
-            </div>
-          </div> */}
-          {/* <!-- detail --> */}
-          {/* <p className="checkout-detail">付款明細</p>
-          <div className="checkout-cal">
-            <p>合計</p>
-            <p>169799</p>
-          </div>
-
-          <div className="checkout-fee">
-            <p>運費</p>
-            <p>120</p>
-          </div>
-
-          <div className="checkout-total">
-            <p>總金額</p>
-            <p>169919</p>
-          </div>
-
-          <a href="#" className="is-login">
-            已經有帳號了嗎？登入來進行購買
-          </a>
-
-          <a href="#" className="btn-to-register">
-            註冊新帳號來進行購買
-          </a>
-
-          <button className="btn-to-checkout" form="form1">
-            立即下單
-          </button> */}
-
           {/* <!-- 標語 --> */}
 
-          <CheckoutRightLogin />
-          <CheckoutRight />
+          {localStorage.getItem('myAuth') &&
+          JSON.parse(localStorage.getItem('myAuth')).memberId ? (
+            <CheckoutRightLogin
+              hasDiscount={hasDiscount}
+              hasCoupon={hasCoupon}
+              setHasCoupon={setHasCoupon}
+              discount={discount}
+              getCoupon={getCoupon}
+            />
+          ) : (
+            <CheckoutRight />
+          )}
 
           <div className="bottom-slogan">
             <svg
@@ -577,9 +278,7 @@ function Checkout() {
       </div>
 
       <div className="m-bottom-btn">
-        <button type="submit" className="m-btn-to-checkout btn-to-checkout">
-          立即下單
-        </button>
+        <button className="m-btn-to-checkout btn-to-checkout">立即下單</button>
       </div>
     </>
   )

@@ -15,7 +15,7 @@ function NavbarMemberBox({memberBoxRef}) {
      <div className="triangle"></div>
        
      <div className="member_info">
-       {memberAuth.authorized ? '歡迎 '+memberAuth.memberName.substr(memberAuth.memberName.length-2,2):'歡迎~請先登入'}
+       {memberAuth.authorized ? 'Hello '+memberAuth.memberName.substr(memberAuth.memberName.length-2,2):'歡迎~請先登入'}
      </div>
     
 

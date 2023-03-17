@@ -192,7 +192,7 @@
   width: 35%;
   min-height: 100vh;
 }
-.checkout-right p {
+.checkout-right {
   color: var(--textColorWhite);
 }
 .checkout-item-card {
@@ -227,6 +227,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: translate(-10px, -10px);
 }
 
 .checkout-item-info {
@@ -237,6 +238,7 @@
 
 .checkout-item-info p:nth-child(1) {
   text-align: left;
+  padding-left: 1rem;
   margin: 0;
 }
 .checkout-item-info p:nth-child(2) {
@@ -280,6 +282,10 @@
   bottom: 1rem;
   right: 1rem;
 }
+/* .err-msg {
+  padding-left: 1rem;
+  color: red;
+} */
 
 @media screen and (max-width: 375px) {
   .done-page-checkout-left .fixed-width {

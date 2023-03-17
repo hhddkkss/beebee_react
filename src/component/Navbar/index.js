@@ -22,6 +22,7 @@ function Navbar() {
     getProductData,
     addToCartTable,
     cartItemPId,
+    getCartData,
   } = useContext(ProductFunctionContext)
 
   const { navbarType,memberAuth,memberBoxToggle,setMemberBoxToggle,Logout  } = useContext(AuthContext)
@@ -47,7 +48,6 @@ function Navbar() {
     getProductData()
     document.addEventListener('click', handleOutMemberBox)
   }, [])
-  console.log(memberBoxRef,memberIconRef);
   return (
     <>
       <header>
@@ -93,7 +93,10 @@ function Navbar() {
               >
                 比比精選
               </button>
-              <button className="btn">比比論壇</button>
+              <button className="btn"
+              onClick={()=>{
+                navigation('/articles/front')
+              }}>比比論壇</button>
             </div>
             <div className="nav_btn_group">
               <button className="btn">比比專區</button>
@@ -170,7 +173,6 @@ function Navbar() {
                 />
               </svg>
             </button>
-            
           </div>
         </nav>
 
@@ -238,7 +240,7 @@ function Navbar() {
                       </div>
                       <p className="product-name">{v.product_name}</p>
                     </div>
-                    <p className="product-price">{v.product_price}</p>
+                    <p className="product-price">{v.product_price - 1000}</p>
                   </div>
                 )
               })}
@@ -248,9 +250,11 @@ function Navbar() {
             <a
               href="#/"
               className="check-cart"
-              onClick={() => {
+              onClick={async (e) => {
+                e.preventDefault()
+                await addToCartTable()
+                await getCartData()
                 navigation('/cart')
-                addToCartTable()
               }}
             >
               查看購物車
