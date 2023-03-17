@@ -1,11 +1,14 @@
 import { createContext, useState, useContext } from 'react'
 import axios from 'axios'
 import { HOST, GET_CART_ITEM_API } from '../component/LoginApi'
+import AuthContext from './AuthContext'
 
 const ProductFunctionContext = createContext({})
 export default ProductFunctionContext
 
 export const ProductFunctionContextProvider = function ({ children }) {
+  const { memberAuth } = useContext(AuthContext)
+
   //拿到produtct
   const getProductData = async () => {
     const dev = 'http://localhost:3003'
@@ -35,7 +38,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
 
     await axios
       .post(dev, {
-        member_id: 1,
+        member_id: memberAuth.member_id,
         product_id:
           localStorage.getItem('cartItem') &&
           JSON.parse(localStorage.getItem('cartItem')).map((v) => v.product_id),

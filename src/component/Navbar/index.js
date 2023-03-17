@@ -5,7 +5,7 @@
 //3: useEffect(()=<{setNavbarType('白的話是light；深藍的話是dark')},[])
 
 import AuthContext from '../../Contexts/AuthContext'
-import React, { useContext, useEffect,useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import './../../styles/Navbar.css'
 import './../../styles/m-navbar.css'
 import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
@@ -25,7 +25,13 @@ function Navbar() {
     getCartData,
   } = useContext(ProductFunctionContext)
 
-  const { navbarType,memberAuth,memberBoxToggle,setMemberBoxToggle,Logout  } = useContext(AuthContext)
+  const {
+    navbarType,
+    memberAuth,
+    memberBoxToggle,
+    setMemberBoxToggle,
+    Logout,
+  } = useContext(AuthContext)
   const memberBoxRef = useRef(null)
   const memberIconRef = useRef(null)
 
@@ -34,12 +40,9 @@ function Navbar() {
 
   //點畫面其他區域會使會員區消失
   function handleOutMemberBox(event) {
-    if (
-      memberBoxRef.current &&
-      !memberIconRef.current.contains(event.target)
-    ) {
+    if (memberBoxRef.current && !memberIconRef.current.contains(event.target)) {
       setMemberBoxToggle(false)
-    }else{
+    } else {
       setMemberBoxToggle(true)
     }
   }
@@ -48,7 +51,7 @@ function Navbar() {
     getProductData()
     document.addEventListener('click', handleOutMemberBox)
   }, [])
-  console.log(memberBoxRef,memberIconRef);
+  console.log(memberBoxRef, memberIconRef)
   return (
     <>
       <header>
@@ -97,22 +100,21 @@ function Navbar() {
               <button className="btn">比比論壇</button>
             </div>
             <div className="nav_btn_group">
-              <button className="btn">比比專區</button>
+              <button className="btn">比比會員</button>
               <button className="btn">關於比比</button>
             </div>
           </div>
           <div className="nav_top">
-         
             <button
-            ref={memberIconRef}
-            className="btn member"
-            onClick={(e) => {
-              e.preventDefault()
-              // setMemberBoxToggle(!memberBoxToggle)
-                }}
+              ref={memberIconRef}
+              className="btn member"
+              onClick={(e) => {
+                e.preventDefault()
+                // setMemberBoxToggle(!memberBoxToggle)
+              }}
             >
               <svg
-                width="24" 
+                width="24"
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -133,9 +135,6 @@ function Navbar() {
                 />
               </svg>
             </button>
-
-
-
 
             <button
               className="btn cart"
@@ -260,10 +259,7 @@ function Navbar() {
           </div>
         </div>
 
-      <NavbarMemberBox memberBoxRef={memberBoxRef}/>
-
-
-       
+        <NavbarMemberBox memberBoxRef={memberBoxRef} />
       </header>
     </>
   )
