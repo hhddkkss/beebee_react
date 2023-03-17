@@ -48,7 +48,6 @@ function Navbar() {
     getProductData()
     document.addEventListener('click', handleOutMemberBox)
   }, [])
-  console.log(memberBoxRef,memberIconRef);
   return (
     <>
       <header>
@@ -94,7 +93,10 @@ function Navbar() {
               >
                 比比精選
               </button>
-              <button className="btn">比比論壇</button>
+              <button className="btn"
+              onClick={()=>{
+                navigation('/articles/front')
+              }}>比比論壇</button>
             </div>
             <div className="nav_btn_group">
               <button className="btn">比比專區</button>

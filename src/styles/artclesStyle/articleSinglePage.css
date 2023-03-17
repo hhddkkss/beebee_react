@@ -1,0 +1,126 @@
+.articles_container>.article_main_pic{
+    width: 100%;
+    height: 464px;
+    object-fit: cover;
+}
+
+.single_article_title{
+    width: 100%;
+    font-size: 40px;
+    line-height: 47px;
+    font-weight: 600;
+}
+.article_page>.articles_container>.article_writer{
+    flex-grow: 0;
+}
+.article_content{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.article_paragraph{
+    font-size: 16px;
+    line-height: 30px;
+    letter-spacing: 0.07em;
+    color: #4F4F4F;
+}
+
+.article_content>.article_content_pic{
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+}
+
+.article_message_area{
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    margin-bottom: 100px;
+}
+
+
+.article_button_group{
+    display: flex;
+    gap: 30px;
+    justify-content: start;
+}
+.article_buton{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 30px;
+    color: #4F4F4F;
+    border-bottom: 1px solid #4F4F4F;
+    gap: 10px;
+}
+.article_buton>.article_like_button{
+    margin-left: 0;
+}
+
+.message_box{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px 5px;
+    border-bottom: 1px solid #e59069;
+}
+
+.input_messenge_box{
+    width: 100%;
+    position: relative;
+    margin-top: 30px;
+}
+
+.input_messenge_box>input{
+    width: 100%;
+    border: 1px solid #e59069;
+    height: 60px;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.input_messenge_box>button{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.more_suggest_articles{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.more_suggest_articles>.more_suggest{
+    width: 160px;
+    height: 30px;
+    border-bottom: 1px solid #4f4f4f;
+    text-align: center;
+    color: #4F4F4F;
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: 0.07em;
+}
+
+.article_box{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+@media screen and (max-width: 376px) {
+
+    .articles_container>.article_main_pic,.article_content>.article_content_pic{
+        margin:  0 -5px;
+        width: 376px;
+        height: 200px;
+    }
+    .article_box{
+        flex-direction: column;
+    }
+    
+    
+}
