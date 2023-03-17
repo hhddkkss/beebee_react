@@ -26,8 +26,9 @@ export const AuthContextProvider = function ({ children }) {
   let initAuth = { ...unAuth }
 
   const str = localStorage.getItem('beebeeMemberAuth')
+  let local = JSON.parse(str)
   try {
-    if (str) {
+    if (str && local.authorized && local.memberId && local.memberName&&local.memberEmail && local.token ) {
       const localAuth = JSON.parse(str)
       if (localAuth.token && localAuth.memberId && localAuth.memberEmail) {
         initAuth = {
