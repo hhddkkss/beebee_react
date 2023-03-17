@@ -191,7 +191,7 @@ body {
 .member_box_off {
   display: none;
 }
-.member_box {
+.navMember_box {
   width: 250px;
   height: fit-content;
   background-color: #727272;
@@ -211,7 +211,7 @@ body {
 
 }
 
-.member_box .btn_member {
+.navMember_box .btn_member {
   color: #fff;
   text-decoration: none;;
   padding: 0.5rem 1.5rem;
@@ -224,7 +224,7 @@ body {
   margin-right: 10px;
 }
 /* hover animation */
-.member_box .btn_member:before {
+.navMember_box .btn_member:before {
   content: '';
   width: 0%;
   height: 100%;
@@ -236,7 +236,7 @@ body {
   z-index: -1;
   transition: all 0.3s;
 }
-.member_box .btn_member:after {
+.navMember_box .btn_member:after {
   width: 100%;
   height: 100%;
   content: '';
@@ -247,15 +247,15 @@ body {
   left: 0;
   z-index: -2;
 }
-.member_box .btn_member:hover {
+.navMember_box .btn_member:hover {
   color: #fff;
 }
-.member_box .btn_member:hover.btn_member:before {
+.navMember_box .btn_member:hover.btn_member:before {
   width: 100%;
 }
 
 /* 會員中心 */
-.member_box .btn_member_logout {
+.navMember_box .btn_member_logout {
   color: #fff;
   text-decoration: none;;
   padding: 0.5rem 1.5rem;
@@ -268,7 +268,7 @@ body {
   margin-right: 10px;
 }
 /* hover animation */
-.member_box .btn_member_logout:before {
+.navMember_box .btn_member_logout:before {
   content: '';
   width: 0%;
   height: 100%;
@@ -280,7 +280,7 @@ body {
   z-index: -1;
   transition: all 0.3s;
 }
-.member_box .btn_member_logout:after {
+.navMember_box .btn_member_logout:after {
   width: 100%;
   height: 100%;
   content: '';
@@ -291,10 +291,10 @@ body {
   left: 0;
   z-index: -2;
 }
-.member_box .btn_member_logout:hover {
+.navMember_box .btn_member_logout:hover {
   color: #fff;
 }
-.member_box .btn_member_logout:hover.btn_member_logout:before {
+.navMember_box .btn_member_logout:hover.btn_member_logout:before {
   width: 100%;
 }
 
