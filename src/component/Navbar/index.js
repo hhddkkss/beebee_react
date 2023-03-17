@@ -35,21 +35,34 @@ function Navbar() {
   const memberBoxRef = useRef(null)
   const memberIconRef = useRef(null)
 
+  const cartBoxRef = useRef(null)
+  const cartIconRef = useRef(null)
+
   // const myCartItem = cartItem || []
   // const cartItemPId = myCartItem.map((v) => v.product_id)
 
   //點畫面其他區域會使會員區消失
   function handleOutMemberBox(event) {
-    if (memberBoxRef.current && !memberIconRef.current.contains(event.target)) {
+    if (memberBoxRef.current&&!memberBoxRef.current.contains(event.target) && !memberIconRef.current.contains(event.target)) {
       setMemberBoxToggle(false)
     } else {
       setMemberBoxToggle(true)
     }
   }
 
+  function handleOutCartBox(event) {
+    if (cartBoxRef.current && !cartBoxRef.current.contains(event.target) && !cartIconRef.current.contains(event.target)) {
+      setToggleCartButton(false)
+    } else {
+      setToggleCartButton(true)
+    }
+  }
+
   useEffect(() => {
     getProductData()
     document.addEventListener('click', handleOutMemberBox)
+    document.addEventListener('click', handleOutCartBox)
+
   }, [])
   return (
     <>
@@ -139,10 +152,11 @@ function Navbar() {
             </button>
 
             <button
+              ref={cartIconRef}
               className="btn cart"
-              onClick={() => {
-                setToggleCartButton(!toggleCartButton)
-              }}
+              // onClick={() => {
+              //   setToggleCartButton(!toggleCartButton)
+              // }}
             >
               <svg
                 width="24"
@@ -216,6 +230,7 @@ function Navbar() {
         </nav>
 
         <div
+        ref={cartBoxRef}
           className={
             toggleCartButton
               ? 'cart-hover-box cart-hover-box-on'
