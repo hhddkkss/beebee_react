@@ -106,7 +106,8 @@ function ProductDetailsBasic({ p_detailData }) {
                           }
                           alt="product_picture2 product_picture_little1"
                           onClick={(e) => {
-                            v.product_pic.split(',')[1] ? changeMainPic(e) : ''
+                            if(v.product_pic.split(',')[1]){
+                            changeMainPic(e)}
                           }}
                         />
                       </div>
@@ -120,7 +121,8 @@ function ProductDetailsBasic({ p_detailData }) {
                           }
                           alt="product_picture3"
                           onClick={(e) => {
-                            v.product_pic.split(',')[2] ? changeMainPic(e) : ''
+                            if(v.product_pic.split(',')[2]){
+                            changeMainPic(e)}
                           }}
                         />
                       </div>
@@ -134,7 +136,8 @@ function ProductDetailsBasic({ p_detailData }) {
                           }
                           alt="product_picture4"
                           onClick={(e) => {
-                            v.product_pic.split(',')[3] ? changeMainPic(e) : ''
+                            if(v.product_pic.split(',')[3]){
+                            changeMainPic(e)}
                           }}
                         />
                       </div>
@@ -148,7 +151,8 @@ function ProductDetailsBasic({ p_detailData }) {
                           }
                           alt="product_picture5"
                           onClick={(e) => {
-                            v.product_pic.split(',')[4] ? changeMainPic(e) : ''
+                            if(v.product_pic.split(',')[4]){
+                            changeMainPic(e)}
                           }}
                         />
                       </div>
