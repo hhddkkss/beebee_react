@@ -10,7 +10,7 @@ function NavbarMemberBox({ memberBoxRef }) {
    <>   {/* 會員 */}
    <div
    ref={memberBoxRef}
-     className={memberBoxToggle?'member_box member_box_on':'member_box member_box_off'}
+     className={memberBoxToggle?'navMember_box member_box_on':'navMember_box member_box_off'}
    >
      <div className="triangle"></div>
        
