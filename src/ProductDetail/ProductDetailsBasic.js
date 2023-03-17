@@ -212,20 +212,15 @@ function ProductDetailsBasic({ p_detailData }) {
                         <button
                           className="add_To_Cart"
                           onClick={() => {
-                            handleAddOrDeleteCart(v.product_id, productCount)
-                            if (memberAuth.memberId !== 0) {
-                              axios
-                                .post(PRODUCT_DETAIL_ADD_CART_API, {
-                                  memberId: memberAuth.memverId,
-                                  productId: v.product_id,
-                                  count: productCount,
-                                })
-                                .then((res) => {
-                                  console.log('addCartResult', res.data)
-                                })
-                            } else {
-                              console.log('用戶未登入')
-                            }
+                          handleAddOrDeleteCart(v.product_id, productCount)
+                          if(memberAuth.memberId!==0){
+                          axios.post(PRODUCT_DETAIL_ADD_CART_API,{
+                            memberId:memberAuth.memberId,
+                            productId:v.product_id,
+                            count:productCount
+                            }).then((res)=>{
+                            console.log('addCartResult',res.data)
+                          })}else{console.log('用戶未登入')}
                           }}
                         >
                           <i className="fa-solid fa-cart-shopping d-inline"></i>
