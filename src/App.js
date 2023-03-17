@@ -30,6 +30,7 @@ function App() {
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/donePage" element={<DonePage />} />
                 <Route path="/articles/:nowPage" element={<Articles />} />
+                <Route path="/articles/:nowPage/:article_id" element={<Articles />} />
               </Routes>
             </CompareContextProvider>
           </ProductFunctionContextProvider>
