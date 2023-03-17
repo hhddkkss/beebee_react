@@ -31,3 +31,23 @@ export const MINUS_CART_QUANTITY = `${HOST}/cart/minus`
 export const DELETE_CART_ITEM = `${HOST}/cart/delete`
 //商品詳細頁加入購物車API
 export const PRODUCT_DETAIL_ADD_CART_API = `${HOST}/cart/detailAddCart`
+
+//新增文章API
+export const MEMBER_POST = `${HOST}/article_page/memberPostArticle`
+
+//拿取分類文章
+export const GET_All_ARTICLE_POST = `${HOST}/article_page/allArticle_api`
+
+//拿取首頁文章
+export const GET_FRONT_ARTICLES = `${HOST}/article_page/frontArticle_api`
+
+//拿取文章留言
+export const GET_ARTICLE_COMMENT = `${HOST}/article_page/articleComments`
+
+//新增文章留言
+export const POST_ARTICLE_COMMENT = `${HOST}/article_page/postArticleComments`
+
+// 拿取會員歷史喜愛
+export const ARTICLE_MEMBER_LIKED = `${HOST}/article_page/memberArticleLike`
+// 拿取會員歷史文章
+export const ARTICLE_MEMBER_POST = `${HOST}/article_page/memberArticlePosted`

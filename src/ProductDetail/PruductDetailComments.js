@@ -159,7 +159,7 @@ function PruductDetailComments({p_detailData}) {
                     </div>
                     <Rating name="read-only" value={v.star} readOnly />
                     <div className="product_account_contant">
-                      {Dayjs(v.comment_created_at).format('YYYY/MM/DD')}
+                      {Dayjs(v.comment_created_at).format('YYYY-MM-DD')}
                     </div>
                     <pre className="commemt_card_content">{v.content}</pre>
                   </div>
