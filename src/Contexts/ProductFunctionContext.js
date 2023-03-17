@@ -38,7 +38,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
 
     await axios
       .post(dev, {
-        member_id: memberAuth.member_id,
+        member_id: memberAuth.memberId,
         product_id:
           localStorage.getItem('cartItem') &&
           JSON.parse(localStorage.getItem('cartItem')).map((v) => v.product_id),
@@ -204,8 +204,8 @@ export const ProductFunctionContextProvider = function ({ children }) {
 
   const getCartData = async () => {
     const member_id =
-      localStorage.getItem('myAuth') &&
-      JSON.parse(localStorage.getItem('myAuth')).memberId
+      localStorage.getItem('beebeeMemberAuth') &&
+      JSON.parse(memberAuth.memberId)
 
     // console.log(member_id)
 
@@ -217,6 +217,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
         const itemData = r.data.rows.map((v) => v.product_id) //拉到的資料變成為儲存 product_id 的陣列
         coverCartItems(itemData) //轉好格式{product_id,count} 轉字串 複寫localStorage
         setCarTotalRows(r.data.totalRows)
+
       })
       .catch((e) => console.log(e))
   }
