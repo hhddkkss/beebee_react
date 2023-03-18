@@ -264,6 +264,7 @@ header {
   text-decoration: none;
   transition: all 0.5s ease;
   cursor: pointer;
+  margin: 0;
 }
 
 .brand-class .brand-area .brand-item p:hover {
@@ -433,15 +434,20 @@ header {
 .card-bottom svg {
   cursor: pointer;
 }
-.product-area .fa-solid.fa-heart {
+.product-area .fa-regular.fa-heart {
   position: absolute;
   top: 0;
   right: 0;
 }
 .product-area .fa-solid.fa-heart.active {
+  position: absolute;
+  top: 0;
+  right: 0;
   color: var(--orange1);
 }
-
+.product-area .fa-solid.fa-cart-shopping.active {
+  color: var(--orange1);
+}
 .product-area .my-card .card-top .img-wrap {
   width: 180px;
   aspect-ratio: 10/9;
@@ -734,8 +740,6 @@ header {
   }
 
   /** card-top */
-  .product-area .my-card .card-top {
-  }
 
   .product-area .my-card .card-top .img-wrap {
     width: 100px;

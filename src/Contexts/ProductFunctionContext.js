@@ -1,6 +1,6 @@
 import { createContext, useState, useContext } from 'react'
 import axios from 'axios'
-import { HOST, GET_CART_ITEM_API } from '../component/LoginApi'
+import { HOST, GET_CART_ITEM_API, FAVORITES } from '../component/LoginApi'
 import AuthContext from './AuthContext'
 
 const ProductFunctionContext = createContext({})
@@ -10,9 +10,9 @@ export const ProductFunctionContextProvider = function ({ children }) {
   const { memberAuth } = useContext(AuthContext)
 
   //拿到produtct
+
   const getProductData = async () => {
-    const dev = 'http://localhost:3003'
-    const res = await axios.get(dev + '/products/pd_api')
+    const res = await axios.get(HOST + '/products/pd_api')
     const initialData = res.data.map((v, i) => {
       return { ...v, isLiked: false, isCompared: false }
     })
@@ -22,6 +22,9 @@ export const ProductFunctionContextProvider = function ({ children }) {
 
   // forRemoveInfo
   const [showRemove, setShowRemove] = useState(false)
+
+  //cart item pid
+  const [cartPId, setCartPId] = useState([])
 
   const [pageNow, setPageNow] = useState(1) //預設第一頁
   const [perPage, setPerPage] = useState(25) // 一頁25個
@@ -64,13 +67,13 @@ export const ProductFunctionContextProvider = function ({ children }) {
   } catch (ex) {}
   const [comparedList, setComparedList] = useState(initComparedList)
 
-  //收藏
-  let initFavorites = []
+  // //收藏
+  // let initFavorites = []
 
-  try {
-    initFavorites = JSON.parse(localStorage.getItem('favorites')) || []
-  } catch (ex) {}
-  const [favorites, setFavorite] = useState(initFavorites)
+  // try {
+  //   initFavorites = JSON.parse(localStorage.getItem('favorites')) || []
+  // } catch (ex) {}
+  const [favorites, setFavorite] = useState([])
 
   //加入收藏(外觀)
   const toggleLiked = (arr, product_id) => {
@@ -166,35 +169,54 @@ export const ProductFunctionContextProvider = function ({ children }) {
   }
 
   //收藏商品
-  const handleAddOrDeleteFavorite = (product_id) => {
-    const hasFavorite = favorites.includes(product_id)
 
-    if (hasFavorite) {
-      const newFavorites = [...favorites].filter((v) => v !== product_id)
-      setFavorite(newFavorites)
-      localStorage.setItem('favorites', JSON.stringify(newFavorites))
+  const [reGetFavorites, setReGetFavorites] = useState(false) //改變就重新拿最愛清單
+  const [favoritePId, setFavoritePId] = useState([])
+
+  const getFavorites = async (member_id) => {
+    const res = await axios.get(`${FAVORITES}/${member_id}`)
+    console.log(res.data, '收藏')
+    await setFavorite(res.data)
+    await setFavoritePId(res.data.map((v) => v.product_id))
+  }
+
+  const handleAddOrDeleteFavorite = async (member_id, product_id) => {
+    const favoritesData = favorites.map((v) => v.product_id)
+
+    if (favoritesData.includes(product_id)) {
+      console.log(111, '有加入收藏')
+      await axios.delete(FAVORITES, {
+        data: { member_id: member_id, product_id: product_id },
+      })
+      setReGetFavorites(!reGetFavorites)
     } else {
-      const newFavorites = [...favorites, product_id]
-      setFavorite(newFavorites)
-      localStorage.setItem('favorites', JSON.stringify(newFavorites))
+      console.log(999, '沒加入收藏')
+      await axios.post(FAVORITES, {
+        member_id: member_id,
+        product_id: product_id,
+      })
+      setReGetFavorites(!reGetFavorites)
     }
   }
+
+  // const handleAddOrDeleteFavorite = (product_id) => {
+  //   const hasFavorite = favorites.includes(product_id)
+
+  //   if (hasFavorite) {
+  //     const newFavorites = [...favorites].filter((v) => v !== product_id)
+  //     setFavorite(newFavorites)
+  //     localStorage.setItem('favorites', JSON.stringify(newFavorites))
+  //   } else {
+  //     const newFavorites = [...favorites, product_id]
+  //     setFavorite(newFavorites)
+  //     localStorage.setItem('favorites', JSON.stringify(newFavorites))
+  //   }
+  // }
 
   //購物車拿資料
   const [cartData, setCartData] = useState([])
   //購物車幾樣商品
   const [cartTotalRows, setCarTotalRows] = useState(0)
-
-  //覆蓋local storage
-  const coverCartItems = (arr) => {
-    const readyToCartItem = arr.map((v) => {
-      return { product_id: v, count: 1 }
-    })
-    setCartItem(readyToCartItem)
-    //json轉字串 再複寫
-    localStorage.setItem('cartItem', JSON.stringify(readyToCartItem))
-    console.log(readyToCartItem)
-  }
 
   //算出總價
   const totalPrice = cartData
@@ -215,9 +237,8 @@ export const ProductFunctionContextProvider = function ({ children }) {
       .then((r) => {
         setCartData(r.data.rows) //拉資料庫購物車 新增進狀態中
         const itemData = r.data.rows.map((v) => v.product_id) //拉到的資料變成為儲存 product_id 的陣列
-        coverCartItems(itemData) //轉好格式{product_id,count} 轉字串 複寫localStorage
-        setCarTotalRows(r.data.totalRows)
-
+        setCartPId(itemData)
+        setCarTotalRows(cartPId.length)
       })
       .catch((e) => console.log(e))
   }
@@ -235,7 +256,6 @@ export const ProductFunctionContextProvider = function ({ children }) {
         toggleCompared,
         handleAddOrDeleteCart,
         handleAddOrDeleteCompared,
-        handleAddOrDeleteFavorite,
         toggleCartButton,
         setToggleCartButton,
         products,
@@ -256,6 +276,11 @@ export const ProductFunctionContextProvider = function ({ children }) {
         showRemove,
         setShowRemove,
         totalPrice,
+        cartPId,
+        getFavorites,
+        handleAddOrDeleteFavorite,
+        reGetFavorites,
+        favoritePId,
       }}
     >
       {children}

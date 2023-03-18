@@ -215,9 +215,9 @@ function Products() {
     setPageNow(p)
   }
 
-  useEffect(() => {
-    getProductData()
-  }, [])
+  // useEffect(() => {
+  //   getProductData()
+  // }, [])
 
   useEffect(() => {
     setBrand('全部品牌')
@@ -227,7 +227,7 @@ function Products() {
     //* 如果要根據篩選的東西重新搜尋 就把註解的打開 或是搜尋選取到的
     // setProductType(4)
     // setBrand('全部品牌')
-    getProductData()
+    // getProductData()
     setPageNow(1)
   }, [keyword])
 
@@ -331,15 +331,27 @@ function Products() {
         popCompareBtn={popCompareBtn}
       />
 
-      <Pagination
-        count={pageTotal}
-        page={pageNow}
-        sx={{ mx: '0 auto' }}
-        onChange={handleChangePageNow}
-        size={'large'}
-        showFirstButton={true}
-        showLastButton={true}
-      />
+      {window.screen.width > 376 ? (
+        <Pagination
+          count={pageTotal}
+          page={pageNow}
+          sx={{ mx: '0 auto' }}
+          onChange={handleChangePageNow}
+          size={'large'}
+          showFirstButton={true}
+          showLastButton={true}
+        />
+      ) : (
+        <Pagination
+          count={pageTotal}
+          page={pageNow}
+          sx={{ mx: '0 auto' }}
+          onChange={handleChangePageNow}
+          size={'small'}
+          showFirstButton={true}
+          showLastButton={false}
+        />
+      )}
       {/* 比價區 */}
       <ProductCompare
         // setCompareListClass={setCompareListClass}

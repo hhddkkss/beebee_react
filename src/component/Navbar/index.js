@@ -23,6 +23,7 @@ function Navbar() {
     addToCartTable,
     cartItemPId,
     getCartData,
+    cartData,
   } = useContext(ProductFunctionContext)
 
   const {
@@ -109,10 +110,14 @@ function Navbar() {
               >
                 比比精選
               </button>
-              <button className="btn"
-              onClick={()=>{
-                navigation('/articles/front')
-              }}>比比論壇</button>
+              <button
+                className="btn"
+                onClick={() => {
+                  navigation('/articles/front')
+                }}
+              >
+                比比論壇
+              </button>
             </div>
             <div className="nav_btn_group">
               <button className="btn">比比會員</button>
@@ -240,24 +245,22 @@ function Navbar() {
           <div className="triangle"></div>
 
           <div className="my-cards">
-            {products
-              .filter((v) => cartItemPId.includes(v.product_id))
-              .map((v) => {
-                return (
-                  <div className="my-cart-card" key={v.product_id}>
-                    <div className="my-cart-card-left">
-                      <div className="img-wrap">
-                        <img
-                          src={'/images/' + v.product_pic.split(',')[0]}
-                          alt=""
-                        />
-                      </div>
-                      <p className="product-name">{v.product_name}</p>
+            {cartData.map((v) => {
+              return (
+                <div className="my-cart-card" key={v.product_id}>
+                  <div className="my-cart-card-left">
+                    <div className="img-wrap">
+                      <img
+                        src={'/images/' + v.product_pic.split(',')[0]}
+                        alt=""
+                      />
                     </div>
-                    <p className="product-price">{v.product_price - 1000}</p>
+                    <p className="product-name">{v.product_name}</p>
                   </div>
-                )
-              })}
+                  <p className="product-price">{v.product_price - 1000}</p>
+                </div>
+              )
+            })}
           </div>
 
           <div className="btn-check-cart">
@@ -266,8 +269,6 @@ function Navbar() {
               className="check-cart"
               onClick={async (e) => {
                 e.preventDefault()
-                await addToCartTable()
-                await getCartData()
                 navigation('/cart')
               }}
             >
