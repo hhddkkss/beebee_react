@@ -5,7 +5,7 @@ import Dayjs from 'dayjs'
 import { useLocation, useParams,useNavigate } from 'react-router-dom'
 
 
-function Front({hashtagColor,frontData}) {
+function Front({hashtagColor,frontData,setType}) {
     const navigation = useNavigate()
     
 
@@ -15,7 +15,8 @@ function Front({hashtagColor,frontData}) {
     {frontData.length > 0? 
      <div className="article_front">
             <div className="news_category_card bg_orange">
-                <div className="category_title">
+                <div className="category_title" onClick={()=>{ setType(1)
+                navigation('/articles/beebeeArticles') }}>
                     <div className="title">Bee新聞
                     <svg className="article_mb_show" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.42871 18.5715L10.0001 10.0001L1.42871 1.42868" stroke="#F4F4F4" strokeLinecap="round" strokeLinejoin="round"/>
@@ -28,7 +29,7 @@ function Front({hashtagColor,frontData}) {
 
                 <div className="latest_article">
                     <div className="article">
-                        <div className="title">{frontData[0].title}</div>
+                        <div className="title" onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[0].article_id)}}>{frontData[0].title}</div>
                         <div className="content article_mb_hidden">{frontData[0].content_1}</div>
                         <div className="foot">
                             <div className="article_writer">
@@ -41,7 +42,7 @@ function Front({hashtagColor,frontData}) {
                             {frontData[0].article_hashtag.map((v,i)=>{
                                 return(
                                     <div key={i} className="hashtags"
-                                    style={{backgroundColor:hashtagColor(i)}}>{v}</div>
+                                    style={{backgroundColor:hashtagColor(frontData[0].article_id,i)}}>{v}</div>
                                 )
                             })}
                                 
@@ -54,7 +55,8 @@ function Front({hashtagColor,frontData}) {
             </div>
 
             <div className="news_category_card bg_blue">
-                <div className="category_title">
+                <div className="category_title" onClick={()=>{ setType(2)
+                navigation('/articles/beebeeArticles') }}>
                     <div className="title">推薦版
                     <svg className="article_mb_show" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.42871 18.5715L10.0001 10.0001L1.42871 1.42868" stroke="#F4F4F4" strokeLinecap="round" strokeLinejoin="round"/>
@@ -66,10 +68,9 @@ function Front({hashtagColor,frontData}) {
                 </div>
 
                 <div className="latest_article">
-                    
                     <img onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[1].article_id)}} src={'/images/article/'+frontData[1].article_pic_main} alt=""/>
                     <div className="article">
-                        <div className="title">{frontData[1].title}</div>
+                        <div className="title"  onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[1].article_id)}} >{frontData[1].title}</div>
                         <div className="content article_mb_hidden">{frontData[1].content_1}</div>
                         <div className="foot">
                             <div className="article_writer">
@@ -84,7 +85,7 @@ function Front({hashtagColor,frontData}) {
                             {frontData[1].article_hashtag.map((v,i)=>{
                                 return(
                                     <div key={i} className="hashtags"
-                                    style={{backgroundColor:hashtagColor(i)}}>{v}</div>
+                                    style={{backgroundColor:hashtagColor(frontData[1].article_id,i)}}>{v}</div>
                                 )
                             })}
                                 
@@ -96,7 +97,8 @@ function Front({hashtagColor,frontData}) {
             </div>
 
             <div className="news_category_card bg_pink">
-                <div className="category_title">
+                <div className="category_title" onClick={()=>{ setType(3)
+                navigation('/articles/beebeeArticles') }}>
                     <div className="title">心得版
                     <svg className="article_mb_show" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.42871 18.5715L10.0001 10.0001L1.42871 1.42868" stroke="#F4F4F4" strokeLinecap="round" strokeLinejoin="round"/>
@@ -109,7 +111,7 @@ function Front({hashtagColor,frontData}) {
 
                 <div className="latest_article">
                     <div className="article">
-                        <div className="title">{frontData[2].title}</div>
+                        <div className="title"  onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[2].article_id)}} >{frontData[2].title}</div>
                         <div className="content article_mb_hidden">{frontData[2].content_1}</div>
                         <div className="foot">
                             <div className="article_writer">
@@ -124,14 +126,14 @@ function Front({hashtagColor,frontData}) {
                             {frontData[2].article_hashtag.map((v,i)=>{
                                 return(
                                     <div key={i} className="hashtags"
-                                    style={{backgroundColor:hashtagColor(i)}}>{v}</div>
+                                    style={{backgroundColor:hashtagColor(frontData[2].article_id,i)}}>{v}</div>
                                 )
                             })}
                                 
                             </div>
                         </div>
                     </div>
-                    <img onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[2].article_id)}} src={'/images/article/'+frontData[2].article_pic_main}alt=""/>
+                    <img  src={'/images/article/'+frontData[2].article_pic_main} alt="" onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[2].article_id)}} />
                 </div>
 
             </div>
