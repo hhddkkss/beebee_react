@@ -115,6 +115,9 @@ body {
   color: #fff;
   margin: 0;
 }
+.cart-info p:first-child {
+  width: 300px;
+}
 
 .pd-info {
   width: 100%;
@@ -193,7 +196,7 @@ body {
 }
 
 .cart-name {
-  width: 100px;
+  width: 200px;
 }
 .cart-price {
   width: 200px;
@@ -205,11 +208,12 @@ body {
 .cart-item .wrap {
   display: flex;
   align-items: center;
+  width: 300px;
+  justify-content: space-between;
 }
 .cart-item .img {
-  width: 100px;
-  height: 100px;
-  /* background-image: url('/public/images/iphone-14promax-256G-deeppurple.png'); */
+  width: 80px;
+  height: 80px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50%;
@@ -558,7 +562,7 @@ body {
   }
 
   .cart-name {
-    width: 50%;
+    width: 70%;
     transform: translateY(-30px);
     font-size: 20px;
     overflow: hidden;
@@ -569,14 +573,15 @@ body {
   }
   .cart-price {
     width: 100px;
-    transform: translate(81px);
+    transform: translate(90px);
     position: absolute;
     bottom: 20%;
     font-size: 18px;
+    text-align: left;
   }
   .cart-item .img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     background-image: url('/public/images/iphone-14promax-256G-deeppurple.png');
     background-size: cover;
     background-repeat: no-repeat;
