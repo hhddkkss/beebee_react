@@ -215,9 +215,9 @@ function Products() {
     setPageNow(p)
   }
 
-  useEffect(() => {
-    getProductData()
-  }, [])
+  // useEffect(() => {
+  //   getProductData()
+  // }, [])
 
   useEffect(() => {
     setBrand('全部品牌')
@@ -227,7 +227,7 @@ function Products() {
     //* 如果要根據篩選的東西重新搜尋 就把註解的打開 或是搜尋選取到的
     // setProductType(4)
     // setBrand('全部品牌')
-    getProductData()
+    // getProductData()
     setPageNow(1)
   }, [keyword])
 

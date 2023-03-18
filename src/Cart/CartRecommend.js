@@ -44,12 +44,16 @@ function CartRecommend() {
     getCartData,
     cartPId,
     cartData,
+    getFavorites,
+    reGetFavorites,
+    favoritePId,
   } = useContext(ProductFunctionContext)
 
   const { memberAuth } = useContext(AuthContext)
   useEffect(() => {
     getCartData()
-  }, [render])
+    getFavorites(memberAuth.memberId)
+  }, [render, reGetFavorites])
 
   return (
     <>
@@ -77,23 +81,20 @@ function CartRecommend() {
                           </Link>
                         </div>
 
-                        {favorites && favorites.includes(v.product_id) ? (
-                          <i
-                            className="fa-solid fa-heart"
-                            onClick={() => {
-                              setProducts(toggleLiked(products, v.product_id))
-                              handleAddOrDeleteFavorite(v.product_id)
-                            }}
-                          ></i>
-                        ) : (
-                          <i
-                            className="fa-regular fa-heart"
-                            onClick={() => {
-                              setProducts(toggleLiked(products, v.product_id))
-                              handleAddOrDeleteFavorite(v.product_id)
-                            }}
-                          ></i>
-                        )}
+                        <i
+                          className={
+                            favoritePId.includes(v.product_id)
+                              ? 'fa-solid fa-heart active'
+                              : 'fa-regular fa-heart'
+                          }
+                          onClick={() => {
+                           
+                            handleAddOrDeleteFavorite(
+                              memberAuth.memberId,
+                              v.product_id
+                            )
+                          }}
+                        ></i>
                       </div>
                       <div className="card-bottom">
                         <h3>{v.product_name}</h3>

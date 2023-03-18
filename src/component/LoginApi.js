@@ -54,3 +54,5 @@ export const POST_ARTICLE_COMMENT = `${HOST}/article_page/postArticleComments`
 export const ARTICLE_MEMBER_LIKED = `${HOST}/article_page/memberArticleLike`
 // 拿取會員歷史文章
 export const ARTICLE_MEMBER_POST = `${HOST}/article_page/memberArticlePosted`
+
+export const FAVORITES = `${HOST}/favorites`

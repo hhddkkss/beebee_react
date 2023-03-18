@@ -18,6 +18,9 @@ function DefaultCard({ productsDisplay }) {
     handleAddOrDeleteCompared,
     getCartData,
     cartPId,
+    getFavorites,
+    reGetFavorites,
+    favoritePId,
   } = useContext(ProductFunctionContext)
 
   const { memberAuth } = useContext(AuthContext)
@@ -38,14 +41,12 @@ function DefaultCard({ productsDisplay }) {
 
   useEffect(() => {
     getCartData()
-  }, [render])
+    getFavorites(memberAuth.memberId)
+  }, [render, reGetFavorites])
 
   return (
     <>
-      {/* {console.log(ADD_CART_ITEM)} */}
       <div className="row row-cols-lg-5">
-        {/* {console.log(productsDisplay, 'defaultCard',pageNow)} */}
-
         {productsDisplay[pageNow - 1] &&
           productsDisplay[pageNow - 1].map((v, i) => {
             return (
@@ -68,7 +69,20 @@ function DefaultCard({ productsDisplay }) {
                       </Link>
                     </div>
 
-                    <i className="fa-regular fa-heart" onClick={() => {}}></i>
+                    <i
+                      className={
+                        favoritePId.includes(v.product_id)
+                          ? 'fa-solid fa-heart active'
+                          : 'fa-regular fa-heart'
+                      }
+                      onClick={() => {
+                        // getFavorites(memberAuth.memberId)
+                        handleAddOrDeleteFavorite(
+                          memberAuth.memberId,
+                          v.product_id
+                        )
+                      }}
+                    ></i>
                   </div>
                   <div className="card-bottom">
                     <h3>{v.product_name}</h3>

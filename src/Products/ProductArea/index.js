@@ -1,4 +1,4 @@
-import React ,{useContext}from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
 import DefaultCard from './DefaultCard'
@@ -15,7 +15,7 @@ function ProductArea({
   // cartItem,
   // handleAddOrDeleteCart,
 }) {
-  const {comparedList,favorites,handleAddOrDeleteFavorite,handleAddOrDeleteCart,cartItem,pageNow,setProducts,} = useContext(ProductFunctionContext)
+  const { cartItem } = useContext(ProductFunctionContext)
 
   return (
     <>
