@@ -21,7 +21,7 @@ function CateArticle({hashtagColor,frontData,allArtData,type}) {
     }
 useEffect(()=>{
     getShowPosts(type)
-    console.log(type);
+    // console.log(type);
 },[type])
    
 
@@ -37,8 +37,10 @@ useEffect(()=>{
 
                     <div className="latest_article article_mb_hidden" >
                         <div className="article">
-                            <div className="title">
-                                <span>{frontData[type-1].title}</span>
+                            <div  className="title">
+                                <span onClick={()=>{
+                            navigation('/articles/beebeePostNO/'+frontData[type-1].article_id)
+                        }}>{frontData[type-1].title}</span>
                                 <button className=" article_like_button" 
                                 onClick={()=>{
 
@@ -53,23 +55,23 @@ useEffect(()=>{
                                 <div className="article_writer">
                                     <img src={'/images/'+frontData[type-1].member_pic} alt=""/>
                                     <div className="writer_name">{frontData[type-1].email}</div>
-                                    <div className="post_time">>{Dayjs(frontData[type-1].created_at).format('YYYY/MM/DD')}</div>
+                                    <div className="post_time">{Dayjs(frontData[type-1].created_at).format('YYYY/MM/DD')}</div>
                                 </div>
 
                                 <div className="hashtag_group">
-                                {frontData[type-1].article_hashtag.map((v,i)=>{
+                                {
+                                    frontData[type-1].article_hashtag.map((v,i)=>{
+
                                     return(
                                         <div key={i} className="hashtags"
-                                        style={{backgroundColor:hashtagColor(i)}}>{v}</div>
+                                        style={{backgroundColor:hashtagColor(frontData[type-1].article_id,i)}}>{v}</div>
                                     )
                                 })}
                                     
                                 </div>
                             </div>
                         </div>
-                        <img onClick={()=>{
-                            navigation('/articles/beebeePostNO/'+frontData[type-1].article_id)
-                        }} src={'/images/article/'+frontData[type-1].article_pic_main} alt=""/>
+                        <img  src={'/images/article/'+frontData[type-1].article_pic_main} alt=""/>
                     </div>
 
 
@@ -90,15 +92,14 @@ useEffect(()=>{
                         {showPosts.map((v,i)=>{
 
                             return(
-                                <div key={v.article_id} className="article_card col-4">
-                                    <img
-                                    onClick={()=>{
-                                    navigation('/articles/beebeePostNO/'+v.article_id)
-                                        }} 
+                                <div key={v.article_id}  className="article_card col-4">
+                                    <img                                     
                                      src={'/images/article/'+v.article_pic_main}alt=""/>
                                     <div className="article">
                                         <div className="title">
-                                            <span>{v.title}</span>
+                                            <span onClick={()=>{
+                                    navigation('/articles/beebeePostNO/'+v.article_id)
+                                        }} >{v.title}</span>
                                             <button className=" article_like_button" 
                                                 onClick={()=>{
 
@@ -117,10 +118,11 @@ useEffect(()=>{
                                             </div>
         
                                             <div className="hashtag_group">
-                                            {v.article_hashtag.map((v,i)=>{
+                                            {  v.article_hashtag.map((w,i)=>{
+                                              
                                                 return(
                                                     <div key={i} className="hashtags"
-                                                    style={{backgroundColor:hashtagColor(i)}}>{v}</div>
+                                                    style={{backgroundColor:hashtagColor(v.article_id,i)}}>{w}</div>
                                                 )
                                             })}
                                             

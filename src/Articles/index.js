@@ -30,7 +30,7 @@ function Articles() {
     const { nowPage,article_id } = useParams()
     // console.log(nowPage);
     // 頁名
-    const pageNames = ['front','beebeeArticles','member','post','beebeePostNO']
+    const pageNames = ['front','beebeeArticles','member','beebeePost','beebeePostNO']
     // 按鈕focusclassName
     const listBarBtnClass = ['btn article_list_button','btn article_list_button article_mb_hidden']
     // 分類頁篩選碼
@@ -81,7 +81,8 @@ function Articles() {
              return listBarBtnClass[a]} 
      }
     // hashtag變色
-    const hashtagColor = (i)=>{
+    const hashtagColor = (a,i)=>{
+         let ii = parseInt(a)+i
         const colors =[
             '#8fbc8f',
             '#FFD686',
@@ -89,11 +90,9 @@ function Articles() {
             '#89b8f5', 
             '#dcc2ed'
         ]
-    const rand = i+ Math.ceil(Math.random()*10)%4
-    // console.log(rand);
-        return colors[rand]
+    // const rand = i+ Math.ceil(Math.random()*10)%4
+        return colors[ii%5] 
     }
-
 
 
 
@@ -234,7 +233,7 @@ function Articles() {
     {/* 需依照nowPage改變區域 */}
 
     {/* 首頁 */}
-    {isShowPage(0, <Front hashtagColor={hashtagColor} frontData={frontData}/>)}
+    {isShowPage(0, <Front hashtagColor={hashtagColor} frontData={frontData} setType={setType}/>)}
     {/* <Front/> */}
         {/* <div className="article_front">
             <div className="news_category_card bg_orange">
@@ -660,7 +659,7 @@ function Articles() {
 
         
     {/* 會員文章頁 */} 
-        {isShowPage(2, <ArticleMember hashtagColor={hashtagColor} allArtData={allArtData} type={type} setType={setType} article_id={article_id}/>)}
+    {isShowPage(2, <ArticleMember hashtagColor={hashtagColor} allArtData={allArtData} type={type} setType={setType} article_id={article_id}/>)}
      
          {/* <div className="article_page">
             
@@ -889,7 +888,7 @@ function Articles() {
 {/* 開始發文鍵 */}
         <div className="post_btn" 
         onClick={()=>{
-                    navigation('/articles/post')
+                    navigation('/articles/beebeePost')
                 }}>
             <div className="post_icon">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">

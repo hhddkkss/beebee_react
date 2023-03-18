@@ -86,14 +86,20 @@
 }
 .latest_article>.article>.title>span{
     width: 80%;
-   
+    cursor: pointer;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space:nowrap;
 }
+.article_front .latest_article>.article>.title{
+    cursor: pointer;
+
+}
 
 .article_card>.article>.title>span{
     width: 80%;
+    cursor: pointer;
+
     overflow: hidden;
     text-overflow: ellipsis;
     white-space:nowrap;
@@ -159,6 +165,7 @@
     text-align: center;
     letter-spacing: 0.075em;
     color: #4F4F4F;
+    cursor: pointer;
 }
 .suggest_articles>.suggest_articles_card{
     width: 100%;

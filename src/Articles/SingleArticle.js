@@ -29,12 +29,12 @@ function SingleArticle({hashtagColor,allArtData,type,article_id, setType}) {
 const [postsComment,setPostsComment]=useState([])
 
 const getPostsComment = ()=>{
-    console.log('G2');
+    // console.log('G2');
 
     axios.post(GET_ARTICLE_COMMENT,{
         article_id:article_id
     }).then((res)=>{
-        console.log('G3');
+        // console.log('G3');
 
         setPostsComment(res.data)
     })
@@ -56,11 +56,20 @@ const postComment = ()=>{
 }
 // 推薦文章
 const[suggestPosts,setSuggestPosts]=useState([])
-const getSuggestPosts=()=>{
+const getSuggestPosts=(cou)=>{
     let rex = []
-    for(let i = 1;i<4;i++){
-        let ii = i + Math.ceil(Math.random()*10)
-        rex = [...rex,allArtData[ii]]
+    let ids=[]
+    let n = 0
+    for(let i = 0;i<cou;i++){
+        n = Math.floor(Math.random()*allArtData.length);
+         if(ids.indexOf(n)>0){ //若有重複判斷
+            i-=1;
+            continue
+         }else{ //若不重複
+        ids=[ids,n]
+        rex = [...rex,allArtData[n]]
+        }
+        
     }
     console.log('rec',rex);
     return rex
@@ -70,14 +79,14 @@ useEffect(()=>{
         console.log('E0','A',allArtData,'S',singlePost);
         getSinglePost(article_id)
         getPostsComment()
-        setSuggestPosts(getSuggestPosts())
+        setSuggestPosts(getSuggestPosts(3))
         },[allArtData])
 
 useEffect(()=>{
-    console.log('G0','A',allArtData,'S',singlePost);
+    // console.log('G0','A',allArtData,'S',singlePost);
 
     if(!!allArtData){
-        console.log('G01','A',allArtData,'S',singlePost);
+        // console.log('G01','A',allArtData,'S',singlePost);
             getSinglePost(article_id)
             getPostsComment()
         }
@@ -89,7 +98,7 @@ useEffect(()=>{
         getPostsComment()
     },[postDone])
 
-    console.log('A',allArtData,'S',singlePost);
+    // console.log('A',allArtData,'S',singlePost);
 
   return (
    <>
@@ -101,17 +110,18 @@ useEffect(()=>{
                     <>
                     {singlePost.map((v,i)=>{
                         return(
-                            <Fragment key={v.id}>
+                            <Fragment key={v.article_id}>
                                 <img className="article_main_pic" src={'/images/article/'+v.article_pic_main} alt='article_main_pic' />
                                 <div className="single_article_title">{v.title}</div>
 
                                 <div className="hashtag_group">
-                                {v.article_hashtag.map((v,i)=>{
-                                return(
+                                { v.article_hashtag.map((w,i)=>{
+                                              
+                                    return(
                                     <div key={i} className="hashtags"
-                                    style={{backgroundColor:hashtagColor(i)}}>{v}</div>
-                                )
-                            })}
+                                    style={{backgroundColor:hashtagColor(v.article_id,i)}}>{w}</div>
+                                    )
+                                })}
                                     
                                 </div>
                                 <div className="article_writer">
@@ -186,7 +196,7 @@ useEffect(()=>{
                         {postsComment.map((v,i)=>{
 
                             return(
-                            <div key={v.id} className="message_box">
+                            <div key={v.message_id} className="message_box">
                                 <div className="article_writer">
                                     <img src={'/images/'+v.member_pic} alt=""/>
                                     <div className="writer_name">{v.email}</div>
@@ -252,13 +262,13 @@ useEffect(()=>{
                     return(
                         <div key={v.article_id} className="article_card col-4">
                             <img
-                            onClick={()=>{
-                            navigation('/articles/beebeePostNO/'+v.article_id)
-                                }} 
+                           
                             src={'/images/article/'+v.article_pic_main}alt=""/>
                             <div className="article">
                                 <div className="title">
-                                    <span>{v.title}</span>
+                                    <span  onClick={()=>{
+                            navigation('/articles/beebeePostNO/'+v.article_id)
+                                }}>{v.title}</span>
                                     <button className=" article_like_button" 
                                         onClick={()=>{
 
@@ -277,12 +287,14 @@ useEffect(()=>{
                                     </div>
 
                                     <div className="hashtag_group">
-                                    {v.article_hashtag.map((v,i)=>{
-                                        return(
-                                            <div key={i} className="hashtags"
-                                            style={{backgroundColor:hashtagColor(i)}}>{v}</div>
-                                        )
-                                    })}
+                                    {  v.article_hashtag.map((w,i)=>{
+                                              
+                                              return(
+                                                  <div key={i} className="hashtags"
+                                                  style={{backgroundColor:hashtagColor(v.article_id,i)}}>{w}</div>
+                                              )
+                                          })}
+
                                     
                                     </div>
                                 </div>

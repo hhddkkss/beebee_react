@@ -52,14 +52,13 @@ function ArticleMember() {
                     {/* {showPosts.map((v,i)=>{
 
                         return(
-                            <div key={v.id} className="article_card col-4">
-                                <img
-                                onClick={()=>{
-                                navigation('/articles/beebeePostNO/'+v.id)
-                                    }} 
+                            <div key={v.article_id}  className="article_card col-4">
+                                <img                                     
                                 src={'/images/article/'+v.article_pic_main}alt=""/>
                                 <div className="article">
-                                    <div className="title">
+                                    <div onClick={()=>{
+                                navigation('/articles/beebeePostNO/'+v.article_id)
+                                    }} className="title">
                                         <span>{v.title}</span>
                                         <button className=" article_like_button" 
                                             onClick={()=>{
@@ -79,10 +78,11 @@ function ArticleMember() {
                                         </div>
 
                                         <div className="hashtag_group">
-                                        {v.article_hashtag.map((v,i)=>{
+                                        {  v.article_hashtag.map((w,i)=>{
+                                        
                                             return(
                                                 <div key={i} className="hashtags"
-                                                style={{backgroundColor:hashtagColor(i)}}>{v}</div>
+                                                style={{backgroundColor:hashtagColor(v.article_id,i)}}>{w}</div>
                                             )
                                         })}
                                         
