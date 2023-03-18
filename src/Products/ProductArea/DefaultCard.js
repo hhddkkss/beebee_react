@@ -94,9 +94,11 @@ function DefaultCard({ productsDisplay }) {
                           console.log(v.isCompared)
                         }}
                       >
-                        {v.product_price}
+                        {v.product_price.toLocaleString()}
                       </p>
-                      <p className="discount">{v.product_price - 1000}</p>
+                      <p className="discount">
+                        {(v.product_price - 1000).toLocaleString()}
+                      </p>
                       <div className="compare-and-cart">
                         {localStorage.getItem('comparedList') &&
                         JSON.parse(

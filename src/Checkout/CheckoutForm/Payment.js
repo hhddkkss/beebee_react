@@ -26,7 +26,7 @@ function Payment({
             <option value="2">貨到付款</option>
             <option value="3">LinePay</option>
           </select>
-          <label className="form-label">付款方式</label>
+          <label className="form-label">*付款方式</label>
           <span className="checkout-error">456</span>
         </div>
       </div>

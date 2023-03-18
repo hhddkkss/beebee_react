@@ -31,7 +31,7 @@ function CheckoutRightLogin({ hasDiscount }) {
                 </div>
                 <div className="checkout-item-info">
                   <p>{v.product_name}</p>
-                  <p>{v.product_price - 1000}</p>
+                  <p>{(v.product_price - 1000).toLocaleString()}</p>
                 </div>
               </div>
             </div>
@@ -47,7 +47,7 @@ function CheckoutRightLogin({ hasDiscount }) {
       <p className="checkout-detail">付款明細</p>
       <div className="checkout-cal">
         <p>合計</p>
-        <p>{totalPrice}</p>
+        <p>{totalPrice.toLocaleString()}</p>
       </div>
       <div className="checkout-fee">
         <p>運費</p>
@@ -63,7 +63,7 @@ function CheckoutRightLogin({ hasDiscount }) {
       )}
       <div className="checkout-total">
         <p>總金額</p>
-        <p>{totalPrice + fee}</p>
+        <p>{(totalPrice + fee).toLocaleString()}</p>
       </div>
       <button className="btn-to-checkout" form="form1">
         立即下單

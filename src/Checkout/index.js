@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import '../styles/checkout.css'
 import Navbar from '../component/CheckoutNavBarLight'
 import StepInfomation from '../component/StepInfomation'
@@ -9,8 +9,11 @@ import CheckoutForm from './CheckoutForm'
 import CheckoutRightLogin from './CheckoutRightLogin'
 import CheckoutRight from './CheckoutRight'
 import BtnLoginAndSignUp from './BtnLoginAndSignUp'
+import AuthContext from '../Contexts/AuthContext'
 
 function Checkout() {
+  const { memberAuth } = useContext(AuthContext)
+
   //表單資料
   const [inputs, setInputs] = useState({})
 
@@ -25,9 +28,8 @@ function Checkout() {
   const handleChange = (event) => {
     const name = event.target.name
     const value = event.target.value
-
+    console.log({ ...inputs, [name]: value })
     setInputs({ ...inputs, [name]: value })
-    console.log(inputs)
   }
 
   const handleSubmit = (event) => {
@@ -37,6 +39,7 @@ function Checkout() {
 
   //拿優惠券
   const getCoupon = async () => {}
+
   return (
     <>
       <Navbar />
@@ -204,8 +207,7 @@ function Checkout() {
         <div className="checkout-right">
           {/* <!-- 標語 --> */}
 
-          {localStorage.getItem('myAuth') &&
-          JSON.parse(localStorage.getItem('myAuth')).memberId ? (
+          {memberAuth && memberAuth.memberId ? (
             <CheckoutRightLogin
               hasDiscount={hasDiscount}
               hasCoupon={hasCoupon}

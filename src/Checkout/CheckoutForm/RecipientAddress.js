@@ -1,15 +1,13 @@
+import { compose } from '@mui/system'
 import React from 'react'
+import cities from '../../data/cities.json'
+import disc from '../../data/disc.json'
 
 function RecipientAddress({ inputs, setInputs, handleChange, handleSubmit }) {
-  //城市
-  const cities = async () => {}
-  //區
-  const disc = async () => {}
-
   return (
     <>
       <div className="form-border recipient-address">
-        <h3 className="form-title">收件地址</h3>
+        <h3 className="form-title">*收件地址</h3>
 
         <div className="field-wrap">
           <input
@@ -31,29 +29,46 @@ function RecipientAddress({ inputs, setInputs, handleChange, handleSubmit }) {
             <select
               name="city"
               className="form-input"
-              defaultValue={0}
+              defaultValue="請選擇"
               onChange={(e) => {
                 handleChange(e)
               }}
             >
-              <option value="0">請選擇</option>
-              {/* <!-- <option value="1"></option> --> */}
+              <option value="請選擇">請選擇</option>
+              {cities.map((v) => {
+                return (
+                  <option value={v.name} key={v.name}>
+                    {v.name}
+                  </option>
+                )
+              })}
             </select>
-            <label className="form-label">縣市</label>
+            <label className="form-label">*縣市</label>
           </div>
           <div className="field-wrap">
             <select
               name="disc"
               className="form-input"
-              defaultValue={0}
+              defaultValue="請選擇"
               onChange={(e) => {
                 handleChange(e)
               }}
             >
-              <option value="0">請選擇</option>
-              {/* <!-- <option value="1"></option> --> */}
+              <option value="請選擇">請選擇</option>
+              {disc
+                .filter((v) => {
+                  return v.city_name === inputs.city
+                })
+                .map((v) => {
+                  return (
+                    <option value={v.name} key={v.name}>
+                      {v.name}
+                    </option>
+                  )
+                })}
+              {/* {console.log(disc)} */}
             </select>
-            <label className="form-label">區</label>
+            <label className="form-label">*區</label>
           </div>
           <span className="checkout-error">456</span>
         </div>
@@ -70,7 +85,7 @@ function RecipientAddress({ inputs, setInputs, handleChange, handleSubmit }) {
               handleChange(e)
             }}
           />
-          <label className="form-label">詳細地址</label>
+          <label className="form-label">*詳細地址</label>
           <span className="checkout-error">456</span>
         </div>
 
@@ -86,7 +101,7 @@ function RecipientAddress({ inputs, setInputs, handleChange, handleSubmit }) {
               handleChange(e)
             }}
           />
-          <label className="form-label">郵遞區號</label>
+          <label className="form-label">*郵遞區號</label>
           <span className="checkout-error">456</span>
         </div>
       </div>

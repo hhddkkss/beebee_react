@@ -19,7 +19,7 @@ function RecipientInfo({ inputs, setInputs, handleChange, handleSubmit }) {
                 handleChange(e)
               }}
             />
-            <label className="form-label">姓</label>
+            <label className="form-label">*姓</label>
           </div>
 
           <div className="field-wrap">
@@ -35,7 +35,7 @@ function RecipientInfo({ inputs, setInputs, handleChange, handleSubmit }) {
               }}
             />
 
-            <label className="form-label">名</label>
+            <label className="form-label">*名</label>
           </div>
           <span className="checkout-error">456</span>
         </div>
@@ -54,7 +54,7 @@ function RecipientInfo({ inputs, setInputs, handleChange, handleSubmit }) {
             }}
           />
           <label htmlFor="mobile" className="form-label">
-            手機號碼
+            *手機號碼
           </label>
           <span className="checkout-error">456</span>
         </div>
@@ -71,7 +71,7 @@ function RecipientInfo({ inputs, setInputs, handleChange, handleSubmit }) {
               handleChange(e)
             }}
           />
-          <label className="form-label">Email</label>
+          <label className="form-label">*Email</label>
           <span className="checkout-error">456</span>
         </div>
       </div>

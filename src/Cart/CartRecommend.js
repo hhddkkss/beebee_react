@@ -88,7 +88,6 @@ function CartRecommend() {
                               : 'fa-regular fa-heart'
                           }
                           onClick={() => {
-                           
                             handleAddOrDeleteFavorite(
                               memberAuth.memberId,
                               v.product_id
@@ -100,7 +99,9 @@ function CartRecommend() {
                         <h3>{v.product_name}</h3>
                         <div className="card-text">
                           <p className="original">{v.product_price}</p>
-                          <p className="discount">{v.product_price}</p>
+                          <p className="discount">
+                            {(v.product_price - 1000).toLocaleString()}
+                          </p>
                           <div className="compare-and-cart">
                             {comparedList &&
                             comparedList.includes(v.product_id) ? (

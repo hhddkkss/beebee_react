@@ -44,7 +44,11 @@ function Navbar() {
 
   //點畫面其他區域會使會員區消失
   function handleOutMemberBox(event) {
-    if (memberBoxRef.current&&!memberBoxRef.current.contains(event.target) && !memberIconRef.current.contains(event.target)) {
+    if (
+      memberBoxRef.current &&
+      !memberBoxRef.current.contains(event.target) &&
+      !memberIconRef.current.contains(event.target)
+    ) {
       setMemberBoxToggle(false)
     } else {
       setMemberBoxToggle(true)
@@ -52,7 +56,11 @@ function Navbar() {
   }
 
   function handleOutCartBox(event) {
-    if (cartBoxRef.current && !cartBoxRef.current.contains(event.target) && !cartIconRef.current.contains(event.target)) {
+    if (
+      cartBoxRef.current &&
+      !cartBoxRef.current.contains(event.target) &&
+      !cartIconRef.current.contains(event.target)
+    ) {
       setToggleCartButton(false)
     } else {
       setToggleCartButton(true)
@@ -63,7 +71,6 @@ function Navbar() {
     getProductData()
     document.addEventListener('click', handleOutMemberBox)
     document.addEventListener('click', handleOutCartBox)
-
   }, [])
   return (
     <>
@@ -235,7 +242,7 @@ function Navbar() {
         </nav>
 
         <div
-        ref={cartBoxRef}
+          ref={cartBoxRef}
           className={
             toggleCartButton
               ? 'cart-hover-box cart-hover-box-on'
@@ -257,7 +264,9 @@ function Navbar() {
                     </div>
                     <p className="product-name">{v.product_name}</p>
                   </div>
-                  <p className="product-price">{v.product_price - 1000}</p>
+                  <p className="product-price">
+                    {(v.product_price - 1000).toLocaleString()}
+                  </p>
                 </div>
               )
             })}

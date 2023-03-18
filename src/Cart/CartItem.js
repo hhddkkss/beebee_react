@@ -107,7 +107,9 @@ function CartItem() {
                   ></div>
                   <span className="cart-name">{v.product_name}</span>
                 </div>
-                <span className="cart-price">{v.product_price - 1000}</span>
+                <span className="cart-price">
+                  {(v.product_price - 1000).toLocaleString()}
+                </span>
                 <div className="cart-control">
                   <a href="#">
                     <i
@@ -140,7 +142,7 @@ function CartItem() {
                   </a>
                 </div>
                 <span className="cart-total">
-                  {v.quantity * (v.product_price - 1000)}
+                  {(v.quantity * (v.product_price - 1000)).toLocaleString()}
                 </span>
               </div>
             )
@@ -154,7 +156,8 @@ function CartItem() {
             購物車內總共有<span>{cartData.length}</span>樣商品
           </p>
           <p>
-            合計：<span className="total-price">{totalPrice}</span>
+            合計：
+            <span className="total-price">{totalPrice.toLocaleString()}</span>
           </p>
           <button
             className="btn btn-checkout"

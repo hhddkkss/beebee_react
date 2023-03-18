@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Cards from 'react-credit-cards-2'
 import 'react-credit-cards-2/es/styles-compiled.css'
 
-const PaymentForm = ({ inputs, setInputs, handleChange, handleSubmit }) => {
+const PaymentForm = () => {
   const [state, setState] = useState({
     number: '',
     expiry: '',
@@ -56,7 +56,7 @@ const PaymentForm = ({ inputs, setInputs, handleChange, handleSubmit }) => {
             className="form-input"
             autoComplete="off"
           />
-          <label className="form-label">信用卡號</label>
+          <label className="form-label">*信用卡號</label>
         </div>
 
         <div className="field-wrap">
@@ -70,7 +70,7 @@ const PaymentForm = ({ inputs, setInputs, handleChange, handleSubmit }) => {
             className="form-input"
             autoComplete="off"
           />
-          <label className="form-label">持有者姓名</label>
+          <label className="form-label">*持有者姓名</label>
         </div>
         <div className="field-wrap">
           <input
@@ -83,7 +83,7 @@ const PaymentForm = ({ inputs, setInputs, handleChange, handleSubmit }) => {
             className="form-input"
             autoComplete="off"
           />
-          <label className="form-label">到期年</label>
+          <label className="form-label">*到期年</label>
         </div>
         <div className="field-wrap">
           <input
@@ -96,7 +96,7 @@ const PaymentForm = ({ inputs, setInputs, handleChange, handleSubmit }) => {
             className="form-input"
             autoComplete="off"
           />
-          <label className="form-label">安全碼</label>
+          <label className="form-label">*安全碼</label>
         </div>
       </div>
     </div>
