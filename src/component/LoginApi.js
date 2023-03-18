@@ -47,6 +47,10 @@ export const GET_ARTICLE_COMMENT = `${HOST}/article_page/articleComments`
 //新增文章留言
 export const POST_ARTICLE_COMMENT = `${HOST}/article_page/postArticleComments`
 
+//加入或移除喜愛文章
+export const ADD_DEL_ARTI_LIKE = `${HOST}/article_page/memArticleLikeOrRemove`
+
+
 // 拿取會員歷史喜愛
 export const ARTICLE_MEMBER_LIKED = `${HOST}/article_page/memberArticleLike`
 // 拿取會員歷史文章

@@ -22,6 +22,9 @@
     background-color: transparent;
     border: none;
 }
+.article_like_button>.fa-heart{
+    color: #E59069;
+}
 
 .articles_container>.latest_article>img{
     width: 60%;

@@ -5,7 +5,7 @@ import axios from 'axios'
 import Dayjs from 'dayjs'
 import ArticleSideBar from './ArticleSideBar'
 
-function CateArticle({hashtagColor,frontData,allArtData,type}) {
+function CateArticle({hashtagColor,frontData,allArtData,type,addDelLikeArt,likeIdList}) {
     const navigation = useNavigate()
 
     // 將所有文章分類呈現
@@ -43,9 +43,12 @@ useEffect(()=>{
                         }}>{frontData[type-1].title}</span>
                                 <button className=" article_like_button" 
                                 onClick={()=>{
-
+                                    addDelLikeArt(frontData[type-1].article_id)
                                 }}>
-                                <i className="fa-solid fa-heart"></i>
+                                {likeIdList.includes(frontData[type-1].article_id)?
+                                <i className="fa-solid fa-heart"></i>:<i className="fa-regular fa-heart"></i>
+                                }
+                                
                                     
                                     </button>
                                     
@@ -102,9 +105,11 @@ useEffect(()=>{
                                         }} >{v.title}</span>
                                             <button className=" article_like_button" 
                                                 onClick={()=>{
-
+                                                    addDelLikeArt(v.article_id)
                                                 }}>
-                                                <i className="fa-regular fa-heart"></i>
+                                               {likeIdList.includes(v.article_id)?
+                                                <i className="fa-solid fa-heart"></i>:<i className="fa-regular fa-heart"></i>
+                                                }
                                                 
                                             </button>
                                                 

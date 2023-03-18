@@ -7,7 +7,7 @@ import Dayjs from 'dayjs'
 import AuthContext from '../Contexts/AuthContext'
 import ArticleSideBar from './ArticleSideBar'
 
-function ArticleMember() {
+function ArticleMember({addDelLikeArt,likeIdList}) {
     const navigation = useNavigate()
     const {memberAuth}=useContext(AuthContext)
   return (
@@ -60,13 +60,15 @@ function ArticleMember() {
                                 navigation('/articles/beebeePostNO/'+v.article_id)
                                     }} className="title">
                                         <span>{v.title}</span>
-                                        <button className=" article_like_button" 
-                                            onClick={()=>{
-
-                                            }}>
-                                            <i className="fa-regular fa-heart"></i>
-                                            
-                                        </button>
+                                       <button className=" article_like_button" 
+                                                onClick={()=>{
+                                                    addDelLikeArt(v.article_id)
+                                                }}>
+                                               {likeIdList.includes(v.article_id)?
+                                                <i className="fa-solid fa-heart"></i>:<i className="fa-regular fa-heart"></i>
+                                                }
+                                                
+                                            </button>
                                             
                                     </div>
                             

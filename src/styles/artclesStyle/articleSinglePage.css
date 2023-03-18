@@ -54,6 +54,7 @@
     color: #4F4F4F;
     border-bottom: 1px solid #4F4F4F;
     gap: 10px;
+    cursor: pointer;
 }
 .article_buton>.article_like_button{
     margin-left: 0;
