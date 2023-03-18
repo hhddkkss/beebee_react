@@ -1,7 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
-import ProductArea from '../Products/ProductArea'
+import axios from 'axios'
+import { ADD_CART_ITEM } from '../component/LoginApi'
+import AuthContext from '../Contexts/AuthContext'
 
 function CartRecommend() {
   //隨機五個數字
@@ -16,6 +18,19 @@ function CartRecommend() {
   }
   const [recommend, setRecommend] = useState(getRandomNum())
 
+  const [render, setRender] = useState(false)
+  //  寫進購物車資料庫
+  const addToCart = async (product_id) => {
+    const member_id = memberAuth.memberId
+
+    await axios.post(ADD_CART_ITEM, {
+      member_id: member_id,
+      product_id: product_id,
+    })
+
+    await setRender(!render)
+  }
+
   //------ UseContext -------
   const {
     products,
@@ -26,11 +41,15 @@ function CartRecommend() {
     comparedList,
     toggleCompared,
     handleAddOrDeleteCompared,
-    cartItem,
-    handleAddOrDeleteCart,
-    addToCartTable,
     getCartData,
+    cartPId,
+    cartData,
   } = useContext(ProductFunctionContext)
+
+  const { memberAuth } = useContext(AuthContext)
+  useEffect(() => {
+    getCartData()
+  }, [render])
 
   return (
     <>
@@ -132,31 +151,18 @@ function CartRecommend() {
                               </svg>
                             )}
 
-                            {cartItem &&
-                            cartItem.find(
-                              (v2) => v2.product_id === v.product_id
-                            ) ? (
+                            {
                               <i
-                                className="fa-solid fa-cart-shopping active"
-                                onClick={async () => {
-                                  //寫進localStorage
-                                  await handleAddOrDeleteCart(v.product_id)
-                                  //寫到資料庫
-                                  await addToCartTable()
-                                  //從資料庫拿購物車
-                                  await getCartData()
+                                className={
+                                  cartPId.includes(v.product_id)
+                                    ? 'fa-solid fa-cart-shopping active'
+                                    : 'fa-solid fa-cart-shopping'
+                                }
+                                onClick={() => {
+                                  addToCart(v.product_id)
                                 }}
                               ></i>
-                            ) : (
-                              <i
-                                className="fa-solid fa-cart-shopping"
-                                onClick={async () => {
-                                  await handleAddOrDeleteCart(v.product_id)
-                                  await addToCartTable()
-                                  await getCartData()
-                                }}
-                              ></i>
-                            )}
+                            }
                           </div>
                         </div>
                       </div>

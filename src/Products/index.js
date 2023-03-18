@@ -331,15 +331,27 @@ function Products() {
         popCompareBtn={popCompareBtn}
       />
 
-      <Pagination
-        count={pageTotal}
-        page={pageNow}
-        sx={{ mx: '0 auto' }}
-        onChange={handleChangePageNow}
-        size={'large'}
-        showFirstButton={true}
-        showLastButton={true}
-      />
+      {window.screen.width > 376 ? (
+        <Pagination
+          count={pageTotal}
+          page={pageNow}
+          sx={{ mx: '0 auto' }}
+          onChange={handleChangePageNow}
+          size={'large'}
+          showFirstButton={true}
+          showLastButton={true}
+        />
+      ) : (
+        <Pagination
+          count={pageTotal}
+          page={pageNow}
+          sx={{ mx: '0 auto' }}
+          onChange={handleChangePageNow}
+          size={'small'}
+          showFirstButton={true}
+          showLastButton={false}
+        />
+      )}
       {/* 比價區 */}
       <ProductCompare
         // setCompareListClass={setCompareListClass}

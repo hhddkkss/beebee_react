@@ -433,15 +433,17 @@ header {
 .card-bottom svg {
   cursor: pointer;
 }
-.product-area .fa-solid.fa-heart {
+.product-area .fa-regular.fa-heart {
   position: absolute;
   top: 0;
   right: 0;
 }
-.product-area .fa-solid.fa-heart.active {
+.product-area .fa-regular.fa-heart.active {
   color: var(--orange1);
 }
-
+.product-area .fa-solid.fa-cart-shopping.active {
+  color: var(--orange1);
+}
 .product-area .my-card .card-top .img-wrap {
   width: 180px;
   aspect-ratio: 10/9;
@@ -734,8 +736,6 @@ header {
   }
 
   /** card-top */
-  .product-area .my-card .card-top {
-  }
 
   .product-area .my-card .card-top .img-wrap {
     width: 100px;

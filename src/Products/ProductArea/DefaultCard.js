@@ -1,6 +1,10 @@
-import React, { useContext } from 'react'
+import axios from 'axios'
+import React, { useContext, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import AuthContext from '../../Contexts/AuthContext'
 import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
+import { ADD_CART_ITEM } from '../../component/LoginApi'
+
 function DefaultCard({ productsDisplay }) {
   const {
     pageNow,
@@ -12,11 +16,33 @@ function DefaultCard({ productsDisplay }) {
     comparedList,
     toggleCompared,
     handleAddOrDeleteCompared,
-    cartItem,
-    handleAddOrDeleteCart,
+    getCartData,
+    cartPId,
   } = useContext(ProductFunctionContext)
+
+  const { memberAuth } = useContext(AuthContext)
+
+  //render
+
+  const [render, setRender] = useState(false)
+  //  寫進購物車資料庫
+  const addToCart = async (product_id) => {
+    const member_id = memberAuth.memberId
+
+    await axios.post(ADD_CART_ITEM, {
+      member_id: member_id,
+      product_id: product_id,
+    })
+    await setRender(!render)
+  }
+
+  useEffect(() => {
+    getCartData()
+  }, [render])
+
   return (
     <>
+      {/* {console.log(ADD_CART_ITEM)} */}
       <div className="row row-cols-lg-5">
         {/* {console.log(productsDisplay, 'defaultCard',pageNow)} */}
 
@@ -42,23 +68,7 @@ function DefaultCard({ productsDisplay }) {
                       </Link>
                     </div>
 
-                    {favorites && favorites.includes(v.product_id) ? (
-                      <i
-                        className="fa-solid fa-heart"
-                        onClick={() => {
-                          setProducts(toggleLiked(products, v.product_id))
-                          handleAddOrDeleteFavorite(v.product_id)
-                        }}
-                      ></i>
-                    ) : (
-                      <i
-                        className="fa-regular fa-heart"
-                        onClick={() => {
-                          setProducts(toggleLiked(products, v.product_id))
-                          handleAddOrDeleteFavorite(v.product_id)
-                        }}
-                      ></i>
-                    )}
+                    <i className="fa-regular fa-heart" onClick={() => {}}></i>
                   </div>
                   <div className="card-bottom">
                     <h3>{v.product_name}</h3>
@@ -66,6 +76,7 @@ function DefaultCard({ productsDisplay }) {
                       <p
                         className="original"
                         onClick={() => {
+                          //測試用
                           console.log(v.isCompared)
                         }}
                       >
@@ -125,24 +136,16 @@ function DefaultCard({ productsDisplay }) {
                           </svg>
                         )}
 
-                        {cartItem &&
-                        cartItem.find(
-                          (v2) => v2.product_id === v.product_id
-                        ) ? (
-                          <i
-                            className="fa-solid fa-cart-shopping active"
-                            onClick={() => {
-                              handleAddOrDeleteCart(v.product_id)
-                            }}
-                          ></i>
-                        ) : (
-                          <i
-                            className="fa-solid fa-cart-shopping"
-                            onClick={() => {
-                              handleAddOrDeleteCart(v.product_id)
-                            }}
-                          ></i>
-                        )}
+                        <i
+                          className={
+                            cartPId.includes(v.product_id)
+                              ? 'fa-solid fa-cart-shopping active'
+                              : 'fa-solid fa-cart-shopping'
+                          }
+                          onClick={() => {
+                            addToCart(v.product_id)
+                          }}
+                        ></i>
                       </div>
                     </div>
                   </div>

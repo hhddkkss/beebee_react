@@ -1,6 +1,6 @@
 import { createContext, useState, useContext } from 'react'
 import axios from 'axios'
-import { HOST, GET_CART_ITEM_API } from '../component/LoginApi'
+import { HOST, GET_CART_ITEM_API, ADD_CART_ITEM } from '../component/LoginApi'
 import AuthContext from './AuthContext'
 
 const ProductFunctionContext = createContext({})
@@ -22,6 +22,9 @@ export const ProductFunctionContextProvider = function ({ children }) {
 
   // forRemoveInfo
   const [showRemove, setShowRemove] = useState(false)
+
+  //cart item pid
+  const [cartPId, setCartPId] = useState([])
 
   const [pageNow, setPageNow] = useState(1) //預設第一頁
   const [perPage, setPerPage] = useState(25) // 一頁25個
@@ -185,17 +188,6 @@ export const ProductFunctionContextProvider = function ({ children }) {
   //購物車幾樣商品
   const [cartTotalRows, setCarTotalRows] = useState(0)
 
-  //覆蓋local storage
-  const coverCartItems = (arr) => {
-    const readyToCartItem = arr.map((v) => {
-      return { product_id: v, count: 1 }
-    })
-    setCartItem(readyToCartItem)
-    //json轉字串 再複寫
-    localStorage.setItem('cartItem', JSON.stringify(readyToCartItem))
-    console.log(readyToCartItem)
-  }
-
   //算出總價
   const totalPrice = cartData
     .map((v) => (v.product_price - 1000) * v.quantity)
@@ -215,9 +207,8 @@ export const ProductFunctionContextProvider = function ({ children }) {
       .then((r) => {
         setCartData(r.data.rows) //拉資料庫購物車 新增進狀態中
         const itemData = r.data.rows.map((v) => v.product_id) //拉到的資料變成為儲存 product_id 的陣列
-        coverCartItems(itemData) //轉好格式{product_id,count} 轉字串 複寫localStorage
-        setCarTotalRows(r.data.totalRows)
-
+        setCartPId(itemData)
+        setCarTotalRows(cartPId.length)
       })
       .catch((e) => console.log(e))
   }
@@ -256,6 +247,7 @@ export const ProductFunctionContextProvider = function ({ children }) {
         showRemove,
         setShowRemove,
         totalPrice,
+        cartPId,
       }}
     >
       {children}
