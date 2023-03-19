@@ -43,12 +43,18 @@ export const GET_All_ARTICLE_POST = `${HOST}/article_page/allArticle_api`
 
 //拿取首頁文章
 export const GET_FRONT_ARTICLES = `${HOST}/article_page/frontArticle_api`
+//拿取單篇文章
+export const GET_SINGLE_ARTICLE_POST = `${HOST}/article_page/singleArticle_api`
 
 //拿取文章留言
 export const GET_ARTICLE_COMMENT = `${HOST}/article_page/articleComments`
 
 //新增文章留言
 export const POST_ARTICLE_COMMENT = `${HOST}/article_page/postArticleComments`
+
+//加入或移除喜愛文章
+export const ADD_DEL_ARTI_LIKE = `${HOST}/article_page/memArticleLikeOrRemove`
+
 
 // 拿取會員歷史喜愛
 export const ARTICLE_MEMBER_LIKED = `${HOST}/article_page/memberArticleLike`
