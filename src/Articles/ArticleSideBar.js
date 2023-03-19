@@ -1,5 +1,7 @@
-import React from 'react'
+import axios from 'axios'
+import React,{useState,useEffect} from 'react'
 import {useParams,useNavigate } from 'react-router-dom'
+import { HOT_ARTICLES } from '../component/LoginApi'
 
 
 function ArticleSideBar({type}) {
@@ -34,7 +36,15 @@ function ArticleSideBar({type}) {
         }
     } 
 
-
+    const [hotPosts,setHotPosts]=useState([])
+    const getHotPots=()=>{
+        axios.get(HOT_ARTICLES).then((res)=>{
+            setHotPosts(res.data)
+        })
+    }
+useEffect(()=>{
+    getHotPots()
+},[])
 
   return (
    <>
@@ -61,18 +71,28 @@ function ArticleSideBar({type}) {
             <div className="suggest_articles">
 
                 <div className="title">熱門排行榜</div>
+{hotPosts[0]?
+<>
+{hotPosts.map((v,i)=>{
+    return(
+         <div key={v.article_id} className="suggest_articles_card">
 
-                <div className="suggest_articles_card">
-
-                    <div className="articleTitle">藍芽耳機空降出現</div>
+                    <div onClick={()=>{
+                                    navigation('/articles/beebeePostNO/'+v.article_id)
+                                        }} className="articleTitle">{v.title}</div>
 
                     <div className="articleWritter">
-                        <img src="./titleBar.png" alt=""/>
-                        <div className="writterName">會員XXX</div>
+                        <img src={'/images/'+v.member_pic} alt=""/>
+                        <div className="writterName">{v.email}</div>
                         </div>
 
-                        <img src="/imges/member_default_avatar.png" alt=""/>
+                        <img src={'/images/article/'+v.article_pic_main}/>
                 </div>
+    )
+})}
+    
+</>:''}
+               
 
             </div>
 

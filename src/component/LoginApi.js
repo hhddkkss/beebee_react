@@ -62,3 +62,6 @@ export const ARTICLE_MEMBER_LIKED = `${HOST}/article_page/memberArticleLike`
 export const ARTICLE_MEMBER_POST = `${HOST}/article_page/memberArticlePosted`
 
 export const FAVORITES = `${HOST}/favorites`
+
+//最熱門文章
+export const HOT_ARTICLES = `${HOST}/article_page/hotIssue`

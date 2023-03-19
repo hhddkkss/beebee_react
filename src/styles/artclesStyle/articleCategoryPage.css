@@ -186,7 +186,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    
+    cursor: pointer;
 }
 .suggest_articles>.suggest_articles_card>.articleWritter{
     display: flex;
