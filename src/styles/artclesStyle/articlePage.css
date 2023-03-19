@@ -95,6 +95,7 @@ body{
     height:130px;
     padding-left: 45px;
     cursor: pointer;
+    padding-top: 15px;
 }
 .category_title>.description{
     width: 70%;

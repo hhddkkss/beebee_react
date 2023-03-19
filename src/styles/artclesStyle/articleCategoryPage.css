@@ -96,6 +96,7 @@
 }
 .article_front .latest_article>.article>.title{
     cursor: pointer;
+    display: block;
 
 }
 
