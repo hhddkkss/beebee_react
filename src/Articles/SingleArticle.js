@@ -1,12 +1,13 @@
 import React ,{useState,useEffect, useContext,Fragment,useRef}from 'react'
-import {GET_ARTICLE_COMMENT,POST_ARTICLE_COMMENT } from '../component/LoginApi'
+import {GET_ARTICLE_COMMENT,POST_ARTICLE_COMMENT,GET_SINGLE_ARTICLE_POST } from '../component/LoginApi'
 import { useLocation, useParams,useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Dayjs from 'dayjs'
 import AuthContext from '../Contexts/AuthContext'
 import ArticleSideBar from './ArticleSideBar'
+import HashTagColor from './HashTagColor'
 
-function SingleArticle({hashtagColor,allArtData,type,article_id, setType,addDelLikeArt,likeIdList}) {
+function SingleArticle({allArtData,type,article_id, setType,addDelLikeArt,likeIdList}) {
     const navigation = useNavigate()
 
     const {memberAuth}=useContext(AuthContext)
@@ -14,15 +15,18 @@ function SingleArticle({hashtagColor,allArtData,type,article_id, setType,addDelL
 // 文章內容資料
     const [singlePost,setSinglePost]=useState([])
 
-    const getSinglePost = (sid)=>{
+    const getSinglePost = async(sid)=>{
+        // console.log(article_id);
+        if(!!sid){
+            await axios.post(GET_SINGLE_ARTICLE_POST,{
+                article_id:sid
+            }).then((res)=>{
+                console.log(res.data);
+                setSinglePost(res.data)
+            })
+        }
   
-      let nowD = allArtData.filter((v)=>{
-            return v.article_id == parseInt(sid)
-        })
-        console.log('G1');
-          setSinglePost(nowD)
-        if(!!nowD[0]){
-          setType(parseInt(nowD[0].article_category_id))}
+      
     }
 // 文章留言資料
 const [postsComment,setPostsComment]=useState([])
@@ -58,11 +62,13 @@ const postComment = ()=>{
 const[suggestPosts,setSuggestPosts]=useState([])
 const getSuggestPosts=(cou)=>{
     let rex = []
+    if(!!allArtData.length){
+    
     let ids=[]
     let n = 0
     for(let i = 0;i<cou;i++){
         n = Math.floor(Math.random()*allArtData.length);
-         if(ids.indexOf(n)>0){ //若有重複判斷
+         if(ids.includes(n)){ //若有重複判斷
             i-=1;
             continue
          }else{ //若不重複
@@ -70,28 +76,22 @@ const getSuggestPosts=(cou)=>{
         rex = [...rex,allArtData[n]]
         }
         
-    }
-    console.log('rec',rex);
+    }}
+    // console.log('rec',rex);
     return rex
+   
 }
 
+
 useEffect(()=>{
-        console.log('E0','A',allArtData,'S',singlePost);
+        // console.log('E0','A',allArtData,'S',singlePost);
         getSinglePost(article_id)
         getPostsComment()
         setSuggestPosts(getSuggestPosts(3))
-        },[allArtData])
-
+        },[article_id])
 useEffect(()=>{
-    // console.log('G0','A',allArtData,'S',singlePost);
-
-    if(!!allArtData){
-        // console.log('G01','A',allArtData,'S',singlePost);
-            getSinglePost(article_id)
-            getPostsComment()
-        }
-    },[article_id])
-
+    setSuggestPosts(getSuggestPosts(3))
+},[allArtData])
    
 
 useEffect(()=>{
@@ -119,7 +119,7 @@ useEffect(()=>{
                                               
                                     return(
                                     <div key={i} className="hashtags"
-                                    style={{backgroundColor:hashtagColor(v.article_id,i)}}>{w}</div>
+                                    style={{backgroundColor:HashTagColor(v.article_id,i)}}>{w}</div>
                                     )
                                 })}
                                     
@@ -187,7 +187,7 @@ useEffect(()=>{
                     <div className="article_buton" onClick={()=>{
                                                     postInput.current.focus()
                                                 }}>
-                                   <i class="fa-regular fa-comments fa-xl"></i>
+                                   <i className="fa-regular fa-comments fa-xl"></i>
                             
                                 留言
                     </div>
@@ -261,8 +261,8 @@ useEffect(()=>{
                   <div className="more_suggest">what's more</div>
                   <div className="article_box">
                 
-                
-                  {suggestPosts[0]?
+               
+                  {!!suggestPosts[0]?
                     suggestPosts.map((v,i)=>{
 
                     return(
@@ -299,7 +299,7 @@ useEffect(()=>{
                                               
                                               return(
                                                   <div key={i} className="hashtags"
-                                                  style={{backgroundColor:hashtagColor(v.article_id,i)}}>{w}</div>
+                                                  style={{backgroundColor:HashTagColor(v.article_id,i)}}>{w}</div>
                                               )
                                           })}
 
