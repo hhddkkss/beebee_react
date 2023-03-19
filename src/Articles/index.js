@@ -268,7 +268,7 @@ function Articles() {
 
 
     {/* 分類頁 */}
-    {isShowPage(1, <CateArticle  frontData={frontData} allArtData={allArtData} type={type} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList}/>)}
+    {isShowPage(1, <CateArticle  frontData={frontData} allArtData={allArtData} type={type} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} setType={setType}/>)}
 
 
 
