@@ -81,19 +81,7 @@ function Articles() {
              // console.log('A2');
              return listBarBtnClass[a]} 
      }
-    // hashtag變色
-    const hashtagColor = (a,i)=>{
-         let ii = parseInt(a)+i
-        const colors =[
-            '#8fbc8f',
-            '#FFD686',
-            '#f7a99f',
-            '#89b8f5', 
-            '#dcc2ed'
-        ]
-    // const rand = i+ Math.ceil(Math.random()*10)%4
-        return colors[ii%5] 
-    }
+   
 
 
     //喜愛功能
@@ -116,14 +104,17 @@ function Articles() {
     
     }
     //喜愛列表
+    const [artLikeList,setArtLikeIdList]  = useState([])
     const getLikedArti = async()=>{
         if(memberAuth.token && memberAuth.memberId){
         await axios.post(ARTICLE_MEMBER_LIKED,{
             memberId:memberAuth.memberId
         }).then((res)=>{
+            setArtLikeIdList(res.data);
             setLikeIdList(res.data.map((v,i)=>{
                 return v.article_id
             }))
+           
         })
     }
 
@@ -138,8 +129,11 @@ function Articles() {
         getFrontArticles()
         getAllArticles()
         getLikedArti()
-    },[])
 
+    },[])
+    useEffect(()=>{
+        getAllArticles()
+    },[nowPage])
     useEffect(()=>{   
         getLikedArti()
     },[addYY])
@@ -220,7 +214,7 @@ function Articles() {
                     `${listBarBtnClass[1]} active`:`${listBarBtnClass[1]}`
                 }
                  onClick={()=>{
-                    navigation('/articles/member')
+                    navigation('/articles/member/liked')
                 }}>會員文章中心</button>
                 <button className="btn article_list_button article_mb_show ">其他
                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -268,24 +262,24 @@ function Articles() {
     {/* 需依照nowPage改變區域 */}
 
     {/* 首頁 */}
-    {isShowPage(0, <Front hashtagColor={hashtagColor} frontData={frontData} setType={setType}/>)}
+    {isShowPage(0, <Front  frontData={frontData} setType={setType}/>)}
     {/* <Front/> */}
         
 
 
     {/* 分類頁 */}
-    {isShowPage(1, <CateArticle hashtagColor={hashtagColor} frontData={frontData} allArtData={allArtData} type={type} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList}/>)}
+    {isShowPage(1, <CateArticle  frontData={frontData} allArtData={allArtData} type={type} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList}/>)}
 
 
 
  
     {/* 單頁面 */}
-    {isShowPage(4, <SingleArticle hashtagColor={hashtagColor} allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList}/>)}
+    {isShowPage(4, <SingleArticle  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList}/>)}
 
 
         
     {/* 會員文章頁 */} 
-    {isShowPage(2, <ArticleMember hashtagColor={hashtagColor} allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList}/>)}
+    {isShowPage(2, <ArticleMember  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} artLikeList={artLikeList}/>)}
      
       
 
