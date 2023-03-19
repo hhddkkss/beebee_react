@@ -6,20 +6,25 @@ import Dayjs from 'dayjs'
 import ArticleSideBar from './ArticleSideBar'
 import HashTagColor from './HashTagColor'
 
-function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList}) {
+function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType}) {
     const navigation = useNavigate()
 
     // 將所有文章分類呈現
     const [showPosts,setShowPosts] = useState(allArtData)
     const getShowPosts = (typeId)=>{
         let newArt = allArtData.filter((v,i)=>{
-         return  v.article_id!==frontData[type-1].id && v.article_category_id == typeId
+         return  v.article_id!==frontData[type-1].article_id && v.article_category_id == typeId
         //  
         })
         
 
         setShowPosts(newArt)
     }
+    useEffect(()=>{
+        if(!!type){
+            setType(1)
+        }
+    },[])
     useEffect(()=>{
     //    console.log('cete',allArtData);
     //    getAllArticles()
