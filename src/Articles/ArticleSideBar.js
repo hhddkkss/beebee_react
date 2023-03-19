@@ -2,7 +2,7 @@ import React from 'react'
 
 function ArticleSideBar({type}) {
     // 分類頁籤字樣
-    const typeTitle = ['Bee新聞','推薦版','心得版']
+    const typeTitle = ['Bee新聞','推薦版','分享版']
     const typeSubTitle = ['為網友提供專業的最新時事動態，為您提供最新、最完整的時事報導。','網友最誠心的推薦好物，貨比三家不吃虧！','最詳細的使用推薦心得就在BEEbeE，結合自己的使用經驗，一啟發文與別人分享吧！']
     const typeColor = [
         'category_side_title news',
