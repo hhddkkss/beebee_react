@@ -104,13 +104,13 @@ function Articles() {
     
     }
     //喜愛列表
-    const [artLikeList,setArtLikeIdList]  = useState([])
+    const [artLikeList,setArtLikeList]  = useState([])
     const getLikedArti = async()=>{
         if(memberAuth.token && memberAuth.memberId){
         await axios.post(ARTICLE_MEMBER_LIKED,{
             memberId:memberAuth.memberId
         }).then((res)=>{
-            setArtLikeIdList(res.data);
+            setArtLikeList(res.data);
             setLikeIdList(res.data.map((v,i)=>{
                 return v.article_id
             }))
@@ -133,6 +133,8 @@ function Articles() {
     },[])
     useEffect(()=>{
         getAllArticles()
+        getLikedArti()
+
     },[nowPage])
     useEffect(()=>{   
         getLikedArti()
@@ -279,7 +281,7 @@ function Articles() {
 
         
     {/* 會員文章頁 */} 
-    {isShowPage(2, <ArticleMember  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} artLikeList={artLikeList}/>)}
+    {isShowPage(2, <ArticleMember  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} artLikeList={artLikeList} getLikedArti={getLikedArti}/>)}
      
       
 
