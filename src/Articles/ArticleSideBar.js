@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,Fragment} from 'react'
 import {useParams,useNavigate } from 'react-router-dom'
 import { HOT_ARTICLES } from '../component/LoginApi'
 
@@ -42,9 +42,19 @@ function ArticleSideBar({type}) {
             setHotPosts(res.data)
         })
     }
+
+    const [justRead,setJustRead]=useState(JSON.parse(localStorage.getItem('beebeejustSeenList')))
+    
+
+
+
 useEffect(()=>{
     getHotPots()
 },[])
+
+useEffect(()=>{
+    setJustRead(JSON.parse(localStorage.getItem('beebeejustSeenList')))
+},[article_id])
 
   return (
    <>
@@ -70,7 +80,7 @@ useEffect(()=>{
 
             <div className="suggest_articles">
 
-                <div className="title">熱門排行榜</div>
+                <div className="title">熱門排行榜 <i className="fa-solid fa-fire" style={{color:'#FF4500'}}></i></div>
 {hotPosts[0]?
 <>
 {hotPosts.map((v,i)=>{
@@ -98,18 +108,27 @@ useEffect(()=>{
 
 
             <div className="suggest_articles">
-
-                <div className="title">剛剛看過</div>
-
-                <div className="suggest_articles_card">
-                    <div className="articleTitle">藍芽耳機空降出現</div>
+            <div className="title">剛剛看過</div>
+                
+        {justRead?       
+        justRead.map((v,i)=>{
+            return(
+            <Fragment key={v.article_id} >
+             <div className="suggest_articles_card">
+                    <div onClick={()=>{
+                                    navigation('/articles/beebeePostNO/'+v.article_id)
+                                        }}  className="articleTitle">{v.title}</div>
                     <div className="articleWritter">
-                        <img src="./titleBar.png" alt=""/>
-                        <div className="writterName">會員XXX</div>
+                        <img src={'/images/'+v.member_pic} alt=""/>
+                        <div className="writterName">{v.email}</div>
                     </div>
 
-                    <img src="/imges/member_default_avatar.png" alt=""/>
+                    <img src={'/images/article/'+v.article_pic_main} alt=""/>
                 </div>
+            </Fragment>)
+        })
+           :''}
+              
 
 
 

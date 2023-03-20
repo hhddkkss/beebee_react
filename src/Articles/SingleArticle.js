@@ -1,11 +1,12 @@
 import React ,{useState,useEffect, useContext,Fragment,useRef}from 'react'
-import {GET_ARTICLE_COMMENT,POST_ARTICLE_COMMENT,GET_SINGLE_ARTICLE_POST } from '../component/LoginApi'
+import {GET_ARTICLE_COMMENT,POST_ARTICLE_COMMENT,GET_SINGLE_ARTICLE_POST,SINGLE_ARTICLE_LIKE } from '../component/LoginApi'
 import { useLocation, useParams,useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Dayjs from 'dayjs'
 import AuthContext from '../Contexts/AuthContext'
 import ArticleSideBar from './ArticleSideBar'
 import HashTagColor from './HashTagColor'
+import { getLocalJustSeen } from './JustSeenArticle'
 
 function SingleArticle({allArtData,type,article_id, setType,addDelLikeArt,likeIdList}) {
     const navigation = useNavigate()
@@ -44,7 +45,7 @@ const getPostsComment = ()=>{
 }
 
 const postInput = useRef(null)
-// 發文
+// 發留言
 const [postMessage,setPostMessage]=useState('')
 const [postDone,setPostDone]=useState(false)
 
@@ -82,22 +83,55 @@ const getSuggestPosts=(cou)=>{
    
 }
 
+//拿案讚數
+const [likeDone,setLikeDone]=useState(false)
+const [likeCount,setLikeCount]=useState(0)
+const getLikeCount = async(sid)=>{
+     axios.post(SINGLE_ARTICLE_LIKE,{
+        article_id:sid
+    }).then((res)=>{
+        console.log(res.data[0].likesCount);
+        setLikeCount(res.data[0].likesCount)
+    })
+
+
+}
+
 
 useEffect(()=>{
-        // console.log('E0','A',allArtData,'S',singlePost);
+        console.log('E0','A',allArtData,'S',singlePost);
         getSinglePost(article_id)
+        getLikeCount(article_id)
         getPostsComment()
         setSuggestPosts(getSuggestPosts(3))
         },[article_id])
 useEffect(()=>{
+    console.log('E1');
+
     setSuggestPosts(getSuggestPosts(3))
+    
 },[allArtData])
    
+useEffect(()=>{
+    console.log(likeDone);
+    getLikeCount(article_id)
+},[likeDone])
 
 useEffect(()=>{
+    console.log('E2');
+
         getPostsComment()
     },[postDone])
-
+//將剛看過的文章存local裡
+useEffect(()=>{
+    if(!!singlePost[0]){
+        getLocalJustSeen(
+    singlePost[0].article_id ,
+    singlePost[0].article_pic_main ,
+    singlePost[0].title ,
+    singlePost[0].email ,
+    singlePost[0].member_pic ,
+)}},[singlePost])
     // console.log('A',allArtData,'S',singlePost);
 
   return (
@@ -172,7 +206,9 @@ useEffect(()=>{
                 <div className="article_button_group">
                     <div className="article_buton"  onClick={()=>{
                                                     addDelLikeArt(singlePost[0].article_id)
-                                                }}>
+                                                    setLikeDone(!likeDone)
+                                                }}>  {likeCount}
+                                                {console.log('RE!')}
                                 <button className=" article_like_button" 
                                                >
                                                {singlePost[0]&&likeIdList.includes(singlePost[0].article_id)?
@@ -180,7 +216,7 @@ useEffect(()=>{
                                                 }
                                                 
                                             </button>
-                                    
+                                  
                                  
                                 收藏
                     </div>

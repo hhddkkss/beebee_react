@@ -65,3 +65,6 @@ export const FAVORITES = `${HOST}/favorites`
 
 //最熱門文章
 export const HOT_ARTICLES = `${HOST}/article_page/hotIssue`
+
+//文章案讚數
+export const SINGLE_ARTICLE_LIKE = `${HOST}/article_page/singleArtLikes`
