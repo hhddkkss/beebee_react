@@ -48,8 +48,10 @@ export const AuthContextProvider = function ({ children }) {
   const Logout = () => {
     localStorage.removeItem('beebeeMemberAuth')
     localStorage.removeItem('compareIngList')
+    localStorage.removeItem('beebeejustSeenList')
+    
     setMemberAuth(unAuth)
-    // navigate('/')
+    navigate('/')
   }
 
   return (
