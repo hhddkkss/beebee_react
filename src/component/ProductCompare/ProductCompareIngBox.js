@@ -30,9 +30,9 @@ function ProductCompareIngBox(props) {
       '防水係數',
     ],
   ]
-  // console.log('Q01', compareIngClass)
+  //  console.log('Q01', compareIngClass,compareType)
   // 手機
-  if (compareType === 1) {
+  if (compareType == 1) {
     return (
       <>
         <ScrollSync>
@@ -152,7 +152,7 @@ function ProductCompareIngBox(props) {
     )
   }
   // 平板
-  if (compareType === 2) {
+  if (compareType == 2) {
     return (
       <>
         <ScrollSync>
@@ -275,7 +275,7 @@ function ProductCompareIngBox(props) {
     )
   }
   // 耳機
-  if (compareType === 3) {
+  if (compareType == 3) {
     return (
       <>
         <ScrollSync>

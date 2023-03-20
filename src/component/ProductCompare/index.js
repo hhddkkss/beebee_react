@@ -236,62 +236,6 @@ function ProductCompare(props) {
           setCompareListClass={setCompareListClass}
         />
 
-        {/* <div className="compareIng_box ">
-          <div className="compareIng_head">
-            <div className="item_content"></div>
-            <div className="head_title">
-              <p>作業系統</p>
-              <p>處理器</p>
-              <p>記憶體</p>
-              <p>電池</p>
-              <p>螢幕尺寸</p>
-            </div>
-          </div>
-
-          {compareIngData.map((v, i) => {
-            return (
-              <div key={v.product_id} className="compareIng_item_card">
-                <button className="compareIng_item_remove">
-                  <svg
-                    width="20"
-                    height="19"
-                    viewBox="0 0 20 19"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M2.66666 12H9.74999H17.6667"
-                      stroke="#4F4F4F"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-
-                <div className="item_content">
-                  <img
-                    src="https://cs-b.ecimg.tw/items/DYAJ3QA900FHDTK/000002_1663052522.jpg"
-                    alt=""
-                  />
-                  <div className="item_name">{v.product_name}</div>
-                  <div className="item_price">$ {v.product_price}</div>
-                  <button className="add_To_Cart">
-                    <i className="fa-solid fa-cart-shopping d-inline"></i>
-                    加入購物車
-                  </button>
-                </div>
-                <div className="compare_item_property">
-                  <p>{v.operation_system}</p>
-                  <p>{v.prcessor}</p>
-                  <p>{v.ROM}</p>
-                  <p>{v.battery}</p>
-                  <p>{v.screen_size}</p>
-                </div>
-              </div>
-            )
-          })}
-        </div> */}
       </div>
     </>
   )
