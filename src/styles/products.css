@@ -493,7 +493,7 @@ header {
 }
 .card-bottom .card-text .discount {
   font-size: 20px;
-  color: red;
+  color: var(--error);
   margin: 0;
   font-weight: 600;
   vertical-align: bottom;
@@ -724,7 +724,7 @@ header {
     padding: 0.5rem;
   }
   .functional-bar .search-form .btn-search {
-    transform: translateX(110%);
+    transform: translateX(125%);
     padding: 0.35rem 0.5rem;
   }
   .functional-bar .wrap {

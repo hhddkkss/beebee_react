@@ -3,37 +3,13 @@ import { Link } from 'react-router-dom'
 import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
 import DefaultCard from './DefaultCard'
 
-function ProductArea({
-  productsDisplay,
-  // pageNow,
-  // favorites,
-  // setProducts,
-  toggleLiked,
-  products,
-  // handleAddOrDeleteFavorite,
-  toggleCompared,
-  // cartItem,
-  // handleAddOrDeleteCart,
-}) {
+function ProductArea({ productsDisplay }) {
   const { cartItem } = useContext(ProductFunctionContext)
 
   return (
     <>
-      {/* {pageNow,favorites,setProducts,products,toggleLiked,handleAddOrDeleteFavorite,toggleCompared,cartItem,handleAddOrDeleteCart} */}
       <div className="product-area">
-        <DefaultCard
-          productsDisplay={productsDisplay}
-          // pageNow={pageNow}
-          // favorites={favorites}
-          // setProducts={setProducts}
-          // toggleLiked={toggleLiked}
-          // products={products}
-          // handleAddOrDeleteFavorite={handleAddOrDeleteFavorite}
-          // comparedList={comparedList}
-          // toggleCompared={toggleCompared}
-          cartItem={cartItem}
-          // handleAddOrDeleteCart={handleAddOrDeleteCart}
-        />
+        <DefaultCard productsDisplay={productsDisplay} cartItem={cartItem} />
 
         {/* <!-- 手機版的橫向卡片--> */}
         {/* <div className="row row-for-m-card">

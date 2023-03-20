@@ -55,4 +55,7 @@ export const ARTICLE_MEMBER_LIKED = `${HOST}/article_page/memberArticleLike`
 // 拿取會員歷史文章
 export const ARTICLE_MEMBER_POST = `${HOST}/article_page/memberArticlePosted`
 
+//最愛
 export const FAVORITES = `${HOST}/favorites`
+//優惠券
+export const GET_COUPON = `${HOST}/coupon/`

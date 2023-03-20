@@ -105,7 +105,7 @@ body {
 .cart-info {
   display: flex;
   justify-content: space-between;
-  padding: 0 30px 0 0;
+  /* padding: 0 30px 0 0; */
   height: 56px;
 }
 
@@ -185,7 +185,7 @@ body {
 /** cart items  */
 
 .cart-items {
-  padding-right: 30px;
+  /* padding-right: 30px; */
 }
 
 .cart-items .cart-item {
@@ -194,7 +194,10 @@ body {
   align-items: center;
   min-height: 120px;
 }
-
+.cart-item:hover {
+  background-color: #f5f5f5;
+  transition: 0.3s ease-in;
+}
 .cart-name {
   width: 200px;
 }
