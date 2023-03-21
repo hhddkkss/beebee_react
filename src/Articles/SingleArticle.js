@@ -91,9 +91,9 @@ const getLikeCount = async(sid)=>{
         article_id:sid
     }).then((res)=>{
       
-        console.log(res.data[0].likesCount,111111);
+        // console.log(res.data[0].likesCount,111111);
         setLikeCount(res.data[0].likesCount)
-        console.log(likeCount,2222)
+        // console.log(likeCount,2222)
     })
 
 
@@ -116,7 +116,8 @@ useEffect(()=>{
    
  useEffect(()=>{
      console.log(likeDone);
-     getLikeCount(article_id) },[likeDone])
+     getLikeCount(article_id) 
+    },[likeDone])
 
 useEffect(()=>{
     console.log('E2');
