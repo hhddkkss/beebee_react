@@ -35,6 +35,9 @@ export const DELETE_CART_ITEM = `${HOST}/cart/delete`
 //商品詳細頁加入購物車API
 export const PRODUCT_DETAIL_ADD_CART_API = `${HOST}/cart/detailAddCart`
 
+//清空購物車
+export const EMPTY_CART = `${HOST}/cart/empty`
+
 //新增文章API
 export const MEMBER_POST = `${HOST}/article_page/memberPostArticle`
 
@@ -59,3 +62,7 @@ export const ARTICLE_MEMBER_POST = `${HOST}/article_page/memberArticlePosted`
 export const FAVORITES = `${HOST}/favorites`
 //優惠券
 export const GET_COUPON = `${HOST}/coupon/`
+
+//訂單
+export const ADD_ORDER_ALL = `${HOST}/order/order_all`
+export const ADD_ORDER_DETAIL = `${HOST}/order/order_detail`

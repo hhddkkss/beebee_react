@@ -1,7 +1,12 @@
 import React, { useState, useContext } from 'react'
 import '../styles/checkout.css'
 import Navbar from '../component/CheckoutNavBarLight'
-import { GET_COUPON } from '../component/LoginApi'
+import {
+  GET_COUPON,
+  ADD_ORDER_ALL,
+  ADD_ORDER_DETAIL,
+  EMPTY_CART,
+} from '../component/LoginApi'
 import M_Path from '../component/M_Path'
 import M_OrderDetailCard from './M_OrderDetailCard'
 import M_orderDetailBottom from './M_orderDetailBottom'
@@ -11,15 +16,23 @@ import CheckoutRight from './CheckoutRight'
 import BtnLoginAndSignUp from './BtnLoginAndSignUp'
 import AuthContext from '../Contexts/AuthContext'
 import axios from 'axios'
-import { convertNeSwToNwSe } from 'google-map-react'
+import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 
 function Checkout() {
   const { memberAuth } = useContext(AuthContext)
+
+  const { cartData } = useContext(ProductFunctionContext)
   //折扣
   const [discount, setDiscount] = useState(0)
   const [hasDiscount, setHasDiscount] = useState(false)
   const [couponCode, setCouponCode] = useState('')
   const [couponError, setCouponError] = useState(false)
+  const [couponId, setCouponId] = useState('')
+
+  //訂單相關
+  const [passValidation, SetPassValidation] = useState(false)
+  // const [orderId, setOrderId] = useState('')
+  let orderId = ''
   //有沒有優惠券
   //note: {output:有優惠券 沒有優惠券 還沒檢查 }控制要不要顯示錯誤訊息
   const [hasCoupon, setHasCoupon] = useState('還沒檢查')
@@ -73,10 +86,11 @@ function Checkout() {
     setInputs({ ...inputs, [name]: value })
   }
 
+  //驗證表單用
   const handleValidation = () => {
     setValidation({})
     //判斷input裡面的東西有沒有符合
-    const passValidation = false
+    // const passValidation = false
     //名字驗證
 
     if (!inputs.firstName || !inputs.firstName.trim()) {
@@ -186,13 +200,28 @@ function Checkout() {
       }))
     }
 
-    // if (JSON.stringify(validation) === '{}') {
-    //   console.log('表格檢查無誤')
-    // }
+    //表單有沒有通過？
+    if (JSON.stringify(validation) === '{}') {
+      console.log('表格檢查無誤')
+      SetPassValidation(true)
+    }
   }
 
-  const handleSubmit = (event) => {
+  //表單送出
+  const handleSubmit = async (event) => {
     handleValidation(event)
+
+    if (passValidation) {
+      //寫入訂單總表
+      await addOrderAll()
+      //寫入訂單總表
+      await addOrderDetail()
+    }
+
+    //寫入訂單細節
+
+    //清空購物車
+    // await emptyCart()
     console.log(inputs, 'input')
     console.log(validation, 11111)
   }
@@ -204,12 +233,60 @@ function Checkout() {
     if (res.data && +res.data.discount > 0) {
       setHasDiscount(true)
       setDiscount(res.data.discount)
+      setCouponId(res.data.id)
       setCouponError(false)
     } else {
       setHasDiscount(false)
       setCouponError(true)
     }
   }
+  //  新增訂單
+  const addOrderAll = async () => {
+    const res = await axios.post(ADD_ORDER_ALL, {
+      member_id: memberAuth.memberId,
+      order_memo: inputs.note,
+      coupon_id: couponId,
+      firstName: inputs.firstName,
+      lastName: inputs.lastName,
+      order_phone: inputs.mobile,
+      order_address_city: inputs.city,
+      order_address_dist: inputs.disc,
+      order_address: inputs.address,
+      order_email: inputs.email,
+      postalCode: inputs.postalCode,
+      product_price: cartData.map((v) => Number(v.product_price)),
+      quantity: cartData.map((v) => +v.quantity),
+      discount: discount,
+    })
+    console.log(res.data.orderNum, 'num')
+    // setOrderId(res.data.orderNum)
+    orderId = res.data.orderNum
+  }
+
+  //新增詳細訂單
+  const addOrderDetail = async () => {
+    console.log(orderId, 'num2')
+    const res = await axios.post(ADD_ORDER_DETAIL, {
+      order_id: orderId,
+      product_id: cartData.map((v) => v.product_id),
+      product_name: cartData.map((v) => v.product_name),
+      product_amount: cartData.map((v) => v.quantity),
+      product_price: cartData.map((v) => v.product_price),
+      payment_method: +inputs.payment,
+    })
+  }
+
+  //清空購物車
+  const emptyCart = async () => {
+    console.log(22222)
+    const res = await axios.delete(EMPTY_CART, {
+      data: {
+        member_id: memberAuth.memberId,
+      },
+    })
+    console.log(res.data)
+  }
+
   return (
     <>
       <Navbar />
@@ -339,6 +416,8 @@ function Checkout() {
               couponError={couponError}
               handleSubmit={handleSubmit}
               inputs={inputs}
+              addOrderAll={addOrderAll}
+              addOrderDetail={addOrderDetail}
             />
           ) : (
             <CheckoutRight />

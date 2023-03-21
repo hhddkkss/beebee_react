@@ -433,7 +433,7 @@ form {
   outline: 2px solid #ccc;
 }
 .note textarea:focus {
-  outline: 2px solid rgb(10, 135, 20);
+  outline: 2px solid #727272;
 }
 
 /** checkout right */

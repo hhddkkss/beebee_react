@@ -18,19 +18,8 @@ import ProductCompare from '../component/ProductCompare'
 import AuthContext from '../Contexts/AuthContext'
 import CompareContext from '../Contexts/CompareContext'
 function Products() {
-  const {
-    products,
-    cartItem,
-    setProducts,
-    setCartItem,
-    getProductData,
-    pageNow,
-    setPageNow,
-    perPage,
-    setPerPage,
-    pageTotal,
-    setPageTotal,
-  } = useContext(ProductFunctionContext)
+  const { products, pageNow, setPageNow, perPage, pageTotal, setPageTotal } =
+    useContext(ProductFunctionContext)
   const {
     compareListClass,
     setCompareListClass,

@@ -9,7 +9,7 @@ function RecipientInfo({
   validation,
 }) {
 
-  // note :有空來補做 自動填入會員資料
+  // note :有空來補做 自動填入會員資料ˋ
   const getMemberData = async () => {
     const res = await axios('')
   }

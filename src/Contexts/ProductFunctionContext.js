@@ -20,6 +20,14 @@ export const ProductFunctionContextProvider = function ({ children }) {
     setProducts(initialData)
   }
 
+  const getFavoritesData = async (member_id) => {
+    const res = await axios.get(HOST + '/favorites/' + member_id)
+
+    setProducts(res.data)
+  }
+
+  //control favorites or 
+
   // forRemoveInfo
   const [showRemove, setShowRemove] = useState(false)
 
