@@ -25,7 +25,7 @@
 * {
   list-style-type: none;
   box-sizing: border-box;
-  font-family: Noto_Sans;
+  font-family: creamfont;
 }
 
 /** 固定nav */
@@ -310,6 +310,7 @@ header {
   color: #fff;
 } */
 .functional-bar .search-form .search-input {
+  width: 190px;
   border-radius: 20px;
   padding: 0.5rem 0 0.5rem 1rem;
   border: 1px solid var(--wordGray);
@@ -448,6 +449,7 @@ header {
 .product-area .fa-solid.fa-cart-shopping.active {
   color: var(--orange1);
 }
+
 .product-area .my-card .card-top .img-wrap {
   width: 180px;
   aspect-ratio: 10/9;
@@ -491,7 +493,7 @@ header {
 }
 .card-bottom .card-text .discount {
   font-size: 20px;
-  color: red;
+  color: var(--error);
   margin: 0;
   font-weight: 600;
   vertical-align: bottom;
@@ -722,7 +724,7 @@ header {
     padding: 0.5rem;
   }
   .functional-bar .search-form .btn-search {
-    transform: translateX(110%);
+    transform: translateX(125%);
     padding: 0.35rem 0.5rem;
   }
   .functional-bar .wrap {
