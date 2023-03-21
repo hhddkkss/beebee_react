@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import OrderDetail from './OrderDetail'
+import { useNavigate } from 'react-router-dom'
 import Navbar from '../../component/CheckoutNavBarLight'
 import M_Path from '../../component/M_Path'
 
@@ -8,9 +9,9 @@ import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
 
 function DonePage() {
   const { donepageData } = useContext(ProductFunctionContext)
+  const navigation = useNavigate()
   return (
     <>
-      {/* {console.log(donepageData)} */}
       <Navbar />
       <M_Path />
       <div className="checkout">
@@ -95,11 +96,11 @@ function DonePage() {
 
           <div className="order-detail fixed-width">
             <h4>訂單資訊：</h4>
-            <p>訂單編號：{donepageData.orderAll}</p>
+            <p>訂單編號：{donepageData.orderAll.orderNum}</p>
             <p>付款方式：信用卡</p>
-            <p>會員姓名：王小明</p>
-            <p>會員email: test123@gamil.com</p>
-            <p>訂單成立時間：2023/3/29</p>
+            <p>會員姓名：{donepageData.orderAll.order_recipient}</p>
+            <p>會員email：{donepageData.orderAll.order_email}</p>
+            <p>訂單成立時間：{donepageData.orderAll.orderDate}</p>
           </div>
 
           <p className="info-msg fixed-width">
@@ -115,16 +116,63 @@ function DonePage() {
           </p>
 
           <div className="d-flex gap-4 justify-content-between fixed-width">
-            <a href="#" className="mybtn btn-to-homepage">
+            <a
+              href="#/"
+              className="mybtn btn-to-homepage"
+              onClick={(e) => {
+                navigation('/')
+              }}
+            >
               回到官網
             </a>
-            <a href="#" className="mybtn btn-to-order">
+            <a
+              href="#/"
+              className="mybtn btn-to-order"
+              onClick={(e) => {
+                navigation('/')
+              }}
+            >
               查看訂單
             </a>
           </div>
         </div>
         <div className="checkout-right">
-          <OrderDetail />
+          {/* <OrderDetail donepageData={donepageData} /> */}
+          <div className="checkout-items">
+            {donepageData.orderDetail.product_info.map((v) => (
+              <div className="checkout-item-card" key={v.product_id}>
+                <div className="checkout-item">
+                  <div
+                    className="img-wrap"
+                    style={{
+                      backgroundImage: `url("/images/${v.product_pic}")`,
+                    }}
+                  >
+                    <div className="amount">1</div>
+                  </div>
+                  <div className="checkout-item-info">
+                    <p>{v.product_name}</p>
+                    <p>{v.product_price}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* <!-- detail --> */}
+          <p className="checkout-detail">付款明細</p>
+          <div className="checkout-cal">
+            <p>合計</p>
+            <p>{donepageData.orderAll.totalPrice}</p>
+          </div>
+          <div className="checkout-fee">
+            <p>運費</p>
+            <p>120</p>
+          </div>
+          <div className="checkout-total">
+            <p>總金額</p>
+            <p>{donepageData.orderAll.finalPrice}</p>
+          </div>
           <div className="bottom-slogan">
             <svg
               width="375"

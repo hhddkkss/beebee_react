@@ -96,10 +96,11 @@ function Checkout() {
   const handleValidation = () => {
     setValidation({})
     //判斷input裡面的東西有沒有符合
-    let passValidation = false
+    let passValidation = true
     //名字驗證
 
     if (!inputs.firstName || !inputs.firstName.trim()) {
+      passValidation = false
       setValidation((...prevValidation) => ({
         ...prevValidation,
         firstName: errorMsg.name,
@@ -108,6 +109,7 @@ function Checkout() {
     //姓氏驗證
 
     if (!inputs.lastName || !inputs.lastName.trim()) {
+      passValidation = false
       setValidation((prevValidation) => ({
         ...prevValidation,
         lastName: errorMsg.name,
@@ -116,6 +118,7 @@ function Checkout() {
     //手機號碼驗證
     //為空
     if (!inputs.mobile || !inputs.mobile.trim()) {
+      passValidation = false
       setValidation((prevValidation) => ({
         ...prevValidation,
         mobile: errorMsg.mobile[0],
@@ -124,6 +127,7 @@ function Checkout() {
     //格式不對
     const mobileCondition = /^09[0-9]{8}$/
     if (inputs.mobile && !inputs.mobile.match(mobileCondition)) {
+      passValidation = false
       setValidation((prevValidation) => ({
         ...prevValidation,
         mobile: errorMsg.mobile[1],
@@ -135,6 +139,7 @@ function Checkout() {
       /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     //email為空
     if (inputs.email === undefined || !inputs.email.trim()) {
+      passValidation = false
       setValidation((prevValidation) => ({
         ...prevValidation,
         email: errorMsg.email[0],
@@ -143,6 +148,7 @@ function Checkout() {
     //email格式驗證 by: https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
 
     if (inputs.email && !inputs.email.match(emailCondition)) {
+      passValidation = false
       setValidation((prevValidation) => ({
         ...prevValidation,
         email: errorMsg.email[1],
@@ -152,6 +158,7 @@ function Checkout() {
     //縣市驗證
 
     if (!inputs.city || inputs.city === '請選擇') {
+      passValidation = false
       setValidation((prevValidation) => ({
         ...prevValidation,
         cities: errorMsg.cities,
@@ -160,6 +167,7 @@ function Checkout() {
 
     //區驗證
     if (!inputs.disc || inputs.disc === '請選擇') {
+      passValidation = false
       setValidation((prevValidation) => ({
         ...prevValidation,
         disc: errorMsg.disc,
@@ -169,6 +177,7 @@ function Checkout() {
     //地址驗證
 
     if (!inputs.address || !inputs.address.trim()) {
+      passValidation = false
       setValidation((prevValidation) => ({
         ...prevValidation,
         address: errorMsg.address,
@@ -177,6 +186,7 @@ function Checkout() {
     //郵遞區號
     //為空
     if (!inputs.postalCode || !inputs.postalCode.trim()) {
+      passValidation = false
       setValidation((prevValidation) => ({
         ...prevValidation,
         postalCode: errorMsg.postalCode[0],
@@ -184,6 +194,7 @@ function Checkout() {
     }
     //郵遞區號須為數字
     if (inputs.postalCode && Number.isNaN(inputs.postalCode)) {
+      passValidation = false
       setValidation((prevValidation) => ({
         ...prevValidation,
         postalCode: errorMsg.postalCode[1],
@@ -192,6 +203,7 @@ function Checkout() {
 
     //郵遞區號為 3碼 or 5碼
     if (inputs.postalCode && inputs.postalCode.length === 4) {
+      passValidation = false
       setValidation((prevValidation) => ({
         ...prevValidation,
         postalCode: errorMsg.postalCode[2],
@@ -200,22 +212,24 @@ function Checkout() {
 
     //付款方式驗證
     if (!inputs.payment || inputs.payment === '請選擇') {
+      passValidation = false
       setValidation((prevValidation) => ({
         ...prevValidation,
         payment: errorMsg.payment,
       }))
     }
 
+    return passValidation;
     //表單有沒有通過？
-    if (JSON.stringify(validation) === '{}') {
-      console.log('表格檢查無誤')
-      setPassValidation(true)
-    }
+    // if (JSON.stringify(validation) === '{}') {
+    //   console.log('表格檢查無誤')
+    //   setPassValidation(true)
+    // }
   }
 
   //表單送出
   const handleSubmit = async (event) => {
-    handleValidation(event)
+    const passValidation = handleValidation()
     console.log({ passValidation })
     if (passValidation) {
       //寫入訂單總表
