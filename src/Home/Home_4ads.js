@@ -1,8 +1,10 @@
 import { Fragment, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../styles/Home.css'
 import axios from 'axios'
 
 function Home4ads() {
+  const navigation = useNavigate()
   const [data, setDate] = useState([])
   const geHometData = async () => {
     const r = await axios
@@ -20,7 +22,6 @@ function Home4ads() {
     })()
   }, [])
   useEffect(() => {
-    console.log('A02', data.length)
   }, [data])
 
   return (
@@ -34,7 +35,13 @@ function Home4ads() {
                   <div className="home_ad_1">
                     <p className="home_ad_1-issue">{data[0].product_name}</p>
                     <p className="home_ad_1-price">{data[0].product_price}</p>
-                    <button className="home_ad_1_check" type="submit">
+                    <button
+                      className="home_ad_1_check"
+                      type="submit"
+                      onClick={() => {
+                        navigation('/products')
+                      }}
+                    >
                       check →
                     </button>
                   </div>
@@ -60,7 +67,13 @@ function Home4ads() {
                   <div className="home_ad_2">
                     <p className="home_ad_2_issue">{data[1].product_name}</p>
                     <p className="home_ad_2_price">{data[1].product_price}</p>
-                    <button className="home_ad_2-check" type="submit">
+                    <button
+                      className="home_ad_2-check"
+                      type="submit"
+                      onClick={() => {
+                        navigation('/products')
+                      }}
+                    >
                       check →
                     </button>
                   </div>
@@ -73,7 +86,13 @@ function Home4ads() {
                     <p className="home_ad_3_issue">{data[2].product_name}</p>
                     {/* <p className="home_ad_3_word">New generation</p> */}
                     <p className="home_ad_3_price">{data[2].product_price}</p>
-                    <button className="home_ad_3-check" type="submit">
+                    <button
+                      className="home_ad_3-check"
+                      type="submit"
+                      onClick={() => {
+                        navigation('/products')
+                      }}
+                    >
                       check →
                     </button>
                   </div>
@@ -95,7 +114,13 @@ function Home4ads() {
                   <div className="home_ad_4">
                     <p className="home_ad_4_issue">{data[3].product_name}</p>
                     <p className="home_ad_4_price">{data[3].product_price}</p>
-                    <button className="home_ad_4_check" type="submit">
+                    <button
+                      className="home_ad_4_check"
+                      type="submit"
+                      onClick={() => {
+                        navigation('/products')
+                      }}
+                    >
                       check →
                     </button>
                   </div>
@@ -113,7 +138,13 @@ function Home4ads() {
                   <div className="home_ad_5">
                     <p className="home_ad_5_issue">{data[4].product_name}</p>
                     <p className="home_ad_5_price">{data[4].product_price}</p>
-                    <button className="home_ad_5_check" type="submit">
+                    <button
+                      className="home_ad_5_check"
+                      type="submit"
+                      onClick={() => {
+                        navigation('/products')
+                      }}
+                    >
                       check →
                     </button>
                   </div>
@@ -138,7 +169,13 @@ function Home4ads() {
                   <div className="home_word_div">
                     <p className="home_ad_6_issue">{data[5].product_name}</p>
                     <p className="home_ad_6_price">{data[5].product_price}</p>
-                    <button className="home_ad_6-check" type="submit">
+                    <button
+                      className="home_ad_6-check"
+                      type="submit"
+                      onClick={() => {
+                        navigation('/products')
+                      }}
+                    >
                       check →
                     </button>
                   </div>

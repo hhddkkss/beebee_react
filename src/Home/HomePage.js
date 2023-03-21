@@ -1,4 +1,5 @@
 import AuthContext from '../Contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 import { React, useEffect, useState, useRef, useContext } from 'react'
 import '../styles/Home.css'
 import '../styles/home_ver3.css'
@@ -10,6 +11,7 @@ import HomeNews from './HomeNews'
 import HomeMap from './HomeMap'
 
 function HomePage() {
+  const navigation = useNavigate()
   const { setNavbarType } = useContext(AuthContext)
   useEffect(() => {
     setNavbarType('light')
@@ -79,7 +81,13 @@ function HomePage() {
           <br />
           -Mr. Self Development
         </div>
-        <button className="home_show_check" type="submit">
+        <button
+          className="home_show_check"
+          type="submit"
+          onClick={() => {
+            navigation('/products')
+          }}
+        >
           check →
         </button>
       </div>

@@ -1,13 +1,13 @@
 import React from 'react'
 import Navbar from '../component/Navbar/index'
-import MeberPage_Sidebar from '../component/MemberPage/MeberPage_Sidebar'
+import MeberPage_Sidebar from './MemberPageComponent/MeberPage_Sidebar'
 
 function MemberComment_List() {
   return (
     <>
       <Navbar />
       <div class="member_body">
-      <MeberPage_Sidebar />
+        <MeberPage_Sidebar />
 
         <div class="member_container ">
           <div class="now_memberPage">歷史評價</div>
