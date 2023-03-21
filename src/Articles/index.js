@@ -2,7 +2,7 @@ import React ,{useContext,useEffect,useState} from 'react'
 import AuthContext from '../Contexts/AuthContext'
 import Navbar from './../component/Navbar'
 import { useLocation, useParams,useNavigate } from 'react-router-dom'
-import { MEMBER_POST,GET_All_ARTICLE_POST,GET_FRONT_ARTICLES,ADD_DEL_ARTI_LIKE,ARTICLE_MEMBER_LIKED } from '../component/LoginApi'
+import { GET_All_ARTICLE_POST,GET_FRONT_ARTICLES,ADD_DEL_ARTI_LIKE,ARTICLE_MEMBER_LIKED } from '../component/LoginApi'
 import PostPage from './PostPage'
 import axios from 'axios'
 
@@ -20,7 +20,7 @@ import Front from './Front';
 import CateArticle from './CateArticle'
 import SingleArticle from './SingleArticle'
 import ArticleMember from './ArticleMember'
-import { set } from 'lodash'
+import SearchArticles from './SearchArticles'
 
 
 function Articles() {
@@ -32,7 +32,7 @@ function Articles() {
     const { nowPage,article_id } = useParams()
     // console.log(nowPage);
     // 頁名
-    const pageNames = ['front','beebeeArticles','member','beebeePost','beebeePostNO']
+    const pageNames = ['front','beebeeArticles','member','beebeePost','beebeePostNO','editPost','searchArticles']
     // 按鈕focusclassName
     const listBarBtnClass = ['btn article_list_button','btn article_list_button article_mb_hidden']
     // 分類頁篩選碼
@@ -121,6 +121,8 @@ function Articles() {
 
     }
 
+    // 搜尋功能
+    const [inputText,setInputText] = useState('')
 
 
 
@@ -235,21 +237,27 @@ function Articles() {
                     className="search-input"
                     placeholder="輸入要尋找的商品"
                     autoComplete="off"
-                    // value={inputText}
-                    // onChange={(e) => {
-                    //   setInputText(e.target.value)
-                    // }}
-                    // onKeyDown={(e) => {
-                    //   if (e.key === 'Enter') {
-                    //     setKeyword(inputText)
-                    //   }
-                    // }}
+                     value={inputText}
+                     onChange={(e) => {
+                       
+                       setInputText(e.target.value)
+                     }}
+                     onKeyDown={(e) => { if(e.target.value.length>0){
+                            if (e.key === 'Enter') {
+                         navigation('/articles/searchArticles/'+e.target.value)
+                         setInputText('')
+                       }
+                        }
+                       
+                     }}
                 />
                 <button
                     className="btn btn-search"
-                    // onClick={() => {
-                    //   setKeyword(inputText)
-                    // }}
+                     onClick={() => {if(inputText.length>0){
+                        
+                        navigation('/articles/searchArticles/'+inputText)
+                        setInputText('')
+                     }}}
                 >
                     開始搜尋
                 </button>
@@ -289,8 +297,11 @@ function Articles() {
     {/* 發文頁 */}
     {isShowPage(3, <PostPage  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} artLikeList={artLikeList} getLikedArti={getLikedArti}/>)}
 
-    
+    {/* 編輯貼文頁 */}
 
+    
+    {/* 搜尋頁 */}
+    {isShowPage(6, <SearchArticles  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} artLikeList={artLikeList} getLikedArti={getLikedArti}/>)}
 
 
 
