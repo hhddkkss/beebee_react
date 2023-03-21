@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../styles/checkout.css'
 import Navbar from '../component/CheckoutNavBarLight'
 import {
@@ -19,9 +20,12 @@ import axios from 'axios'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 
 function Checkout() {
+  const navigation = useNavigate()
   const { memberAuth } = useContext(AuthContext)
 
-  const { cartData } = useContext(ProductFunctionContext)
+  const { cartData, donepageData, setDonepageData } = useContext(
+    ProductFunctionContext
+  )
   //折扣
   const [discount, setDiscount] = useState(0)
   const [hasDiscount, setHasDiscount] = useState(false)
@@ -30,7 +34,7 @@ function Checkout() {
   const [couponId, setCouponId] = useState('')
 
   //訂單相關
-  const [passValidation, SetPassValidation] = useState(false)
+  const [passValidation, setPassValidation] = useState(false)
   // const [orderId, setOrderId] = useState('')
   let orderId = ''
   //有沒有優惠券
@@ -63,6 +67,8 @@ function Checkout() {
     // payment: '',
   })
 
+  // let validation = {}
+
   const errorMsg = {
     name: '姓名為必填項目',
     mobile: ['手機為必填項目', '請遵守範例格式為0912123123'],
@@ -90,7 +96,7 @@ function Checkout() {
   const handleValidation = () => {
     setValidation({})
     //判斷input裡面的東西有沒有符合
-    // const passValidation = false
+    let passValidation = false
     //名字驗證
 
     if (!inputs.firstName || !inputs.firstName.trim()) {
@@ -203,19 +209,25 @@ function Checkout() {
     //表單有沒有通過？
     if (JSON.stringify(validation) === '{}') {
       console.log('表格檢查無誤')
-      SetPassValidation(true)
+      setPassValidation(true)
     }
   }
 
   //表單送出
   const handleSubmit = async (event) => {
     handleValidation(event)
-
+    console.log({ passValidation })
     if (passValidation) {
       //寫入訂單總表
-      await addOrderAll()
+      const data1 = await addOrderAll()
       //寫入訂單總表
-      await addOrderDetail()
+      const data2 = await addOrderDetail()
+      console.log(donepageData, 7777)
+
+      setDonepageData({ ...donepageData, orderAll: data1, orderDetail: data2 })
+
+      //跳頁
+      navigation('/donePage')
     }
 
     //寫入訂單細節
@@ -258,9 +270,12 @@ function Checkout() {
       quantity: cartData.map((v) => +v.quantity),
       discount: discount,
     })
+    console.log(res.data, 'all')
     console.log(res.data.orderNum, 'num')
     // setOrderId(res.data.orderNum)
     orderId = res.data.orderNum
+    return res.data
+    // setDonepageData({ ...donepageData, orderAll: res.data })
   }
 
   //新增詳細訂單
@@ -273,7 +288,11 @@ function Checkout() {
       product_amount: cartData.map((v) => v.quantity),
       product_price: cartData.map((v) => v.product_price),
       payment_method: +inputs.payment,
+      product_pic: cartData.map((v) => v.product_pic.split(',')[0]),
     })
+    console.log(res.data, 'detail')
+    return res.data
+    // setDonepageData({ ...donepageData, orderDetail: res.data })
   }
 
   //清空購物車

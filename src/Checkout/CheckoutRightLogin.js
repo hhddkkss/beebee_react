@@ -101,7 +101,7 @@ function CheckoutRightLogin({
       <button
         className="btn-to-checkout"
         form="form1"
-        onClick={async (event) => {
+        onClick={ (event) => {
           handleSubmit(event)
         }}
       >

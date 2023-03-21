@@ -25,8 +25,8 @@ export const ProductFunctionContextProvider = function ({ children }) {
 
     setProducts(res.data)
   }
-
-  //control favorites or 
+  //donepage用 後端傳回來的檔案
+  const [donepageData, setDonepageData] = useState({})
 
   // forRemoveInfo
   const [showRemove, setShowRemove] = useState(false)
@@ -289,6 +289,8 @@ export const ProductFunctionContextProvider = function ({ children }) {
         handleAddOrDeleteFavorite,
         reGetFavorites,
         favoritePId,
+        donepageData,
+        setDonepageData,
       }}
     >
       {children}

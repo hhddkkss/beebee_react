@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import OrderDetail from './OrderDetail'
-import Navbar from '../component/CheckoutNavBarLight'
-import M_Path from '../component/M_Path'
+import Navbar from '../../component/CheckoutNavBarLight'
+import M_Path from '../../component/M_Path'
 
-import '../styles/donepage.css'
+import '../../styles/donepage.css'
+import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
 
 function DonePage() {
+  const { donepageData } = useContext(ProductFunctionContext)
   return (
     <>
+      {/* {console.log(donepageData)} */}
       <Navbar />
       <M_Path />
       <div className="checkout">
@@ -92,7 +95,7 @@ function DonePage() {
 
           <div className="order-detail fixed-width">
             <h4>訂單資訊：</h4>
-            <p>訂單編號：bee20230122abcdefg</p>
+            <p>訂單編號：{donepageData.orderAll}</p>
             <p>付款方式：信用卡</p>
             <p>會員姓名：王小明</p>
             <p>會員email: test123@gamil.com</p>
