@@ -90,8 +90,10 @@ const getLikeCount = async(sid)=>{
      axios.post(SINGLE_ARTICLE_LIKE,{
         article_id:sid
     }).then((res)=>{
-        console.log(res.data[0].likesCount);
+      
+        console.log(res.data[0].likesCount,111111);
         setLikeCount(res.data[0].likesCount)
+        console.log(likeCount,2222)
     })
 
 
@@ -112,10 +114,9 @@ useEffect(()=>{
     
 },[allArtData])
    
-useEffect(()=>{
-    console.log(likeDone);
-    getLikeCount(article_id)
-},[likeDone])
+ useEffect(()=>{
+     console.log(likeDone);
+     getLikeCount(article_id) },[likeDone])
 
 useEffect(()=>{
     console.log('E2');
@@ -204,9 +205,9 @@ useEffect(()=>{
             <div className="article_message_area">
 
                 <div className="article_button_group">
-                    <div className="article_buton"  onClick={()=>{
-                                                    addDelLikeArt(singlePost[0].article_id)
-                                                    setLikeDone(!likeDone)
+                    <div className="article_buton"  onClick={async()=>{
+                                                    await addDelLikeArt(singlePost[0].article_id)
+                                                    await setLikeDone(!likeDone)
                                                 }}>  {likeCount}
                                                 {console.log('RE!')}
                                 <button className=" article_like_button" 
