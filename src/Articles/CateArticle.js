@@ -1,5 +1,5 @@
 import React ,{useState,useEffect, useContext}from 'react'
-import {GET_CATEGORYS_POST } from '../component/LoginApi'
+import {HOST } from '../component/LoginApi'
 import { useLocation, useParams,useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Dayjs from 'dayjs'
@@ -76,17 +76,19 @@ function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType
                                 <div className="hashtag_group">
                                 {
                                     frontData[type-1].article_hashtag.map((v,i)=>{
-
-                                    return(
+                                        if(v){
+                                             return(
                                         <div key={i} className="hashtags"
                                         style={{backgroundColor:HashTagColor(frontData[type-1].article_id,i)}}>{v}</div>
                                     )
+                                        }
+                                   
                                 })}
                                     
                                 </div>
                             </div>
                         </div>
-                        <img  src={'/images/article/'+frontData[type-1].article_pic_main} alt=""/>
+                        <img  src={HOST+'/articlePic/'+frontData[type-1].article_pic_main} alt=""/>
                     </div>
 
 
@@ -109,7 +111,7 @@ function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType
                             return(
                                 <div key={v.article_id}  className="article_card col-4">
                                     <img                                     
-                                     src={'/images/article/'+v.article_pic_main}alt=""/>
+                                     src={HOST+'/articlePic/'+v.article_pic_main}alt=""/>
                                     <div className="article">
                                         <div className="title">
                                             <span onClick={()=>{
@@ -136,11 +138,13 @@ function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType
         
                                             <div className="hashtag_group">
                                             {  v.article_hashtag.map((w,i)=>{
-                                              
+                                              if(w){
                                                 return(
                                                     <div key={i} className="hashtags"
                                                     style={{backgroundColor:HashTagColor(v.article_id,i)}}>{w}</div>
                                                 )
+                                              }
+                                                
                                             })}
                                             
                                             </div>

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React,{useState,useEffect,Fragment} from 'react'
 import {useParams,useNavigate } from 'react-router-dom'
-import { HOT_ARTICLES } from '../component/LoginApi'
+import { HOT_ARTICLES,HOST } from '../component/LoginApi'
 
 
 function ArticleSideBar({type}) {
@@ -96,7 +96,7 @@ useEffect(()=>{
                         <div className="writterName">{v.email}</div>
                         </div>
 
-                        <img src={'/images/article/'+v.article_pic_main}/>
+                        <img src={HOST+'/articlePic/'+v.article_pic_main}/>
                 </div>
     )
 })}
@@ -123,7 +123,7 @@ useEffect(()=>{
                         <div className="writterName">{v.email}</div>
                     </div>
 
-                    <img src={'/images/article/'+v.article_pic_main} alt=""/>
+                    <img src={HOST+'/articlePic/'+v.article_pic_main} alt=""/>
                 </div>
             </Fragment>)
         })

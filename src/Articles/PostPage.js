@@ -1,22 +1,172 @@
-import React from 'react'
-
+import axios from 'axios'
+import  Dayjs  from 'dayjs'
+import React,{useState,useContext,useEffect,useRef} from 'react'
+import { json } from 'react-router-dom'
+import { MEMBER_POST,POST_PIC,HOST } from '../component/LoginApi'
+import AuthContext from '../Contexts/AuthContext'
+import HashTagColor from './HashTagColor'
 function PostPage() {
+
+    const {memberAuth} = useContext(AuthContext)
+    const mainpicbtn= useRef(null)
+    const contentpicbtn = useRef(null)
+//article_4_main.jpg
+    const [postUpload,setPostUpload] = useState({
+        title:'',
+        category:0,
+        article_pic_main:'',
+        hashtags:'',
+        content_1:'',
+        content_2:'',
+        article_pic_content:''
+        
+    })
+    const [errorMessage,setErrorMessage] = useState({
+        title:'',
+        category:'',
+        article_pic_main:'',
+        hashtags:'',
+        content_1:'',
+        content_2:'',
+        article_pic_content:'',
+        
+        
+    })
+
+  
+//  上傳照片
+      async function handleSubmit(e) {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("articlePic",e.target.files[0]);
+
+        // console.log('aa',formData,e.target.files[0]);
+        if(memberAuth.memberId && memberAuth.authorized){
+            let response =  await fetch(POST_PIC, {
+          method: "POST",
+          body: formData,
+        })
+        response = await response.json()
+        console.log(response);
+        
+        setPostUpload({...postUpload , [e.target.name]:response.filename})
+        }
+        
+        
+      }
+// 分類按鈕
+      const changeMemArtCateBtn=(x)=>{
+        if(x == postUpload.category) {return 'btn category_radio active article_mb_hidden'}
+        else{return 'btn category_radio article_mb_hidden'}
+     }
+
+// hashtag
+const[ogVal,setOgVal]  =useState('')
+     function handleEnterKey(e) {
+        if (e.key === 'Enter') {
+          if (e.target.value) {
+            setPostUpload({...postUpload,hashtags:postUpload.hashtags+`#${e.target.value}`})
+            setOgVal('')
+          } else {
+            return
+          }
+        }
+      }
+
+
+    //   確認上傳
+    const upLoadPost = async(x)=>{
+    if(memberAuth.memberId && memberAuth.authorized){
+
+        // 檢查~
+        let isTrue = true
+
+
+        //檢查通過送出資料
+        if(isTrue) {
+          const[result] = await axios.post(MEMBER_POST,{
+            ...postUpload,
+            memberId:memberAuth.memberId,
+            article_OnPublic:x
+          })
+           console.log('posted',result);
+
+        }
+
+
+    }
+
+    }
+
+
+
   return (
     <div className="article_page">
 
-    <form className="articles_container">
-        <div className="article_main_pic">
-            <button className="btn post_add_button">
-                首頁圖片
-                <i className="fa-solid fa-plus"></i></button>
+    <form className="articles_container" onSubmit={(e)=>{e.preventDefault()}}>
+    <div className="d-flex gap-3 align-items-center">
+                            <label htmlFor="article_order">請選擇文章分類　
+                            <i className="fa-solid fa-caret-right"></i></label>
+                           
+                        
+                           
+                            <button className={changeMemArtCateBtn(2)}
+                            onClick={(e)=>{
+                                e.preventDefault()
+                                setPostUpload({...postUpload,category:2})
+                            }}>
+                               推薦
+                            </button>
+                            <button  className={changeMemArtCateBtn(3)} 
+                            onClick={(e)=>{
+                                e.preventDefault()
+                                setPostUpload({...postUpload,category:3})
+                            }}>
+                                分享
+                            </button>
+                            
+                        </div>
+
+
+
+        <div className="article_main_pic" 
+        style={postUpload.article_pic_main.length>0?{backgroundImage:`url(${HOST}/articlePic/${postUpload.article_pic_main})`}:{backgroundImage:`none`}}>
+        
+            <button className="btn post_add_button"
+             onClick={(e)=>{
+                    e.preventDefault()
+                    console.log('click,',mainpicbtn.current)
+                    mainpicbtn.current.click()
+                }} >
+               
+           
+             首頁圖片
+                <i className="fa-solid fa-plus"></i>
+                </button>
+             <input name='article_pic_main' type="file" ref={mainpicbtn} className="d-none" 
+                onChange={async(e)=>{
+                    handleSubmit(e)
+                }
+                }
+             />
+       
         </div>
 
-        <input className="post_article_box" placeholder="請輸入文章標題"/>
+        <input className="post_article_box" placeholder="請輸入文章標題" value={postUpload.title} name='title' onChange={(e)=>{
+            setPostUpload({...postUpload,[e.target.name]:e.target.value})
+        }}/>
 
     
 
         <div className="hashtag_group">
-            <input className="hashtags" placeholder="+hashtag"/>
+            <input className="hashtags" placeholder="+hashtag" value={ogVal} onChange={(e)=>{setOgVal(e.target.value)}} onKeyDown={handleEnterKey}/>
+            {  postUpload.hashtags.length>0? postUpload.hashtags.split('#').map((w,i)=>{
+                                                if(w){
+                                                     return(
+                                                        <div key={i} className="hashtags"
+                                                        style={{backgroundColor:HashTagColor(5,i)}}>{w}</div>
+                                                    )}
+                                                }):''}
             
             
         </div>
@@ -24,28 +174,48 @@ function PostPage() {
 
         <div className="d-flex gap-2">
             <label className="">發布日期:</label>
-            <div className="post_time">2022-03-01</div>
+            <div className="post_time">
+            {Dayjs().format('YYYY/MM/DD')}
+            </div>
         </div>
 
 
         <div className="article_content">
 
-            <textarea className="post_article_paragraph" placeholder="段落一..."></textarea>
+            <textarea className="post_article_paragraph" placeholder="段落一..." value={postUpload.content_1} name='content_1' onChange={(e)=>{
+            setPostUpload({...postUpload,[e.target.name]:e.target.value})
+        }}></textarea>
 
-            <div className="post_article_pic">
-                <button className="btn post_add_button">
+            <div className="post_article_pic"  
+            style={postUpload.article_pic_content.length>0?{backgroundImage:`url(${HOST}/articlePic/${postUpload.article_pic_content})`}:{backgroundImage:`none`}}>
+                <button className="btn post_add_button" 
+                onClick={(e)=>{
+                    e.preventDefault()
+                    contentpicbtn.current.click()
+                }}>
                     內文圖片
                     <i className="fa-solid fa-plus"></i></button>
             </div>
+            <input name='article_pic_content' type="file" ref={contentpicbtn} className="d-none" 
+                onChange={async(e)=>{
+                    handleSubmit(e)
+                }
+                }
+             />
 
-            <textarea className="post_article_paragraph" placeholder="段落二..."></textarea>
+            <textarea className="post_article_paragraph" placeholder="段落二..." value={postUpload.content_2} name='content_2' onChange={(e)=>{
+            setPostUpload({...postUpload,[e.target.name]:e.target.value})
+        }}></textarea>
 
         </div>
 
 
 
     <div className="post_form_check_button">
-        <button className="btn post_add_button bg_gray">
+        <button className="btn post_add_button bg_gray"
+         onClick={(e)=>{
+                upLoadPost(0)
+            }}>
             <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M21 15.5V19.5C21 20.0304 20.7893 20.5391 20.4142 20.9142C20.0391 21.2893 19.5304 21.5 19 21.5H5C4.46957 21.5 3.96086 21.2893 3.58579 20.9142C3.21071 20.5391 3 20.0304 3 19.5V15.5" stroke="#F4F4F4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M7 10.5L12 15.5L17 10.5" stroke="#F4F4F4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -54,7 +224,10 @@ function PostPage() {
                 
             儲存草稿
             </button>
-            <button className="btn post_add_button bg_pink">
+            <button className="btn post_add_button bg_pink"
+            onClick={(e)=>{
+                upLoadPost(1)
+            }}>
                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 8.5L12 16.5L20 8.5" stroke="#233A66" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>

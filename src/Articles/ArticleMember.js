@@ -5,7 +5,7 @@ import Dayjs from 'dayjs'
 import AuthContext from '../Contexts/AuthContext'
 import ArticleSideBar from './ArticleSideBar'
 import axios from 'axios'
-import { ARTICLE_MEMBER_POST } from '../component/LoginApi'
+import { ARTICLE_MEMBER_POST,HOST } from '../component/LoginApi'
 
 function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
     const navigation = useNavigate()
@@ -109,10 +109,7 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
                     <div className="article_control_btn">
                         
                         <div className="d-flex gap-3 align-items-center">
-                            <label htmlFor="article_order">文章分類 
-                                <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M-3.67644e-08 9.15893L-4.00349e-07 0.841071C-4.33042e-07 0.0931635 0.93026 -0.28079 1.47261 0.246939L5.74678 4.40587C6.08441 4.73439 6.08441 5.26561 5.74678 5.59064L1.47261 9.75306C0.93026 10.2808 -4.0723e-09 9.90684 -3.67644e-08 9.15893Z" fill="black"/>
-                                </svg></label>
+                            <label htmlFor="article_order">文章分類 　<i className="fa-solid fa-caret-right"></i></label>
                             <button onClick={()=>{ 
                                 setMemNowCate(4)
                                 if(article_id=='liked'){
@@ -153,13 +150,14 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
                             {showMemData.map((v,i)=>{return(
                                 <div key={v.article_id}  className="article_card col-4">
                                     <img                                     
-                                    src={'/images/article/'+v.article_pic_main}alt=""/>
+                                    src={HOST+'/articlePic/'+v.article_pic_main}alt=""/>
                                     <div className="article">
                                         <div className="title">
                                             <span onClick={()=>{
                                     navigation('/articles/beebeePostNO/'+v.article_id)
                                         }} >{v.title}</span>
-                                        <button className=" article_like_button" 
+
+                                        {article_id=='liked' ?    <button className=" article_like_button" 
                                                     onClick={()=>{
                                                         addDelLikeArt(v.article_id)
                                                     }}>
@@ -167,7 +165,17 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
                                                     <i className="fa-solid fa-heart"></i>:<i className="fa-regular fa-heart"></i>
                                                     }
                                                     
+                                                </button>:
+                                                <button className=" article_like_button" 
+                                                    onClick={()=>{
+                                                        // 跳頁至編輯頁
+                                                    }}>
+                                                    <i className="fa-regular fa-pen-to-square" style={{color:" #5e6673"}}></i>
+                                                    
                                                 </button>
+                                                
+                                                }
+                                    
                                                 
                                         </div>
                                 
@@ -179,12 +187,14 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
                                             </div>
 
                                              <div className="hashtag_group">
-                                            { v.article_hashtag[0]?  v.article_hashtag.map((w,i)=>{
-                                              
-                                              return(
+                                            { v.article_hashtag[1]?  v.article_hashtag.map((w,i)=>{
+                                              if(w){
+                                                return(
                                                   <div key={i} className="hashtags"
                                                   style={{backgroundColor:HashTagColor(v.article_id,i)}}>{w}</div>
                                               )
+                                              }
+                                              
                                           }):''}
                                             
                                             </div> 

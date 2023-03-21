@@ -1,5 +1,5 @@
 import React ,{useState,useEffect, useContext,Fragment,useRef}from 'react'
-import {GET_ARTICLE_COMMENT,POST_ARTICLE_COMMENT,GET_SINGLE_ARTICLE_POST,SINGLE_ARTICLE_LIKE } from '../component/LoginApi'
+import {GET_ARTICLE_COMMENT,POST_ARTICLE_COMMENT,GET_SINGLE_ARTICLE_POST,SINGLE_ARTICLE_LIKE,HOST } from '../component/LoginApi'
 import { useLocation, useParams,useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Dayjs from 'dayjs'
@@ -147,16 +147,18 @@ useEffect(()=>{
                     {singlePost.map((v,i)=>{
                         return(
                             <Fragment key={v.article_id}>
-                                <img className="article_main_pic" src={'/images/article/'+v.article_pic_main} alt='article_main_pic' />
+                                <img className="article_main_pic" src={HOST+'/articlePic/'+v.article_pic_main} alt='article_main_pic' />
                                 <div className="single_article_title">{v.title}</div>
 
                                 <div className="hashtag_group">
                                 { v.article_hashtag.map((w,i)=>{
-                                              
+                                 if(w){
                                     return(
                                     <div key={i} className="hashtags"
                                     style={{backgroundColor:HashTagColor(v.article_id,i)}}>{w}</div>
                                     )
+                                 }
+                                    
                                 })}
                                     
                                 </div>
@@ -173,7 +175,7 @@ useEffect(()=>{
                                     </div>
                                     
                                     {v.article_pic_content?
-                                     <img className="article_content_pic" src={'/images/article/'+v.article_pic_content} alt="article_content_pic1"/>
+                                     <img className="article_content_pic" src={HOST+'/articlePic/'+v.article_pic_content} alt="article_content_pic1"/>
                                     :''}
                                    
 
@@ -307,7 +309,7 @@ useEffect(()=>{
                         <div key={v.article_id} className="article_card col-4">
                             <img
                            
-                            src={'/images/article/'+v.article_pic_main}alt=""/>
+                            src={HOST+'/articlePic/'+v.article_pic_main} alt=""/>
                             <div className="article">
                                 <div className="title">
                                     <span  onClick={()=>{
@@ -334,11 +336,13 @@ useEffect(()=>{
 
                                     <div className="hashtag_group">
                                     {  v.article_hashtag.map((w,i)=>{
-                                              
-                                              return(
+                                              if(w){
+                                                return(
                                                   <div key={i} className="hashtags"
                                                   style={{backgroundColor:HashTagColor(v.article_id,i)}}>{w}</div>
                                               )
+                                              }
+                                              
                                           })}
 
                                     

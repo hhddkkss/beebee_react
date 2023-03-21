@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {GET_FRONT_ARTICLES } from '../component/LoginApi'
+import {HOST } from '../component/LoginApi'
 import axios from 'axios'
 import Dayjs from 'dayjs'
 import { useLocation, useParams,useNavigate } from 'react-router-dom'
@@ -41,16 +41,19 @@ function Front({frontData,setType}) {
 
                             <div className="hashtag_group">
                             {frontData[0].article_hashtag.map((v,i)=>{
-                                return(
+                                if(v){
+                                    return(
                                     <div key={i} className="hashtags"
                                     style={{backgroundColor:HashTagColor(frontData[0].article_id,i)}}>{v}</div>
                                 )
+                                }
+                                
                             })}
                                 
                             </div>
                         </div>
                     </div>
-                    <img onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[0].article_id)}} src={'/images/article/'+frontData[0].article_pic_main} alt=""/>
+                    <img onClick={()=>{navigation(HOST+'/articlePic/'+frontData[0].article_id)}} src={'/images/article/'+frontData[0].article_pic_main} alt=""/>
                 </div>
 
             </div>
@@ -69,7 +72,7 @@ function Front({frontData,setType}) {
                 </div>
 
                 <div className="latest_article">
-                    <img onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[1].article_id)}} src={'/images/article/'+frontData[1].article_pic_main} alt=""/>
+                    <img onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[1].article_id)}} src={HOST+'/articlePic/'+frontData[1].article_pic_main} alt=""/>
                     <div className="article">
                         <div className="title"  onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[1].article_id)}} >{frontData[1].title}</div>
                         <div className="content article_mb_hidden">{frontData[1].content_1}</div>
@@ -84,10 +87,13 @@ function Front({frontData,setType}) {
 
                             <div className="hashtag_group">
                             {frontData[1].article_hashtag.map((v,i)=>{
-                                return(
+                                if(v){
+                                    return(
                                     <div key={i} className="hashtags"
                                     style={{backgroundColor:HashTagColor(frontData[1].article_id,i)}}>{v}</div>
                                 )
+                                }
+                                
                             })}
                                 
                             </div>
@@ -125,16 +131,19 @@ function Front({frontData,setType}) {
 
                             <div className="hashtag_group">
                             {frontData[2].article_hashtag.map((v,i)=>{
-                                return(
+                                if(v){
+                                    return(
                                     <div key={i} className="hashtags"
                                     style={{backgroundColor:HashTagColor(frontData[2].article_id,i)}}>{v}</div>
                                 )
+                                }
+                                
                             })}
                                 
                             </div>
                         </div>
                     </div>
-                    <img  src={'/images/article/'+frontData[2].article_pic_main} alt="" onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[2].article_id)}} />
+                    <img  src={HOST+'/articlePic/'+frontData[2].article_pic_main} alt="" onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[2].article_id)}} />
                 </div>
 
             </div>

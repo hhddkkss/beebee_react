@@ -133,6 +133,7 @@ body{
 
 }
 .latest_article{
+    /* 忘記為啥要grow明明就會爆版看不懂自己= = */
     /* flex-grow: 1; */
     display: flex;
     flex-direction: row;

@@ -78,3 +78,6 @@ export const GET_COUPON = `${HOST}/coupon/`
 //訂單
 export const ADD_ORDER_ALL = `${HOST}/order/order_all`
 export const ADD_ORDER_DETAIL = `${HOST}/order/order_detail`
+
+//發文圖片
+export const POST_PIC = `${HOST}/article_page/memberPostArticlePic`
