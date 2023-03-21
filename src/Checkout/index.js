@@ -1,7 +1,12 @@
 import React, { useState, useContext } from 'react'
 import '../styles/checkout.css'
 import Navbar from '../component/CheckoutNavBarLight'
-import StepInfomation from '../component/StepInfomation'
+import {
+  GET_COUPON,
+  ADD_ORDER_ALL,
+  ADD_ORDER_DETAIL,
+  EMPTY_CART,
+} from '../component/LoginApi'
 import M_Path from '../component/M_Path'
 import M_OrderDetailCard from './M_OrderDetailCard'
 import M_orderDetailBottom from './M_orderDetailBottom'
@@ -10,35 +15,277 @@ import CheckoutRightLogin from './CheckoutRightLogin'
 import CheckoutRight from './CheckoutRight'
 import BtnLoginAndSignUp from './BtnLoginAndSignUp'
 import AuthContext from '../Contexts/AuthContext'
+import axios from 'axios'
+import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 
 function Checkout() {
   const { memberAuth } = useContext(AuthContext)
 
-  //表單資料
-  const [inputs, setInputs] = useState({})
-
+  const { cartData } = useContext(ProductFunctionContext)
   //折扣
   const [discount, setDiscount] = useState(0)
   const [hasDiscount, setHasDiscount] = useState(false)
+  const [couponCode, setCouponCode] = useState('')
+  const [couponError, setCouponError] = useState(false)
+  const [couponId, setCouponId] = useState('')
+
+  //訂單相關
+  const [passValidation, SetPassValidation] = useState(false)
+  // const [orderId, setOrderId] = useState('')
+  let orderId = ''
   //有沒有優惠券
   //note: {output:有優惠券 沒有優惠券 還沒檢查 }控制要不要顯示錯誤訊息
   const [hasCoupon, setHasCoupon] = useState('還沒檢查')
 
+  //表單資料
+  const [inputs, setInputs] = useState({
+    // firstName: '',
+    // lastName: '',
+    // mobile: '',
+    // email: '',
+    // cities: '',
+    // disc: '',
+    // address: '',
+    // postalCode: '',
+    // payment: '',
+  })
+
+  // validation
+  const [validation, setValidation] = useState({
+    // firstName: '',
+    // lastName: '',
+    // mobile: '',
+    // email: '',
+    // cities: '',
+    // disc: '',
+    // address: '',
+    // postalCode: '',
+    // payment: '',
+  })
+
+  const errorMsg = {
+    name: '姓名為必填項目',
+    mobile: ['手機為必填項目', '請遵守範例格式為0912123123'],
+    email: ['Email為必填項目', '請遵守範例格式為beeebee@test.com'],
+    cities: '收件人城市為必選項目',
+    disc: '收件人區為必選項目',
+    address: '收件人地址為必填項目',
+    postalCode: [
+      '收件人郵遞區號為必填項目',
+      '請遵守收件人郵遞區號格式為數字',
+      '郵遞區號須為3碼或是5碼',
+    ],
+    payment: '付款方式為必選項目',
+  }
   //控制表單輸入欄用
   const handleChange = (event) => {
     const name = event.target.name
     const value = event.target.value
+
     console.log({ ...inputs, [name]: value })
     setInputs({ ...inputs, [name]: value })
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log(inputs)
+  //驗證表單用
+  const handleValidation = () => {
+    setValidation({})
+    //判斷input裡面的東西有沒有符合
+    // const passValidation = false
+    //名字驗證
+
+    if (!inputs.firstName || !inputs.firstName.trim()) {
+      setValidation((...prevValidation) => ({
+        ...prevValidation,
+        firstName: errorMsg.name,
+      }))
+    }
+    //姓氏驗證
+
+    if (!inputs.lastName || !inputs.lastName.trim()) {
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        lastName: errorMsg.name,
+      }))
+    }
+    //手機號碼驗證
+    //為空
+    if (!inputs.mobile || !inputs.mobile.trim()) {
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        mobile: errorMsg.mobile[0],
+      }))
+    }
+    //格式不對
+    const mobileCondition = /^09[0-9]{8}$/
+    if (inputs.mobile && !inputs.mobile.match(mobileCondition)) {
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        mobile: errorMsg.mobile[1],
+      }))
+    }
+
+    //email驗證
+    const emailCondition =
+      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+    //email為空
+    if (inputs.email === undefined || !inputs.email.trim()) {
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        email: errorMsg.email[0],
+      }))
+    }
+    //email格式驗證 by: https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
+
+    if (inputs.email && !inputs.email.match(emailCondition)) {
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        email: errorMsg.email[1],
+      }))
+    }
+
+    //縣市驗證
+
+    if (!inputs.city || inputs.city === '請選擇') {
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        cities: errorMsg.cities,
+      }))
+    }
+
+    //區驗證
+    if (!inputs.disc || inputs.disc === '請選擇') {
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        disc: errorMsg.disc,
+      }))
+    }
+
+    //地址驗證
+
+    if (!inputs.address || !inputs.address.trim()) {
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        address: errorMsg.address,
+      }))
+    }
+    //郵遞區號
+    //為空
+    if (!inputs.postalCode || !inputs.postalCode.trim()) {
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        postalCode: errorMsg.postalCode[0],
+      }))
+    }
+    //郵遞區號須為數字
+    if (inputs.postalCode && Number.isNaN(inputs.postalCode)) {
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        postalCode: errorMsg.postalCode[1],
+      }))
+    }
+
+    //郵遞區號為 3碼 or 5碼
+    if (inputs.postalCode && inputs.postalCode.length === 4) {
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        postalCode: errorMsg.postalCode[2],
+      }))
+    }
+
+    //付款方式驗證
+    if (!inputs.payment || inputs.payment === '請選擇') {
+      setValidation((prevValidation) => ({
+        ...prevValidation,
+        payment: errorMsg.payment,
+      }))
+    }
+
+    //表單有沒有通過？
+    if (JSON.stringify(validation) === '{}') {
+      console.log('表格檢查無誤')
+      SetPassValidation(true)
+    }
+  }
+
+  //表單送出
+  const handleSubmit = async (event) => {
+    handleValidation(event)
+
+    if (passValidation) {
+      //寫入訂單總表
+      await addOrderAll()
+      //寫入訂單總表
+      await addOrderDetail()
+    }
+
+    //寫入訂單細節
+
+    //清空購物車
+    // await emptyCart()
+    console.log(inputs, 'input')
+    console.log(validation, 11111)
   }
 
   //拿優惠券
-  const getCoupon = async () => {}
+  const getCoupon = async (couponCode) => {
+    const res = await axios.get(GET_COUPON + couponCode)
+
+    if (res.data && +res.data.discount > 0) {
+      setHasDiscount(true)
+      setDiscount(res.data.discount)
+      setCouponId(res.data.id)
+      setCouponError(false)
+    } else {
+      setHasDiscount(false)
+      setCouponError(true)
+    }
+  }
+  //  新增訂單
+  const addOrderAll = async () => {
+    const res = await axios.post(ADD_ORDER_ALL, {
+      member_id: memberAuth.memberId,
+      order_memo: inputs.note,
+      coupon_id: couponId,
+      firstName: inputs.firstName,
+      lastName: inputs.lastName,
+      order_phone: inputs.mobile,
+      order_address_city: inputs.city,
+      order_address_dist: inputs.disc,
+      order_address: inputs.address,
+      order_email: inputs.email,
+      postalCode: inputs.postalCode,
+      product_price: cartData.map((v) => Number(v.product_price)),
+      quantity: cartData.map((v) => +v.quantity),
+      discount: discount,
+    })
+    console.log(res.data.orderNum, 'num')
+    // setOrderId(res.data.orderNum)
+    orderId = res.data.orderNum
+  }
+
+  //新增詳細訂單
+  const addOrderDetail = async () => {
+    console.log(orderId, 'num2')
+    const res = await axios.post(ADD_ORDER_DETAIL, {
+      order_id: orderId,
+      product_id: cartData.map((v) => v.product_id),
+      product_name: cartData.map((v) => v.product_name),
+      product_amount: cartData.map((v) => v.quantity),
+      product_price: cartData.map((v) => v.product_price),
+      payment_method: +inputs.payment,
+    })
+  }
+
+  //清空購物車
+  const emptyCart = async () => {
+    console.log(22222)
+    const res = await axios.delete(EMPTY_CART, {
+      data: {
+        member_id: memberAuth.memberId,
+      },
+    })
+    console.log(res.data)
+  }
 
   return (
     <>
@@ -59,64 +306,12 @@ function Checkout() {
 
           {/* m<!-- 折疊訊息 --> */}
           <div className="m-order-detail-info">
-            {/* <div className="checkout-items">
-              <div className="checkout-item-card">
-                <div className="checkout-item">
-                  <div className="img-wrap">
-                    <div className="amount">1</div>
-                  </div>
-                  <div className="checkout-item-info">
-                    <p>Iphone14 Pro</p>
-                    <p>34900</p>
-                  </div>
-                </div>
-              </div>
-            </div> */}
-
             <M_OrderDetailCard />
 
-            {/* <div className="coupon">
-              <input
-                type="text"
-                className="coupon-code"
-                placeholder="請輸入折扣碼"
-              />
-              <a href="#" className="btn-coupon">
-                使用
-              </a>
-              <p className="d-none err-msg">折扣碼錯誤請重新輸入</p>
-            </div>
-
-            <div className="checkout-cal">
-              <p>合計</p>
-              <p>169799</p>
-            </div>
-
-            <div className="checkout-fee">
-              <p>運費</p>
-              <p>120</p>
-            </div>
-
-            <div className="checkout-discount">
-              <p>折扣</p>
-              <p>120</p>
-            </div>
-
-            <div className="checkout-total">
-              <p>總金額</p>
-              <p>169919</p>
-            </div> */}
-            {/* 明細 */}
             <M_orderDetailBottom />
           </div>
         </div>
-        {/* 
-        <a href="#" className="btn-to-login">
-          已經有帳號了嗎？ 登入來進行購買
-        </a>
-        <a href="#" className="btn-to-signup">
-          註冊新帳號進行購買
-        </a> */}
+
         {localStorage.getItem('myAuth') &&
         JSON.parse(localStorage.getItem('myAuth')).memberId ? (
           ''
@@ -201,6 +396,8 @@ function Checkout() {
             setInputs={setInputs}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            validation={validation}
+            setValidation={setValidation}
           />
         </div>
         {/* <!-- 右半邊 --> */}
@@ -214,6 +411,13 @@ function Checkout() {
               setHasCoupon={setHasCoupon}
               discount={discount}
               getCoupon={getCoupon}
+              couponCode={couponCode}
+              setCouponCode={setCouponCode}
+              couponError={couponError}
+              handleSubmit={handleSubmit}
+              inputs={inputs}
+              addOrderAll={addOrderAll}
+              addOrderDetail={addOrderDetail}
             />
           ) : (
             <CheckoutRight />

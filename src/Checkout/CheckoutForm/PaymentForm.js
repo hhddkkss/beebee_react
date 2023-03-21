@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import { compose } from '@mui/system'
+import React, { useState, useRef } from 'react'
 import Cards from 'react-credit-cards-2'
 import 'react-credit-cards-2/es/styles-compiled.css'
 
-const PaymentForm = () => {
+const PaymentForm = (setValidation, validation) => {
   const [state, setState] = useState({
     number: '',
     expiry: '',
@@ -43,11 +44,13 @@ const PaymentForm = () => {
           cvc={state.cvc}
           name={state.name}
           focused={state.focus}
+
           // callback={(...a) => console.log(a)}
         />
+
         <div className="field-wrap">
           <input
-            type="number"
+            type="text"
             name="number"
             placeholder=" "
             value={state.number}
@@ -56,12 +59,13 @@ const PaymentForm = () => {
             className="form-input"
             autoComplete="off"
           />
+
           <label className="form-label">*信用卡號</label>
         </div>
 
         <div className="field-wrap">
           <input
-            type="name"
+            type="text"
             name="name"
             placeholder=" "
             value={state.name}
@@ -74,9 +78,9 @@ const PaymentForm = () => {
         </div>
         <div className="field-wrap">
           <input
-            type="expiry"
+            type="text"
             name="expiry"
-            placeholder="year/month"
+            placeholder="month/year"
             value={state.expiry}
             onChange={handleInputChange}
             onFocus={handleInputFocus}
@@ -87,7 +91,7 @@ const PaymentForm = () => {
         </div>
         <div className="field-wrap">
           <input
-            type="cvc"
+            type="text"
             name="cvc"
             placeholder=" "
             value={state.cvc}
@@ -98,6 +102,21 @@ const PaymentForm = () => {
           />
           <label className="form-label">*安全碼</label>
         </div>
+        <a
+          href="#/"
+          className="btn-credit-info"
+          onClick={() => {
+            setState({
+              ...state,
+              number: '4111111112341234',
+              expiry: '1225',
+              cvc: '366',
+              name: 'CHEN MING MING',
+            })
+          }}
+        >
+          自動填入信用卡資訊
+        </a>
       </div>
     </div>
   )

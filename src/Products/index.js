@@ -18,19 +18,8 @@ import ProductCompare from '../component/ProductCompare'
 import AuthContext from '../Contexts/AuthContext'
 import CompareContext from '../Contexts/CompareContext'
 function Products() {
-  const {
-    products,
-    cartItem,
-    setProducts,
-    setCartItem,
-    getProductData,
-    pageNow,
-    setPageNow,
-    perPage,
-    setPerPage,
-    pageTotal,
-    setPageTotal,
-  } = useContext(ProductFunctionContext)
+  const { products, pageNow, setPageNow, perPage, pageTotal, setPageTotal } =
+    useContext(ProductFunctionContext)
   const {
     compareListClass,
     setCompareListClass,
@@ -167,49 +156,6 @@ function Products() {
     }
   }
 
-  //加入購物車
-  // const handleAddOrDeleteCart = (product_id, count) => {
-  //   //判斷購物車內有沒有這個商品
-  //   console.log('1', cartItem)
-  //   const inCart = cartItem && cartItem.find((v) => v.product_id === product_id)
-
-  //   //有的話
-  //   if (inCart) {
-  //     /*
-  //     const newCart = cartItem.filter((v) => v.product_id !== product_id)
-
-  //     setCartItem(newCart)
-  //     //轉成字串寫進localStorage
-  //     localStorage.setItem('cartItem', JSON.stringify(newCart))
-  //     */
-  //   }
-
-  //   //沒有的話
-  //   else {
-  //     const newCart = [...cartItem, { product_id: product_id, count: count }]
-  //     setCartItem(newCart)
-  //     //轉成字串寫進localStorage
-  //     localStorage.setItem('cartItem', JSON.stringify(newCart))
-  //   }
-  // }
-
-  //加入比較清單
-  // const handleAddOrDeleteCompared = (product_id) => {
-  //   const isOnComparedList = comparedList && comparedList.includes(product_id)
-
-  //   if (isOnComparedList) {
-  //     const newComparedList = [...comparedList].filter((v) => {
-  //       return v !== product_id
-  //     })
-  //     setComparedList(newComparedList)
-  //     localStorage.setItem('comparedList', JSON.stringify(newComparedList))
-  //   } else {
-  //     const newComparedList = [...comparedList, product_id]
-  //     setComparedList(newComparedList)
-  //     localStorage.setItem('comparedList', JSON.stringify(newComparedList))
-  //   }
-  // }
-
   //分頁用
   const handleChangePageNow = (e, p) => {
     setPageNow(p)
@@ -309,16 +255,8 @@ function Products() {
 
           <ProductArea
             productsDisplay={productsDisplay}
-            // pageNow={pageNow}
-            // favorites={favorites}
-            // setProducts={setProducts}
             toggleLiked={toggleLiked}
-            // products={products}
-            // handleAddOrDeleteFavorite={handleAddOrDeleteFavorite}
-            // comparedList={comparedList}
             toggleCompared={toggleCompared}
-            // cartItem={cartItem}
-            // handleAddOrDeleteCart={handleAddOrDeleteCart}
           />
         </section>
       </div>
@@ -347,9 +285,9 @@ function Products() {
           page={pageNow}
           sx={{ mx: '0 auto' }}
           onChange={handleChangePageNow}
-          size={'small'}
-          showFirstButton={true}
-          showLastButton={false}
+          size={'large'}
+          defaultPage={1}
+          siblingCount={0}
         />
       )}
       {/* 比價區 */}
