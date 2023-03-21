@@ -15,7 +15,8 @@ function ProductDetailsBasic({ p_detailData }) {
     favoritePId,
     handleAddOrDeleteCompared,
     handleAddOrDeleteFavorite,
-    reGetFavorites
+    reGetFavorites,
+    getCartData
   } = useContext(ProductFunctionContext)
   const { memberAuth } = useContext(AuthContext)
 
@@ -56,7 +57,7 @@ function ProductDetailsBasic({ p_detailData }) {
           productId:product_id,
           count:productCount
           })
-      await setRender(!render)
+     setRender(!render)
     }else{console.log('用戶未登入')}
 
     
@@ -64,6 +65,7 @@ function ProductDetailsBasic({ p_detailData }) {
 
   useEffect(() => {
     getFavorites(memberAuth.memberId)
+    getCartData()
   }, [render,reGetFavorites])
 
   return (
