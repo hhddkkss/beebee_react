@@ -1,13 +1,17 @@
 import { ScrollSync, ScrollSyncPane } from 'react-scroll-sync'
-import { useContext } from 'react'
+import { useContext,useEffect, useState } from 'react'
 import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
+import AuthContext from '../../Contexts/AuthContext'
 import CompareContext from '../../Contexts/CompareContext'
+import { PRODUCT_DETAIL_ADD_CART_API } from '../LoginApi'
+import axios from 'axios'
 
 function ProductCompareIngBox(props) {
   const { compareIngData, compareType, addCompareIngList } = props
   const { setCompareListClass, setCompareIngClass, compareIngClass } =
     useContext(CompareContext)
-  const { handleAddOrDeleteCart } = useContext(ProductFunctionContext)
+  const { handleAddOrDeleteCart, getCartData, getFavorites,reGetFavorites } = useContext(ProductFunctionContext )
+  const { memberAuth } = useContext(AuthContext)
   const compareHeadTiile = [
     ['作業系統', '處理器', '記憶體', '電池', '螢幕尺寸'],
     [
@@ -30,6 +34,29 @@ function ProductCompareIngBox(props) {
       '防水係數',
     ],
   ]
+   // 購物車
+  const [render, setRender] = useState(false)
+  //  寫進購物車資料庫
+ 
+
+
+  const addToCart = async (product_id) => {
+    const member_id = memberAuth.memberId
+    if(member_id!==0){
+      await axios.post(PRODUCT_DETAIL_ADD_CART_API,{
+          memberId:member_id,
+          productId:product_id,
+          count:1
+          })
+     setRender(!render)
+    }else{console.log('用戶未登入')}
+
+    
+  }
+  useEffect(() => {
+    getFavorites(memberAuth.memberId)
+    getCartData()
+  }, [render,reGetFavorites])
   //  console.log('Q01', compareIngClass,compareType)
   // 手機
   if (compareType == 1) {
@@ -127,7 +154,7 @@ function ProductCompareIngBox(props) {
                     <button
                       className="add_To_Cart"
                       onClick={() => {
-                        handleAddOrDeleteCart(v.product_id, 1)
+                         addToCart(v.product_id)
                       }}
                     >
                       <i className="fa-solid fa-cart-shopping d-inline"></i>
@@ -247,7 +274,7 @@ function ProductCompareIngBox(props) {
                     <button
                       className="add_To_Cart"
                       onClick={() => {
-                        handleAddOrDeleteCart(v.product_id, 1)
+                        addToCart(v.product_id)
                       }}
                     >
                       <i className="fa-solid fa-cart-shopping d-inline"></i>
@@ -369,7 +396,7 @@ function ProductCompareIngBox(props) {
                     <button
                       className="add_To_Cart"
                       onClick={() => {
-                        handleAddOrDeleteCart(v.product_id, 1)
+                        addToCart(v.product_id)
                       }}
                     >
                       <i className="fa-solid fa-cart-shopping d-inline"></i>
