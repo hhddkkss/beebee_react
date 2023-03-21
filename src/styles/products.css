@@ -658,6 +658,7 @@ header {
   }
 
   .m-product-class {
+    padding: 0;
     display: flex;
     justify-content: space-between;
   }
@@ -669,7 +670,9 @@ header {
     font-size: 20px;
   }
   .m-product-class li {
-    padding: 0.5rem 0.25rem;
+    width: calc((100% / 4));
+    text-align: center;
+    padding: 0.5rem 0rem;
   }
 
   /* hover的效果 */

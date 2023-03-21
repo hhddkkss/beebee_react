@@ -3,16 +3,16 @@ import React from 'react'
 function M_productAndBrand({ productType, setProductType, brand, setBrand }) {
   // const brandOption = ['全部商品', '手機', '平板', '耳機']
   const productOption = [
+    { product_category_id: 4, title: '全部商品' },
     { product_category_id: 1, title: '手機' },
     { product_category_id: 2, title: '平板' },
     { product_category_id: 3, title: '耳機' },
-    { product_category_id: 4, title: '全部商品' },
   ]
 
   const brandOption = [
+    { brand: '全部品牌', imgSrc: './images/svg/all_button.svg' },
     { brand: 'Apple', imgSrc: './images/svg/Apple_logo_black.svg' },
     { brand: 'Samsung', imgSrc: './images/svg/Samsung_Logo.svg' },
-    { brand: '小米', imgSrc: './images/svg/Xiaomi_logo.svg' },
     { brand: 'other', imgSrc: './images/svg/Frame 365.svg' },
   ]
 
