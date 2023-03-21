@@ -3,7 +3,6 @@ import React from 'react'
 function OrderDetail(donepageData) {
   return (
     <>
-      {console.log(donepageData.orderDetail.product_info, 888)}
       <div className="checkout-items">
         {donepageData.orderDetail.product_info.map((v) => (
           <div className="checkout-item-card" key={v.product_id}>
@@ -12,7 +11,7 @@ function OrderDetail(donepageData) {
                 className="img-wrap"
                 style={{ backgroundImage: v.product_pic }}
               >
-                <div className="amount">1</div>
+                <div className="amount">{v.product_amount}</div>
               </div>
               <div className="checkout-item-info">
                 <p>{v.product_name}</p>

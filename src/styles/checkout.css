@@ -845,6 +845,14 @@ form {
   .m-order-detail-info .checkout-total {
     padding-top: 1rem;
   }
+  .err-msg {
+    padding: 0;
+  }
+  .checkout-error {
+    left: 100%;
+    top: 115%;
+    transform: translate(-80%);
+  }
 
   .m-nav {
     display: flex;

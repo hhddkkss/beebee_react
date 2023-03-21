@@ -219,7 +219,7 @@ function Checkout() {
       }))
     }
 
-    return passValidation;
+    return passValidation
     //表單有沒有通過？
     // if (JSON.stringify(validation) === '{}') {
     //   console.log('表格檢查無誤')
@@ -341,16 +341,19 @@ function Checkout() {
           <div className="m-order-detail-info">
             <M_OrderDetailCard />
 
-            <M_orderDetailBottom />
+            <M_orderDetailBottom
+              hasDiscount={hasDiscount}
+              couponCode={couponCode}
+              setCouponCode={setCouponCode}
+              getCoupon={getCoupon}
+              discount={discount}
+              couponError={couponError}
+              handleSubmit={handleSubmit}
+            />
           </div>
         </div>
 
-        {localStorage.getItem('myAuth') &&
-        JSON.parse(localStorage.getItem('myAuth')).memberId ? (
-          ''
-        ) : (
-          <BtnLoginAndSignUp />
-        )}
+        {memberAuth.memberId ? '' : <BtnLoginAndSignUp />}
       </div>
 
       <div className="checkout">
@@ -517,7 +520,14 @@ function Checkout() {
       </div>
 
       <div className="m-bottom-btn">
-        <button className="m-btn-to-checkout btn-to-checkout">立即下單</button>
+        <button
+          className="m-btn-to-checkout btn-to-checkout"
+          onClick={(event) => {
+            handleSubmit(event)
+          }}
+        >
+          立即下單
+        </button>
       </div>
     </>
   )

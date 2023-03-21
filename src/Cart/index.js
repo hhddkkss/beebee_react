@@ -14,14 +14,10 @@ import { useContext, useEffect, useState } from 'react'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 import axios from 'axios'
 
-
-
 function Cart() {
   //----- UseContext -----
   const { setNavbarType } = useContext(AuthContext)
-  const { getCartData, cartData} = useContext(
-    ProductFunctionContext
-  )
+  const { getCartData, cartData } = useContext(ProductFunctionContext)
 
   useEffect(() => {
     setNavbarType('light')
@@ -54,53 +50,8 @@ function Cart() {
     <>
       {/* <!-- navbar --> */}
       <Navbar />
-      {/* <!-- step information --> */}
-      {/* <div className="container">
-        <section className={styles['step']}>
-          <div className={styles['ball-wrap']}>
-            <div className={styles.ball}>
-              <span>1</span>
-            </div>
-
-            <div className={styles['line']}></div>
-
-            <div className={styles['ball']}>
-              <span>2</span>
-            </div>
-
-            <div className={styles['line']}></div>
-
-            <div className={styles['ball']}>
-              <span>3</span>
-            </div>
-          </div>
-
-          <div className="text">
-            <p>購物車</p>
-            <p>填寫資料</p>
-            <p>完成訂單</p>
-          </div>
-        </section>
-      </div> */}
 
       <StepInfomation />
-
-      {/* <!-- 手機版麵包屑 --> */}
-      {/* <div className="path">
-        <span>
-          <a href="#" className="path-active">
-            購物車
-          </a>
-        </span>
-        <i className="fa-solid fa-chevron-right"></i>
-        <span>
-          <a href="#">填寫資料</a>
-        </span>
-        <i className="fa-solid fa-chevron-right"></i>
-        <span>
-          <a href="#">完成訂單</a>
-        </span>
-      </div> */}
 
       <M_Path />
 
@@ -314,7 +265,6 @@ function Cart() {
           <i className="fa-solid fa-xmark"></i>
         </a>
       </div> */}
-     
     </>
   )
 }

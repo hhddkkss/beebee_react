@@ -43,7 +43,13 @@ function FunctionalBar({
         {/* <!-- 收藏 --> */}
         <div className="wrap">
           <div className="like-list-wrap">
-            <a href="#" className="like-list">
+            <a
+              href="#/"
+              className="like-list"
+              onClick={(e) => {
+                e.preventDefault()
+              }}
+            >
               收藏清單
             </a>
           </div>

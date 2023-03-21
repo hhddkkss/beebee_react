@@ -148,7 +148,7 @@ function DonePage() {
                       backgroundImage: `url("/images/${v.product_pic}")`,
                     }}
                   >
-                    <div className="amount">1</div>
+                    <div className="amount">{v.product_amount}</div>
                   </div>
                   <div className="checkout-item-info">
                     <p>{v.product_name}</p>
