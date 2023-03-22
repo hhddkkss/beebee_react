@@ -118,7 +118,7 @@ function SignipForm(props) {
               setShow(false)
             }} 
             className="changeEye">
-              {show?<i  className="fa-solid fa-eye"></i>:<i class="fa-solid fa-eye-slash"></i>}
+              {show?<i  className="fa-solid fa-eye"></i>:<i className="fa-solid fa-eye-slash"></i>}
             </div>
             <div className="login_input_alert_info input_alert_true">
             {errorMessage.password}
