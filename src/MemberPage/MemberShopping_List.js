@@ -1,17 +1,19 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import Navbar from '../component/Navbar/index'
-import MeberPage_Sidebar from '../component/MemberPage/MeberPage_Sidebar'
+import MeberPage_Sidebar from './MemberPageComponent/MeberPage_Sidebar'
 
 function MemberShopping_List() {
+  const navigation = useNavigate()
   return (
     <>
       <Navbar />
-      <div class="member_body">
+      <div className="member_body">
         <MeberPage_Sidebar />
 
-        <div class="member_container">
-          <div class="now_memberPage">購買清單</div>
-          <table class="member_shoppingList member_List member_mobile_hidden">
+        <div className="member_container">
+          <div className="now_memberPage">購買清單</div>
+          <table className="member_shoppingList member_List member_mobile_hidden">
             <thead>
               <tr>
                 <th>訂單編號</th>
@@ -30,7 +32,12 @@ function MemberShopping_List() {
                 <td>訂單配送中</td>
                 <td>TWD 9998</td>
                 <td>
-                  <button class="memberPage_button view_more_btn">
+                  <button
+                    className="memberPage_button view_more_btn"
+                    onClick={() => {
+                      navigation('/member_page/shoppinglistdetail')
+                    }}
+                  >
                     VEIW MORE
                   </button>
                 </td>
@@ -42,7 +49,12 @@ function MemberShopping_List() {
                 <td>已完成</td>
                 <td>TWD 4498</td>
                 <td>
-                  <button class="memberPage_button view_more_btn">
+                  <button
+                    className="memberPage_button view_more_btn"
+                    onClick={() => {
+                      navigation('/member_page/shoppinglistdetail')
+                    }}
+                  >
                     VEIW MORE
                   </button>
                 </td>
@@ -51,7 +63,7 @@ function MemberShopping_List() {
           </table>
 
           {/* <!-- 手機板 --> */}
-          <table class="member_mobile_show mobile_member_List">
+          <table className="member_mobile_show mobile_member_List">
             <tbody>
               <tr>
                 <td>訂單編號:</td>
@@ -81,7 +93,7 @@ function MemberShopping_List() {
               <tr>
                 <td></td>
                 <td>
-                  <button class="memberPage_button view_more_btn">
+                  <button className="memberPage_button view_more_btn">
                     VEIW MORE
                   </button>
                 </td>
@@ -117,7 +129,12 @@ function MemberShopping_List() {
               <tr>
                 <td></td>
                 <td>
-                  <button class="memberPage_button view_more_btn">
+                  <button
+                    className="memberPage_button view_more_btn"
+                    onClick={() => {
+                      navigation('/member_page/shoppinglistdetail')
+                    }}
+                  >
                     VEIW MORE
                   </button>
                 </td>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../component/Navbar/index'
-import MeberPage_Sidebar from '../component/MemberPage/MeberPage_Sidebar'
+import MeberPage_Sidebar from './MemberPageComponent/MeberPage_Sidebar'
 
 function MemberLevel() {
   return (
@@ -16,7 +16,10 @@ function MemberLevel() {
             <div class="level_map member_mobile_hidden">
               <div class="ellipse_pink"></div>
               <div class="ellipse_blue"></div>
-              <img src="../../public/images/member_level.png" alt=""></img>
+              <img
+                src={'/images/member_level.png'}
+                alt="level"
+              ></img>
             </div>
 
             <div class="level_card">

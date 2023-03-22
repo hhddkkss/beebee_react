@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../component/Navbar/index'
-import MeberPage_Sidebar from '../component/MemberPage/MeberPage_Sidebar'
+import MeberPage_Sidebar from './MemberPageComponent/MeberPage_Sidebar'
 
 function MemberComment_Detail() {
   return (
@@ -10,8 +10,6 @@ function MemberComment_Detail() {
         <MeberPage_Sidebar />
 
         <div class="member_container">
-          <div class="now_memberPage">優惠券</div>
-
           <div class="detailArea">
             <div class="coupon_box">
               <table class="coupon_box_detail">

@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from '../component/Navbar/index'
-import MeberPage_Sidebar from '../component/MemberPage/MeberPage_Sidebar'
+import MeberPage_Sidebar from './MemberPageComponent/MeberPage_Sidebar'
 
 function MemberShoppingList_Detail() {
   return (
