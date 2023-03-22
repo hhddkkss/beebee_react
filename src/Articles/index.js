@@ -21,6 +21,7 @@ import CateArticle from './CateArticle'
 import SingleArticle from './SingleArticle'
 import ArticleMember from './ArticleMember'
 import SearchArticles from './SearchArticles'
+import EditPostPage from './EditPostPage'
 
 
 function Articles() {
@@ -298,10 +299,10 @@ function Articles() {
     {isShowPage(3, <PostPage  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} artLikeList={artLikeList} getLikedArti={getLikedArti}/>)}
 
     {/* 編輯貼文頁 */}
-
+    {isShowPage(5, <EditPostPage  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} artLikeList={artLikeList} getLikedArti={getLikedArti}/>)}
     
     {/* 搜尋頁 */}
-    {isShowPage(6, <SearchArticles  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} artLikeList={artLikeList} getLikedArti={getLikedArti}/>)}
+    {isShowPage(6, <SearchArticles  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} artLikeList={artLikeList} getLikedArti={getLikedArti} />)}
 
 
 

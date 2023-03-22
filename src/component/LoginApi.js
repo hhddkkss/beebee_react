@@ -40,6 +40,10 @@ export const EMPTY_CART = `${HOST}/cart/empty`
 
 //新增文章API
 export const MEMBER_POST = `${HOST}/article_page/memberPostArticle`
+//編輯文章API
+export const MEMBER_EDIT_POST = `${HOST}/article_page/memberEditPostArticle`
+// 刪除文章API
+export const MEMBER_DELETE_POST = `${HOST}/article_page/deleteArticle`
 
 //拿取分類文章
 export const GET_All_ARTICLE_POST = `${HOST}/article_page/allArticle_api`
@@ -81,3 +85,8 @@ export const ADD_ORDER_DETAIL = `${HOST}/order/order_detail`
 
 //發文圖片
 export const POST_PIC = `${HOST}/article_page/memberPostArticlePic`
+
+// Google登入 取得連結
+export const GOOGLE_LOGIN_URL = `${HOST}/googleAuth`
+// Google登入 取得資料
+export const GOOGLE_LOGIN_DATA = `${HOST}/googleAuth/googleBack`
