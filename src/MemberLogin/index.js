@@ -76,7 +76,135 @@ function MemberLogin() {
         return a
     }
   }
+  // 認證訊息
+  const [errorMessage,setErrorMessage]=useState({
+    email_l:'', 
+    password_l:'',
+    name:'',
+    email_s:'',
+    password:'',
+    password2:'',
+    phone:'',
+    isOkL:false,
+    isOkS:false
+  
+  })
 
+  // Email認證
+  function isValidEmail(email) {
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zAZ]{2,}))$/.test(email);
+  }
+  // 密碼驗證 密碼規則:最少6最多16含一大寫一小寫兩數字沒空白
+  function isValisPass(pass){
+    return /^(?=.*\d{2,})(?=.*[a-z])(?=.*[A-Z]).{6,12}$/.test(pass)
+  }
+  // 電話驗證
+  function isValidPhone (phone){
+    return /^09\d{2}-?\d{3}-?\d{3}$/.test(phone)
+  }
+  //登入驗證
+  const handleLoginChange = (event,type) => {
+    if(type==1){ 
+      if(event.target.value.length<1){ 
+        setErrorMessage({...errorMessage,email_l:'',isOkL:false});
+        return
+      }else{
+         if (!isValidEmail(event.target.value)) {
+          setErrorMessage({...errorMessage,email_l:'請輸入正確Email格式',isOkL:false});
+        } else {
+          setErrorMessage({...errorMessage,email_l:'',isOkL:true});
+        }
+      }
+     
+    }
+  // 密碼不得為空
+  if(type==2){ 
+    if(event.target.value.length<1){ 
+      setErrorMessage({...errorMessage,password_l:'請輸入密碼',isOkL:false});
+    }else {
+      setErrorMessage({...errorMessage,password_l:'',isOkL:true});
+  }
+  }
+  }
+
+  //申請驗證
+  const handleSignupChange = (event,type) => {
+      //姓名
+      if(type==1){
+        if(event.target.value.length<1){ 
+          setErrorMessage({...errorMessage,name:'',isOkS:false});
+        }else{
+          if (event.target.value.length>0 && event.target.value.length<2) {
+            setErrorMessage({...errorMessage,name:'請輸入正確姓名',isOkS:false});
+          } else {
+            setErrorMessage({...errorMessage,name:'',isOkS:true});
+          }
+        }
+      }
+      // Email
+      if(type==2){
+        if(event.target.value.length<1){ 
+          setErrorMessage({...errorMessage,email_s:'',isOkS:false});
+          return
+        }else{
+           if (!isValidEmail(event.target.value)) {
+            setErrorMessage({...errorMessage,email_s:'請輸入正確Email格式',isOkS:false});
+          } else {
+            setErrorMessage({...errorMessage,email_s:'',isOkS:true});
+          }
+        }
+
+    }
+         // password
+         if(type==3){
+          if(event.target.value.length<1){ 
+            setErrorMessage({...errorMessage,password:'',isOkS:false});
+            return
+          }else{
+             if (!isValisPass(event.target.value)) {
+              setErrorMessage({...errorMessage,password:'請設定含1個大寫字母、1個小寫字母貳位數字、長度6-12位的密碼',isOkS:false});
+            } else {
+              setErrorMessage({...errorMessage,password:'',isOkS:true});
+            }
+          }
+  
+      }
+       // password2
+       if(type==32){
+        if(event.target.value.length<1){ 
+          setErrorMessage({...errorMessage,password2:'',isOkS:false});
+          return
+        }else{
+           if (event.target.value!=signupForm.password) {
+            setErrorMessage({...errorMessage,password2:'兩次輸入密碼不同',isOkS:false});
+          } else {
+            setErrorMessage({...errorMessage,password2:'',isOkS:true});
+          }
+        }
+
+    }
+
+         // password2
+         if(type==4){
+           if(event.target.value.length<1){ 
+             setErrorMessage({...errorMessage,phone:''});
+             return
+           }else{
+              if (!isValidPhone(event.target.value)) {
+               setErrorMessage({...errorMessage,phone:'請輸入正確號碼',isOkS:false});
+             } else {
+               setErrorMessage({...errorMessage,phone:'',isOkS:true});
+             }
+           }
+   
+       }
+    
+  }
+
+
+  // 密碼顯示狀態
+  
+ const [show,setShow]=useState(false)
   return (
     <>
       <div className="wrapper">
@@ -262,6 +390,10 @@ function MemberLogin() {
               setLoginFormValue={setLoginFormValue}
               activeClass={activeClass}
               setInfoState={setInfoState}
+              errorMessage={errorMessage}
+              handleLoginChange={handleLoginChange}
+              show={show} 
+              setShow={setShow}
             />
 
             {/* 申請 */}
@@ -271,6 +403,10 @@ function MemberLogin() {
               setActive={setActive}
               signupForm={signupForm}
               setInfoState={setInfoState}
+              errorMessage={errorMessage}
+              handleSignupChange={handleSignupChange}
+              show={show} 
+              setShow={setShow}
             />
           </div>
         </div>

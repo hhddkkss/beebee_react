@@ -6,9 +6,16 @@ import CreditCard from './CreditCard'
 import Note from './Note'
 import PaymentForm from './PaymentForm'
 
-function CheckoutForm({ inputs, setInputs, handleChange, handleSubmit }) {
+function CheckoutForm({
+  inputs,
+  setInputs,
+  handleChange,
+  handleSubmit,
+  validation,
+  setValidation,
+}) {
   //確認付款方式狀態
-  const [paymentMethod, setPaymentMethod] = useState(0)
+  const [paymentMethod, setPaymentMethod] = useState('')
 
   //checkout error msg
 
@@ -17,7 +24,6 @@ function CheckoutForm({ inputs, setInputs, handleChange, handleSubmit }) {
   //檢查輸入的欄位是否有錯誤？
 
   // method改變的時候要呼叫什麼來重新render出信用卡表格？
-  useEffect(() => {}, [paymentMethod])
 
   return (
     <>
@@ -27,12 +33,14 @@ function CheckoutForm({ inputs, setInputs, handleChange, handleSubmit }) {
           setInputs={setInputs}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
+          validation={validation}
         />
         <RecipientAddress
           inputs={inputs}
           setInputs={setInputs}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
+          validation={validation}
         />
         <Payment
           inputs={inputs}
@@ -41,14 +49,17 @@ function CheckoutForm({ inputs, setInputs, handleChange, handleSubmit }) {
           handleSubmit={handleSubmit}
           paymentMethod={paymentMethod}
           setPaymentMethod={setPaymentMethod}
+          validation={validation}
         />
         {/* <CreditCard /> */}
-        {paymentMethod === 1 ? (
+        {inputs.payment === '1' ? (
           <PaymentForm
             inputs={inputs}
             setInputs={setInputs}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            validation={validation}
+            setValidation={setValidation}
           />
         ) : (
           ''

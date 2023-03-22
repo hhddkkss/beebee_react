@@ -10,6 +10,7 @@
   --orange1: #e59069;
   --deepYellow: #f3d775;
   --bgGray: #727272;
+  --error: #ff4d40;
 }
 
 body {
@@ -136,12 +137,15 @@ form {
   margin-bottom: 2rem;
 }
 .checkout-error {
+  width: 100%;
   font-size: 12px;
-  color: #dc4848;
+  color: var(--error);
+  font-weight: 600;
   position: absolute;
   left: 50%;
   top: 130%;
   transform: translate(-50%);
+  text-align: center;
 }
 
 /** 標題壓線  */
@@ -176,6 +180,10 @@ form {
   text-align: center;
   font-size: 20px;
   width: 100%;
+}
+
+.form-input.error {
+  outline: 2px solid var(--error);
 }
 .form-label {
   font-size: 14px;
@@ -371,6 +379,52 @@ form {
   text-align: right;
 }
 
+.btn-credit-info {
+  /* width: 112px; */
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s;
+  border: none;
+  display: block;
+  margin: 0 auto;
+}
+.btn-credit-info::after {
+  width: 100%;
+  height: 100%;
+  content: '';
+  background-color: var(--deepBlue);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -2;
+  border-radius: 3px;
+}
+.btn-credit-info::before {
+  content: '';
+  width: 0%;
+  height: 100%;
+  background-color: #1b2d4f;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.3s;
+  border-radius: 3px;
+}
+.btn-credit-info:hover {
+  color: #fff;
+}
+.btn-credit-info:hover:before {
+  width: 100%;
+}
+
 .note textarea {
   padding: 1rem;
   border-radius: 5px;
@@ -379,7 +433,7 @@ form {
   outline: 2px solid #ccc;
 }
 .note textarea:focus {
-  outline: 2px solid rgb(10, 135, 20);
+  outline: 2px solid #727272;
 }
 
 /** checkout right */
@@ -407,6 +461,9 @@ form {
   width: 60%;
   padding-left: 1rem;
   border-radius: 3px;
+}
+.coupon-code.error {
+  outline: 2px solid var(--error);
 }
 .btn-coupon {
   /* width: 112px; */
@@ -471,7 +528,7 @@ form {
 
 .err-msg {
   padding-left: 1rem;
-  color: rgb(220, 72, 72);
+  color: var(--error);
 }
 .checkout-item-info {
   width: 100%;
@@ -787,6 +844,14 @@ form {
 
   .m-order-detail-info .checkout-total {
     padding-top: 1rem;
+  }
+  .err-msg {
+    padding: 0;
+  }
+  .checkout-error {
+    left: 100%;
+    top: 115%;
+    transform: translate(-80%);
   }
 
   .m-nav {

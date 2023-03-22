@@ -1,7 +1,16 @@
+import axios from 'axios'
 import React, { useContext, useState, useEffect } from 'react'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 
-function CheckoutRightLogin({ hasDiscount }) {
+function CheckoutRightLogin({
+  hasDiscount,
+  couponCode,
+  setCouponCode,
+  getCoupon,
+  discount,
+  couponError,
+  handleSubmit,
+}) {
   const { getCartData, cartData, totalPrice } = useContext(
     ProductFunctionContext
   )
@@ -9,6 +18,7 @@ function CheckoutRightLogin({ hasDiscount }) {
   const fee = 120
 
   //進來就要先拿購物車列表資料
+
   useEffect(() => {
     getCartData()
   }, [])
@@ -31,41 +41,68 @@ function CheckoutRightLogin({ hasDiscount }) {
                 </div>
                 <div className="checkout-item-info">
                   <p>{v.product_name}</p>
-                  <p>{v.product_price - 1000}</p>
+                  <p>{(v.product_price - 1000).toLocaleString()}</p>
                 </div>
               </div>
             </div>
           )
         })}
       </div>
-      <div className="coupon" id="coupon">
-        <input type="text" className="coupon-code" placeholder="請輸入折扣碼" />
-        <button className="btn-coupon">使用</button>
+      <div className="coupon">
+        <input
+          type="text"
+          className={couponError ? 'coupon-code error' : 'coupon-code'}
+          placeholder="請輸入折扣碼"
+          value={couponCode}
+          onChange={(e) => {
+            e.preventDefault()
+            setCouponCode(e.target.value)
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              getCoupon(couponCode)
+            }
+          }}
+        />
+        <button
+          className="btn-coupon"
+          onClick={() => {
+            getCoupon(couponCode)
+          }}
+        >
+          使用
+        </button>
       </div>
-      <p className="err-msg">折扣碼錯誤請重新輸入</p>
+      {couponError ? <p className="err-msg">折扣碼錯誤請重新輸入</p> : ''}
       {/* <!-- detail --> */}
       <p className="checkout-detail">付款明細</p>
       <div className="checkout-cal">
         <p>合計</p>
-        <p>{totalPrice}</p>
+        <p>{totalPrice.toLocaleString()}</p>
       </div>
       <div className="checkout-fee">
         <p>運費</p>
         <p>{fee}</p>
       </div>
       {hasDiscount ? (
-        <div class="checkout-discount">
+        <div className="checkout-discount">
           <p>折扣</p>
-          <p>120</p>
+          <p>{discount}</p>
         </div>
       ) : (
         ''
       )}
       <div className="checkout-total">
         <p>總金額</p>
-        <p>{totalPrice + fee}</p>
+        <p>{(totalPrice + fee - discount).toLocaleString()}</p>
       </div>
-      <button className="btn-to-checkout" form="form1">
+      <button
+        className="btn-to-checkout"
+        form="form1"
+        onClick={(event) => {
+          handleSubmit(event)
+        }}
+      >
         立即下單
       </button>
     </>

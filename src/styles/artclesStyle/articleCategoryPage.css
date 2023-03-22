@@ -22,6 +22,9 @@
     background-color: transparent;
     border: none;
 }
+.article_like_button>.fa-heart{
+    color: #E59069;
+}
 
 .articles_container>.latest_article>img{
     width: 60%;
@@ -86,14 +89,21 @@
 }
 .latest_article>.article>.title>span{
     width: 80%;
-   
+    cursor: pointer;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space:nowrap;
 }
+.article_front .latest_article>.article>.title{
+    cursor: pointer;
+    display: block;
+
+}
 
 .article_card>.article>.title>span{
     width: 80%;
+    cursor: pointer;
+
     overflow: hidden;
     text-overflow: ellipsis;
     white-space:nowrap;
@@ -159,6 +169,7 @@
     text-align: center;
     letter-spacing: 0.075em;
     color: #4F4F4F;
+    cursor: pointer;
 }
 .suggest_articles>.suggest_articles_card{
     width: 100%;
@@ -175,7 +186,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    
+    cursor: pointer;
 }
 .suggest_articles>.suggest_articles_card>.articleWritter{
     display: flex;
@@ -198,6 +209,20 @@
     position: absolute;
     top: 0;
     right: 0;
+}
+
+.searchNoAns{
+    width: 100%;
+    text-align: center;
+    line-height: 400px;
+    color: #4f4f4f;
+    font-size: 1.5rem;
+
+}
+.searchNoAns>img{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
 }
 
 @media screen and (max-width: 376px) {

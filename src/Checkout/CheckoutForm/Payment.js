@@ -7,6 +7,7 @@ function Payment({
   handleSubmit,
   paymentMethod,
   setPaymentMethod,
+  validation,
 }) {
   return (
     <>
@@ -15,10 +16,11 @@ function Payment({
         <div className="field-wrap">
           <select
             name="payment"
-            className="form-input"
-            value={paymentMethod}
+            className={validation.payment ? 'form-input error' : 'form-input'}
+            value={inputs.payment}
+            // value={0}
             onChange={(e) => {
-              setPaymentMethod(e.target.value)
+              handleChange(e)
             }}
           >
             <option value="0">請選擇</option>
@@ -26,8 +28,12 @@ function Payment({
             <option value="2">貨到付款</option>
             <option value="3">LinePay</option>
           </select>
-          <label className="form-label">付款方式</label>
-          <span className="checkout-error">456</span>
+          <label className="form-label">*付款方式</label>
+          {validation.payment ? (
+            <span className="checkout-error">{validation.payment}</span>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     </>

@@ -1,6 +1,5 @@
-import { React, useEffect, useState, useRef, useContext } from 'react'
+import { React, useEffect, useState, useContext } from 'react'
 import _ from 'lodash'
-import axios from 'axios'
 import Navbar from '../component/Navbar'
 import { Link } from 'react-router-dom'
 import Pagination from '@mui/material/Pagination'
@@ -17,19 +16,20 @@ import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 import ProductCompare from '../component/ProductCompare'
 import AuthContext from '../Contexts/AuthContext'
 import CompareContext from '../Contexts/CompareContext'
+import NavbarControlPanel from '../component/NavbarControlPanel/NavbarControlPanel.js'
+
 function Products() {
   const {
     products,
-    cartItem,
-    setProducts,
-    setCartItem,
     getProductData,
     pageNow,
     setPageNow,
     perPage,
-    setPerPage,
     pageTotal,
     setPageTotal,
+    displayFavorites,
+    setDisplayFavorites,
+    getFavoritesData,
   } = useContext(ProductFunctionContext)
   const {
     compareListClass,
@@ -39,10 +39,18 @@ function Products() {
     popCompareBtn,
   } = useContext(CompareContext)
 
+  const { memberAuth } = useContext(AuthContext)
+
   const { setNavbarType } = useContext(AuthContext)
   useEffect(() => {
     setNavbarType('dark')
   }, [])
+
+  const [myWindowWidth, setMyWindowWidth] = useState(window.innerWidth)
+
+  window.addEventListener('resize', () => {
+    setMyWindowWidth(window.innerWidth)
+  })
 
   const [toggleSortList, setToggleSortList] = useState(false)
 
@@ -55,6 +63,7 @@ function Products() {
 
   //品牌
   const [brand, setBrand] = useState('')
+
   //排序
   const [sortList, setSortList] = useState('上架時間:最新(預設)')
   //搜尋
@@ -64,7 +73,7 @@ function Products() {
   const [productType, setProductType] = useState(4)
 
   //卡片樣式切換
-  const [cardType, setCardType] = useState(1)
+  const [cardType, setCardType] = useState(true)
 
   //呈現用的資料
 
@@ -141,6 +150,7 @@ function Products() {
   //品牌分類
 
   const otherBrand = [5, 8, 1, 9, 2, 10, 7]
+  const mOtherBrand = [5, 8, 2]
   const filterBrandType = (arr, brand) => {
     switch (brand) {
       case '全部品牌':
@@ -159,6 +169,8 @@ function Products() {
         return arr.filter((v) => v.brand_category_id === 10)
       case 'Realme':
         return arr.filter((v) => v.brand_category_id === 7)
+      case 'other':
+        return arr.filter((v) => !mOtherBrand.includes(v.brand_category_id))
       case '其他品牌':
         return arr.filter((v) => !otherBrand.includes(v.brand_category_id))
 
@@ -167,57 +179,18 @@ function Products() {
     }
   }
 
-  //加入購物車
-  // const handleAddOrDeleteCart = (product_id, count) => {
-  //   //判斷購物車內有沒有這個商品
-  //   console.log('1', cartItem)
-  //   const inCart = cartItem && cartItem.find((v) => v.product_id === product_id)
-
-  //   //有的話
-  //   if (inCart) {
-  //     /*
-  //     const newCart = cartItem.filter((v) => v.product_id !== product_id)
-
-  //     setCartItem(newCart)
-  //     //轉成字串寫進localStorage
-  //     localStorage.setItem('cartItem', JSON.stringify(newCart))
-  //     */
-  //   }
-
-  //   //沒有的話
-  //   else {
-  //     const newCart = [...cartItem, { product_id: product_id, count: count }]
-  //     setCartItem(newCart)
-  //     //轉成字串寫進localStorage
-  //     localStorage.setItem('cartItem', JSON.stringify(newCart))
-  //   }
-  // }
-
-  //加入比較清單
-  // const handleAddOrDeleteCompared = (product_id) => {
-  //   const isOnComparedList = comparedList && comparedList.includes(product_id)
-
-  //   if (isOnComparedList) {
-  //     const newComparedList = [...comparedList].filter((v) => {
-  //       return v !== product_id
-  //     })
-  //     setComparedList(newComparedList)
-  //     localStorage.setItem('comparedList', JSON.stringify(newComparedList))
-  //   } else {
-  //     const newComparedList = [...comparedList, product_id]
-  //     setComparedList(newComparedList)
-  //     localStorage.setItem('comparedList', JSON.stringify(newComparedList))
-  //   }
-  // }
-
   //分頁用
   const handleChangePageNow = (e, p) => {
     setPageNow(p)
   }
 
+  // useEffect(() => {
+  //   getProductData()
+  // }, [])
+
   useEffect(() => {
-    getProductData()
-  }, [])
+    displayFavorites ? getFavoritesData(memberAuth.memberId) : getProductData()
+  }, [displayFavorites])
 
   useEffect(() => {
     setBrand('全部品牌')
@@ -227,7 +200,7 @@ function Products() {
     //* 如果要根據篩選的東西重新搜尋 就把註解的打開 或是搜尋選取到的
     // setProductType(4)
     // setBrand('全部品牌')
-    getProductData()
+    // getProductData()
     setPageNow(1)
   }, [keyword])
 
@@ -264,9 +237,12 @@ function Products() {
 
   useEffect(() => {
     return () => {
-      console.log('跳頁')
+      setCardType(true)
     }
   }, [])
+  useEffect(() => {
+    setCardType(true)
+  }, [myWindowWidth > 375])
 
   return (
     <>
@@ -280,7 +256,12 @@ function Products() {
 
       {/* <!-- 手機版品牌類別 --> */}
 
-      <M_productAndBrand />
+      <M_productAndBrand
+        productType={productType}
+        setProductType={setProductType}
+        brand={brand}
+        setBrand={setBrand}
+      />
 
       <div className="container">
         {/* <!-- 商品類別 --> */}
@@ -304,21 +285,16 @@ function Products() {
             sortList={sortList}
             setSortList={setSortList}
             sortOption={sortOption}
+            setCardType={setCardType}
+            cardType={cardType}
           />
           {/* 產品 */}
 
           <ProductArea
             productsDisplay={productsDisplay}
-            // pageNow={pageNow}
-            // favorites={favorites}
-            // setProducts={setProducts}
             toggleLiked={toggleLiked}
-            // products={products}
-            // handleAddOrDeleteFavorite={handleAddOrDeleteFavorite}
-            // comparedList={comparedList}
             toggleCompared={toggleCompared}
-            // cartItem={cartItem}
-            // handleAddOrDeleteCart={handleAddOrDeleteCart}
+            cardType={cardType}
           />
         </section>
       </div>
@@ -331,15 +307,27 @@ function Products() {
         popCompareBtn={popCompareBtn}
       />
 
-      <Pagination
-        count={pageTotal}
-        page={pageNow}
-        sx={{ mx: '0 auto' }}
-        onChange={handleChangePageNow}
-        size={'large'}
-        showFirstButton={true}
-        showLastButton={true}
-      />
+      {window.screen.width > 376 ? (
+        <Pagination
+          count={pageTotal}
+          page={pageNow}
+          sx={{ mx: '0 auto' }}
+          onChange={handleChangePageNow}
+          size={'large'}
+          showFirstButton={true}
+          showLastButton={true}
+        />
+      ) : (
+        <Pagination
+          count={pageTotal}
+          page={pageNow}
+          sx={{ mx: '0 auto' }}
+          onChange={handleChangePageNow}
+          size={'large'}
+          defaultPage={1}
+          siblingCount={0}
+        />
+      )}
       {/* 比價區 */}
       <ProductCompare
         // setCompareListClass={setCompareListClass}
@@ -350,6 +338,7 @@ function Products() {
         // popCompareBtn={popCompareBtn}
         // comparedList={comparedList}
       />
+      <NavbarControlPanel />
     </>
   )
 }

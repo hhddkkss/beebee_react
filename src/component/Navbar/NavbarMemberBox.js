@@ -29,15 +29,6 @@ function NavbarMemberBox({ memberBoxRef }) {
             <>
               <a
                 href="#/"
-                className="btn_member"
-                onClick={() => {
-                  navigation('/')
-                }}
-              >
-                會員中心
-              </a>
-              <a
-                href="#/"
                 className="btn_member_logout"
                 onClick={() => {
                   Logout()

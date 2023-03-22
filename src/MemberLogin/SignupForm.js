@@ -13,6 +13,8 @@ function SignipForm(props) {
     setActive,
     signupForm,
     setInfoState,
+    handleSignupChange,
+    errorMessage,show,setShow
   } = props
   const [cityList, setCityList] = useState([])
   const [allDistList, setAllDistList] = useState([])
@@ -62,7 +64,7 @@ function SignipForm(props) {
         <div className="now_page login_mobile_hidden">Sign up</div>
         <form name="sign_form" className="login_form">
           <div className="form_box">
-            <label className="label">姓名</label>
+            <label className="label"><i className="fa-2xs fa-solid fa-hashtag" style={{color:"coral"}}></i> 姓名 </label>
             <input
               type="text"
               placeholder="您的中文大名"
@@ -71,14 +73,15 @@ function SignipForm(props) {
               value={signupForm.name}
               onChange={(e) => {
                 setSingupFormValue(e)
+                handleSignupChange(e,1)
               }}
             />
             <div className="login_input_alert_info input_alert_true">
-              兩次輸入密碼不同
+            {errorMessage.name}
             </div>
           </div>
           <div className="form_box">
-            <label className="label">E-mail</label>
+            <label className="label"><i className="fa-2xs fa-solid fa-hashtag" style={{color:"coral"}}></i> E-mail</label>
             <input
               type="text"
               placeholder="E-mail"
@@ -87,38 +90,56 @@ function SignipForm(props) {
               value={signupForm.email}
               onChange={(e) => {
                 setSingupFormValue(e)
+                handleSignupChange(e,2)
+
               }}
             />
             <div className="login_input_alert_info input_alert_true">
-              兩次輸入密碼不同
+            {errorMessage.email_s}
             </div>
           </div>
           <div className="form_box">
-            <label className="label">密碼</label>
+            <label className="label"><i className="fa-2xs fa-solid fa-hashtag" style={{color:"coral"}}></i> 密碼</label>
             <input
-              type="text"
+              type={show?'text':'password'}
               placeholder="Password"
               name="password"
               className="form_input"
               value={signupForm.password}
               onChange={(e) => {
                 setSingupFormValue(e)
+                handleSignupChange(e,3)
+
               }}
             />
+            <div onMouseDown={()=>{
+              setShow(true)
+            }} onMouseUp={()=>{
+              setShow(false)
+            }} 
+            className="changeEye">
+              {show?<i  className="fa-solid fa-eye"></i>:<i class="fa-solid fa-eye-slash"></i>}
+            </div>
             <div className="login_input_alert_info input_alert_true">
-              兩次輸入密碼不同
+            {errorMessage.password}
+
             </div>
           </div>
           <div className="form_box">
             <label className="label">請再輸入一次密碼</label>
             <input
-              type="text"
+              type="password"
               placeholder=""
               name="password-check"
               className="form_input"
+              onChange={(e) => {
+                handleSignupChange(e,32)
+
+              }}
             />
             <div className="login_input_alert_info input_alert_true">
-              兩次輸入密碼不同
+            {errorMessage.password2}
+
             </div>
           </div>
           <div className="form_btn">
@@ -156,14 +177,19 @@ function SignipForm(props) {
             </label>
             <input
               type="text"
-              placeholder="09XXXXXXXXX"
+              placeholder="09-"
               name="mobile"
               className="form_input"
               value={signupForm.mobile}
               onChange={(e) => {
                 setSingupFormValue(e)
+                handleSignupChange(e,4)
+
               }}
             />
+            <div className="login_input_alert_info input_alert_true">
+            {errorMessage.phone}
+            </div>
           </div>
           <div className="form_box">
             <label className="label">性別</label>
@@ -303,32 +329,37 @@ function SignipForm(props) {
               className="loginPage_button sign_form_btn"
               onClick={(e) => {
                 e.preventDefault()
-                axios.post(SIGNUP, { ...signupForm }).then((response) => {
-                  console.log(response.data)
-                  if (response.data.success) {
-                    const { success, data, token } = response.data
-                    //setLocalStorage
-                    localStorage.setItem(
-                      'beebeeMemberAuth',
-                      JSON.stringify({
+                if(!!errorMessage.isOkS){
+                  axios.post(SIGNUP, { ...signupForm }).then((response) => {
+                    console.log(response.data)
+                    if (response.data.success) {
+                      const { success, data, token } = response.data
+                      //setLocalStorage
+                      localStorage.setItem(
+                        'beebeeMemberAuth',
+                        JSON.stringify({
+                          memberId: data.sid,
+                          memberEmail: data.email,
+                          memberName:data.name,
+                          token,
+                        })
+                      )
+                      setInfoState(2)
+                      //setAuth
+                      setMemberAuth({
+                        authorized: success,
                         memberId: data.sid,
                         memberEmail: data.email,
-                        memberName:data.name,
-                        token,
+                        token: token,
                       })
-                    )
-                    setInfoState(2)
-                    //setAuth
-                    setMemberAuth({
-                      authorized: success,
-                      memberId: data.sid,
-                      memberEmail: data.email,
-                      token: token,
-                    })
-                  } else {
-                    setInfoState(3)
-                  }
-                })
+                    } else {
+                      setInfoState(3)
+                    }
+                  })
+                }else{
+                  setInfoState(3)
+                }
+  
               }}
             >
               <svg

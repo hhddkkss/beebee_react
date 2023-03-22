@@ -85,10 +85,37 @@ body {
 }
 
 .cart-hover-box .my-cards {
+  height: 400px;
+  overflow-y: scroll;
   display: flex;
   flex-flow: column;
   align-items: center;
 }
+/* 側邊滾輪 */
+.cart-hover-box .my-cards::-webkit-scrollbar,.head_title::-webkit-scrollbar {
+  width: 7px;
+
+}
+.cart-hover-box .my-cards::-webkit-scrollbar-button,.head_title::-webkit-scrollbar-button {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.cart-hover-box .my-cards::-webkit-scrollbar-track-piece,.head_title::-webkit-scrollbar-track-piece {
+  background: transparent;
+}
+
+.cart-hover-box .my-cards::-webkit-scrollbar-thumb,.head_title::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid slategrey;
+
+}
+
+.cart-hover-box .my-cards::-webkit-scrollbar-track,.head_title::-webkit-scrollbar-track {
+  box-shadow: transparent;
+}
+/*  */
 .cart-hover-box .my-cart-card {
   /* width: 340px; */
   width: 100%;
@@ -192,7 +219,7 @@ body {
   display: none;
 }
 .navMember_box {
-  width: 250px;
+  width: 200px;
   height: fit-content;
   background-color: #727272;
   position: fixed;

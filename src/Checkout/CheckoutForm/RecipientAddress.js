@@ -1,11 +1,15 @@
+import { compose } from '@mui/system'
 import React from 'react'
+import cities from '../../data/cities.json'
+import disc from '../../data/disc.json'
 
-function RecipientAddress({ inputs, setInputs, handleChange, handleSubmit }) {
-  //城市
-  const cities = async () => {}
-  //區
-  const disc = async () => {}
-
+function RecipientAddress({
+  inputs,
+  setInputs,
+  handleChange,
+  handleSubmit,
+  validation,
+}) {
   return (
     <>
       <div className="form-border recipient-address">
@@ -30,32 +34,55 @@ function RecipientAddress({ inputs, setInputs, handleChange, handleSubmit }) {
           <div className="field-wrap">
             <select
               name="city"
-              className="form-input"
-              defaultValue={0}
+              className={validation.cities ? 'form-input error' : 'form-input'}
+              defaultValue="請選擇"
               onChange={(e) => {
                 handleChange(e)
               }}
             >
-              <option value="0">請選擇</option>
-              {/* <!-- <option value="1"></option> --> */}
+              <option value="請選擇">請選擇</option>
+              {cities.map((v) => {
+                return (
+                  <option value={v.name} key={v.name}>
+                    {v.name}
+                  </option>
+                )
+              })}
             </select>
-            <label className="form-label">縣市</label>
+            <label className="form-label">*縣市</label>
           </div>
           <div className="field-wrap">
             <select
               name="disc"
-              className="form-input"
-              defaultValue={0}
+              className={validation.disc ? 'form-input error' : 'form-input'}
+              value={inputs.disc}
               onChange={(e) => {
                 handleChange(e)
               }}
             >
-              <option value="0">請選擇</option>
-              {/* <!-- <option value="1"></option> --> */}
+              <option value="請選擇">請選擇</option>
+              {disc
+                .filter((v) => {
+                  return v.city_name === inputs.city
+                })
+                .map((v) => {
+                  return (
+                    <option value={v.name} key={v.name}>
+                      {v.name}
+                    </option>
+                  )
+                })}
+              {/* {console.log(disc)} */}
             </select>
-            <label className="form-label">區</label>
+            <label className="form-label">*區</label>
           </div>
-          <span className="checkout-error">456</span>
+          {validation.cities || validation.disc ? (
+            <span className="checkout-error">
+              {validation.cities || validation.disc}
+            </span>
+          ) : (
+            ''
+          )}
         </div>
 
         <div className="field-wrap">
@@ -63,15 +90,19 @@ function RecipientAddress({ inputs, setInputs, handleChange, handleSubmit }) {
             type="text"
             autoComplete="off"
             name="address"
-            className="form-input"
+            className={validation.address ? 'form-input error' : 'form-input'}
             placeholder=" "
             value={inputs.address}
             onChange={(e) => {
               handleChange(e)
             }}
           />
-          <label className="form-label">詳細地址</label>
-          <span className="checkout-error">456</span>
+          <label className="form-label">*詳細地址</label>
+          {validation.address ? (
+            <span className="checkout-error">{validation.address}</span>
+          ) : (
+            ''
+          )}
         </div>
 
         <div className="field-wrap">
@@ -79,15 +110,23 @@ function RecipientAddress({ inputs, setInputs, handleChange, handleSubmit }) {
             type="text"
             name="postalCode"
             autoComplete="off"
-            className="form-input"
+            className={
+              validation.postalCode ? 'form-input error' : 'form-input'
+            }
             placeholder=" "
+            minLength={3}
+            maxLength={5}
             value={inputs.postalCode}
             onChange={(e) => {
               handleChange(e)
             }}
           />
-          <label className="form-label">郵遞區號</label>
-          <span className="checkout-error">456</span>
+          <label className="form-label">*郵遞區號</label>
+          {validation.postalCode ? (
+            <span className="checkout-error">{validation.postalCode}</span>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     </>

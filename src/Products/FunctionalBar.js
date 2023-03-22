@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 
 function FunctionalBar({
   inputText,
@@ -9,7 +10,12 @@ function FunctionalBar({
   sortList,
   setSortList,
   sortOption,
+  setCardType,
+  cardType,
 }) {
+  const { displayFavorites, setDisplayFavorites } = useContext(
+    ProductFunctionContext
+  )
   return (
     <>
       <div className="functional-bar">
@@ -43,15 +49,28 @@ function FunctionalBar({
         {/* <!-- 收藏 --> */}
         <div className="wrap">
           <div className="like-list-wrap">
-            <a href="#" className="like-list">
-              收藏清單
+            <a
+              href="#/"
+              className="like-list"
+              onClick={(e) => {
+                e.preventDefault()
+                setDisplayFavorites(!displayFavorites)
+              }}
+            >
+              {displayFavorites ? '比比精選' : '收藏清單'}
             </a>
           </div>
 
           {/* <!-- 商品篩選 --> */}
           <div className="product-sort">
             <a className="sort-to-list">
-              <i className="fa-solid fa-list"></i>
+              <i
+                className="fa-solid fa-list"
+                onClick={() => {
+                  setCardType(!cardType)
+                  console.log(cardType)
+                }}
+              ></i>
             </a>
             <span
               className="sort-selection"

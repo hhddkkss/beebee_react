@@ -1,39 +1,19 @@
-import React ,{useContext}from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext } from 'react'
+import M_productCardfrom from './M_productCard'
 import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
 import DefaultCard from './DefaultCard'
 
-function ProductArea({
-  productsDisplay,
-  // pageNow,
-  // favorites,
-  // setProducts,
-  toggleLiked,
-  products,
-  // handleAddOrDeleteFavorite,
-  toggleCompared,
-  // cartItem,
-  // handleAddOrDeleteCart,
-}) {
-  const {comparedList,favorites,handleAddOrDeleteFavorite,handleAddOrDeleteCart,cartItem,pageNow,setProducts,} = useContext(ProductFunctionContext)
+function ProductArea({ productsDisplay, cardType }) {
+  const { cartItem } = useContext(ProductFunctionContext)
 
   return (
     <>
-      {/* {pageNow,favorites,setProducts,products,toggleLiked,handleAddOrDeleteFavorite,toggleCompared,cartItem,handleAddOrDeleteCart} */}
       <div className="product-area">
-        <DefaultCard
-          productsDisplay={productsDisplay}
-          // pageNow={pageNow}
-          // favorites={favorites}
-          // setProducts={setProducts}
-          // toggleLiked={toggleLiked}
-          // products={products}
-          // handleAddOrDeleteFavorite={handleAddOrDeleteFavorite}
-          // comparedList={comparedList}
-          // toggleCompared={toggleCompared}
-          cartItem={cartItem}
-          // handleAddOrDeleteCart={handleAddOrDeleteCart}
-        />
+        {cardType ? (
+          <DefaultCard productsDisplay={productsDisplay} cartItem={cartItem} />
+        ) : (
+          <M_productCardfrom productsDisplay={productsDisplay} />
+        )}
 
         {/* <!-- 手機版的橫向卡片--> */}
         {/* <div className="row row-for-m-card">
