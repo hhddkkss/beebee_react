@@ -1,6 +1,7 @@
 import { useEffect, useState, Fragment } from 'react'
 import '../styles/Home.css'
 import axios from 'axios'
+import { HOST } from '../component/LoginApi'
 
 function HomeNews() {
   const [data, setDate] = useState([])
@@ -30,7 +31,10 @@ function HomeNews() {
                   <div className="home_news_card">
                     <div className="column">
                       <div className="home_news_card1">
-                        <img src={`images/${v.article_pic_main}`} alt="news1" />
+                        <img
+                          src={HOST + '/articlePic/' + v.article_pic_main}
+                          alt="news1"
+                        />
                       </div>
                       <div className="home_news_word">
                         <div className="home_news_word1">{v.title}</div>
