@@ -206,7 +206,12 @@ function Navbar() {
         </nav>
 
         <nav className="m-nav nav-dark">
-          <i className="fa-solid fa-chevron-left btn-back nav-dark"></i>
+          <i
+            className="fa-solid fa-chevron-left btn-back nav-dark"
+            onClick={() => {
+              navigation(-1)
+            }}
+          ></i>
           <svg
             width="67"
             height="13"

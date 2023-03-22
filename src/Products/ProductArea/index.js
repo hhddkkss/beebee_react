@@ -1,15 +1,19 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import M_productCardfrom from './M_productCard'
 import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
 import DefaultCard from './DefaultCard'
 
-function ProductArea({ productsDisplay }) {
+function ProductArea({ productsDisplay, cardType }) {
   const { cartItem } = useContext(ProductFunctionContext)
 
   return (
     <>
       <div className="product-area">
-        <DefaultCard productsDisplay={productsDisplay} cartItem={cartItem} />
+        {cardType ? (
+          <DefaultCard productsDisplay={productsDisplay} cartItem={cartItem} />
+        ) : (
+          <M_productCardfrom productsDisplay={productsDisplay} />
+        )}
 
         {/* <!-- 手機版的橫向卡片--> */}
         {/* <div className="row row-for-m-card">

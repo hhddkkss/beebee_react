@@ -1,6 +1,5 @@
-import { React, useEffect, useState, useRef, useContext } from 'react'
+import { React, useEffect, useState, useContext } from 'react'
 import _ from 'lodash'
-import axios from 'axios'
 import Navbar from '../component/Navbar'
 import { Link } from 'react-router-dom'
 import Pagination from '@mui/material/Pagination'
@@ -47,6 +46,12 @@ function Products() {
     setNavbarType('dark')
   }, [])
 
+  const [myWindowWidth, setMyWindowWidth] = useState(window.innerWidth)
+
+  window.addEventListener('resize', () => {
+    setMyWindowWidth(window.innerWidth)
+  })
+
   const [toggleSortList, setToggleSortList] = useState(false)
 
   // //比較區顯示className
@@ -68,7 +73,7 @@ function Products() {
   const [productType, setProductType] = useState(4)
 
   //卡片樣式切換
-  const [cardType, setCardType] = useState(1)
+  const [cardType, setCardType] = useState(true)
 
   //呈現用的資料
 
@@ -232,9 +237,12 @@ function Products() {
 
   useEffect(() => {
     return () => {
-      console.log('跳頁')
+      setCardType(true)
     }
   }, [])
+  useEffect(() => {
+    setCardType(true)
+  }, [myWindowWidth > 375])
 
   return (
     <>
@@ -277,6 +285,8 @@ function Products() {
             sortList={sortList}
             setSortList={setSortList}
             sortOption={sortOption}
+            setCardType={setCardType}
+            cardType={cardType}
           />
           {/* 產品 */}
 
@@ -284,6 +294,7 @@ function Products() {
             productsDisplay={productsDisplay}
             toggleLiked={toggleLiked}
             toggleCompared={toggleCompared}
+            cardType={cardType}
           />
         </section>
       </div>

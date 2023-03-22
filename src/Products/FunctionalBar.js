@@ -10,6 +10,8 @@ function FunctionalBar({
   sortList,
   setSortList,
   sortOption,
+  setCardType,
+  cardType,
 }) {
   const { displayFavorites, setDisplayFavorites } = useContext(
     ProductFunctionContext
@@ -62,7 +64,13 @@ function FunctionalBar({
           {/* <!-- 商品篩選 --> */}
           <div className="product-sort">
             <a className="sort-to-list">
-              <i className="fa-solid fa-list"></i>
+              <i
+                className="fa-solid fa-list"
+                onClick={() => {
+                  setCardType(!cardType)
+                  console.log(cardType)
+                }}
+              ></i>
             </a>
             <span
               className="sort-selection"
