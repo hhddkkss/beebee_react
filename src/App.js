@@ -17,7 +17,7 @@ import MemberShopping_List_Detail from './MemberPage/MemberShoppingList_Detail'
 import MemberLevel from './MemberPage/MemberLevel'
 import MemberCustomerService from './MemberPage/MemberCustomerService'
 import Articles from './Articles'
-import Passsss from './MemberPage/MemberPageComponent/MemberPage_ChangePassword'
+
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
           <ProductFunctionContextProvider>
             <CompareContextProvider>
               <Routes>
-                <Route path="/" element={<Passsss />} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/products" element={<Products />} />
                 <Route
                   path="/product_detail/:product_id/:product_category"

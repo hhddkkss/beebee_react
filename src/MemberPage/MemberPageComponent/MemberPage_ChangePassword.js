@@ -5,21 +5,40 @@ import axios from 'axios'
 
 function MemberPage_ChangePassword({ onHide }) {
   const { memberAuth } = useContext(AuthContext)
+  const str = JSON.parse(localStorage.getItem('beebeeMemberAuth'))
+  const [changeClick, setChangeClick] = useState(true)
 
-  const [passowrd, setPassword] = useState([])
+  const [password, setPassword] = useState({
+    old_password: '',
+    new_password: '',
+  })
+
+  const handleChangePass = (event) => {
+    const name = event.target.name
+    const value = event.target.value
+
+    setPassword({ ...password, [name]: value })
+  }
 
   const upDatePassword = async () => {
     const r = await axios
-      .put(`http://localhost:3003/member_page/password/55`)
+      .put(
+        `http://localhost:3003/member_page/password/${memberAuth.memberId}`,
+        {
+          newPass: password.new_password,
+          oldPass: password.old_password,
+          memberId: str.memberId,
+        }
+      )
       .then((response) => {
         console.log(response.data, 66666)
-        // setPassword(response.data)
+        setPassword(response.data)
       })
   }
 
-
   return (
     <>
+      {console.log(str)}
       <div className="member_body">
         {/* <!-- 要顯示請加 "change_info_true" --> */}
         <div className="changePassword-info change_info_true">
@@ -28,21 +47,47 @@ function MemberPage_ChangePassword({ onHide }) {
           <div className="changePassword_form">
             <div className="member_box">
               <label htmlFor="old_password">原密碼</label>
-              <input type="text" name="old_password"></input>
+              <input
+                type="text"
+                name="old_password"
+                value={password.old_password}
+                onChange={(e) => {
+                  handleChangePass(e)
+                }}
+              ></input>
               {/* <!-- 警告框加上"input_alert_true"會顯示,無則不顯示 --> */}
               <div className="input_alert_info ">兩次輸入密碼不同</div>
             </div>
+
             <div className="member_box">
               <label htmlFor="new_password">新密碼</label>
-              <input type="text" name="new_password"></input>
-              <div className="input_alert_info input_alert_true">
-                兩次輸入密碼不同
-              </div>
+              <input
+                type="text"
+                name="new_password"
+                value={password.new_password}
+                onChange={(e) => {
+                  handleChangePass(e)
+                }}
+              />
+              <div className="input_alert_info">兩次輸入密碼不同</div>
             </div>
             <div className="member_box">
               <label htmlFor="new_password">請再次輸入新密碼</label>
-              <input type="text" name="new_password"></input>
-              <div className="input_alert_info input_alert_true">
+              <input
+                type="text"
+                name="confirm_new_password"
+                value={password.confirm_new_password}
+                onChange={(e) => {
+                  handleChangePass(e)
+                }}
+              />
+              <div
+                className={
+                  changeClick
+                    ? 'input_alert_info '
+                    : 'input_alert_info input_alert_true'
+                }
+              >
                 兩次輸入密碼不同
               </div>
             </div>
@@ -50,7 +95,15 @@ function MemberPage_ChangePassword({ onHide }) {
           <div className="btn-mygroup">
             <button
               className="btn memberPage_button basic_infomation_confirm"
-              onClick={() => console.log('送出')}
+              onClick={() => {
+                
+                if (password.new_password === password.confirm_new_password) {
+                  setChangeClick(true)
+                  upDatePassword()
+                } else {
+                  setChangeClick(false)
+                }
+              }}
             >
               <svg
                 width="18"
@@ -88,6 +141,7 @@ function MemberPage_ChangePassword({ onHide }) {
               </svg>
               確認修改
             </button>
+
             <button
               className="btn memberPage_button basic_infomation_cancle"
               onClick={onHide}
