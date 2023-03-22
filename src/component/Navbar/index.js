@@ -127,7 +127,11 @@ function Navbar() {
               </button>
             </div>
             <div className="nav_btn_group">
-              <button className="btn">比比會員</button>
+              <button className="btn"
+              onClick={() => {
+                  navigation('/member_page/edit')
+                }}
+              >比比會員</button>
               <button className="btn">關於比比</button>
             </div>
           </div>

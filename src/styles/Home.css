@@ -577,7 +577,8 @@ height:300px ;
 }
 .home_news_img{
     width: 100%;
-    height: ;
+    height:300px ;
+    object-fit: cover;
 }
 
 .home_news_word{

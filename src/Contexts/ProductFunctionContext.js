@@ -168,7 +168,9 @@ export const ProductFunctionContextProvider = function ({ children }) {
   }
 
   const handleAddOrDeleteFavorite = async (member_id, product_id) => {
-    const favoritesData = favorites.map((v) => v.product_id)
+    if(memberAuth.authorized && memberAuth.memberId){
+
+      const favoritesData = favorites.map((v) => v.product_id)
 
     if (favoritesData.includes(product_id)) {
       console.log(111, '有加入收藏')
@@ -184,6 +186,8 @@ export const ProductFunctionContextProvider = function ({ children }) {
       })
       setReGetFavorites(!reGetFavorites)
     }
+    }
+    
   }
 
   // const handleAddOrDeleteFavorite = (product_id) => {

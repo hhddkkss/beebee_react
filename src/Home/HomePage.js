@@ -92,11 +92,11 @@ function HomePage() {
         </button>
       </div>
       <HomeNews />
-      <div class="row home_wecare g-0">
-        <div class="col-6 p-0">
-          <div class="home_wecare_left_picture">
-            <div class="home_wecare_left_word">WE CARE !</div>
-            <div class="home_wecare_left_word2">
+      <div className="row home_wecare g-0">
+        <div className="col-6 p-0">
+          <div className="home_wecare_left_picture">
+            <div className="home_wecare_left_word">WE CARE !</div>
+            <div className="home_wecare_left_word2">
               我們在乎每一位客人，
               <br />
               在乎每一個想法，
@@ -109,8 +109,8 @@ function HomePage() {
             </div>
           </div>
         </div>
-        <div class="col-6 p-0 d-none d-sm-block">
-          <div class="home_wecare_right"></div>
+        <div className="col-6 p-0 d-none d-sm-block">
+          <div className="home_wecare_right"></div>
         </div>
       </div>
       <HomeMap />
