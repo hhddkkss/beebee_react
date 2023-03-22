@@ -10,6 +10,7 @@ import Checkout from './Checkout'
 import DonePage from './Checkout/DonePage'
 import HomePage from './Home/HomePage'
 import Articles from './Articles'
+import BeeLoginGoogle from './MemberLogin/BeeLoginGoogle'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
                   element={<ProductDetail />}
                 />
                 <Route path="/member_login" element={<MemberLogin />} />
+                <Route path="/member_login_google" element={<BeeLoginGoogle />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/donePage" element={<DonePage />} />
