@@ -4,6 +4,7 @@ import '../styles/Home.css'
 import axios from 'axios'
 import { HOST } from '../component/LoginApi'
 
+
 function HomeNews() {
   const [data, setDate] = useState([])
   useEffect(() => {
