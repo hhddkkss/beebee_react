@@ -10,8 +10,6 @@ function CheckoutRightLogin({
   discount,
   couponError,
   handleSubmit,
-  addOrderAll,
-  addOrderDetail,
 }) {
   const { getCartData, cartData, totalPrice } = useContext(
     ProductFunctionContext
@@ -50,7 +48,7 @@ function CheckoutRightLogin({
           )
         })}
       </div>
-      <div className="coupon" id="coupon">
+      <div className="coupon">
         <input
           type="text"
           className={couponError ? 'coupon-code error' : 'coupon-code'}
@@ -101,7 +99,7 @@ function CheckoutRightLogin({
       <button
         className="btn-to-checkout"
         form="form1"
-        onClick={async (event) => {
+        onClick={(event) => {
           handleSubmit(event)
         }}
       >

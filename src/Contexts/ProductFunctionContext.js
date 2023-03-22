@@ -22,11 +22,14 @@ export const ProductFunctionContextProvider = function ({ children }) {
 
   const getFavoritesData = async (member_id) => {
     const res = await axios.get(HOST + '/favorites/' + member_id)
-
+    console.log(res, '12313')
     setProducts(res.data)
   }
+  //控制收藏還是完整
+  const [displayFavorites, setDisplayFavorites] = useState(false)
 
-  //control favorites or 
+  //donepage用 後端傳回來的檔案
+  const [donepageData, setDonepageData] = useState({})
 
   // forRemoveInfo
   const [showRemove, setShowRemove] = useState(false)
@@ -103,30 +106,6 @@ export const ProductFunctionContextProvider = function ({ children }) {
       }
     })
   }
-
-  //加入購物車
-  // const handleAddOrDeleteCart = (product_id) => {
-  //   //判斷購物車內有沒有這個商品
-  //   console.log(product_id)
-  //   const inCart = cartItem.includes(product_id)
-
-  //   //有的話
-  //   if (inCart) {
-  //     // const newCart = cartItem.filter((v) => v.product_id !== product_id)
-  //     // setCartItem(newCart)
-  //     // //轉成字串寫進localStorage
-  //     // localStorage.setItem('cartItem', JSON.stringify(newCart))
-  //   }
-
-  //   //沒有的話
-  //   else {
-  //     const newCart = [...cartItem, product_id]
-  //     console.log(newCart)
-  //     setCartItem(newCart)
-  //     //轉成字串寫進localStorage
-  //     localStorage.setItem('cartItem', JSON.stringify(newCart))
-  //   }
-  // }
 
   const handleAddOrDeleteCart = (product_id) => {
     //判斷購物車內有沒有這個商品
@@ -289,6 +268,11 @@ export const ProductFunctionContextProvider = function ({ children }) {
         handleAddOrDeleteFavorite,
         reGetFavorites,
         favoritePId,
+        donepageData,
+        setDonepageData,
+        displayFavorites,
+        setDisplayFavorites,
+        getFavoritesData,
       }}
     >
       {children}

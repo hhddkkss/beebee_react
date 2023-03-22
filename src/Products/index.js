@@ -17,9 +17,21 @@ import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 import ProductCompare from '../component/ProductCompare'
 import AuthContext from '../Contexts/AuthContext'
 import CompareContext from '../Contexts/CompareContext'
+import NavbarControlPanel from '../component/NavbarControlPanel/NavbarControlPanel.js'
+
 function Products() {
-  const { products, pageNow, setPageNow, perPage, pageTotal, setPageTotal } =
-    useContext(ProductFunctionContext)
+  const {
+    products,
+    getProductData,
+    pageNow,
+    setPageNow,
+    perPage,
+    pageTotal,
+    setPageTotal,
+    displayFavorites,
+    setDisplayFavorites,
+    getFavoritesData,
+  } = useContext(ProductFunctionContext)
   const {
     compareListClass,
     setCompareListClass,
@@ -27,6 +39,8 @@ function Products() {
     setCompareIngClass,
     popCompareBtn,
   } = useContext(CompareContext)
+
+  const { memberAuth } = useContext(AuthContext)
 
   const { setNavbarType } = useContext(AuthContext)
   useEffect(() => {
@@ -44,6 +58,7 @@ function Products() {
 
   //品牌
   const [brand, setBrand] = useState('')
+
   //排序
   const [sortList, setSortList] = useState('上架時間:最新(預設)')
   //搜尋
@@ -130,6 +145,7 @@ function Products() {
   //品牌分類
 
   const otherBrand = [5, 8, 1, 9, 2, 10, 7]
+  const mOtherBrand = [5, 8, 2]
   const filterBrandType = (arr, brand) => {
     switch (brand) {
       case '全部品牌':
@@ -148,6 +164,8 @@ function Products() {
         return arr.filter((v) => v.brand_category_id === 10)
       case 'Realme':
         return arr.filter((v) => v.brand_category_id === 7)
+      case 'other':
+        return arr.filter((v) => !mOtherBrand.includes(v.brand_category_id))
       case '其他品牌':
         return arr.filter((v) => !otherBrand.includes(v.brand_category_id))
 
@@ -164,6 +182,10 @@ function Products() {
   // useEffect(() => {
   //   getProductData()
   // }, [])
+
+  useEffect(() => {
+    displayFavorites ? getFavoritesData(memberAuth.memberId) : getProductData()
+  }, [displayFavorites])
 
   useEffect(() => {
     setBrand('全部品牌')
@@ -226,7 +248,12 @@ function Products() {
 
       {/* <!-- 手機版品牌類別 --> */}
 
-      <M_productAndBrand />
+      <M_productAndBrand
+        productType={productType}
+        setProductType={setProductType}
+        brand={brand}
+        setBrand={setBrand}
+      />
 
       <div className="container">
         {/* <!-- 商品類別 --> */}
@@ -300,6 +327,7 @@ function Products() {
         // popCompareBtn={popCompareBtn}
         // comparedList={comparedList}
       />
+      <NavbarControlPanel />
     </>
   )
 }
