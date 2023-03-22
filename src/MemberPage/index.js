@@ -20,6 +20,7 @@ function MemberPage() {
   const [changeMember, setChangeMember] = useState({})
   const [changePassword, setChangePassword] = useState(false)
 
+
   const getMemberData = async () => {
     const pwd = await axios
       .get(`http://localhost:3003/member_page/edit/${memberAuth.memberId}`)

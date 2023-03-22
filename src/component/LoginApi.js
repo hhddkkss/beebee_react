@@ -58,7 +58,6 @@ export const POST_ARTICLE_COMMENT = `${HOST}/article_page/postArticleComments`
 //加入或移除喜愛文章
 export const ADD_DEL_ARTI_LIKE = `${HOST}/article_page/memArticleLikeOrRemove`
 
-
 // 拿取會員歷史喜愛
 export const ARTICLE_MEMBER_LIKED = `${HOST}/article_page/memberArticleLike`
 // 拿取會員歷史文章
@@ -81,3 +80,9 @@ export const ADD_ORDER_DETAIL = `${HOST}/order/order_detail`
 
 //發文圖片
 export const POST_PIC = `${HOST}/article_page/memberPostArticlePic`
+
+//拿購買清單
+export const GET_PURCHASE_RECORDS = `${HOST}/member_page/membershoppinglist/`
+
+//購買清單訂單明細
+export const GET_PURCHASE_DETAIL = `${HOST}/member_page/shoppinglistdetail/`

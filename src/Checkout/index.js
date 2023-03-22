@@ -236,12 +236,17 @@ function Checkout() {
       const data1 = await addOrderAll()
       //寫入訂單總表
       const data2 = await addOrderDetail()
-      console.log(donepageData, 7777)
+      console.log(
+        { ...donepageData, orderAll: data1, orderDetail: data2 },
+        7777
+      )
 
       setDonepageData({ ...donepageData, orderAll: data1, orderDetail: data2 })
 
       //跳頁
-      navigation('/donePage')
+      setTimeout(() => {
+        navigation('/donePage')
+      }, 500)
     }
 
     //寫入訂單細節
@@ -249,7 +254,7 @@ function Checkout() {
     //清空購物車
     // await emptyCart()
     console.log(inputs, 'input')
-    console.log(validation, 11111)
+   
   }
 
   //拿優惠券
@@ -283,6 +288,7 @@ function Checkout() {
       product_price: cartData.map((v) => Number(v.product_price)),
       quantity: cartData.map((v) => +v.quantity),
       discount: discount,
+      payment_method: +inputs.payment,
     })
     console.log(res.data, 'all')
     console.log(res.data.orderNum, 'num')
