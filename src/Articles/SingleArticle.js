@@ -272,7 +272,18 @@ useEffect(()=>{
                                 (e)=>{
                                     setPostMessage(e.target.value)
                                 }
-                            }/>
+                            }
+                                onKeyDown={(e)=>{
+                                    if (e.key === 'Enter') {
+                                    if (e.target.value) {
+                                        postComment()
+                                        setPostMessage('')
+                                        } else {
+                                            console.log('請先登入')
+                                            return
+                                        } }
+                                }}
+                            />
                             <button className="btn"
                             onClick={()=>{
                                 if(memberAuth.authorized){
