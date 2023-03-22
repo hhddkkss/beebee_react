@@ -354,6 +354,9 @@ header {
   color: var(--wordGray);
   text-decoration: none;
 }
+.functional-bar .like-list-wrap .like-list:hover {
+  color: var(--deepBlue);
+}
 
 .functional-bar .wrap {
   display: flex;

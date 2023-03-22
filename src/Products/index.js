@@ -20,8 +20,18 @@ import CompareContext from '../Contexts/CompareContext'
 import NavbarControlPanel from '../component/NavbarControlPanel/NavbarControlPanel.js'
 
 function Products() {
-  const { products, pageNow, setPageNow, perPage, pageTotal, setPageTotal } =
-    useContext(ProductFunctionContext)
+  const {
+    products,
+    getProductData,
+    pageNow,
+    setPageNow,
+    perPage,
+    pageTotal,
+    setPageTotal,
+    displayFavorites,
+    setDisplayFavorites,
+    getFavoritesData,
+  } = useContext(ProductFunctionContext)
   const {
     compareListClass,
     setCompareListClass,
@@ -29,6 +39,8 @@ function Products() {
     setCompareIngClass,
     popCompareBtn,
   } = useContext(CompareContext)
+
+  const { memberAuth } = useContext(AuthContext)
 
   const { setNavbarType } = useContext(AuthContext)
   useEffect(() => {
@@ -170,6 +182,10 @@ function Products() {
   // useEffect(() => {
   //   getProductData()
   // }, [])
+
+  useEffect(() => {
+    displayFavorites ? getFavoritesData(memberAuth.memberId) : getProductData()
+  }, [displayFavorites])
 
   useEffect(() => {
     setBrand('全部品牌')

@@ -22,9 +22,12 @@ export const ProductFunctionContextProvider = function ({ children }) {
 
   const getFavoritesData = async (member_id) => {
     const res = await axios.get(HOST + '/favorites/' + member_id)
-
+    console.log(res, '12313')
     setProducts(res.data)
   }
+  //控制收藏還是完整
+  const [displayFavorites, setDisplayFavorites] = useState(false)
+
   //donepage用 後端傳回來的檔案
   const [donepageData, setDonepageData] = useState({})
 
@@ -267,6 +270,9 @@ export const ProductFunctionContextProvider = function ({ children }) {
         favoritePId,
         donepageData,
         setDonepageData,
+        displayFavorites,
+        setDisplayFavorites,
+        getFavoritesData,
       }}
     >
       {children}
