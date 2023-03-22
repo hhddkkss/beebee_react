@@ -115,7 +115,7 @@
     padding: 20px 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 15px;
 
   }
   .compare_item_box>.item_content>.item_name{
@@ -341,7 +341,7 @@
     font-size: 20px;
     color: #1D2D64;
     font-weight: 600;
-    /* height: 70px; */
+    height: 90px;
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -386,4 +386,51 @@
   
 .compare_item_property::-webkit-scrollbar-track {
     box-shadow: transparent;
+}
+
+/* 手機板 */
+
+@media screen and (max-width: 375px) {
+
+  .compare_list_box{
+    width: 250px;
+    height: 600px;
+    
+  }
+  .compare_item_box{
+    align-items: center;
+  }
+  .compare_item_list>.compare_item_box>img{
+    width: 60px;
+    height: 60px;
+  }
+
+
+  .compare_item_box>.item_content>.item_name,.compareIng_item_card>.item_content>.item_name{
+    font-size: 16px;
+  }
+ 
+  .compare_item_box>.compare_box_btn_group{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .compare_item_box>.compare_box_btn_group>.btn{
+    width: 100%;
+  }
+
+
+  .compareIng_box{
+    width: 350px;
+    height: 500px;
+    
+  }
+  .compareIng_item_card>.item_content, .compareIng_head>.item_content{
+    height: 600px;
+  }
+
+  .compareIng_item_card{
+    margin-left: -1px;
+  }
 }

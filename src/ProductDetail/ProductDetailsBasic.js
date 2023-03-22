@@ -212,12 +212,7 @@ function ProductDetailsBasic({ p_detailData }) {
                         </span>
                       </div>
                       <div className="product_count_share">
-                        <button className="product_count_line">
-                          <i className="fa-brands fa-line"></i>
-                        </button>
-                        <button className="product_count_facebook">
-                          <i className="fa-brands fa-square-facebook"></i>
-                        </button>
+                       
                       </div>
                       <div className="product_add">
                         <button

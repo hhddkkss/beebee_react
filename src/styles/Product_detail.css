@@ -483,4 +483,8 @@ border-radius: 3px;} */
   .product_introduce {
     padding: 5px;
   }
+
+  .product_main_pic {
+    padding: 10px;
+  }
 }
