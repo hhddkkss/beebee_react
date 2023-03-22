@@ -1,8 +1,23 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate, NavLink } from 'react-router-dom'
 import '../../styles/memberPagefornav.css'
+import axios from 'axios'
+import AuthContext from '../../Contexts/AuthContext'
 
 function MeberPage_Sidebar() {
+  const { memberAuth } = useContext(AuthContext)
+  const [getmamber, setGetMember] = useState
+
+  const getMemberData = async () => {
+    const memberdata = await axios
+      .get(
+        `http://localhost:3003/member_page//getnavname/${memberAuth.memberId}`
+      )
+      .then((response) => {
+        console.log(response.data, 66666)
+        setGetMember(response.data)
+      })
+  }
 
   return (
     <>
@@ -61,7 +76,7 @@ function MeberPage_Sidebar() {
             會員基本資料
           </button> */}
           <NavLink
-            to="/member_page_"
+            to="/member_page/edit"
             className={({ isActive }) =>
               isActive ? 'sidebar_btn  sidebar_btn_active' : 'sidebar_btn'
             }
@@ -103,7 +118,7 @@ function MeberPage_Sidebar() {
             文章管理
           </NavLink>
           <NavLink
-            to="/member_page/membercoupon_list"
+            to="/articles/member/postEd"
             className={({ isActive }) =>
               isActive ? 'sidebar_btn  sidebar_btn_active' : 'sidebar_btn'
             }
