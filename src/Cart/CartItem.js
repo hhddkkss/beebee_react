@@ -11,14 +11,8 @@ import { useRef } from 'react'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 
 function CartItem() {
-  const {
-    cartData,
-    getCartData,
-    cartTotalRows,
-    setShowRemove,
-    showRemove,
-    CartItem,
-  } = useContext(ProductFunctionContext)
+  const { cartData, getCartData, setShowRemove, showRemove, CartItem } =
+    useContext(ProductFunctionContext)
   const navigation = useNavigate()
 
   //重新渲染 使用布林值
@@ -113,7 +107,9 @@ function CartItem() {
                   ></div>
                   <span className="cart-name">{v.product_name}</span>
                 </div>
-                <span className="cart-price">{v.product_price - 1000}</span>
+                <span className="cart-price">
+                  {(v.product_price - 1000).toLocaleString()}
+                </span>
                 <div className="cart-control">
                   <a href="#">
                     <i
@@ -141,13 +137,12 @@ function CartItem() {
                         e.preventDefault()
                         setShowRemove(true)
                         setProductsSid(v.sid)
-                        // deleteCartItem(v.sid)
                       }}
                     ></i>
                   </a>
                 </div>
                 <span className="cart-total">
-                  {v.quantity * (v.product_price - 1000)}
+                  {(v.quantity * (v.product_price - 1000)).toLocaleString()}
                 </span>
               </div>
             )
@@ -158,10 +153,11 @@ function CartItem() {
       <div className="container">
         <div className="cart-bottom">
           <p>
-            購物車內總共有<span>{cartTotalRows}</span>樣商品
+            購物車內總共有<span>{cartData.length}</span>樣商品
           </p>
           <p>
-            合計：<span className="total-price">{totalPrice}</span>
+            合計：
+            <span className="total-price">{totalPrice.toLocaleString()}</span>
           </p>
           <button
             className="btn btn-checkout"

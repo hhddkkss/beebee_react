@@ -394,6 +394,11 @@ border-radius: 3px;} */
   width: 100%;
 }
 
+.product_picture>.fa-solid.fa-heart.active{
+  
+  color: var(--orange1);
+}
+
 /* 手機板 */
 
 @media screen and (max-width: 375px) {
@@ -477,5 +482,9 @@ border-radius: 3px;} */
 
   .product_introduce {
     padding: 5px;
+  }
+
+  .product_main_pic {
+    padding: 10px;
   }
 }

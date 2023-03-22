@@ -1,15 +1,18 @@
 import axios from 'axios'
-import { useContext } from 'react'
+import { useContext} from 'react'
 
 import './../styles/login.css'
 import { LOGIN } from './../component/LoginApi'
 import AuthContext from '../Contexts/AuthContext'
 
 function LoginForm(props) {
-  const { loginForm, setLoginFormValue, activeClass, setInfoState } = props
+  const { loginForm, setLoginFormValue, activeClass, setInfoState, errorMessage, handleLoginChange,show,setShow } = props
 
   //引入setAuth
   const { setMemberAuth } = useContext(AuthContext)
+
+
+  
 
   return (
     <>
@@ -27,7 +30,7 @@ function LoginForm(props) {
           className="login_form"
           onSubmit={(e) => {
             e.preventDefault()
-            
+         
           }}
         >
           <div className="form_box">
@@ -39,25 +42,37 @@ function LoginForm(props) {
               className="form_input"
               onChange={(e) => {
                 setLoginFormValue(e)
+                handleLoginChange(e,1)
               }}
             />
             <div className="login_input_alert_info input_alert_true">
-              兩次輸入密碼不同
+              {errorMessage.email_l}
             </div>
           </div>
           <div className="form_box">
             <label className="label">密碼</label>
             <input
-              type="text"
+              type={show?'text':'password'}
               placeholder="Password"
               name="password"
               className="form_input"
               onChange={(e) => {
                 setLoginFormValue(e)
+                handleLoginChange(e,2)
+
               }}
             />
+            <div onMouseDown={()=>{
+              setShow(true)
+            }} onMouseUp={()=>{
+              setShow(false)
+            }} 
+            className="changeEye">
+              {show?<i  className="fa-solid fa-eye"></i>:<i class="fa-solid fa-eye-slash"></i>}
+            </div>
+            
             <div className="login_input_alert_info input_alert_true">
-              兩次輸入密碼不同
+              {errorMessage.password_l}
             </div>
           </div>
           <div className="form_btn">
@@ -80,9 +95,10 @@ function LoginForm(props) {
               忘記密碼
             </button>
             <button 
-            onClick={(e)=>{e.preventDefault()
-            //登入送去API
-            axios.post(LOGIN, { ...loginForm }).then((response) => {
+            onClick={ (e)=>{e.preventDefault()
+              if(!!errorMessage.isOkL){
+               //登入送去API
+                  axios.post(LOGIN, { ...loginForm }).then((response) => {
               if (response.data.success) {
                 const { memberEmail, memberId,memberName, token } = response.data
                 //setLocalStorage
@@ -109,7 +125,13 @@ function LoginForm(props) {
               } else {
                 setInfoState(3)
               }
-            })
+               })
+               }else{
+                  setInfoState(3)
+              }
+            
+             
+           
             }} type="submit" className="loginPage_button login_form_btn">
               登入
             </button>

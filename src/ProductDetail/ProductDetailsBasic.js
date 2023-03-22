@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 import AuthContext from '../Contexts/AuthContext'
 import Rating from '@mui/material/Rating'
-import { PRODUCT_DETAIL_ADD_CART_API } from '../component/LoginApi'
+import { PRODUCT_DETAIL_ADD_CART_API,ADD_CART_ITEM } from '../component/LoginApi'
 import axios from 'axios'
 
 function ProductDetailsBasic({ p_detailData }) {
@@ -10,17 +10,13 @@ function ProductDetailsBasic({ p_detailData }) {
 
   const [detailMainPic, setDetailMainPic] = useState('')
   const {
-    cartItem,
-    setCartItem,
-    comparedList,
-    setComparedList,
-    favorites,
-    setFavorite,
-    toggleLiked,
-    toggleCompared,
-    handleAddOrDeleteCart,
+    cartPId,
+    getFavorites,
+    favoritePId,
     handleAddOrDeleteCompared,
     handleAddOrDeleteFavorite,
+    reGetFavorites,
+    getCartData
   } = useContext(ProductFunctionContext)
   const { memberAuth } = useContext(AuthContext)
 
@@ -47,6 +43,31 @@ function ProductDetailsBasic({ p_detailData }) {
     }
   }, [p_detailData])
 
+  // 購物車
+  const [render, setRender] = useState(false)
+  //  寫進購物車資料庫
+ 
+
+
+  const addToCart = async (product_id) => {
+    const member_id = memberAuth.memberId
+    if(member_id!==0){
+      await axios.post(PRODUCT_DETAIL_ADD_CART_API,{
+          memberId:member_id,
+          productId:product_id,
+          count:productCount
+          })
+     setRender(!render)
+    }else{console.log('用戶未登入')}
+
+    
+  }
+
+  useEffect(() => {
+    getFavorites(memberAuth.memberId)
+    getCartData()
+  }, [render,reGetFavorites])
+
   return (
     <>
       {p_detailData
@@ -66,24 +87,22 @@ function ProductDetailsBasic({ p_detailData }) {
                         src={detailMainPic}
                         alt="product_picture"
                       />
-                      {localStorage.getItem('favorites') &&
-                      JSON.parse(localStorage.getItem('favorites')).includes(
-                        v.product_id
-                      ) ? (
+                      
                         <i
-                          className="fa-solid fa-heart fa-xl"
-                          onClick={() => {
-                            handleAddOrDeleteFavorite(v.product_id)
-                          }}
+                          className={
+                        favoritePId.includes(v.product_id)
+                          ? 'fa-solid fa-heart active'
+                          : 'fa-regular fa-heart'
+                      }
+                      onClick={() => {
+                        // getFavorites(memberAuth.memberId)
+                        handleAddOrDeleteFavorite(
+                          memberAuth.memberId,
+                          v.product_id
+                        )
+                      }}
                         ></i>
-                      ) : (
-                        <i
-                          className="fa-regular fa-heart fa-xl"
-                          onClick={() => {
-                            handleAddOrDeleteFavorite(v.product_id)
-                          }}
-                        ></i>
-                      )}
+                      
                     </div>
                     <div className="row g-0 product_picture_little">
                       <div className="col-2 p-0">
@@ -106,7 +125,8 @@ function ProductDetailsBasic({ p_detailData }) {
                           }
                           alt="product_picture2 product_picture_little1"
                           onClick={(e) => {
-                            v.product_pic.split(',')[1] ? changeMainPic(e) : ''
+                            if(v.product_pic.split(',')[1]){
+                            changeMainPic(e)}
                           }}
                         />
                       </div>
@@ -120,7 +140,8 @@ function ProductDetailsBasic({ p_detailData }) {
                           }
                           alt="product_picture3"
                           onClick={(e) => {
-                            v.product_pic.split(',')[2] ? changeMainPic(e) : ''
+                            if(v.product_pic.split(',')[2]){
+                            changeMainPic(e)}
                           }}
                         />
                       </div>
@@ -134,7 +155,8 @@ function ProductDetailsBasic({ p_detailData }) {
                           }
                           alt="product_picture4"
                           onClick={(e) => {
-                            v.product_pic.split(',')[3] ? changeMainPic(e) : ''
+                            if(v.product_pic.split(',')[3]){
+                            changeMainPic(e)}
                           }}
                         />
                       </div>
@@ -148,7 +170,8 @@ function ProductDetailsBasic({ p_detailData }) {
                           }
                           alt="product_picture5"
                           onClick={(e) => {
-                            v.product_pic.split(',')[4] ? changeMainPic(e) : ''
+                            if(v.product_pic.split(',')[4]){
+                            changeMainPic(e)}
                           }}
                         />
                       </div>
@@ -189,12 +212,7 @@ function ProductDetailsBasic({ p_detailData }) {
                         </span>
                       </div>
                       <div className="product_count_share">
-                        <button className="product_count_line">
-                          <i className="fa-brands fa-line"></i>
-                        </button>
-                        <button className="product_count_facebook">
-                          <i className="fa-brands fa-square-facebook"></i>
-                        </button>
+                       
                       </div>
                       <div className="product_add">
                         <button
@@ -208,23 +226,14 @@ function ProductDetailsBasic({ p_detailData }) {
                         <button
                           className="add_To_Cart"
                           onClick={() => {
-                            handleAddOrDeleteCart(v.product_id, productCount)
-                            if (memberAuth.memberId !== 0) {
-                              axios
-                                .post(PRODUCT_DETAIL_ADD_CART_API, {
-                                  memberId: memberAuth.memverId,
-                                  productId: v.product_id,
-                                  count: productCount,
-                                })
-                                .then((res) => {
-                                  console.log('addCartResult', res.data)
-                                })
-                            } else {
-                              console.log('用戶未登入')
-                            }
+                            addToCart(v.product_id)
                           }}
                         >
-                          <i className="fa-solid fa-cart-shopping d-inline"></i>
+                          <i className={
+                            cartPId.includes(v.product_id)
+                              ? 'fa-solid fa-clipboard-check'
+                              : 'fa-solid fa-cart-shopping'
+                          }></i>
                           加入購物車
                         </button>
                       </div>
@@ -265,54 +274,7 @@ function ProductDetailsBasic({ p_detailData }) {
                         ))
                     : '暫無產品介紹'}
                 </div>
-                {/* <div className="product_bar">商品評論區</div>
-                <div className="product_commentarea">
-                  <div>
-                    <span className="product_commentarea_word">4.0 </span>
-                    <span className="product_commentarea_word2">/ 5</span>
-                    <Rating name="read-only" value={3} readOnly />
-                  </div>
-                  <div className="product_commentarea_position">
-                    <div className=" product_commentarea_selectors">
-                      <div className="">
-                        <button className="btn select product_commentarea_tatal">
-                          全部
-                        </button>
-                      </div>
-                      <div className=" d-none d-sm-block">
-                        <button className="btn select product_commentarea_tatal">
-                          1星
-                        </button>
-                      </div>
-                      <div className=" d-none d-sm-block">
-                        <button className="btn select product_commentarea_tatal">
-                          2星
-                        </button>
-                      </div>
-                      <div className="d-none d-sm-block">
-                        <button className="btn select product_commentarea_tatal">
-                          3星
-                        </button>
-                      </div>
-                      <div className=" d-none d-sm-block">
-                        <button className="btn select product_commentarea_tatal">
-                          4星
-                        </button>
-                      </div>
-                      <div className=" d-none d-sm-block">
-                        <button className="btn select product_commentarea_tatal">
-                          5星
-                        </button>
-                      </div>
-
-                      <div className="">
-                        <button className="btn select product_commentarea_tatal">
-                          附上評論
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
+              
               </div>
             </div>
           )

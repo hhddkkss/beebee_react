@@ -25,7 +25,7 @@
 * {
   list-style-type: none;
   box-sizing: border-box;
-  font-family: Noto_Sans;
+  font-family: creamfont;
 }
 
 /** 固定nav */
@@ -264,6 +264,7 @@ header {
   text-decoration: none;
   transition: all 0.5s ease;
   cursor: pointer;
+  margin: 0;
 }
 
 .brand-class .brand-area .brand-item p:hover {
@@ -309,6 +310,7 @@ header {
   color: #fff;
 } */
 .functional-bar .search-form .search-input {
+  width: 190px;
   border-radius: 20px;
   padding: 0.5rem 0 0.5rem 1rem;
   border: 1px solid var(--wordGray);
@@ -351,6 +353,9 @@ header {
 .functional-bar .like-list-wrap .like-list {
   color: var(--wordGray);
   text-decoration: none;
+}
+.functional-bar .like-list-wrap .like-list:hover {
+  color: var(--deepBlue);
 }
 
 .functional-bar .wrap {
@@ -433,12 +438,18 @@ header {
 .card-bottom svg {
   cursor: pointer;
 }
-.product-area .fa-solid.fa-heart {
+.product-area .fa-regular.fa-heart {
   position: absolute;
   top: 0;
   right: 0;
 }
 .product-area .fa-solid.fa-heart.active {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: var(--orange1);
+}
+.product-area .fa-solid.fa-cart-shopping.active {
   color: var(--orange1);
 }
 
@@ -485,7 +496,7 @@ header {
 }
 .card-bottom .card-text .discount {
   font-size: 20px;
-  color: red;
+  color: var(--error);
   margin: 0;
   font-weight: 600;
   vertical-align: bottom;
@@ -650,6 +661,7 @@ header {
   }
 
   .m-product-class {
+    padding: 0;
     display: flex;
     justify-content: space-between;
   }
@@ -661,7 +673,9 @@ header {
     font-size: 20px;
   }
   .m-product-class li {
-    padding: 0.5rem 0.25rem;
+    width: calc((100% / 4));
+    text-align: center;
+    padding: 0.5rem 0rem;
   }
 
   /* hover的效果 */
@@ -716,7 +730,7 @@ header {
     padding: 0.5rem;
   }
   .functional-bar .search-form .btn-search {
-    transform: translateX(110%);
+    transform: translateX(125%);
     padding: 0.35rem 0.5rem;
   }
   .functional-bar .wrap {
@@ -734,8 +748,6 @@ header {
   }
 
   /** card-top */
-  .product-area .my-card .card-top {
-  }
 
   .product-area .my-card .card-top .img-wrap {
     width: 100px;

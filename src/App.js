@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import ProductDetail from './ProductDetail'
 import Cart from './Cart'
 import Checkout from './Checkout'
-import DonePage from './DonePage'
+import DonePage from './Checkout/DonePage'
 import HomePage from './Home/HomePage'
 import Articles from './Articles'
 
@@ -49,7 +49,10 @@ function App() {
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/donePage" element={<DonePage />} />
                 <Route path="/articles/:nowPage" element={<Articles />} />
-                <Route path="/articles/:nowPage/:article_id" element={<Articles />} />
+                <Route
+                  path="/articles/:nowPage/:article_id"
+                  element={<Articles />}
+                />
               </Routes>
             </CompareContextProvider>
           </ProductFunctionContextProvider>

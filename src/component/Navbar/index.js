@@ -5,7 +5,7 @@
 //3: useEffect(()=<{setNavbarType('白的話是light；深藍的話是dark')},[])
 
 import AuthContext from '../../Contexts/AuthContext'
-import React, { useContext, useEffect,useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import './../../styles/Navbar.css'
 import './../../styles/m-navbar.css'
 import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
@@ -23,11 +23,21 @@ function Navbar() {
     addToCartTable,
     cartItemPId,
     getCartData,
+    cartData,
   } = useContext(ProductFunctionContext)
 
-  const { navbarType,memberAuth,memberBoxToggle,setMemberBoxToggle,Logout  } = useContext(AuthContext)
+  const {
+    navbarType,
+    memberAuth,
+    memberBoxToggle,
+    setMemberBoxToggle,
+    Logout,
+  } = useContext(AuthContext)
   const memberBoxRef = useRef(null)
   const memberIconRef = useRef(null)
+
+  const cartBoxRef = useRef(null)
+  const cartIconRef = useRef(null)
 
   // const myCartItem = cartItem || []
   // const cartItemPId = myCartItem.map((v) => v.product_id)
@@ -36,17 +46,31 @@ function Navbar() {
   function handleOutMemberBox(event) {
     if (
       memberBoxRef.current &&
+      !memberBoxRef.current.contains(event.target) &&
       !memberIconRef.current.contains(event.target)
     ) {
       setMemberBoxToggle(false)
-    }else{
+    } else {
       setMemberBoxToggle(true)
+    }
+  }
+
+  function handleOutCartBox(event) {
+    if (
+      cartBoxRef.current &&
+      !cartBoxRef.current.contains(event.target) &&
+      !cartIconRef.current.contains(event.target)
+    ) {
+      setToggleCartButton(false)
+    } else {
+      setToggleCartButton(true)
     }
   }
 
   useEffect(() => {
     getProductData()
     document.addEventListener('click', handleOutMemberBox)
+    document.addEventListener('click', handleOutCartBox)
   }, [])
   return (
     <>
@@ -93,28 +117,31 @@ function Navbar() {
               >
                 比比精選
               </button>
-              <button className="btn"
-              onClick={()=>{
-                navigation('/articles/front')
-              }}>比比論壇</button>
+              <button
+                className="btn"
+                onClick={() => {
+                  navigation('/articles/front')
+                }}
+              >
+                比比論壇
+              </button>
             </div>
             <div className="nav_btn_group">
-              <button className="btn">比比專區</button>
+              <button className="btn">比比會員</button>
               <button className="btn">關於比比</button>
             </div>
           </div>
           <div className="nav_top">
-         
             <button
-            ref={memberIconRef}
-            className="btn member"
-            onClick={(e) => {
-              e.preventDefault()
-              // setMemberBoxToggle(!memberBoxToggle)
-                }}
+              ref={memberIconRef}
+              className="btn member"
+              onClick={(e) => {
+                e.preventDefault()
+                // setMemberBoxToggle(!memberBoxToggle)
+              }}
             >
               <svg
-                width="24" 
+                width="24"
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -136,14 +163,12 @@ function Navbar() {
               </svg>
             </button>
 
-
-
-
             <button
+              ref={cartIconRef}
               className="btn cart"
-              onClick={() => {
-                setToggleCartButton(!toggleCartButton)
-              }}
+              // onClick={() => {
+              //   setToggleCartButton(!toggleCartButton)
+              // }}
             >
               <svg
                 width="24"
@@ -217,6 +242,7 @@ function Navbar() {
         </nav>
 
         <div
+          ref={cartBoxRef}
           className={
             toggleCartButton
               ? 'cart-hover-box cart-hover-box-on'
@@ -226,24 +252,24 @@ function Navbar() {
           <div className="triangle"></div>
 
           <div className="my-cards">
-            {products
-              .filter((v) => cartItemPId.includes(v.product_id))
-              .map((v) => {
-                return (
-                  <div className="my-cart-card" key={v.product_id}>
-                    <div className="my-cart-card-left">
-                      <div className="img-wrap">
-                        <img
-                          src={'/images/' + v.product_pic.split(',')[0]}
-                          alt=""
-                        />
-                      </div>
-                      <p className="product-name">{v.product_name}</p>
+            {cartData.map((v) => {
+              return (
+                <div className="my-cart-card" key={v.product_id}>
+                  <div className="my-cart-card-left">
+                    <div className="img-wrap">
+                      <img
+                        src={'/images/' + v.product_pic.split(',')[0]}
+                        alt=""
+                      />
                     </div>
-                    <p className="product-price">{v.product_price - 1000}</p>
+                    <p className="product-name">{v.product_name}</p>
                   </div>
-                )
-              })}
+                  <p className="product-price">
+                    {(v.product_price - 1000).toLocaleString()}
+                  </p>
+                </div>
+              )
+            })}
           </div>
 
           <div className="btn-check-cart">
@@ -252,8 +278,6 @@ function Navbar() {
               className="check-cart"
               onClick={async (e) => {
                 e.preventDefault()
-                await addToCartTable()
-                await getCartData()
                 navigation('/cart')
               }}
             >
@@ -262,10 +286,7 @@ function Navbar() {
           </div>
         </div>
 
-      <NavbarMemberBox memberBoxRef={memberBoxRef}/>
-
-
-       
+        <NavbarMemberBox memberBoxRef={memberBoxRef} />
       </header>
     </>
   )

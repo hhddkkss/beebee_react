@@ -161,7 +161,7 @@ function PruductDetailComments({p_detailData}) {
                     <div className="product_account_contant">
                       {Dayjs(v.comment_created_at).format('YYYY-MM-DD')}
                     </div>
-                    <pre className="commemt_card_content">{v.content}</pre>
+                    <p className="commemt_card_content">{v.content}</p>
                   </div>
                 </div>
               )

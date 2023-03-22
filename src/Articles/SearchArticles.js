@@ -6,35 +6,31 @@ import Dayjs from 'dayjs'
 import ArticleSideBar from './ArticleSideBar'
 import HashTagColor from './HashTagColor'
 
-function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType}) {
+function SearchArticles({frontData,allArtData,type,addDelLikeArt,likeIdList,setType}) {
     const navigation = useNavigate()
+    const { article_id } = useParams()
 
     // 將所有文章分類呈現
+    console.log('all',allArtData);
     const [showPosts,setShowPosts] = useState(allArtData)
-    const getShowPosts = (typeId)=>{
+    const getShowPosts = ()=>{
         let newArt = allArtData.filter((v,i)=>{
-         return  v.article_id!==frontData[type-1].article_id && v.article_category_id == typeId
+         return  v.title.includes(article_id) || v.article_hashtag.includes(article_id)
         //  
         })
         
 
         setShowPosts(newArt)
     }
+
     useEffect(()=>{
-        if(!!type){
-            setType(1)
-        }
-    },[])
-    useEffect(()=>{
-    //    console.log('cete',allArtData);
-    //    getAllArticles()
-    getShowPosts(type)
+
+    getShowPosts()
     },[allArtData])
     useEffect(()=>{
-        // console.log('cete2',allArtData);
-        getShowPosts(type)
-      // console.log(type);
-    },[type])
+
+        getShowPosts()
+        },[article_id])
    
 
 
@@ -47,49 +43,7 @@ function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType
            
                 <div className="articles_container">
 
-                    <div className="latest_article article_mb_hidden" >
-                        <div className="article">
-                            <div  className="title">
-                                <span onClick={()=>{
-                            navigation('/articles/beebeePostNO/'+frontData[type-1].article_id)
-                        }}>{frontData[type-1].title}</span>
-                                <button className=" article_like_button" 
-                                onClick={()=>{
-                                    addDelLikeArt(frontData[type-1].article_id)
-                                }}>
-                                {likeIdList.includes(frontData[type-1].article_id)?
-                                <i className="fa-solid fa-heart"></i>:<i className="fa-regular fa-heart"></i>
-                                }
-                                
-                                    
-                                    </button>
-                                    
-                            </div>
-                            <div className="content">{frontData[type-1].content_1}</div>
-                            <div className="foot">
-                                <div className="article_writer">
-                                    <img src={'/images/'+frontData[type-1].member_pic} alt=""/>
-                                    <div className="writer_name">{frontData[type-1].email}</div>
-                                    <div className="post_time">{Dayjs(frontData[type-1].created_at).format('YYYY/MM/DD')}</div>
-                                </div>
-
-                                <div className="hashtag_group">
-                                {
-                                    frontData[type-1].article_hashtag.map((v,i)=>{
-                                        if(v){
-                                             return(
-                                        <div key={i} className="hashtags"
-                                        style={{backgroundColor:HashTagColor(frontData[type-1].article_id,i)}}>{v}</div>
-                                    )
-                                        }
-                                   
-                                })}
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <img  src={HOST+'/articlePic/'+frontData[type-1].article_pic_main} alt=""/>
-                    </div>
+                  
 
 
                     <div className="artcles_area">
@@ -186,10 +140,14 @@ function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType
          
 
             </div>
-        </>  :''}
+        </>  :
+        <div className="article_page">
+            <div className='searchNoAns'>搜尋不到您要的結果 <img src="/images/article/search.gif" alt="" /></div>
+           
+        </div>}
 </>
    
   )
 }
 
-export default CateArticle
+export default SearchArticles
