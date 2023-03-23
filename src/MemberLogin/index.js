@@ -34,10 +34,13 @@ function MemberLogin() {
   const{state} = useLocation()
 
   const paramsChange=()=>{
-    if(state && Object.keys(state).length>0){
+    if(state && state.email){
       setActive(state.isActive)
       setSignupForm({...signupForm,name:state.name,email:state.email})
       setErrorMessage({email_s:state.text})
+    }
+    if(state && state.text2){
+      setErrorMessage({email_l:state.text2})
     }
       
   }

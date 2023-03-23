@@ -129,7 +129,8 @@ function Navbar() {
             <div className="nav_btn_group">
               <button className="btn"
               onClick={() => {
-                  navigation('/member_page/edit')
+                memberAuth.authorized && !!memberAuth.memberId && memberAuth.token?
+                  navigation('/member_page/edit'):navigation('/member_login',{state:{isActive:1,text2:'您尚未登入'}})
                 }}
               >比比會員</button>
               <button className="btn">關於比比</button>
