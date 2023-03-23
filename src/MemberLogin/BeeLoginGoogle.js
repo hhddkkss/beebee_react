@@ -39,7 +39,7 @@ function BeeLoginGoogle() {
             //登入送去API
             axios.post('http://localhost:3003/googleAuth/isMember', {email:loginForm.email }).then((response) => {
                 console.log('isIn?',response);
-                if (response.data.success) {
+                if (response.data.succeess) {
                   const { memberId,memberName} = response.data
                   //setLocalStorage
                   localStorage.setItem(

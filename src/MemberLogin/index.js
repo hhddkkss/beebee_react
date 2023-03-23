@@ -33,9 +33,12 @@ function MemberLogin() {
   const{state} = useLocation()
 
   const paramsChange=()=>{
+    if(state && Object.keys(state).length>0){
       setActive(state.isActive)
       setSignupForm({...signupForm,name:state.name,email:state.email})
       setErrorMessage({email_s:state.text})
+    }
+      
   }
 
   function slice() {
