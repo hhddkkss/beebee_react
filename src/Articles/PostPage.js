@@ -102,15 +102,18 @@ const[ogVal,setOgVal]  =useState('')
         if(postUpload.title.length<1){
           errorMessage.title='文章標題'
           isTrue = false
-        }else{
-           if(!!postUpload.category){
+        }else{ 
+          errorMessage.title=''
+           if(postUpload.category==0){
           errorMessage.category='文章類型'
           isTrue = false
         }else{
+          errorMessage.category=''
           if(postUpload.article_pic_main.length<1){
             errorMessage.article_pic_main='文章首圖'
             isTrue = false
         }else{
+          errorMessage.article_pic_main=''
           if(postUpload.content_1.length<1){
             errorMessage.content_1='文章內文'
             isTrue = false
