@@ -24,8 +24,8 @@ function MemberLogin() {
     mobile: '',
     gender: '',
     birthday: '1990-01-01',
-    address_city: '',
-    address_dist: '',
+    address_city: '請選擇縣市',
+    address_dist: '請選擇鄉鎮區',
     address_rd: '',
   })
   const [infoState, setInfoState] = useState(1)

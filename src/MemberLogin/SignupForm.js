@@ -273,7 +273,7 @@ function SignipForm(props) {
                     setSingupFormValue(e)
                   }}
                 >
-                  <option value="none" hidden disabled>
+                  <option value="請選擇縣市" hidden disabled>
                     請選擇縣市
                   </option>
                   {cityList.map((v, i) => {
@@ -299,7 +299,7 @@ function SignipForm(props) {
                     setSingupFormValue(e)
                   }}
                 >
-                  <option value="none" hidden disabled>
+                  <option value="請選擇鄉鎮區" hidden disabled>
                     請選擇鄉鎮區
                   </option>
                   {distList.map((v, i) => {
