@@ -110,7 +110,7 @@ function CartItem() {
                 <span className="cart-price">
                   {(v.product_price - 1000).toLocaleString()}
                 </span>
-                <div className="cart-control">
+                <div className="cart-count">
                   <a href="#">
                     <i
                       className="fa-solid fa-minus"
@@ -130,6 +130,9 @@ function CartItem() {
                       }}
                     ></i>
                   </a>
+                </div>
+
+                <div className="cart-control">
                   <a href="#">
                     <i
                       className="fa-solid fa-trash-can"

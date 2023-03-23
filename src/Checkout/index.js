@@ -7,6 +7,7 @@ import {
   ADD_ORDER_ALL,
   ADD_ORDER_DETAIL,
   EMPTY_CART,
+  GET_MEMBER_DATA,
 } from '../component/LoginApi'
 import M_Path from '../component/M_Path'
 import M_OrderDetailCard from './M_OrderDetailCard'
@@ -23,9 +24,14 @@ function Checkout() {
   const navigation = useNavigate()
   const { memberAuth } = useContext(AuthContext)
 
+  //購物車完成頁
   const { cartData, donepageData, setDonepageData } = useContext(
     ProductFunctionContext
   )
+
+  // //會員資料
+  // const [memberData, setMemberData] = useState({})
+
   //折扣
   const [discount, setDiscount] = useState(0)
   const [hasDiscount, setHasDiscount] = useState(false)
@@ -47,9 +53,9 @@ function Checkout() {
     // lastName: '',
     // mobile: '',
     // email: '',
-    // cities: '',
-    // disc: '',
-    // address: '',
+    city: '請選擇',
+    disc: '請選擇',
+    address: '',
     // postalCode: '',
     // payment: '',
   })
@@ -236,12 +242,17 @@ function Checkout() {
       const data1 = await addOrderAll()
       //寫入訂單總表
       const data2 = await addOrderDetail()
-      console.log(donepageData, 7777)
+      console.log(
+        { ...donepageData, orderAll: data1, orderDetail: data2 },
+        7777
+      )
 
       setDonepageData({ ...donepageData, orderAll: data1, orderDetail: data2 })
 
       //跳頁
-      navigation('/donePage')
+      setTimeout(() => {
+        navigation('/donePage')
+      }, 500)
     }
 
     //寫入訂單細節
@@ -249,7 +260,6 @@ function Checkout() {
     //清空購物車
     // await emptyCart()
     console.log(inputs, 'input')
-    console.log(validation, 11111)
   }
 
   //拿優惠券
@@ -283,6 +293,7 @@ function Checkout() {
       product_price: cartData.map((v) => Number(v.product_price)),
       quantity: cartData.map((v) => +v.quantity),
       discount: discount,
+      payment_method: +inputs.payment,
     })
     console.log(res.data, 'all')
     console.log(res.data.orderNum, 'num')

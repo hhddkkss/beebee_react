@@ -9,6 +9,9 @@ export default ProductFunctionContext
 export const ProductFunctionContextProvider = function ({ children }) {
   const { memberAuth } = useContext(AuthContext)
 
+  //拿到存進useState 詳細購買資料 by aaron
+  const [purChaseDetail, setPurChaseDetail] = useState([])
+
   //拿到produtct
 
   const getProductData = async () => {
@@ -168,26 +171,24 @@ export const ProductFunctionContextProvider = function ({ children }) {
   }
 
   const handleAddOrDeleteFavorite = async (member_id, product_id) => {
-    if(memberAuth.authorized && memberAuth.memberId){
-
+    if (memberAuth.authorized && memberAuth.memberId) {
       const favoritesData = favorites.map((v) => v.product_id)
 
-    if (favoritesData.includes(product_id)) {
-      console.log(111, '有加入收藏')
-      await axios.delete(FAVORITES, {
-        data: { member_id: member_id, product_id: product_id },
-      })
-      setReGetFavorites(!reGetFavorites)
-    } else {
-      console.log(999, '沒加入收藏')
-      await axios.post(FAVORITES, {
-        member_id: member_id,
-        product_id: product_id,
-      })
-      setReGetFavorites(!reGetFavorites)
+      if (favoritesData.includes(product_id)) {
+        console.log(111, '有加入收藏')
+        await axios.delete(FAVORITES, {
+          data: { member_id: member_id, product_id: product_id },
+        })
+        setReGetFavorites(!reGetFavorites)
+      } else {
+        console.log(999, '沒加入收藏')
+        await axios.post(FAVORITES, {
+          member_id: member_id,
+          product_id: product_id,
+        })
+        setReGetFavorites(!reGetFavorites)
+      }
     }
-    }
-    
   }
 
   // const handleAddOrDeleteFavorite = (product_id) => {
@@ -277,6 +278,8 @@ export const ProductFunctionContextProvider = function ({ children }) {
         displayFavorites,
         setDisplayFavorites,
         getFavoritesData,
+        purChaseDetail,
+        setPurChaseDetail,
       }}
     >
       {children}

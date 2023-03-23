@@ -62,7 +62,6 @@ export const POST_ARTICLE_COMMENT = `${HOST}/article_page/postArticleComments`
 //加入或移除喜愛文章
 export const ADD_DEL_ARTI_LIKE = `${HOST}/article_page/memArticleLikeOrRemove`
 
-
 // 拿取會員歷史喜愛
 export const ARTICLE_MEMBER_LIKED = `${HOST}/article_page/memberArticleLike`
 // 拿取會員歷史文章
@@ -90,3 +89,10 @@ export const POST_PIC = `${HOST}/article_page/memberPostArticlePic`
 export const GOOGLE_LOGIN_URL = `${HOST}/googleAuth`
 // Google登入 取得資料
 export const GOOGLE_LOGIN_DATA = `${HOST}/googleAuth/googleBack`
+//拿購買清單
+export const GET_PURCHASE_RECORDS = `${HOST}/member_page/membershoppinglist/`
+
+//購買清單訂單明細
+export const GET_PURCHASE_DETAIL = `${HOST}/member_page/shoppinglistdetail/`
+//拿會員資料 
+export const GET_MEMBER_DATA = `${HOST}/member_page/member_api/`
