@@ -378,6 +378,10 @@ header {
 .product-sort .sort-selection {
   cursor: pointer;
 }
+
+.product-sort .sort-selection:hover {
+  color: var(--deepBlue);
+}
 .sort-to-list {
   margin-right: 2rem;
   display: none;

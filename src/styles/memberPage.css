@@ -7,7 +7,8 @@ body{
     align-items: flex-start;
     padding: 0px;
     gap: 20px;
-    width: 1900px;
+    /* width: 1425px; */
+    width: 100%;
     height: 1000px;
    
 }
@@ -83,13 +84,14 @@ body{
     border-radius: 0px 30px 30px 0px;
     margin: -25px 0px;
     color: #F4F4F4;
-
+    text-decoration: none
 }
 
 .sidebar_btn_active{
     border-radius: 30px 0px 0px 30px;
     background-color: #fff;
     color: #1D2D64;
+    text-decoration: none
 }
 
 .member_container{
@@ -117,9 +119,10 @@ body{
     flex-wrap: wrap;
     align-items: flex-start;
     gap: 30px;
-    width: 1440px;
+    width: 1425px;
 }
 .member_box{
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -431,6 +434,7 @@ body{
         width: 375px;
         margin-bottom: 10px;
         height: auto;
+        display: block;
     }
     .member_mobile_hidden{
       display: none !important ;
@@ -448,6 +452,7 @@ body{
     }
     .now_memberPage{
         text-align: center;
+        margin-top: 20px;
     }
     .basic_infomation{
         width: 100%;

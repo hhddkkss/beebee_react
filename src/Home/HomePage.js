@@ -1,4 +1,5 @@
 import AuthContext from '../Contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 import { React, useEffect, useState, useRef, useContext } from 'react'
 import '../styles/Home.css'
 import '../styles/home_ver3.css'
@@ -10,6 +11,7 @@ import HomeNews from './HomeNews'
 import HomeMap from './HomeMap'
 
 function HomePage() {
+  const navigation = useNavigate()
   const { setNavbarType } = useContext(AuthContext)
   useEffect(() => {
     setNavbarType('light')
@@ -79,11 +81,38 @@ function HomePage() {
           <br />
           -Mr. Self Development
         </div>
-        <button className="home_show_check" type="submit">
+        <button
+          className="home_show_check"
+          type="submit"
+          onClick={() => {
+            navigation('/products')
+          }}
+        >
           check →
         </button>
       </div>
       <HomeNews />
+      <div className="row home_wecare g-0">
+        <div className="col-6 p-0">
+          <div className="home_wecare_left_picture">
+            <div className="home_wecare_left_word">WE CARE !</div>
+            <div className="home_wecare_left_word2">
+              我們在乎每一位客人，
+              <br />
+              在乎每一個想法，
+              <br />
+              我們只想給您最好的，
+              <br />
+              相信您的選擇，
+              <br />
+              最好的都在BEEbeE。
+            </div>
+          </div>
+        </div>
+        <div className="col-6 p-0 d-none d-sm-block">
+          <div className="home_wecare_right"></div>
+        </div>
+      </div>
       <HomeMap />
       <div className="home_end">
         <div className="home_end_word">

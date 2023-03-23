@@ -127,7 +127,11 @@ function Navbar() {
               </button>
             </div>
             <div className="nav_btn_group">
-              <button className="btn">比比會員</button>
+              <button className="btn"
+              onClick={() => {
+                  navigation('/member_page/edit')
+                }}
+              >比比會員</button>
               <button className="btn">關於比比</button>
             </div>
           </div>
@@ -204,7 +208,12 @@ function Navbar() {
         </nav>
 
         <nav className="m-nav nav-dark">
-          <i className="fa-solid fa-chevron-left btn-back nav-dark"></i>
+          <i
+            className="fa-solid fa-chevron-left btn-back nav-dark"
+            onClick={() => {
+              navigation(-1)
+            }}
+          ></i>
           <svg
             width="67"
             height="13"

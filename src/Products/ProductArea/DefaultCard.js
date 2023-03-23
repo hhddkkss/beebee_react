@@ -30,13 +30,16 @@ function DefaultCard({ productsDisplay }) {
   const [render, setRender] = useState(false)
   //  寫進購物車資料庫
   const addToCart = async (product_id) => {
-    const member_id = memberAuth.memberId
+    if(memberAuth.authorized && memberAuth.memberId){
+      const member_id = memberAuth.memberId
 
     await axios.post(ADD_CART_ITEM, {
       member_id: member_id,
       product_id: product_id,
     })
     await setRender(!render)
+    }
+    
   }
 
   useEffect(() => {

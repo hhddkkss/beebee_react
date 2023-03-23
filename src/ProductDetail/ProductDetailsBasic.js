@@ -50,15 +50,19 @@ function ProductDetailsBasic({ p_detailData }) {
 
 
   const addToCart = async (product_id) => {
-    const member_id = memberAuth.memberId
-    if(member_id!==0){
+    if(memberAuth.authorized && memberAuth.memberId){
+       const member_id = memberAuth.memberId
+      if(member_id!==0){
       await axios.post(PRODUCT_DETAIL_ADD_CART_API,{
           memberId:member_id,
           productId:product_id,
           count:productCount
           })
      setRender(!render)
+    }
     }else{console.log('用戶未登入')}
+   
+    
 
     
   }
