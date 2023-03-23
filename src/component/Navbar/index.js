@@ -162,7 +162,7 @@ function Navbar() {
                 />
               </svg>
             </button>
-
+ {memberAuth.authorized && memberAuth.memberId && memberAuth.token? 
             <button
               ref={cartIconRef}
               className="btn cart"
@@ -197,7 +197,9 @@ function Navbar() {
                   strokeLinejoin="round"
                 />
               </svg>
-            </button>
+            </button> :<div style={{width:'50px'}}></div>}
+
+
           </div>
         </nav>
 
@@ -241,6 +243,7 @@ function Navbar() {
           </svg>
         </nav>
 
+        {memberAuth.authorized && memberAuth.memberId && memberAuth.token? 
         <div
           ref={cartBoxRef}
           className={
@@ -284,7 +287,8 @@ function Navbar() {
               查看購物車
             </a>
           </div>
-        </div>
+        </div>:''}
+       
 
         <NavbarMemberBox memberBoxRef={memberBoxRef} />
       </header>

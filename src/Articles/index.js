@@ -215,13 +215,14 @@ function Articles() {
                     navigation('/articles/beebeeArticles')
                     setType(3)
                 }}>分享版</button>
-                <button className={
+                {memberAuth.authorized && memberAuth.memberId? <button className={
                     pageNames[2] == nowPage||pageNames[3] == nowPage?
                     `${listBarBtnClass[1]} active`:`${listBarBtnClass[1]}`
                 }
                  onClick={()=>{
                     navigation('/articles/member/liked')
-                }}>會員文章中心</button>
+                }}>會員文章中心</button>:''}
+                
                 <button className="btn article_list_button article_mb_show ">其他
                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 6.5L9 14.5L17 6.5" stroke="#F4F4F4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
