@@ -104,3 +104,9 @@ export const GET_HISTORY_COMMEND = `${HOST}/memberComment/getAllComment`
 
 // 按下確認收貨後新增商品評論
 export const HANDLE_CHECK_RECEIVE_NEW_COMMENT = `${HOST}/memberComment/handlenewComment`
+
+// 單獨評論拿取
+export const GET_SINGLE_COMMENT = `${HOST}/memberComment/getSingleComment`
+// 修改評論
+export const POST_SINGLE_COMMENT = `${HOST}/memberComment/upDateComment`
+

@@ -144,7 +144,7 @@ function MeberPage_Sidebar() {
             歷史評價
           </button> */}
           <NavLink
-            to="/member_page/membercomment_list"
+            to="/member_page/membercomment_list/li"
             className={({ isActive }) =>
               isActive ? 'sidebar_btn  sidebar_btn_active' : 'sidebar_btn'
             }

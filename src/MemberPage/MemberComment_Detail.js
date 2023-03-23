@@ -1,18 +1,61 @@
-import React from 'react'
-import Navbar from '../component/Navbar/index'
-import MeberPage_Sidebar from './MemberPageComponent/MeberPage_Sidebar'
+import React,{useEffect,useState,useContext} from 'react'
+import { useParams } from 'react-router'
+import AuthContext from '../Contexts/AuthContext'
+import Rating from '@mui/material/Rating'
+import axios from 'axios'
+import { GET_SINGLE_COMMENT,POST_SINGLE_COMMENT } from '../component/LoginApi'
+import { async } from 'q'
+import dayjs from 'dayjs'
+import { useNavigate } from 'react-router'
+
 
 function MemberComment_Detail() {
+  const navigation = useNavigate()
+  const {memberAuth} = useContext(AuthContext)
+  const [singleComment,setSingleComment] = useState([])
+  const[infoText,setInfoText] = useState('')
+  const {p_comment_id}=useParams()
+  const [editComment,setEditComment]=useState({
+    star:0,
+    content:'',
+  })
+// 拿取評論資料
+  const getSingleComment = async(id)=>{
+    await axios.post(GET_SINGLE_COMMENT,{
+      cid:id
+    }).then((res)=>{
+      console.log(res.data);
+      setSingleComment(res.data)
+    })
+  }
+// 確定送出評論
+const postSingleComment= async()=>{
+  await axios.post(POST_SINGLE_COMMENT,{
+    pid:p_comment_id,
+    star:editComment.star,
+    content:editComment.content
+  }).then((res)=>{
+    console.log('comment result:' ,res);
+    if(res.data.success){
+      window.location.reload()
+    }else{
+      setInfoText(res.data.error)
+    }
+  })
+}
+
+
+  useEffect(()=>{
+    getSingleComment(p_comment_id)
+  },[p_comment_id])
   return (
     <>
-      <Navbar />
-      <div class="member_body">
-        <MeberPage_Sidebar />
+     
 
-        <div class="member_container">
-          <div class="detailArea">
-            <div class="coupon_box">
-              <table class="coupon_box_detail">
+        <div className="member_container">
+          <div className="detailArea">
+            <div className="coupon_box">
+              <table className="coupon_box_detail">
                 <thead>
                   <tr>
                     <th>訂單編號</th>
@@ -23,65 +66,99 @@ function MemberComment_Detail() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>#1763</td>
-                    <td>2022.10.23</td>
-                    <td>iphone 12 pro max</td>
+
+                {singleComment.length>0?
+
+                singleComment[0].comment_done!==0?
+
+
+
+
+                  
+                 
+                  singleComment.map((v)=>{ 
+                    return(
+                       <tr key={v.p_comment_id}>
+                    <td>{v.order_id}</td>
+                    <td>{dayjs(v.comment_created_at).format('YYYY-MM-DD hh:mm')}</td>
+                    <td>{v.product_name}</td>
 
                     <td>
-                      <svg
-                        width="191"
-                        height="25"
-                        viewBox="0 0 191 25"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M24.2543 2.1613L21.4201 7.90783L15.0789 8.83231C13.9418 8.99724 13.486 10.3992 14.3107 11.2021L18.8983 15.6726L17.8133 21.9877C17.618 23.1292 18.8202 23.9842 19.8272 23.4504L25.4999 20.4686L31.1727 23.4504C32.1796 23.9799 33.3819 23.1292 33.1865 21.9877L32.1015 15.6726L36.6891 11.2021C37.5138 10.3992 37.0581 8.99724 35.9209 8.83231L29.5798 7.90783L26.7456 2.1613C26.2378 1.137 24.7664 1.12398 24.2543 2.1613Z"
-                          fill="black"
-                        />
-                        <path
-                          d="M59.2543 2.1613L56.4201 7.90783L50.0789 8.83231C48.9418 8.99724 48.486 10.3992 49.3107 11.2021L53.8983 15.6726L52.8133 21.9877C52.618 23.1292 53.8202 23.9842 54.8272 23.4504L60.4999 20.4686L66.1727 23.4504C67.1796 23.9799 68.3819 23.1292 68.1865 21.9877L67.1015 15.6726L71.6891 11.2021C72.5138 10.3992 72.0581 8.99724 70.9209 8.83231L64.5798 7.90783L61.7456 2.1613C61.2378 1.137 59.7664 1.12398 59.2543 2.1613Z"
-                          fill="black"
-                        />
-                        <path
-                          d="M94.2543 2.1613L91.4201 7.90783L85.0789 8.83231C83.9418 8.99724 83.486 10.3992 84.3107 11.2021L88.8983 15.6726L87.8133 21.9877C87.618 23.1292 88.8202 23.9842 89.8272 23.4504L95.4999 20.4686L101.173 23.4504C102.18 23.9799 103.382 23.1292 103.187 21.9877L102.101 15.6726L106.689 11.2021C107.514 10.3992 107.058 8.99724 105.921 8.83231L99.5798 7.90783L96.7456 2.1613C96.2378 1.137 94.7664 1.12398 94.2543 2.1613Z"
-                          fill="black"
-                        />
-                        <path
-                          d="M129.254 2.1613L126.42 7.90783L120.079 8.83231C118.942 8.99724 118.486 10.3992 119.311 11.2021L123.898 15.6726L122.813 21.9877C122.618 23.1292 123.82 23.9842 124.827 23.4504L130.5 20.4686L136.173 23.4504C137.18 23.9799 138.382 23.1292 138.187 21.9877L137.101 15.6726L141.689 11.2021C142.514 10.3992 142.058 8.99724 140.921 8.83231L134.58 7.90783L131.746 2.1613C131.238 1.137 129.766 1.12398 129.254 2.1613Z"
-                          fill="black"
-                        />
-                        <path
-                          d="M164.254 2.1613L161.42 7.90783L155.079 8.83231C153.942 8.99724 153.486 10.3992 154.311 11.2021L158.898 15.6726L157.813 21.9877C157.618 23.1292 158.82 23.9842 159.827 23.4504L165.5 20.4686L171.173 23.4504C172.18 23.9799 173.382 23.1292 173.187 21.9877L172.101 15.6726L176.689 11.2021C177.514 10.3992 177.058 8.99724 175.921 8.83231L169.58 7.90783L166.746 2.1613C166.238 1.137 164.766 1.12398 164.254 2.1613Z"
-                          fill="black"
-                        />
-                      </svg>
+                 <Rating name="read-only" value={v.star} readOnly />
+                  
                     </td>
 
-                    <td class="comment_all">
-                      <pre>
-                        　　所謂商品評論，關鍵是商品評論需要如何解讀。面對如此難題，我們必須設想周全。拉斯金講過，
-                        年輕時代是培養、希望及信仰的一段時光。但願各位能從這段話中獲得心靈上的滋長。希特勒曾提出，
-                        如果我的民族在這場實驗中失敗了，我將不會為之哭泣，是他們自找了這樣的結局。這不禁令我深思。
-                      </pre>
+                    <td className="comment_all">
+                      <div>
+                        {v.content}
+                      </div>
                     </td>
                   </tr>
+                    ) 
+                  })              :
+                
+                singleComment.map((v)=>{
+                    return(
+                       <tr key={v.p_comment_id}>
+                    <td>{v.order_id}</td>
+                    <td>{dayjs().format('YYYY-MM-DD')}</td>
+                    <td>{v.product_name}</td>
+
+                    <td>
+                    <div><Rating name="star" value={editComment.star}  onChange={(e)=>{
+                          setEditComment({...editComment,star:parseInt(e.target.value)})
+                        
+                    }}/><p className='rating_star_info'>{infoText}</p></div>
+                    </td>
+
+                    <td className="comment_all">
+                      <textarea value={editComment.content} onChange={(e)=>{
+                          setEditComment({...editComment,content:e.target.value})
+                      }}></textarea>
+
+                    
+                    </td>
+                  </tr>
+                    ) 
+                  })
+                
+                
+                :<tr></tr>}
+                 
                 </tbody>
               </table>
             </div>
           </div>
         </div>
 
-        <div class="form_btn_group">
-          <button class="btn basic_infomation_confirm memberPage_button">
+       <div className="form_btn_group">
+        { singleComment.length>0 && !!singleComment[0].comment_done? 
+        <button className="btn basic_infomation_confirm memberPage_button"
+        onClick={(e)=>{
+            navigation(`/product_detail/${singleComment[0].product_id}/${singleComment[0].product_category_id}`)
+          }}>
             查看商品頁
-          </button>
-          <button class="btn basic_infomation_cancle memberPage_button">
+          </button>: 
+          <button className="btn basic_infomation_confirm memberPage_button"
+          onClick={()=>{
+            if(editComment.star!==0){
+               postSingleComment()
+            }else{
+              setInfoText('請為商品評分')
+            }
+           
+          }}>
+            送出評價
+          </button>}
+         
+          <button className="btn basic_infomation_cancle memberPage_button"
+          onClick={(e)=>{
+            navigation(-1)
+          }}>
             返回
           </button>
         </div>
-      </div>
+      
     </>
   )
 }
