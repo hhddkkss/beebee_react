@@ -1,12 +1,15 @@
 import './../styles/login.css'
 import axios from 'axios'
 import { ADDRESS_LIST, SIGNUP } from '../component/LoginApi'
-import { useState, useEffect, useContext } from 'react'
+import { Link,useNavigate } from 'react-router-dom'
+import { useState, useEffect, useContext, useRef } from 'react'
 import AuthContext from '../Contexts/AuthContext'
 
 function SignipForm(props) {
   //引入setAuth
   const { setMemberAuth, memberAuth } = useContext(AuthContext)
+  const googleLink = useRef(null)
+
   const {
     activeClass,
     setSingupFormValue,
@@ -14,7 +17,7 @@ function SignipForm(props) {
     signupForm,
     setInfoState,
     handleSignupChange,
-    errorMessage,show,setShow
+    errorMessage,show,setShow,googleLoginUrl
   } = props
   const [cityList, setCityList] = useState([])
   const [allDistList, setAllDistList] = useState([])
@@ -142,11 +145,7 @@ function SignipForm(props) {
 
             </div>
           </div>
-          <div className="form_btn">
-            <button className="loginPage_button google_login_btn">
-              Google 登入
-            </button>
-          </div>
+
           <div className="form_btn">
             <button
               className="loginPage_button sign_form_btn"
@@ -157,6 +156,21 @@ function SignipForm(props) {
             >
               下一步
             </button>
+          </div>
+
+          <div className="form_btn">
+            <button
+              className="loginPage_button google_login_btn"
+              onClick={(e) => {
+                e.preventDefault()
+                if(googleLink){
+                  googleLink.current.click()
+                }
+              }}
+            >
+             <i className="fa-brands fa-google" style={{color: "#DB4437"}}></i> Google 登入
+            </button>
+            <Link ref={googleLink} className='d-none' to={googleLoginUrl}></Link>
           </div>
         </form>
       </div>
@@ -315,6 +329,8 @@ function SignipForm(props) {
             />
           </div>
 
+          
+
           <div className="form_btn">
             <button
               onClick={(e) => {
@@ -326,7 +342,7 @@ function SignipForm(props) {
               上一步
             </button>
             <button
-              className="loginPage_button sign_form_btn"
+              className="loginPage_button sign_form_btn done"
               onClick={(e) => {
                 e.preventDefault()
                 if(!!errorMessage.isOkS){
