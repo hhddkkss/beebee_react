@@ -1,8 +1,10 @@
 import React from 'react'
 import Navbar from '../component/Navbar/index'
 import MeberPage_Sidebar from './MemberPageComponent/MeberPage_Sidebar'
+import { GET_HISTORY_COMMEND } from '../component/LoginApi'
 
 function MemberComment_List() {
+  // 拿取歷史留言
   return (
     <>
       <Navbar />

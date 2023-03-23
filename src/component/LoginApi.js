@@ -96,3 +96,11 @@ export const GET_PURCHASE_RECORDS = `${HOST}/member_page/membershoppinglist/`
 export const GET_PURCHASE_DETAIL = `${HOST}/member_page/shoppinglistdetail/`
 //拿會員資料 
 export const GET_MEMBER_DATA = `${HOST}/member_page/member_api/`
+
+
+
+// 會員區商品歷史評論拿取
+export const GET_HISTORY_COMMEND = `${HOST}/memberComment/getAllComment`
+
+// 按下確認收貨後新增商品評論
+export const HANDLE_CHECK_RECEIVE_NEW_COMMENT = `${HOST}/memberComment/handlenewComment`
