@@ -19,12 +19,41 @@ function MemberPage() {
   const [passWordData, setPassWordData] = useState([])
   const [changeMember, setChangeMember] = useState({})
   const [changePassword, setChangePassword] = useState(false)
+  
+  const [cityList, setCityList] = useState([])
+  const [allDistList, setAllDistList] = useState([])
+  const [distList, setDistList] = useState([])
+
+  const [signupForm, setSignupForm] = useState({
+    name: '',
+    email: '',
+    password: '',
+    mobile: '',
+    gender: '',
+    birthday: '1990-01-01',
+    address_city: '',
+    address_dist: '',
+    address_rd: '',
+  })
+
+  const [loginForm, setLoginForm] = useState({
+    email: '',
+    password: '',
+  })
+
+  function setLoginFormValue(e) {
+    setLoginForm({ ...loginForm, [e.target.name]: e.target.value })
+  }
+  function setSingupFormValue(e) {
+    setSignupForm({ ...signupForm, [e.target.name]: e.target.value })
+  }
+
 
   const getMemberData = async () => {
     const pwd = await axios
       .get(`http://localhost:3003/member_page/edit/${memberAuth.memberId}`)
       .then((response) => {
-        console.log(response.data, 66666)
+        // console.log(response.data, 66666)
         setPassWordData(response.data)
       })
   }
@@ -45,9 +74,40 @@ function MemberPage() {
         address_rd: changeMember.address_rd,
       })
       .then((response) => {
-        console.log(response, 9999)
+        // console.log(response, 9999)
         setPassWordData(response.data)
       })
+  }
+
+
+
+  const getAddressData = async () => {
+    const addresscity = await axios.get(`http://localhost:3003/address_list`)
+    // .then((response) => {
+    //   console.log(response, 99999)
+    //   setPassWordData(response.data)
+
+    let city = addresscity.data.rows
+      .filter((v) => {
+        return v.parent_sid === 0
+      })
+      .map((e) => {
+        return e.ct_name
+      })
+    let dist = addresscity.data.rows
+      .filter((v) => {
+        return v.parent_sid !== 0
+      })
+      .map((e) => {
+        return { ctname: e.ct_name, parent_sid: e.parent_sid }
+      })
+    setCityList(city)
+    setAllDistList(dist)
+  }
+  const changeDist = (n) => {
+    setDistList(
+      allDistList.filter((v) => v.parent_sid == n).map((e) => e.ctname)
+    )
   }
 
   useEffect(() => {
@@ -58,9 +118,12 @@ function MemberPage() {
     setChangeMember({ ...passWordData[0] })
   }, [passWordData])
 
+  useEffect(() => {
+    getAddressData()
+  }, [])
+
   return (
     <>
-      {console.log(changeMember, 11111)}
       <Navbar />
       {!!changeMember ? (
         <div className="member_body">
@@ -101,12 +164,12 @@ function MemberPage() {
               <div className="member_box">
                 <label htmlFor="member_gender">性別</label>
                 {/* <select name="member_gender"> */}
-                {console.log('cc', changeMember)}
+                {/* {console.log('cc', changeMember)} */}
                 <input
                   name="gender"
                   value={changeMember.gender}
                   onChange={(event) => {
-                    console.log('gender', event.target.name)
+                    // console.log('gender', event.target.name)
                     setChangeMember({
                       ...changeMember,
                       [event.target.name]: event.target.value,
@@ -131,14 +194,36 @@ function MemberPage() {
               <div className="city_dist">
                 <div className="member_box">
                   <label htmlFor="member_city">居住城市</label>
-                  <select name="address_city">
-                    {/* <option value="臺北市">臺北市</option> */}
+                  <select name="address_city"
+                  defaultValue={changeMember.address_city ? changeMember.address_city : signupForm.address_city}
+                  onChange={(e) => {
+                    changeDist(e.target.selectedIndex)
+                    setSingupFormValue(e)
+                  }}
+                  >
+                    <option value="none" hidden disabled>臺北市</option>{cityList.map((v, i) => {
+                    return (
+                      <option key={i} value={v}>
+                        {v}
+                      </option>
+                    )
+                  })}
                   </select>
                 </div>
                 <div className="member_box">
                   <label htmlFor="member_dist">鄉鎮區</label>
-                  <select name="address_dist">
-                    {/* <option value="大安區">大安區</option> */}
+                  <select name="address_dist"
+                  defaultValue={changeMember.address_dist ? changeMember.address_dist : signupForm.address_dist}
+                  onChange={(e) => {
+                    setSingupFormValue(e)
+                  }}>
+                    <option value="none" hidden disabled>大安區</option> {distList.map((v, i) => {
+                    return (
+                      <option key={i} value={v}>
+                        {v}
+                      </option>
+                    )
+                  })}
                   </select>
                 </div>
               </div>
@@ -204,6 +289,8 @@ function MemberPage() {
                   />
                 )}
               </div>
+
+              
               <div className="form_btn_group">
                 <button
                   className="btn memberPage_button basic_infomation_confirm"
