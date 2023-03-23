@@ -27,7 +27,9 @@ function LoginForm(props) {
         )}
       >
         <div className="login_form_title">Welcome back</div>
+        
         <div className="now_page login_mobile_hidden">Log in</div>
+   
         <form
           name="login_form"
           className="login_form"
@@ -79,15 +81,16 @@ function LoginForm(props) {
             </div>
           </div>
           
+         
           <div className="form_btn">
-            <button
+            {/* <button
               onClick={(e) => {
                 e.preventDefault()
               }}
               className="loginPage_button forget_pass_btn"
             >
               忘記密碼
-            </button>
+            </button> */}
             <button 
             onClick={ (e)=>{e.preventDefault()
               if(!!errorMessage.isOkL){
@@ -130,6 +133,7 @@ function LoginForm(props) {
               登入
             </button>
           </div>
+
           <div className="form_btn">
             <button
               className="loginPage_button google_login_btn"
