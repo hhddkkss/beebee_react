@@ -6,7 +6,7 @@ import { LOGIN } from './../component/LoginApi'
 import AuthContext from '../Contexts/AuthContext'
 
 function LoginForm(props) {
-  const { loginForm, setLoginFormValue, activeClass, setInfoState, errorMessage, handleLoginChange,show,setShow,googleLoginUrl } = props
+  const { loginForm, setLoginFormValue, activeClass, setInfoState, errorMessage, handleLoginChange,show,setShow,googleLoginUrl,setLoginForm } = props
 
   //引入setAuth
   const { setMemberAuth } = useContext(AuthContext)
@@ -28,7 +28,15 @@ function LoginForm(props) {
       >
         <div className="login_form_title">Welcome back</div>
         
-        <div className="now_page login_mobile_hidden">Log in</div>
+        <div className="now_page login_mobile_hidden"
+        onClick={(e)=>{
+          e.preventDefault()
+          
+          setLoginForm({
+            email: 'yen1@test.com',
+            password: '123456',
+          })
+        }}>Log in</div>
    
         <form
           name="login_form"
@@ -45,6 +53,7 @@ function LoginForm(props) {
               placeholder="E-mail"
               name="email"
               className="form_input"
+              value={loginForm.email}
               onChange={(e) => {
                 setLoginFormValue(e)
                 handleLoginChange(e,1)
@@ -61,6 +70,7 @@ function LoginForm(props) {
               placeholder="Password"
               name="password"
               className="form_input"
+              value={loginForm.password}
               onChange={(e) => {
                 setLoginFormValue(e)
                 handleLoginChange(e,2)
@@ -93,7 +103,7 @@ function LoginForm(props) {
             </button> */}
             <button 
             onClick={ (e)=>{e.preventDefault()
-              if(!!errorMessage.isOkL){
+              if(!!errorMessage.isOkL&&loginForm.email.length>0&&loginForm.password.length>0){
                //登入送去API
                   axios.post(LOGIN, { ...loginForm }).then((response) => {
               if (response.data.success) {

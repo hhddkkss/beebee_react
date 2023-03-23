@@ -17,7 +17,12 @@ function SignipForm(props) {
     signupForm,
     setInfoState,
     handleSignupChange,
-    errorMessage,show,setShow,googleLoginUrl
+    errorMessage,
+    show,
+    setShow,
+    googleLoginUrl,
+    setSignupForm,
+    setErrorMessage
   } = props
   const [cityList, setCityList] = useState([])
   const [allDistList, setAllDistList] = useState([])
@@ -64,7 +69,21 @@ function SignipForm(props) {
         )}
       >
         <div className="sign_form_title">Welcome</div>
-        <div className="now_page login_mobile_hidden">Sign up</div>
+        <div className="now_page login_mobile_hidden"
+         onClick={(e)=>{
+          e.preventDefault()
+          setSignupForm({
+            name: '張筱玥',
+            email: 'bee0329@gmail.com',
+            password: '',
+            mobile: '0982034566',
+            gender: 'female',
+            birthday: '1999-03-29',
+            address_city: '臺北市',
+            address_dist: '松山區',
+            address_rd: '光復北路190巷2號',
+          })
+        }}>Sign up</div>
         <form name="sign_form" className="login_form">
           <div className="form_box">
             <label className="label"><i className="fa-2xs fa-solid fa-hashtag" style={{color:"coral"}}></i> 姓名 </label>
@@ -133,9 +152,11 @@ function SignipForm(props) {
             <input
               type="password"
               placeholder=""
-              name="password-check"
+              name="password2"
               className="form_input"
+              value={signupForm.password2}
               onChange={(e) => {
+                setSingupFormValue(e)
                 handleSignupChange(e,32)
 
               }}
@@ -151,8 +172,18 @@ function SignipForm(props) {
               className="loginPage_button sign_form_btn"
               onClick={(e) => {
                 e.preventDefault()
-                setActive(3)
-              }}
+                if(signupForm.password.length<1){
+                  setErrorMessage({...errorMessage,password:'請設定含1個大寫字母、1個小寫字母貳位數字、長度6-12位的密碼'});
+                }else{
+                  if(!signupForm.password2){
+                  setErrorMessage({...errorMessage,password2:'請再次確認您的密碼'});
+                 } else{
+                    if(signupForm.password!==signupForm.password2){
+                    setErrorMessage({...errorMessage,password2:'兩次輸入密碼不同'});
+                  }else{
+                    setActive(3)
+                  } }}
+                }}
             >
               下一步
             </button>
@@ -267,7 +298,7 @@ function SignipForm(props) {
                   placeholder="password"
                   name="address_city"
                   className="form_input"
-                  defaultValue={signupForm.address_city}
+                  value={signupForm.address_city}
                   onChange={(e) => {
                     changeDist(e.target.selectedIndex)
                     setSingupFormValue(e)
@@ -294,7 +325,7 @@ function SignipForm(props) {
                   placeholder="password"
                   name="address_dist"
                   className="form_input"
-                  defaultValue={signupForm.address_dist}
+                  value={signupForm.address_dist}
                   onChange={(e) => {
                     setSingupFormValue(e)
                   }}
