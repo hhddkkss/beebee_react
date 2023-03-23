@@ -92,7 +92,7 @@ useEffect(()=>{
                                         }} className="articleTitle">{v.title}</div>
 
                     <div className="articleWritter">
-                        <img src={'/images/'+v.member_pic} alt=""/>
+                        <img src={v.member_pic} alt=""/>
                         <div className="writterName">{v.email}</div>
                         </div>
 
@@ -119,7 +119,7 @@ useEffect(()=>{
                                     navigation('/articles/beebeePostNO/'+v.article_id)
                                         }}  className="articleTitle">{v.title}</div>
                     <div className="articleWritter">
-                        <img src={'/images/'+v.member_pic} alt=""/>
+                        <img src={v.member_pic} alt=""/>
                         <div className="writterName">{v.email}</div>
                     </div>
 

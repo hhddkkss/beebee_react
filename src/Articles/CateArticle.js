@@ -68,7 +68,7 @@ function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType
                             <div className="content">{frontData[type-1].content_1}</div>
                             <div className="foot">
                                 <div className="article_writer">
-                                    <img src={'/images/'+frontData[type-1].member_pic} alt=""/>
+                                    <img src={frontData[type-1].member_pic} alt=""/>
                                     <div className="writer_name">{frontData[type-1].email}</div>
                                     <div className="post_time">{Dayjs(frontData[type-1].created_at).format('YYYY/MM/DD')}</div>
                                 </div>
@@ -131,7 +131,7 @@ function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType
                                 
                                         <div className="foot">
                                             <div className="article_writer">
-                                                <img src={'/images/'+v.member_pic} alt=""/>
+                                                <img src={v.member_pic} alt=""/>
                                                 <div className="writer_name">{v.email}</div>
                                                 <div className="post_time">{Dayjs(v.created_at).format('YYYY/MM/DD')}</div>
                                             </div>

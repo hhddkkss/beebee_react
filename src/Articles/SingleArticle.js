@@ -163,7 +163,7 @@ useEffect(()=>{
                                     
                                 </div>
                                 <div className="article_writer">
-                                    <img src={'/images/'+v.member_pic} alt=""/>
+                                    <img src={v.member_pic} alt=""/>
                                     <div className="writer_name">{v.email}</div>
                                     <div className="post_time">{Dayjs(v.created_at).format('YYYY-MM-DD')}</div>
                                 </div>
@@ -243,7 +243,7 @@ useEffect(()=>{
                             return(
                             <div key={v.message_id} className="message_box">
                                 <div className="article_writer">
-                                    <img src={'/images/'+v.member_pic} alt=""/>
+                                    <img src={v.member_pic} alt=""/>
                                     <div className="writer_name">{v.email}</div>
                                     <div className="post_time">{Dayjs(v.created_at).format('YYYY-MM-DD')}</div>
                                 </div>
@@ -340,7 +340,7 @@ useEffect(()=>{
                         
                                 <div className="foot">
                                     <div className="article_writer">
-                                        <img src={'/images/'+v.member_pic} alt=""/>
+                                        <img src={v.member_pic} alt=""/>
                                         <div className="writer_name">{v.email}</div>
                                         <div className="post_time">{Dayjs(v.created_at).format('YYYY/MM/DD')}</div>
                                     </div>

@@ -13,7 +13,7 @@ function MemberComment_List() {
           <div class="now_memberPage">歷史評價</div>
           <table class="member_List member_mobile_hidden">
             <thead>
-              <tr>
+              <tr>  
                 <th>訂單編號</th>
                 <th>商品名稱</th>
                 <th>評價星數</th>

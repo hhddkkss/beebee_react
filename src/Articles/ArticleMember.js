@@ -193,7 +193,7 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
                                 
                                         <div className="foot">
                                             <div className="article_writer">
-                                                <img src={'/images/'+v.member_pic} alt=""/>
+                                                <img src={v.member_pic} alt=""/>
                                                 <div className="writer_name">{v.email}</div>
                                                 <div className="post_time">{Dayjs(v.created_at).format('YYYY/MM/DD')}</div>
                                             </div>
