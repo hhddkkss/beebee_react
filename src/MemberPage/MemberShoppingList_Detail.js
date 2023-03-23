@@ -32,6 +32,12 @@ function MemberShoppingList_Detail() {
 
   const payment_method = paymentTostring(purChaseDetail[0].payment_method)
 
+  //確認訂單
+  //預設0
+  const receive = purChaseDetail[0].receive_done
+  //4
+  const order_logistics = purChaseDetail[0].order_logistics_id
+
   return (
     <>
       <Navbar />
@@ -290,6 +296,14 @@ function MemberShoppingList_Detail() {
           </div>
 
           <div className="form_btn_group member_mobile_hidden">
+            {receive == 0 && order_logistics == 4 ? (
+              <button className="btn basic_receive_done memberPage_button">
+                完成訂單
+              </button>
+            ) : (
+              ''
+            )}
+
             <button
               className="btn basic_infomation_cancle memberPage_button"
               onClick={() => {
