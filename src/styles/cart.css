@@ -228,7 +228,6 @@ body {
 
 .cart-control {
   width: 200px;
-  text-align: center;
 
   gap: 0.1rem;
 }
@@ -573,7 +572,7 @@ body {
 
   .cart-name {
     width: 70%;
-    transform: translateY(-30px);
+    transform: translate(20px, -30px);
     font-size: 20px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -599,10 +598,11 @@ body {
   }
   .cart-control {
     width: 100px;
-    position: absolute;
+    transform: translateY(20px);
+    text-align: end;
     align-items: end;
     bottom: 20%;
-    left: 70%;
+    left: 80%;
   }
   .cart-control i {
     font-size: 24px;
@@ -612,6 +612,9 @@ body {
   }
   .cart-total {
     display: none;
+  }
+  .cart-count {
+    transform: translateY(20px);
   }
 
   .recommend {

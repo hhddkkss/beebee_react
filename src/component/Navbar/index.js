@@ -69,6 +69,7 @@ function Navbar() {
 
   useEffect(() => {
     getProductData()
+    getCartData()
     document.addEventListener('click', handleOutMemberBox)
     document.addEventListener('click', handleOutCartBox)
   }, [])
@@ -127,11 +128,14 @@ function Navbar() {
               </button>
             </div>
             <div className="nav_btn_group">
-              <button className="btn"
-              onClick={() => {
+              <button
+                className="btn"
+                onClick={() => {
                   navigation('/member_page/edit')
                 }}
-              >比比會員</button>
+              >
+                比比會員
+              </button>
               <button className="btn">關於比比</button>
             </div>
           </div>
@@ -166,44 +170,47 @@ function Navbar() {
                 />
               </svg>
             </button>
- {memberAuth.authorized && memberAuth.memberId && memberAuth.token? 
-            <button
-              ref={cartIconRef}
-              className="btn cart"
-              // onClick={() => {
-              //   setToggleCartButton(!toggleCartButton)
-              // }}
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="black"
-                xmlns="http://www.w3.org/2000/svg"
+            {memberAuth.authorized &&
+            memberAuth.memberId &&
+            memberAuth.token ? (
+              <button
+                ref={cartIconRef}
+                className="btn cart"
+                // onClick={() => {
+                //   setToggleCartButton(!toggleCartButton)
+                // }}
               >
-                <path
-                  d="M9 22C9.55228 22 10 21.5523 10 21C10 20.4477 9.55228 20 9 20C8.44772 20 8 20.4477 8 21C8 21.5523 8.44772 22 9 22Z"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M20 22C20.5523 22 21 21.5523 21 21C21 20.4477 20.5523 20 20 20C19.4477 20 19 20.4477 19 21C19 21.5523 19.4477 22 20 22Z"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button> :<div style={{width:'50px'}}></div>}
-
-
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="black"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9 22C9.55228 22 10 21.5523 10 21C10 20.4477 9.55228 20 9 20C8.44772 20 8 20.4477 8 21C8 21.5523 8.44772 22 9 22Z"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M20 22C20.5523 22 21 21.5523 21 21C21 20.4477 20.5523 20 20 20C19.4477 20 19 20.4477 19 21C19 21.5523 19.4477 22 20 22Z"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            ) : (
+              <div style={{ width: '50px' }}></div>
+            )}
           </div>
         </nav>
 
@@ -252,52 +259,54 @@ function Navbar() {
           </svg>
         </nav>
 
-        {memberAuth.authorized && memberAuth.memberId && memberAuth.token? 
-        <div
-          ref={cartBoxRef}
-          className={
-            toggleCartButton
-              ? 'cart-hover-box cart-hover-box-on'
-              : 'cart-hover-box cart-hover-box-off'
-          }
-        >
-          <div className="triangle"></div>
+        {memberAuth.authorized && memberAuth.memberId && memberAuth.token ? (
+          <div
+            ref={cartBoxRef}
+            className={
+              toggleCartButton
+                ? 'cart-hover-box cart-hover-box-on'
+                : 'cart-hover-box cart-hover-box-off'
+            }
+          >
+            <div className="triangle"></div>
 
-          <div className="my-cards">
-            {cartData.map((v) => {
-              return (
-                <div className="my-cart-card" key={v.product_id}>
-                  <div className="my-cart-card-left">
-                    <div className="img-wrap">
-                      <img
-                        src={'/images/' + v.product_pic.split(',')[0]}
-                        alt=""
-                      />
+            <div className="my-cards">
+              {cartData.map((v) => {
+                return (
+                  <div className="my-cart-card" key={v.product_id}>
+                    <div className="my-cart-card-left">
+                      <div className="img-wrap">
+                        <img
+                          src={'/images/' + v.product_pic.split(',')[0]}
+                          alt=""
+                        />
+                      </div>
+                      <p className="product-name">{v.product_name}</p>
                     </div>
-                    <p className="product-name">{v.product_name}</p>
+                    <p className="product-price">
+                      {(v.product_price - 1000).toLocaleString()}
+                    </p>
                   </div>
-                  <p className="product-price">
-                    {(v.product_price - 1000).toLocaleString()}
-                  </p>
-                </div>
-              )
-            })}
-          </div>
+                )
+              })}
+            </div>
 
-          <div className="btn-check-cart">
-            <a
-              href="#/"
-              className="check-cart"
-              onClick={async (e) => {
-                e.preventDefault()
-                navigation('/cart')
-              }}
-            >
-              查看購物車
-            </a>
+            <div className="btn-check-cart">
+              <a
+                href="#/"
+                className="check-cart"
+                onClick={async (e) => {
+                  e.preventDefault()
+                  navigation('/cart')
+                }}
+              >
+                查看購物車
+              </a>
+            </div>
           </div>
-        </div>:''}
-       
+        ) : (
+          ''
+        )}
 
         <NavbarMemberBox memberBoxRef={memberBoxRef} />
       </header>
