@@ -3,6 +3,7 @@ body{
 }
 .article_title_bar{
     background:url(./../../../public/images/article/titleBar.png) ;
+    /* background:url(https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1) ; */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -22,7 +23,7 @@ body{
     color: #1D2D64;
     position: absolute;
     right: 200px;
-    top: 50%;
+    top: 46%;
     transform: translateY(-50%);
 }
 .article_list_bar{

@@ -297,7 +297,16 @@ const[ogVal,setOgVal]  =useState('')
 
     <div className="article_side_bar">
 
-    <div className="category_side_title review ">
+    <div className="category_side_title review "
+    onClick={(e)=>{
+      e.preventDefault()
+      setPostUpload({
+        ...postUpload,
+        title:'蘋果重啟 iPhone SE 4 研發，TrendForce：限定市場發售',
+        content_1:'蘋果的 iPhone SE 4（或稱 iPhone SE 2024）產品計畫多變，先前才傳出蘋果已經取消了相關研發，但後來又傳出將會更改原先的規格，讓 iPhone SE 4 徹底擺脫 iPhone 8 的外型設計，看起來會像是 iPhone 14 的小改版。不過據市場調查機構 TrendForce 近期釋出的報告顯示，iPhone SE 4 計畫重啟後，帶來的改變不僅是規格上，就連販售市場也從全球市場縮減成幾個零星市場販售。TrendForce 指出，蘋果原先的 iPhone SE 4 內部代號為 D49（已取消），而重啟後的 iPhone SE 4 產品代號為 D27U，D27U 為 D27（iPhone 14 內部代號）的小幅改版本。不過為了避免與 D49 相似的定位而產生衝突，因此 D27U 有可能僅在特定市場販售，而不會在全球市場發行。D27U 與原先的 D49 有何不同？TrendForce 表示，最大的不同之處將會是顯示器規格，D49 使用的螢幕規格為 6.1 吋 LTPS LCD，而 D27U 則將採用 6.1 吋 OLED 顯示器。至於在鏡頭規格方面，D49 採用了 12MP+12MP 雙主鏡頭設計，至於 D27U 的鏡頭規格目前尚未確定。',
+        content_2:'根據外媒《9to5mac》報導，蘋果預計會在6月的WWDC上宣布 iOS 17後，隨即向開發者釋出測試版，並於7月份開放給所有iPhone用戶使用公測版，之後再於9月份的時候釋出正是版本，且今年iOS 17作業系統很有可能會與 iPhone 15和 iPhone 15 Pro系列一起上市。值得注意的是，今年 WWDC 大會看點可能不只有新作業系統，根據《彭博社》報導，由於公司今年專注於首款 AR、VR 頭戴式裝置的開發，iOS 17等作業系統關注度可能會退居二線；雖然目前尚不清楚iOS 17會更新哪些新功能，但據先前報導指出，iOS 17的代號為「Dawn」，並於WWDC舉辦之前正在內部進行持續開發和測試。報導指出，由於今年 WWDC 重點會著重於 AR / VR 耳機軟硬體以及 iOS 16 的障礙，因此五大作業系統更新幅度可能會比蘋果原計畫的重大變化要少。儘管蘋果的硬體產品規格、功能提前洩漏資訊早已行之有年，但有關作業系統的爆料並不常見，這是因為大部分關於硬體規格的洩漏都來自蘋果龐大的供應鏈，而非來自蘋果內部，由於作業系統全權由蘋果掌控，並只有少數內部人員真正了解公司計劃，因此難以預先得知iOS 17會更新哪些新功能。',
+      })
+    }}>
         <div className="title">發文</div>
         <div className="dashed_logo">
         <svg width="263" height="60" viewBox="0 0 263 60" fill="none" xmlns="http://www.w3.org/2000/svg">

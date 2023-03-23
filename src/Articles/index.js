@@ -312,7 +312,12 @@ function Articles() {
 {/* 開始發文鍵 */}
         <div className="post_btn" 
         onClick={()=>{
-                    navigation('/articles/beebeePost')
+            if(memberAuth.authorized && memberAuth.token){
+                 navigation('/articles/beebeePost')
+            }else{
+                navigation('/member_login',{state:{text2:'您尚未登入'}})
+            }
+                   
                 }}>
             <div className="post_icon">
                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">

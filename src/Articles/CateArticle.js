@@ -5,10 +5,11 @@ import axios from 'axios'
 import Dayjs from 'dayjs'
 import ArticleSideBar from './ArticleSideBar'
 import HashTagColor from './HashTagColor'
+import AuthContext from '../Contexts/AuthContext'
 
 function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType}) {
     const navigation = useNavigate()
-
+    const {memberAuth} = useContext(AuthContext)
     // 將所有文章分類呈現
     const [showPosts,setShowPosts] = useState(allArtData)
     const getShowPosts = (typeId)=>{
@@ -23,6 +24,7 @@ function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType
     useEffect(()=>{
         if(!!type){
             setType(1)
+        getShowPosts(1)
         }
     },[])
     useEffect(()=>{
@@ -55,7 +57,12 @@ function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType
                         }}>{frontData[type-1].title}</span>
                                 <button className=" article_like_button" 
                                 onClick={()=>{
-                                    addDelLikeArt(frontData[type-1].article_id)
+                                    if(memberAuth.authorized && memberAuth.token){
+                                         addDelLikeArt(frontData[type-1].article_id)
+                                    }else{
+                                        navigation('/member_login',{state:{text2:'您尚未登入'}})
+                                    }
+                                   
                                 }}>
                                 {likeIdList.includes(frontData[type-1].article_id)?
                                 <i className="fa-solid fa-heart"></i>:<i className="fa-regular fa-heart"></i>
@@ -119,7 +126,10 @@ function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType
                                         }} >{v.title}</span>
                                             <button className=" article_like_button" 
                                                 onClick={()=>{
-                                                    addDelLikeArt(v.article_id)
+                                                    if(memberAuth.authorized && memberAuth.token){
+                                                    addDelLikeArt(v.article_id)}else{
+                                                        navigation('/member_login',{state:{text2:'您尚未登入'}})
+                                                    }
                                                 }}>
                                                {likeIdList.includes(v.article_id)?
                                                 <i className="fa-solid fa-heart"></i>:<i className="fa-regular fa-heart"></i>

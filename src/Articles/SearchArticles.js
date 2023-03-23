@@ -5,10 +5,12 @@ import axios from 'axios'
 import Dayjs from 'dayjs'
 import ArticleSideBar from './ArticleSideBar'
 import HashTagColor from './HashTagColor'
+import AuthContext from '../Contexts/AuthContext'
 
 function SearchArticles({frontData,allArtData,type,addDelLikeArt,likeIdList,setType}) {
     const navigation = useNavigate()
     const { article_id } = useParams()
+    const {memberAuth} = useContext(AuthContext)
 
     // 將所有文章分類呈現
     console.log('all',allArtData);
@@ -72,8 +74,10 @@ function SearchArticles({frontData,allArtData,type,addDelLikeArt,likeIdList,setT
                                     navigation('/articles/beebeePostNO/'+v.article_id)
                                         }} >{v.title}</span>
                                             <button className=" article_like_button" 
-                                                onClick={()=>{
-                                                    addDelLikeArt(v.article_id)
+                                                onClick={()=>{ if(memberAuth.authorized && memberAuth.token){
+                                                    addDelLikeArt(v.article_id)}else{
+                                                        navigation('/member_login',{state:{text2:'您尚未登入'}})
+                                                    }
                                                 }}>
                                                {likeIdList.includes(v.article_id)?
                                                 <i className="fa-solid fa-heart"></i>:<i className="fa-regular fa-heart"></i>
