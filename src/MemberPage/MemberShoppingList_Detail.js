@@ -243,7 +243,7 @@ function MemberShoppingList_Detail() {
             </div>
 
             <div className="payment_shipping_box">
-              <table className="member_bill_detail">
+              {/* <table className="member_bill_detail">
                 <thead>
                   <tr>
                     <th>帳單地址</th>
@@ -259,28 +259,30 @@ function MemberShoppingList_Detail() {
                       <div>{purChaseDetail[0].order_address_dist}</div>
                       <div>{purChaseDetail[0].order_address}</div>
                     </td>
-                    <td>{payment_method}</td>
-                    <td>{purChaseDetail[0].order_status}</td>
                   </tr>
                 </tbody>
-              </table>
+              </table> */}
               <table className="member_shipping_detail">
                 <thead>
                   <tr>
                     <th>運送地址</th>
 
                     <th>運送狀態</th>
+                    <th>付款方式</th>
+                    <th>付款狀態</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>
-                      <div>{purChaseDetail[0].order_recipient}</div>
+                      {/* <div>{purChaseDetail[0].order_recipient}</div> */}
                       <div>{purChaseDetail[0].order_address_city}</div>
                       <div>{purChaseDetail[0].order_address_dist}</div>
                       <div>{purChaseDetail[0].order_address}</div>
                     </td>
                     <td>{purChaseDetail[0].order_logistics_name}</td>
+                    <td>{payment_method}</td>
+                    <td>{purChaseDetail[0].order_status}</td>
                   </tr>
                 </tbody>
               </table>
@@ -288,9 +290,6 @@ function MemberShoppingList_Detail() {
           </div>
 
           <div className="form_btn_group member_mobile_hidden">
-            <button className="btn basic_infomation_confirm memberPage_button">
-              聯繫客服
-            </button>
             <button
               className="btn basic_infomation_cancle memberPage_button"
               onClick={() => {

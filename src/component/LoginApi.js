@@ -86,3 +86,5 @@ export const GET_PURCHASE_RECORDS = `${HOST}/member_page/membershoppinglist/`
 
 //購買清單訂單明細
 export const GET_PURCHASE_DETAIL = `${HOST}/member_page/shoppinglistdetail/`
+//拿會員資料 
+export const GET_MEMBER_DATA = `${HOST}/member_page/member_api/`

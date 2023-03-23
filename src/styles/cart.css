@@ -228,8 +228,8 @@ body {
 
 .cart-control {
   width: 200px;
-  display: flex;
-  justify-content: center;
+  text-align: center;
+
   gap: 0.1rem;
 }
 .cart-control i {
@@ -238,6 +238,13 @@ body {
 .cart-total {
   width: 200px;
   text-align: center;
+}
+.cart-count {
+  width: 200px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
 }
 
 .fa-minus {

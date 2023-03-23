@@ -1,7 +1,6 @@
 import React from 'react'
 
 function CartInformation() {
-
   return (
     <>
       {/* <!-- cart information --> */}
@@ -12,6 +11,7 @@ function CartInformation() {
               <p>商品</p>
               <p>單價</p>
               <p>數量</p>
+              <p>控制</p>
               <p>總計</p>
             </div>
           </div>

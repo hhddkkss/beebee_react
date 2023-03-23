@@ -81,7 +81,7 @@ function MemberShopping_List() {
                           getPurchaseDetail(v.order_id)
                           setTimeout(() => {
                             navigation('/member_page/shoppinglistdetail')
-                          }, 500)
+                          }, 300)
                         }}
                       >
                         VEIW MORE
@@ -110,7 +110,7 @@ function MemberShopping_List() {
                     <td>處理狀態:</td>
                     <td>{v.order_logistics_name}</td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <td>
                       <img
                         src="https://cc.tvbs.com.tw/img/program/upload/2022/03/11/20220311122136-f7fb9feb.jpg"
@@ -118,7 +118,7 @@ function MemberShopping_List() {
                       ></img>
                     </td>
                     <td>iphone 12</td>
-                  </tr>
+                  </tr> */}
                   <tr>
                     <td>總計:</td>
                     <td>TWD {parseInt(v.order_money).toLocaleString()}</td>
@@ -126,7 +126,15 @@ function MemberShopping_List() {
                   <tr>
                     <td></td>
                     <td>
-                      <button className="memberPage_button view_more_btn">
+                      <button
+                        className="memberPage_button view_more_btn"
+                        onClick={() => {
+                          getPurchaseDetail(v.order_id)
+                          setTimeout(() => {
+                            navigation('/member_page/shoppinglistdetail')
+                          }, 300)
+                        }}
+                      >
                         VEIW MORE
                       </button>
                     </td>

@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
+import AuthContext from '../../Contexts/AuthContext'
+import { GET_MEMBER_DATA } from '../../component/LoginApi'
 
 function RecipientInfo({
   inputs,
@@ -8,14 +10,25 @@ function RecipientInfo({
   handleSubmit,
   validation,
 }) {
+  //會員資料
 
+  const { memberAuth } = useContext(AuthContext)
+
+  const [memberData, setMemberData] = useState({})
   // note :有空來補做 自動填入會員資料ˋ
   const getMemberData = async () => {
-    const res = await axios('')
+    const res = await axios.get(`${GET_MEMBER_DATA}${memberAuth.memberId}`)
+    console.log(res, 1111)
+
+    setMemberData(res.data)
   }
+  useEffect(() => {
+    getMemberData()
+  }, [])
 
   return (
     <>
+      {console.log(memberData, 22)}
       <div className="form-border recipient-info">
         <h3 className="form-title">收件人資料</h3>
 
@@ -110,7 +123,18 @@ function RecipientInfo({
           href="#/"
           className="btn-credit-info"
           onClick={() => {
-            setInputs({})
+            setInputs({
+              firstName: memberData.member_name.substring(
+                memberData.member_name.length - 2
+              ),
+              lastName: memberData.member_name.substring(1, 0),
+              mobile: memberData.mobile,
+              email: memberData.email,
+              city: memberData.address_city,
+              disc: memberData.address_dist,
+              address: memberData.address_rd,
+              postalCode: memberData.postalCode,
+            })
           }}
         >
           自動填入會員資料
