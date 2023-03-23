@@ -45,7 +45,7 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
                     return
                 }
                  setShowMemData(his.filter((v,i)=>{
-                 return v.article_category_id==x
+                 return v.article_category_id==x && v.article_Onpublic==1
              }))
              }
           
