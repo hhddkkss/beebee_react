@@ -9,6 +9,7 @@ import Home4ads from './Home_4ads'
 import Navbar from '../component/Navbar/index'
 import HomeNews from './HomeNews'
 import HomeMap from './HomeMap'
+import NavbarControlPanel from '../../src/component/NavbarControlPanel/NavbarControlPanel'
 
 function HomePage() {
   const navigation = useNavigate()
@@ -146,44 +147,7 @@ function HomePage() {
           </div>
         </div>
       </div>
-
-      <nav className="mobile_nav navbar-fixed-bottom d-sm-none">
-        <div className="row g-0">
-          <div className="col-3">
-            <div className="mobile_navcol">
-              <p className="m-0">
-                <i className="fa-solid fa-house-chimney"></i>
-              </p>
-              <p className="mobile_word">首頁</p>
-            </div>
-          </div>
-          <div className="col-3">
-            <div className="mobile_navcol">
-              <p className="m-0">
-                <i className="fa-solid fa-heart"></i>
-              </p>
-              <p className="mobile_word">收藏清單</p>
-            </div>
-          </div>
-          <div className="col-3">
-            <div className="mobile_navcol">
-              <p className="m-0">
-                <i className="fa-solid fa-cart-shopping"></i>
-              </p>
-              <p className="mobile_word">購物車</p>
-            </div>
-          </div>
-
-          <div className="col-3">
-            <div className="mobile_navcol">
-              <p className="m-0">
-                <i className="fa-solid fa-user"></i>
-              </p>
-              <p className="mobile_word">會員</p>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <NavbarControlPanel />
     </>
   )
 }

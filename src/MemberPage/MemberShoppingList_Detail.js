@@ -401,7 +401,7 @@ function MemberShoppingList_Detail() {
               </div>
             </div>
           </div>
-
+{/* 
           <div className="shop_detail_area member_mobile_show dark">
             <button
               // onclick="showClick(event)"
@@ -427,8 +427,8 @@ function MemberShoppingList_Detail() {
                 </div>
               </div>
             </div>
-          </div>
-
+          </div> */}
+{/* 
           <div className="shop_detail_area member_mobile_show gray">
             <button
               // onclick="showClick(event)"
@@ -455,7 +455,7 @@ function MemberShoppingList_Detail() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

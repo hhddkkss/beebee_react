@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState, useContext, useRef } from 'react'
 import Navbar from '../../src/component/Navbar/index'
 import '../styles/memberChat.css'
 import '../styles/memberLevel.css'
@@ -15,6 +15,7 @@ import AuthContext from '../Contexts/AuthContext'
 import MemberPage_ChangeAvatar from './MemberPageComponent/MemberPage_ChangeAvatar'
 
 function MemberPage() {
+  const uploadInput = useRef(null)
   const { memberAuth } = useContext(AuthContext)
   const { setNavbarType } = useContext(AuthContext)
 
@@ -45,6 +46,28 @@ function MemberPage() {
   //換大頭貼照的開關
   const [avatarOpen, setAvaterOpen] = useState(false)
 
+  //大頭貼
+  const handleUpload = async (e) => {
+    e.preventDefault()
+    const formData = new FormData()
+    formData.append('avatar', e.target.files[0])
+
+    if (memberAuth.token && memberAuth.authorized) {
+      let response = await fetch(
+        `http://localhost:3003/member_page/member_photo/${memberAuth.memberId}`,
+        { method: 'POST', body: formData }
+      )
+      console.log('res:', response)
+      if (response.status == 200) {
+        window.location.reload()
+      }
+      // response = response.json()
+      // console.log(response)
+    }
+  }
+
+  
+
   function setLoginFormValue(e) {
     setLoginForm({ ...loginForm, [e.target.name]: e.target.value })
   }
@@ -56,7 +79,7 @@ function MemberPage() {
     const pwd = await axios
       .get(`http://localhost:3003/member_page/edit/${memberAuth.memberId}`)
       .then((response) => {
-        // console.log(response.data, 66666)
+        console.log(response.data, 66666)
         setPassWordData(response.data)
       })
   }
@@ -143,6 +166,7 @@ function MemberPage() {
 
   return (
     <>
+    {console.log(passWordData,8888)}
       <Navbar />
 
       {!!changeMember ? (
@@ -155,16 +179,30 @@ function MemberPage() {
           <div className="member_container">
             <div className="now_memberPage">會員詳細資料</div>
             <div className="avatar_box member_mobile_show">
+            
+            <button className="memberAvatar" onClick={(e) => {
+                e.preventDefault()
+                uploadInput.current.click()
+              }}>
               <img
+                src={changeMember.member_pic}
+                alt="memberAvatar"
+                className="memberAvatar"
+              ></img></button>
+              <input
+              type="file"
+              ref={uploadInput}
+              className="d-none"
+              onChange={(e) => {
+                //上傳照片
+                handleUpload(e)
+              }}></input>
+              
+              {/* <img
                 src="https://teameowdev.files.wordpress.com/2016/04/avatar24-01.png"
                 alt="memberAvatar"
                 className="memberAvatar"
-              ></img>
-              <img
-                src="https://teameowdev.files.wordpress.com/2016/04/avatar24-01.png"
-                alt="memberAvatar"
-                className="memberAvatar"
-              ></img>
+              ></img> */}
             </div>
 
             <form
