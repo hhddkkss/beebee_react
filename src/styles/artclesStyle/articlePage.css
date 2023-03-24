@@ -421,7 +421,7 @@ body{
     .article_list_button{
         width: 125px;
         height: 40px;
-        margin-left: -35px;
+        margin-left: -20px;
     }
 
     .category_title{
@@ -456,5 +456,7 @@ body{
 .news_category_card{
     width: 100%;
 }
-
+.post_btn{
+    bottom: 10%;
+}
 }

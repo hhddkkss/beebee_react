@@ -6,6 +6,11 @@ import Dayjs from 'dayjs'
 import ArticleSideBar from './ArticleSideBar'
 import HashTagColor from './HashTagColor'
 import AuthContext from '../Contexts/AuthContext'
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
 
 function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType}) {
     const navigation = useNavigate()
@@ -21,6 +26,24 @@ function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType
 
         setShowPosts(newArt)
     }
+
+    // 文章排序
+    const[artiOrder,setArtiOrder]=useState(1)
+    const articleOrder=(x)=>{
+        let newArt
+        if(x==1){
+             newArt = showPosts.sort((a,b)=>{
+                return a.article_id-b.article_id
+            })
+        }
+        if(x==2){
+             newArt = showPosts.sort((a,b)=>{
+                return b.article_id-a.article_id
+            })
+        }
+        setShowPosts(newArt)
+    }
+
     useEffect(()=>{
         if(!!type){
             setType(1)
@@ -103,12 +126,22 @@ function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType
                         <div className="article_control_btn">
                             <div className="">
                         
-                                <select name="article_order" id="article_order" defaultValue={''}> 
-                                <option value="" disabled >文章排序</option>
-                                    <option value="oldToNew">由舊至新</option>
-                                    <option value="newToOld">由新至舊</option>
-                                </select>
-                            </div>
+                                 <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                                    <InputLabel id="demo-simple-select-standard-label">文章排序</InputLabel>
+                                    <Select
+                                    labelId="demo-simple-select-standard-label"
+                                    id="demo-simple-select-standard"
+                                    value={artiOrder}
+                                    onChange={(e)=>{
+                                        setArtiOrder(e.target.value)
+                                        articleOrder(e.target.value)}}
+                                    label="Age"
+                                    >
+                                    <MenuItem value={1}>由舊至新</MenuItem>
+                                    <MenuItem value={2}>由新至舊</MenuItem>
+                                    </Select>
+                                </FormControl>
+                             </div>
                         
                         </div>
 

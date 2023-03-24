@@ -39,9 +39,9 @@ function CompareListButton() {
         <p className="start-compare">開始比較</p>
       </div>
 
-      <div className="btn-to-top">
+      {/* <div className="btn-to-top">
         <i className="fa-solid fa-chevron-up"></i>
-      </div>
+      </div> */}
     </>
   )
 }
