@@ -153,6 +153,7 @@ function ProductCompare(props) {
       // console.log('A01')
       setCompareListClass('compare_list_box d-none')
       setCompareIngClass('compareIng_box d-none')
+      setCompareIngList([])
     }
     // }
     // console.log('A02')
