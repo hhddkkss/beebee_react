@@ -6,6 +6,10 @@ import AuthContext from '../Contexts/AuthContext'
 import ArticleSideBar from './ArticleSideBar'
 import axios from 'axios'
 import { ARTICLE_MEMBER_POST,HOST } from '../component/LoginApi'
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
     const navigation = useNavigate()
@@ -60,6 +64,24 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
        if(x == memNowCate) {return 'btn category_radio active article_mb_hidden'}
        else{return 'btn category_radio article_mb_hidden'}
     }
+
+     // 文章排序
+     const[artiOrder,setArtiOrder]=useState(1)
+     const articleOrder=(x)=>{
+         let newArt
+         if(x==1){
+              newArt = showMemData.sort((a,b)=>{
+                 return a.article_id-b.article_id
+             })
+         }
+         if(x==2){
+              newArt = showMemData.sort((a,b)=>{
+                 return b.article_id-a.article_id
+             })
+         }
+         setShowMemData(newArt)
+     }
+ 
   
     useEffect(()=>{
         getHistList()
@@ -115,6 +137,21 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
                     <div className="article_control_btn">
                         
                         <div className="d-flex gap-3 align-items-center">
+                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                                    <InputLabel id="demo-simple-select-standard-label">文章排序</InputLabel>
+                                    <Select
+                                    labelId="demo-simple-select-standard-label"
+                                    id="demo-simple-select-standard"
+                                    value={artiOrder}
+                                    onChange={(e)=>{
+                                        setArtiOrder(e.target.value)
+                                        articleOrder(e.target.value)}}
+                                    label="Age"
+                                    >
+                                    <MenuItem value={1}>由舊至新</MenuItem>
+                                    <MenuItem value={2}>由新至舊</MenuItem>
+                                    </Select>
+                                </FormControl>
                             <label htmlFor="article_order">文章分類 　<i className="fa-solid fa-caret-right"></i></label>
                             <button onClick={()=>{ 
                                 setMemNowCate(4)
