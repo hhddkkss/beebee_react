@@ -4,10 +4,12 @@ import '../../styles/memberPagefornav.css'
 import axios from 'axios'
 import AuthContext from '../../Contexts/AuthContext'
 import MemberPage_ChangeAvatar from './MemberPage_ChangeAvatar'
+import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
 
 function MeberPage_Sidebar(props) {
   const { setAvaterOpen, avatarOpen } = props
   const { memberAuth } = useContext(AuthContext)
+  const {setDisplayFavorites} = useContext(ProductFunctionContext)
   const [checkShow, setCheckShow] = useState(false)
 
   const [getMamber, setGetMember] = useState([])
@@ -179,6 +181,12 @@ function MeberPage_Sidebar(props) {
             收藏好物
           </button> */}
           <NavLink
+          onClick={()=>{
+            setTimeout(()=>{
+               setDisplayFavorites(true)
+            },1)
+           
+          }}
             to="/products"
             className={({ isActive }) =>
               isActive ? 'sidebar_btn  sidebar_btn_active' : 'sidebar_btn'
