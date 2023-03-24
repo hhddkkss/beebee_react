@@ -456,5 +456,7 @@ body{
 .news_category_card{
     width: 100%;
 }
-
+.post_btn{
+    bottom: 10%;
+}
 }
