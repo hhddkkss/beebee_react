@@ -402,7 +402,7 @@ function MemberShoppingList_Detail() {
             </div>
           </div>
 
-          <div className="shop_detail_area member_mobile_show dark">
+          {/* <div className="shop_detail_area member_mobile_show dark">
             <button
               // onclick="showClick(event)"
               className="memberPage_button shop_detail_check_btn member_mobile_show "
@@ -455,7 +455,7 @@ function MemberShoppingList_Detail() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
