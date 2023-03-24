@@ -93,7 +93,7 @@ function HomePage() {
           className="home_show_check"
           type="submit"
           onClick={() => {
-            navigation('/articles/beebeeArticles')
+            navigation('/product_detail/213/2')
           }}
         >
           check →
