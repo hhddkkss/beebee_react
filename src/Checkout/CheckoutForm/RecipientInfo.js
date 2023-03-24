@@ -123,18 +123,20 @@ function RecipientInfo({
           href="#/"
           className="btn-credit-info"
           onClick={() => {
-            setInputs({
-              firstName: memberData.member_name.substring(
-                memberData.member_name.length - 2
-              ),
-              lastName: memberData.member_name.substring(1, 0),
-              mobile: memberData.mobile,
-              email: memberData.email,
-              city: memberData.address_city,
-              disc: memberData.address_dist,
-              address: memberData.address_rd,
-              postalCode: memberData.postalCode,
-            })
+            if (memberData) {
+              setInputs({
+                firstName: memberData.member_name.substring(
+                  memberData.member_name.length - 2
+                ),
+                lastName: memberData.member_name.substring(1, 0),
+                mobile: memberData.mobile,
+                email: memberData.email,
+                city: memberData.address_city,
+                disc: memberData.address_dist,
+                address: memberData.address_rd,
+                postalCode: memberData.postalCode,
+              })
+            }
           }}
         >
           自動填入會員資料
