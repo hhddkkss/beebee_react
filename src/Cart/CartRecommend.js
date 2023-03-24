@@ -82,7 +82,7 @@ function CartRecommend() {
                     <div className="my-card">
                       <div className="card-top">
                         <div className="img-wrap">
-                          <Link to={'/product_detail/' + v.product_id}>
+                          <Link to={'/product_detail/' + v.product_id+'/'+v.product_category_id}>
                             <img
                               src={'/images/' + v.product_pic.split(',')[0]}
                               alt=""
