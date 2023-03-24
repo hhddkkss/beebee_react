@@ -15,7 +15,7 @@ function MemberShoppingList_Detail() {
 
   const fee = 120
 
-  const [orderStatus, setOrderStatus] = useState(purChaseDetail[0].order_state)
+  const [orderStatus, setOrderStatus] = useState(purChaseDetail[0].order_logistics_id)
 
   //算出總價
   const totalPrice = purChaseDetail
