@@ -26,12 +26,15 @@ function HomePage() {
           <br />
           自己選。
         </div>
-        <button 
-        className="home_search"
-        type="submit"
-        onClick={() => {
+        <button
+          className="home_search"
+          type="submit"
+          onClick={() => {
             navigation('/products')
-          }}>開始比價</button>
+          }}
+        >
+          開始比價
+        </button>
       </div>
       <div className="row home_beebeechoose g-0">
         <div className="col-8 p-0">
@@ -90,7 +93,7 @@ function HomePage() {
           className="home_show_check"
           type="submit"
           onClick={() => {
-            navigation('/products')
+            navigation('/articles/beebeeArticles')
           }}
         >
           check →

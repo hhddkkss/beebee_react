@@ -5,11 +5,14 @@ import axios from 'axios'
 import AuthContext from '../../Contexts/AuthContext'
 import MemberPage_ChangeAvatar from './MemberPage_ChangeAvatar'
 
-function MeberPage_Sidebar() {
+function MeberPage_Sidebar(props) {
+  const { setAvaterOpen, avatarOpen } = props
   const { memberAuth } = useContext(AuthContext)
+  const [checkShow, setCheckShow] = useState(false)
 
   const [getMamber, setGetMember] = useState([])
-  const [pic, setPic] = useState(false)
+  const [getMamberPic, setGetMemberPic] = useState([])
+  const [updatePic, setUpdatePic] = useState([])
 
   const getMemberData = async () => {
     const memberdata = await axios
@@ -22,9 +25,17 @@ function MeberPage_Sidebar() {
       })
   }
 
+  //function MemberPage_ChangeAvatar (props){
+  // const { setDataFromChild } = props
+  //}
+
   useEffect(() => {
     getMemberData()
   }, [])
+
+  // useEffect(() => {
+  //   setDataFromChild(checkShow)
+  // }, [checkShow])
 
   return (
     <>
@@ -33,7 +44,7 @@ function MeberPage_Sidebar() {
         <div className="member_card">
           <div className="mamber_avatar_circle">
             <img
-              src="https://teameowdev.files.wordpress.com/2016/04/avatar24-01.png"
+              src={getMamber.member_pic}
               alt="memberAvatar"
               className="memberAvatar"
             ></img>
@@ -43,7 +54,9 @@ function MeberPage_Sidebar() {
                 className="btn"
                 onClick={(e) => {
                   e.preventDefault()
-                  setPic(true)
+                  setAvaterOpen(!avatarOpen)
+                  //   setCheckShow(true)
+                  //   setDataFromChild(123)
                 }}
               >
                 <svg
@@ -76,12 +89,12 @@ function MeberPage_Sidebar() {
                   </div>
                 </svg>
               </button>
-              {pic && (
+              {/* {pic && (
                 <MemberPage_ChangeAvatar
                   show={pic}
                   onHide={() => setPic(false)}
                 />
-              )}
+              )} */}
             </div>
           </div>
           {/* {console.log(getMamber)} */}

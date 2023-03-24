@@ -21,8 +21,7 @@ function Home4ads() {
       setDate(r.data)
     })()
   }, [])
-  useEffect(() => {
-  }, [data])
+  useEffect(() => {}, [data])
 
   return (
     <>
@@ -39,7 +38,7 @@ function Home4ads() {
                       className="home_ad_1_check"
                       type="submit"
                       onClick={() => {
-                        navigation('/products')
+                        navigation('/product_detail/1/1')
                       }}
                     >
                       check →
@@ -71,7 +70,7 @@ function Home4ads() {
                       className="home_ad_2-check"
                       type="submit"
                       onClick={() => {
-                        navigation('/products')
+                        navigation('/product_detail/2/1')
                       }}
                     >
                       check →
@@ -90,7 +89,7 @@ function Home4ads() {
                       className="home_ad_3-check"
                       type="submit"
                       onClick={() => {
-                        navigation('/products')
+                        navigation('/product_detail/3/1')
                       }}
                     >
                       check →
@@ -118,7 +117,7 @@ function Home4ads() {
                       className="home_ad_4_check"
                       type="submit"
                       onClick={() => {
-                        navigation('/products')
+                        navigation('product_detail/4/1')
                       }}
                     >
                       check →
@@ -142,7 +141,7 @@ function Home4ads() {
                       className="home_ad_5_check"
                       type="submit"
                       onClick={() => {
-                        navigation('/products')
+                        navigation('/product_detail/5/1')
                       }}
                     >
                       check →
@@ -173,7 +172,7 @@ function Home4ads() {
                       className="home_ad_6-check"
                       type="submit"
                       onClick={() => {
-                        navigation('/products')
+                        navigation('/product_detail/6/1')
                       }}
                     >
                       check →

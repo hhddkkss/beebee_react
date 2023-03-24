@@ -19,8 +19,6 @@ import MemberShopping_List_Detail from './MemberPage/MemberShoppingList_Detail'
 import MemberLevel from './MemberPage/MemberLevel'
 import MemberCustomerService from './MemberPage/MemberCustomerService'
 
-import MeberPage_Sidebar from './MemberPage/MemberPageComponent/MeberPage_Sidebar'
-import MemberPage_ChangeAvatar from './MemberPage/MemberPageComponent/MemberPage_ChangeAvatar'
 
 function App() {
   return (
@@ -30,7 +28,7 @@ function App() {
           <ProductFunctionContextProvider>
             <CompareContextProvider>
               <Routes>
-                <Route path="/" element={<MeberPage_Sidebar />} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/products" element={<Products />} />
                 <Route
                   path="/product_detail/:product_id/:product_category"

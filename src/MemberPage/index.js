@@ -12,14 +12,16 @@ import axios from 'axios'
 import ChangePasswords from './MemberPageComponent/MemberPage_ChangePassword'
 import dayjs from 'dayjs'
 import AuthContext from '../Contexts/AuthContext'
+import MemberPage_ChangeAvatar from './MemberPageComponent/MemberPage_ChangeAvatar'
 
 function MemberPage() {
   const { memberAuth } = useContext(AuthContext)
+  const { setNavbarType } = useContext(AuthContext)
 
   const [passWordData, setPassWordData] = useState([])
   const [changeMember, setChangeMember] = useState({})
   const [changePassword, setChangePassword] = useState(false)
-  
+
   const [cityList, setCityList] = useState([])
   const [allDistList, setAllDistList] = useState([])
   const [distList, setDistList] = useState([])
@@ -40,6 +42,8 @@ function MemberPage() {
     email: '',
     password: '',
   })
+  //換大頭貼照的開關
+  const [avatarOpen, setAvaterOpen] = useState(false)
 
   function setLoginFormValue(e) {
     setLoginForm({ ...loginForm, [e.target.name]: e.target.value })
@@ -47,7 +51,6 @@ function MemberPage() {
   function setSingupFormValue(e) {
     setSignupForm({ ...signupForm, [e.target.name]: e.target.value })
   }
-
 
   const getMemberData = async () => {
     const pwd = await axios
@@ -78,8 +81,6 @@ function MemberPage() {
         setPassWordData(response.data)
       })
   }
-
-
 
   const getAddressData = async () => {
     const addresscity = await axios.get(`http://localhost:3003/address_list`)
@@ -120,14 +121,37 @@ function MemberPage() {
 
   useEffect(() => {
     getAddressData()
+    setNavbarType('light')
   }, [])
+
+  useEffect(() => {
+    if (changeMember.address_city) {
+      const foundIndex = cityList.findIndex(
+        (v) => v === changeMember.address_city
+      )
+
+      if (foundIndex > -1) {
+        changeDist(foundIndex + 1)
+
+        setSignupForm({
+          ...signupForm,
+          address_dist: changeMember.address_dist,
+        })
+      }
+    }
+  }, [allDistList, changeMember.address_city])
 
   return (
     <>
       <Navbar />
+
       {!!changeMember ? (
         <div className="member_body">
-          <MeberPage_Sidebar />
+          <MemberPage_ChangeAvatar avatarOpen={avatarOpen} />
+          <MeberPage_Sidebar
+            setAvaterOpen={setAvaterOpen}
+            avatarOpen={avatarOpen}
+          />
           <div className="member_container">
             <div className="now_memberPage">會員詳細資料</div>
             <div className="avatar_box member_mobile_show">
@@ -194,36 +218,54 @@ function MemberPage() {
               <div className="city_dist">
                 <div className="member_box">
                   <label htmlFor="member_city">居住城市</label>
-                  <select name="address_city"
-                  defaultValue={changeMember.address_city ? changeMember.address_city : signupForm.address_city}
-                  onChange={(e) => {
-                    changeDist(e.target.selectedIndex)
-                    setSingupFormValue(e)
-                  }}
+                  <select
+                    name="address_city"
+                    defaultValue={
+                      changeMember.address_city
+                        ? changeMember.address_city
+                        : signupForm.address_city
+                    }
+                    onChange={(e) => {
+                      changeDist(e.target.selectedIndex)
+                      setSingupFormValue(e)
+                    }}
                   >
-                    <option value="none" hidden disabled>臺北市</option>{cityList.map((v, i) => {
-                    return (
-                      <option key={i} value={v}>
-                        {v}
-                      </option>
-                    )
-                  })}
+                    <option value="none" hidden disabled>
+                      臺北市
+                    </option>
+                    {cityList.map((v, i) => {
+                      return (
+                        <option key={i} value={v}>
+                          {v}
+                        </option>
+                      )
+                    })}
                   </select>
                 </div>
                 <div className="member_box">
                   <label htmlFor="member_dist">鄉鎮區</label>
-                  <select name="address_dist"
-                  defaultValue={changeMember.address_dist ? changeMember.address_dist : signupForm.address_dist}
-                  onChange={(e) => {
-                    setSingupFormValue(e)
-                  }}>
-                    <option value="none" hidden disabled>大安區</option> {distList.map((v, i) => {
-                    return (
-                      <option key={i} value={v}>
-                        {v}
-                      </option>
-                    )
-                  })}
+                  <select
+                    name="address_dist"
+                    // defaultValue={
+                    //   changeMember.address_dist
+                    //     ? changeMember.address_dist
+                    //     : signupForm.address_dist
+                    // }
+                    value={signupForm.address_dist}
+                    onChange={(e) => {
+                      setSingupFormValue(e)
+                    }}
+                  >
+                    <option value="none" hidden disabled>
+                      大安區
+                    </option>{' '}
+                    {distList.map((v, i) => {
+                      return (
+                        <option key={i} value={v}>
+                          {v}
+                        </option>
+                      )
+                    })}
                   </select>
                 </div>
               </div>
@@ -290,11 +332,13 @@ function MemberPage() {
                 )}
               </div>
 
-              
               <div className="form_btn_group">
                 <button
                   className="btn memberPage_button basic_infomation_confirm"
-                  onClick={() => upDateMember()}
+                  onClick={() => {
+                    upDateMember()
+                    alert('修改成功')
+                  }}
                 >
                   <svg
                     width="18"

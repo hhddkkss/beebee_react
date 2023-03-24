@@ -2,7 +2,10 @@ import React from 'react'
 import Navbar from '../component/Navbar/index'
 import MeberPage_Sidebar from './MemberPageComponent/MeberPage_Sidebar'
 
+
 function MemberShoppingList_Detail() {
+
+
   return (
     <>
       <Navbar />
@@ -244,9 +247,9 @@ function MemberShoppingList_Detail() {
           </div>
 
           <div class="form_btn_group member_mobile_hidden">
-            <button class="btn basic_infomation_confirm memberPage_button">
+            {/* <button class="btn basic_infomation_confirm memberPage_button">
               聯繫課服
-            </button>
+            </button> */}
             <button class="btn basic_infomation_cancle memberPage_button">
               返回
             </button>

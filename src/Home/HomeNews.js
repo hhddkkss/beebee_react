@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router'
 
 
 function HomeNews() {
+  const navigation = useNavigate()
   const [data, setDate] = useState([])
   useEffect(() => {
     ;(async () => {
@@ -56,7 +57,9 @@ function HomeNews() {
         <button className="home_news_button2"></button>
       </div> */}
       <div className="home_news_viewmore">
-        <button className="home_news_viewmore_" type="submit">
+        <button className="home_news_viewmore_" type="submit" onClick={() => {
+            navigation('/product_detail/213/2')
+          }}>
           VIEW MORE
         </button>
       </div>

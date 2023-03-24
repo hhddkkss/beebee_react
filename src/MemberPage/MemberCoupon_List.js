@@ -3,26 +3,42 @@ import Navbar from '../component/Navbar/index'
 import MeberPage_Sidebar from './MemberPageComponent/MeberPage_Sidebar'
 import axios from 'axios'
 import AuthContext from '../Contexts/AuthContext'
+import dayjs from 'dayjs'
 
 function MemberCoupon_List() {
+  const { setNavbarType } = useContext(AuthContext)
   const { memberAuth } = useContext(AuthContext)
   const [coupon, setCoupon] = useState([])
+  // const [memberCoupon, setMemberCoupon] = useState([])
 
   const getCouponData = async () => {
     const couponData = await axios
       .get(`http://localhost:3003/member_page/getcoupon/${memberAuth.memberId}`)
       .then((response) => {
-        console.log(response.data[0])
-        setCoupon(response.data[0])
+        console.log(response.data)
+        setCoupon(response.data)
       })
   }
 
+  // const getCouponMemberData = async () => {
+  //   const couponMemberData = await axios
+  //     .get(`http://localhost:3003/member_page/getmembercoupon/${memberAuth.memberId}`)
+  //     .then((response) => {
+  //       console.log(response.data[0],1111)
+  //       setMemberCoupon(response.data[0])
+  //     })
+  // }
+  // const memberCouponArray = [...memberCoupon,];
+
   useEffect(() => {
     getCouponData()
+    setNavbarType('light')
   }, [])
+  // const str = '1,4,5' // 1 4 5
 
   return (
     <>
+      {/* {console.log(memberCouponArray, 77777)} */}
       <Navbar />
       <div className="member_body">
         <MeberPage_Sidebar />
@@ -41,30 +57,31 @@ function MemberCoupon_List() {
               </tr>
             </thead>
 
-            {/* {coupon.map((v, i) => {
-         return ( */}
-            <Fragment key={coupon.id}>
-              <tbody>
-                <tr>
-                  <td>{coupon.code}</td>
-                  <td>{coupon.end_time}</td>
-                  <td>{coupon.coupon_name}</td>
-                  <td>{coupon.discount}</td>
+            {coupon.map((v, i) => {
+              console.log(v)
+              return (
+                <Fragment key={v.id}>
+                  <tbody>
+                    <tr>
+                      <td>{v.code}</td>
+                      <td>{dayjs(v.end_time).format('YYYY-MM-DD')}</td>
+                      <td>{v.coupon_name}</td>
+                      <td>{v.discount}</td>
 
-                  <td>
-                    <button
-                      className="memberPage_button view_more_btn"
-                      onClick={() => navigator.clipboard.writeText(coupon.code)}
-                    >
-                      複製優惠碼
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </Fragment>
-            {/* )
-          })}
-         */}
+                      <td>
+                        <button
+                          className="memberPage_button view_more_btn"
+                          onClick={() => navigator.clipboard.writeText(v.code)}
+                        >
+                          複製優惠碼
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </Fragment>
+              )
+            })}
+
             {/* <tr>
                 <td>beefriend</td>
                 <td>2023.12.03</td>
@@ -80,34 +97,39 @@ function MemberCoupon_List() {
           {/* 
             <!-- 手機板 --> */}
           <table className="member_mobile_show mobile_member_List coupon">
-            <tbody>
-              <tr>
-                <td className="coupon_code">{coupon.code}</td>
-                <td>{coupon.discount}</td>
-              </tr>
-              <tr>
-                <td>優惠卷名稱</td>
-                <td>{coupon.coupon_name}</td>
-              </tr>
-              <tr>
-                <td>有效日期:</td>
-                <td>{coupon.end_time}</td>
-              </tr>
+            {coupon.map((v, i) => {
+              return (
+                <Fragment key={v.id}>
+                  <tbody>
+                    <tr>
+                      <td className="coupon_code">{v.code}</td>
+                      <td>{v.discount}</td>
+                    </tr>
+                    <tr>
+                      <td>優惠卷名稱</td>
+                      <td>{v.coupon_name}</td>
+                    </tr>
+                    <tr>
+                      <td>有效日期:</td>
+                      <td>{dayjs(v.end_time).format('YYYY-MM-DD')}</td>
+                    </tr>
 
-              <tr>
-                <td></td>
-                <td>
-                  <button
-                    className="memberPage_button view_more_btn"
-                    onClick={() => navigator.clipboard.writeText(coupon.code)}
-                    // }}
-                  >
-                    複製優惠碼
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-
+                    <tr>
+                      <td></td>
+                      <td>
+                        <button
+                          className="memberPage_button view_more_btn"
+                          onClick={() => navigator.clipboard.writeText(v.code)}
+                          // }}
+                        >
+                          複製優惠碼
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </Fragment>
+              )
+            })}
             {/* <tbody>
               <tr>
                 <td className="coupon_code">beefriend</td>
