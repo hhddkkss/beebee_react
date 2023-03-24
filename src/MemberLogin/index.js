@@ -21,6 +21,7 @@ function MemberLogin() {
     name: '',
     email: '',
     password: '',
+    password2: '',
     mobile: '',
     gender: '',
     birthday: '1990-01-01',
@@ -33,10 +34,13 @@ function MemberLogin() {
   const{state} = useLocation()
 
   const paramsChange=()=>{
-    if(state && Object.keys(state).length>0){
+    if(state && state.email){
       setActive(state.isActive)
       setSignupForm({...signupForm,name:state.name,email:state.email})
       setErrorMessage({email_s:state.text})
+    }
+    if(state && state.text2){
+      setErrorMessage({email_l:state.text2})
     }
       
   }
@@ -98,7 +102,7 @@ function MemberLogin() {
     password:'',
     password2:'',
     phone:'',
-    isOkL:false,
+    isOkL:true,
     isOkS:false
   
   })
@@ -439,6 +443,7 @@ function MemberLogin() {
               show={show} 
               setShow={setShow}
               googleLoginUrl={googleLoginUrl}
+              setLoginForm={setLoginForm}
             />
 
             {/* 申請 */}
@@ -453,6 +458,8 @@ function MemberLogin() {
               show={show} 
               setShow={setShow}
               googleLoginUrl={googleLoginUrl}
+              setSignupForm={setSignupForm}
+              setErrorMessage={setErrorMessage}
             />
           </div>
         </div>

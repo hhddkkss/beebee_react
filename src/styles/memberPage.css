@@ -505,6 +505,11 @@ body {
   object-fit: cover;
 }
 
+.rating_star_info{
+  color: red;
+  font-size: 14px;
+}
+
 /* 手機版 */
 
 @media screen and (max-width: 375px) {

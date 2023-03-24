@@ -149,7 +149,7 @@ function PruductDetailComments({p_detailData}) {
                   <div className="col-2 product_memeber">
                     <img
                       className="comment_card_avatar"
-                      src={'/images/'+v.member_pic}
+                      src={v.member_pic}
                       alt="member"
                     />
                   </div>

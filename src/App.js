@@ -51,7 +51,7 @@ function App() {
                   element={<MemberCoupon_List />}
                 />
                 <Route
-                  path="/member_page/membercomment_list"
+                  path="/member_page/membercomment_list/:p_comment_id"
                   element={<MemberComment_List />}
                 />
                 <Route

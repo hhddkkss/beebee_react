@@ -208,9 +208,15 @@ useEffect(()=>{
             <div className="article_message_area">
 
                 <div className="article_button_group">
-                    <div className="article_buton"  onClick={async()=>{
+                    <div className="article_buton"  onClick={async()=>{ 
+                        if(memberAuth.authorized && memberAuth.token){
                                                     await addDelLikeArt(singlePost[0].article_id)
                                                     await setLikeDone(!likeDone)
+                                                   
+                                                   }else{
+                                                        navigation('/member_login',{state:{text2:'您尚未登入'}})
+                                                    }
+                                                   
                                                 }}>  {likeCount}
                                                 {console.log('RE!')}
                                 <button className=" article_like_button" 
@@ -275,12 +281,12 @@ useEffect(()=>{
                             }
                                 onKeyDown={(e)=>{
                                     if (e.key === 'Enter') {
-                                    if (e.target.value) {
+                                    if (e.target.value && memberAuth.authorized) {
                                         postComment()
                                         setPostMessage('')
                                         } else {
                                             console.log('請先登入')
-                                            return
+                                            navigation('/member_login',{state:{text2:'您尚未登入'}})
                                         } }
                                 }}
                             />
@@ -291,6 +297,7 @@ useEffect(()=>{
                                     setPostMessage('')
                                 }else{
                                     console.log('請先登入')
+                                    navigation('/member_login',{state:{text2:'您尚未登入'}})
                                 }
                                 
                             }}>

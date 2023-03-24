@@ -1,12 +1,17 @@
+import { async } from 'q'
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../component/Navbar/index'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
 import MeberPage_Sidebar from './MemberPageComponent/MeberPage_Sidebar'
+import { HANDLE_CHECK_RECEIVE_NEW_COMMENT } from '../component/LoginApi'
+import AuthContext from '../Contexts/AuthContext'
+import axios from 'axios'
 
 function MemberShoppingList_Detail() {
   const { purChaseDetail } = useContext(ProductFunctionContext)
   const navigation = useNavigate()
+  const { memberAuth } = useContext(AuthContext)
 
   const fee = 120
 
@@ -295,141 +300,158 @@ function MemberShoppingList_Detail() {
             </div>
           </div>
 
-          <div class="form_btn_group member_mobile_hidden">
-            {/* <button class="btn basic_infomation_confirm memberPage_button">
-              聯繫課服
-            </button> */}
-            <button class="btn basic_infomation_cancle memberPage_button"></button>
-            <div className="form_btn_group member_mobile_hidden">
-              {receive == 0 && order_logistics == 4 ? (
-                <button className="btn basic_receive_done memberPage_button">
-                  完成訂單
-                </button>
-              ) : (
-                ''
-              )}
-
+          <div className="form_btn_group member_mobile_hidden">
+            {receive == 0 && order_logistics == 4 ? (
               <button
-                className="btn basic_infomation_cancle memberPage_button"
-                onClick={() => {
-                  navigation(-1)
+                className="btn basic_receive_done memberPage_button"
+                onClick={(e) => {
+                  e.preventDefault()
+                  const pid = purChaseDetail.map((v, i) => {
+                    return v.product_id
+                  })
+                  axios
+                    .post(HANDLE_CHECK_RECEIVE_NEW_COMMENT, {
+                      oid: purChaseDetail[0].order_id,
+                      pid: pid,
+                      mid: memberAuth.memberId,
+                    })
+                    .then((res) => {
+                      console.log(res)
+                      if (
+                        !!res.data.Receive.affectedRows &&
+                        !!res.data.newL.affectedRows
+                      ) {
+                        navigation(-1)
+                      }
+                    })
                 }}
               >
-                返回
+                完成訂單
               </button>
-            </div>
+            ) : (
+              ''
+            )}
 
-            {/* <!-- 手機 --> */}
+            <button
+              className="btn basic_infomation_cancle memberPage_button"
+              onClick={() => {
+                navigation(-1)
+              }}
+            >
+              返回
+            </button>
+          </div>
 
-            <table className="member_mobile_show mobile_member_List ">
-              <tbody>
-                <tr>
-                  <td>訂單編號:</td>
-                  <td> #{purChaseDetail[0].order_id}</td>
-                </tr>
-                <tr>
-                  <td>付款狀態:</td>
-                  <td>{purChaseDetail[0].order_status}</td>
-                </tr>
-                <tr>
-                  <td>處理狀態:</td>
-                  <td>{purChaseDetail[0].order_logistics_name}</td>
-                </tr>
-                {purChaseDetail.map((v, i) => {
-                  return (
-                    <tr key={i}>
-                      <td>
-                        <img
-                          src={`/images/${v.product_pic.split(',')[0]}`}
-                          alt=""
-                        ></img>
-                      </td>
-                      <td>{v.product_name}</td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+          {/* <!-- 手機 --> */}
 
-            <div className="member_mobile_show formBottom ">
-              <div className="formBottom_row">
-                <div className="formBottom_discription">小計</div>
-                <div className="formBottom_value">
-                  {parseInt(totalPrice).toLocaleString()} TW
-                </div>
-              </div>
-              <div className="formBottom_row">
-                <div className="formBottom_discription">運費</div>
-                <div className="formBottom_value">{fee} TW</div>
-              </div>
-              <div className="formBottom_row">
-                <div className="formBottom_discription">折扣</div>
-                <div className="coupon_code">
-                  {purChaseDetail[0].coupon_name} TW
-                </div>
-                <div className="formBottom_value">
-                  - {parseInt(purChaseDetail[0].discount).toLocaleString()} TW
-                </div>
-              </div>
-              <div className="formBottom_row">
-                <div className="formBottom_discription">訂單總額</div>
-                <div className="formBottom_value">
-                  {parseInt(purChaseDetail[0].order_money).toLocaleString()} TW
-                </div>
+          <table className="member_mobile_show mobile_member_List ">
+            <tbody>
+              <tr>
+                <td>訂單編號:</td>
+                <td> #{purChaseDetail[0].order_id}</td>
+              </tr>
+              <tr>
+                <td>付款狀態:</td>
+                <td>{purChaseDetail[0].order_status}</td>
+              </tr>
+              <tr>
+                <td>處理狀態:</td>
+                <td>{purChaseDetail[0].order_logistics_name}</td>
+              </tr>
+              {purChaseDetail.map((v, i) => {
+                return (
+                  <tr key={i}>
+                    <td>
+                      <img
+                        src={`/images/${v.product_pic.split(',')[0]}`}
+                        alt=""
+                      ></img>
+                    </td>
+                    <td>{v.product_name}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+
+          <div className="member_mobile_show formBottom ">
+            <div className="formBottom_row">
+              <div className="formBottom_discription">小計</div>
+              <div className="formBottom_value">
+                {parseInt(totalPrice).toLocaleString()} TW
               </div>
             </div>
+            <div className="formBottom_row">
+              <div className="formBottom_discription">運費</div>
+              <div className="formBottom_value">{fee} TW</div>
+            </div>
+            <div className="formBottom_row">
+              <div className="formBottom_discription">折扣</div>
+              <div className="coupon_code">
+                {purChaseDetail[0].coupon_name} TW
+              </div>
+              <div className="formBottom_value">
+                - {parseInt(purChaseDetail[0].discount).toLocaleString()} TW
+              </div>
+            </div>
+            <div className="formBottom_row">
+              <div className="formBottom_discription">訂單總額</div>
+              <div className="formBottom_value">
+                {parseInt(purChaseDetail[0].order_money).toLocaleString()} TW
+              </div>
+            </div>
+          </div>
 
-            <div className="shop_detail_area member_mobile_show dark">
-              <button
-                // onclick="showClick(event)"
-                className="memberPage_button shop_detail_check_btn member_mobile_show "
-              >
-                運送資訊
-              </button>
-              <div className="formBottom">
-                <div className="formBottom_row">
-                  <div className="formBottom_discription">收件人</div>
-                  <div className="formBottom_value">
-                    {purChaseDetail[0].order_recipient}
-                  </div>
+          <div className="shop_detail_area member_mobile_show dark">
+            <button
+              // onclick="showClick(event)"
+              className="memberPage_button shop_detail_check_btn member_mobile_show "
+            >
+              運送資訊
+            </button>
+            <div className="formBottom">
+              <div className="formBottom_row">
+                <div className="formBottom_discription">收件人</div>
+                <div className="formBottom_value">
+                  {purChaseDetail[0].order_recipient}
                 </div>
-                <div className="formBottom_row">
-                  <div className="formBottom_discription">地址</div>
-                  <div className="formBottom_value">
-                    {purChaseDetail[0].order_address_city}
-                    <br />
-                    {purChaseDetail[0].order_address_dist}
-                    <br />
-                    {purChaseDetail[0].order_address}
-                  </div>
+              </div>
+              <div className="formBottom_row">
+                <div className="formBottom_discription">地址</div>
+                <div className="formBottom_value">
+                  {purChaseDetail[0].order_address_city}
+                  <br />
+                  {purChaseDetail[0].order_address_dist}
+                  <br />
+                  {purChaseDetail[0].order_address}
                 </div>
               </div>
             </div>
+          </div>
 
-            <div className="shop_detail_area member_mobile_show gray">
-              <button
-                // onclick="showClick(event)"
-                className="memberPage_button shop_detail_check_btn member_mobile_show "
-              >
-                帳單地址
-              </button>
-              <div className="formBottom">
-                <div className="formBottom_row">
-                  <div className="formBottom_discription">收件人</div>
-                  <div className="formBottom_value">
-                    {' '}
-                    {purChaseDetail[0].order_recipient}
-                  </div>
+          <div className="shop_detail_area member_mobile_show gray">
+            <button
+              // onclick="showClick(event)"
+              className="memberPage_button shop_detail_check_btn member_mobile_show "
+            >
+              帳單地址
+            </button>
+            <div className="formBottom">
+              <div className="formBottom_row">
+                <div className="formBottom_discription">收件人</div>
+                <div className="formBottom_value">
+                  {' '}
+                  {purChaseDetail[0].order_recipient}
                 </div>
-                <div className="formBottom_row">
-                  <div className="formBottom_discription">地址</div>
-                  <div className="formBottom_value">
-                    {purChaseDetail[0].order_address_city}
-                    <br />
-                    {purChaseDetail[0].order_address_dist}
-                    <br />
-                    {purChaseDetail[0].order_address}
-                  </div>
+              </div>
+              <div className="formBottom_row">
+                <div className="formBottom_discription">地址</div>
+                <div className="formBottom_value">
+                  {purChaseDetail[0].order_address_city}
+                  <br />
+                  {purChaseDetail[0].order_address_dist}
+                  <br />
+                  {purChaseDetail[0].order_address}
                 </div>
               </div>
             </div>

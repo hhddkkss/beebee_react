@@ -128,10 +128,10 @@ function Navbar() {
               </button>
             </div>
             <div className="nav_btn_group">
-              <button
-                className="btn"
-                onClick={() => {
-                  navigation('/member_page/edit')
+              <button className="btn"
+              onClick={() => {
+                memberAuth.authorized && !!memberAuth.memberId && memberAuth.token?
+                  navigation('/member_page/edit'):navigation('/member_login',{state:{isActive:1,text2:'您尚未登入'}})
                 }}
               >
                 比比會員

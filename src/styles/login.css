@@ -204,6 +204,7 @@ body {
     width: 100%;
     padding: 10px 20px;
     color: #5F79D1;
+    cursor: default;
 }
 
 .login_form {
