@@ -1,13 +1,16 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useContext } from 'react'
 import '../../styles/memberPage_changePassword.css'
 import AuthContext from '../../Contexts/AuthContext'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 function MemberPage_ChangePassword({ onHide }) {
   const { memberAuth } = useContext(AuthContext)
+
+  const navigate = useNavigate()
+
   const str = JSON.parse(localStorage.getItem('beebeeMemberAuth'))
   const [changeClick, setChangeClick] = useState(true)
-
   const [password, setPassword] = useState({
     old_password: '',
     new_password: '',
@@ -95,11 +98,13 @@ function MemberPage_ChangePassword({ onHide }) {
           <div className="btn-mygroup">
             <button
               className="btn memberPage_button basic_infomation_confirm"
-              onClick={() => {
-                
+              onClick={(e) => {
+                e.preventDefault()
                 if (password.new_password === password.confirm_new_password) {
                   setChangeClick(true)
                   upDatePassword()
+                  onHide()
+                  alert("修改成功")
                 } else {
                   setChangeClick(false)
                 }

@@ -47,7 +47,7 @@
     text-align: center;
     bottom: 250px;
     right: 210px;
-    line-height: 50px;
+    line-height: 30px;
     background-color: white;
     position: absolute;
     font-family: Noto Sans TC;
@@ -595,7 +595,7 @@ left:5%;
 }
 
 .home_news_word2{
-font-size: 27px;
+font-size: 25px;
 color: #484848;
 position: absolute;
 top:10%;
@@ -656,7 +656,7 @@ border:#4f4f4f;
 border-radius: 3px;
 color:white;
 position: absolute;
-left: 41%;
+left: 43.5%;
 margin-top: 30px;
  }
 

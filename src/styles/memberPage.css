@@ -392,6 +392,85 @@ body {
   border-radius: 3px;
 }
 
+.member_List>tbody>tr{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 20px 50px;
+    justify-content: space-between;
+    width: 100%;
+    
+    /* border-width: 2px 0px; */
+    border-style: solid;
+    border-bottom: 2px solid #F3D775;
+    border-color: #F3D775;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;}
+
+.member_List > tbody > tr {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px 50px;
+  justify-content: space-between;
+  width: 100%;
+
+  border-width: 2px 0px;
+  border-style: solid;
+  border-color: #f3d775;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.member_List > tbody,
+.member_shoppingList_detail > tbody {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.member_List > tbody > tr > td,
+.member_List > thead > tr > th,
+.member_shoppingList_detail > thead > tr > th,
+.member_shoppingList_detail > tbody > tr > td {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+}
+.member_List > tbody > tr > :first-child {
+  color: #e59069;
+}
+.view_more_btn {
+  color: #f4f4f4;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 37px;
+  text-align: center;
+  width: 100px;
+  background-color: transparent;
+  border: none;
+}
+.view_more_btn::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  border-radius: 3px;
+  background-color: #e59069;
+  z-index: -2;
+}
+.memberPage_button{
+    position: relative;
+    background-color: transparent;
+    border: none;
+    border-radius: 3px;}
+  
+
 .memberPage_button::after {
   content: '';
   width: 0%;

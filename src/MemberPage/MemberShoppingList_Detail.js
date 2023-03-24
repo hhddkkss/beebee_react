@@ -11,7 +11,7 @@ import axios from 'axios'
 function MemberShoppingList_Detail() {
   const { purChaseDetail } = useContext(ProductFunctionContext)
   const navigation = useNavigate()
-  const {memberAuth} = useContext(AuthContext)
+  const { memberAuth } = useContext(AuthContext)
 
   const fee = 120
 
@@ -302,24 +302,30 @@ function MemberShoppingList_Detail() {
 
           <div className="form_btn_group member_mobile_hidden">
             {receive == 0 && order_logistics == 4 ? (
-              <button className="btn basic_receive_done memberPage_button"
-              onClick={ (e)=>{
+              <button
+                className="btn basic_receive_done memberPage_button"
+                onClick={(e) => {
                   e.preventDefault()
-                   const pid = purChaseDetail.map((v,i)=>{ return v.product_id})
-                   axios.post(HANDLE_CHECK_RECEIVE_NEW_COMMENT,{
-                    oid:purChaseDetail[0].order_id,
-                    pid:pid,
-                    mid:memberAuth.memberId,
-
-                  }).then((res)=>{
-                    console.log(res)
-                    if(
-                      !!res.data.Receive.affectedRows &&  !!res.data.newL.affectedRows
-                    )
-                    {navigation(-1)}
+                  const pid = purChaseDetail.map((v, i) => {
+                    return v.product_id
                   })
-                  
-              }}  >
+                  axios
+                    .post(HANDLE_CHECK_RECEIVE_NEW_COMMENT, {
+                      oid: purChaseDetail[0].order_id,
+                      pid: pid,
+                      mid: memberAuth.memberId,
+                    })
+                    .then((res) => {
+                      console.log(res)
+                      if (
+                        !!res.data.Receive.affectedRows &&
+                        !!res.data.newL.affectedRows
+                      ) {
+                        navigation(-1)
+                      }
+                    })
+                }}
+              >
                 完成訂單
               </button>
             ) : (
