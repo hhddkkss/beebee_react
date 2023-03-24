@@ -5,6 +5,7 @@ import { useLocation, useParams,useNavigate } from 'react-router-dom'
 import { GET_All_ARTICLE_POST,GET_FRONT_ARTICLES,ADD_DEL_ARTI_LIKE,ARTICLE_MEMBER_LIKED } from '../component/LoginApi'
 import PostPage from './PostPage'
 import axios from 'axios'
+import NavbarControlPanel from '../component/NavbarControlPanel/NavbarControlPanel'
 
 
 
@@ -328,7 +329,7 @@ function Articles() {
             <div className="post_letter">開始發文</div>
         </div>
 
-
+<NavbarControlPanel/>
     </>
     
   )
