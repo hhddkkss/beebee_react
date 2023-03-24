@@ -224,7 +224,7 @@ function Articles() {
                 }}>會員文章中心</button>:''}
                 
                 <button className="btn article_list_button article_mb_show ">其他
-                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg className='ms-1' width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 6.5L9 14.5L17 6.5" stroke="#F4F4F4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                 </button>
