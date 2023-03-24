@@ -73,6 +73,12 @@ function Navbar() {
     document.addEventListener('click', handleOutMemberBox)
     document.addEventListener('click', handleOutCartBox)
   }, [])
+
+  useEffect(() => {
+    setToggleCartButton(false)
+    setMemberBoxToggle(false)
+    console.log('跳頁')
+  }, [])
   return (
     <>
       <header>
@@ -301,7 +307,7 @@ function Navbar() {
                   setTimeout(() => {
                     getCartData()
                     navigation('/cart')
-                  }, 500)
+                  }, 300)
                 }}
               >
                 查看購物車

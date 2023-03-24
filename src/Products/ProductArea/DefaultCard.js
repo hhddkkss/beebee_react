@@ -4,8 +4,13 @@ import { Link } from 'react-router-dom'
 import AuthContext from '../../Contexts/AuthContext'
 import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
 import { ADD_CART_ITEM } from '../../component/LoginApi'
+import Box from '@mui/material/Box'
+import Modal from '@mui/material/Modal'
+import { useNavigate } from 'react-router-dom'
 
 function DefaultCard({ productsDisplay }) {
+  const navigation = useNavigate()
+
   const {
     pageNow,
     favorites,
@@ -23,6 +28,31 @@ function DefaultCard({ productsDisplay }) {
     favoritePId,
   } = useContext(ProductFunctionContext)
 
+  //modal style
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: '#222222de',
+    color: '#fff',
+    // border: '2px solid #000',
+    boxShadow: 24,
+    pt: 2,
+    px: 4,
+    pb: 3,
+    borderRadius: '3px',
+  }
+
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
+
   const { memberAuth } = useContext(AuthContext)
 
   //render
@@ -30,16 +60,17 @@ function DefaultCard({ productsDisplay }) {
   const [render, setRender] = useState(false)
   //  寫進購物車資料庫
   const addToCart = async (product_id) => {
-    if(memberAuth.authorized && memberAuth.memberId){
+    if (memberAuth.authorized && memberAuth.memberId) {
       const member_id = memberAuth.memberId
 
-    await axios.post(ADD_CART_ITEM, {
-      member_id: member_id,
-      product_id: product_id,
-    })
-    await setRender(!render)
+      await axios.post(ADD_CART_ITEM, {
+        member_id: member_id,
+        product_id: product_id,
+      })
+      await setRender(!render)
+    } else {
+      handleOpen()
     }
-    
   }
 
   useEffect(() => {
@@ -79,11 +110,14 @@ function DefaultCard({ productsDisplay }) {
                           : 'fa-regular fa-heart'
                       }
                       onClick={() => {
-                        // getFavorites(memberAuth.memberId)
-                        handleAddOrDeleteFavorite(
-                          memberAuth.memberId,
-                          v.product_id
-                        )
+                        if (memberAuth.memberId) {
+                          handleAddOrDeleteFavorite(
+                            memberAuth.memberId,
+                            v.product_id
+                          )
+                        } else {
+                          handleOpen()
+                        }
                       }}
                     ></i>
                   </div>
@@ -173,6 +207,26 @@ function DefaultCard({ productsDisplay }) {
             )
           })}
       </div>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style, width: 200 }}>
+          <p id="child-modal-description">請登入再進行操作</p>
+          <button
+            className="btn btn-cancel"
+            onClick={() => {
+              navigation('/member_login')
+            }}
+            style={{ color: 'gray' }}
+          >
+            登入
+          </button>
+        </Box>
+      </Modal>
     </>
   )
 }
