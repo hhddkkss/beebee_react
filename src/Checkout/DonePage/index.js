@@ -114,8 +114,8 @@ function DonePage() {
           <div className="order-detail fixed-width">
             <h4>訂單資訊：</h4>
             <p>訂單編號：{donepageData.orderAll.orderNum}</p>
-            <p>付款方式：{donepageData.orderAll.order_recipient}</p>
-            <p>會員姓名：{paymentTostring(payment)}</p>
+            <p>付款方式：{paymentTostring(payment)}</p>
+            <p>會員姓名：{donepageData.orderAll.order_recipient}</p>
             <p>會員email：{donepageData.orderAll.order_email}</p>
             <p>訂單成立時間：{donepageData.orderAll.orderDate}</p>
           </div>

@@ -297,7 +297,11 @@ function Navbar() {
                 className="check-cart"
                 onClick={async (e) => {
                   e.preventDefault()
-                  navigation('/cart')
+
+                  setTimeout(() => {
+                    getCartData()
+                    navigation('/cart')
+                  }, 500)
                 }}
               >
                 查看購物車

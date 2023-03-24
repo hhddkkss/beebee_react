@@ -228,7 +228,7 @@ body {
 
 .cart-control {
   width: 200px;
-
+  text-align: center;
   gap: 0.1rem;
 }
 .cart-control i {
