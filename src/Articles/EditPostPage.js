@@ -135,7 +135,7 @@ const[ogVal,setOgVal]  =useState('')
           errorMessage.title='文章標題'
           isTrue = false
         }else{
-           if(!!postUpload.category){
+           if(postUpload.category==0){
           errorMessage.category='文章類型'
           isTrue = false
         }else{
