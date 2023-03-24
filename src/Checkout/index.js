@@ -258,7 +258,7 @@ function Checkout() {
     //寫入訂單細節
 
     //清空購物車
-    // await emptyCart()
+    await emptyCart()
     console.log(inputs, 'input')
   }
 

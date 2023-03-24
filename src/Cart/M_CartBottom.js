@@ -9,7 +9,7 @@ function M_CartBottom() {
 
   const totalPrice = cartData
     .map((v) => (v.product_price - 1000) * v.quantity)
-    .reduce((a, c) => a + c)
+    .reduce((a, c) => a + c, 0)
   return (
     <>
       {/* <!-- 手機版 --> */}
@@ -17,7 +17,7 @@ function M_CartBottom() {
         <div className="m-cart-bottom-area">
           <span className="me-1">合計：</span>
           <span className="bottom-total-price">
-            {totalPrice.toLocaleString()}
+            {totalPrice ? totalPrice.toLocaleString() : 0}
           </span>
           <button
             className="btn-want-to-check-out"

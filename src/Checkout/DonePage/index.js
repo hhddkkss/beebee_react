@@ -13,6 +13,8 @@ function DonePage() {
   )
   const navigation = useNavigate()
 
+  const payment = donepageData.orderDetail.payment_method
+
   const paymentTostring = (payment) => {
     if (payment == 1) {
       return '信用卡付款'
@@ -112,7 +114,7 @@ function DonePage() {
           <div className="order-detail fixed-width">
             <h4>訂單資訊：</h4>
             <p>訂單編號：{donepageData.orderAll.orderNum}</p>
-            <p>付款方式：</p>
+            <p>付款方式：{paymentTostring(payment)}</p>
             <p>會員姓名：{donepageData.orderAll.order_recipient}</p>
             <p>會員email：{donepageData.orderAll.order_email}</p>
             <p>訂單成立時間：{donepageData.orderAll.orderDate}</p>
@@ -138,13 +140,13 @@ function DonePage() {
                 navigation('/')
               }}
             >
-              回到官網
+              回到首頁
             </a>
             <a
               href="#/"
               className="mybtn btn-to-order"
               onClick={(e) => {
-                navigation('/')
+                navigation('/member_page/shoppinglist')
               }}
             >
               查看訂單
