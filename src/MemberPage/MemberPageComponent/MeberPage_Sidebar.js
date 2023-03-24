@@ -61,7 +61,7 @@ function MeberPage_Sidebar() {
             會員基本資料
           </button> */}
           <NavLink
-            to="/member_page_"
+            to="/member_page/edit"
             className={({ isActive }) =>
               isActive ? 'sidebar_btn  sidebar_btn_active' : 'sidebar_btn'
             }

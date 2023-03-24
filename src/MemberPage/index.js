@@ -267,7 +267,7 @@ function MemberPage() {
               </div>
             </form>
 
-            <div className="auth_container">
+            {/* <div className="auth_container">
               <div className="now_memberPage member_mobile_hidden">
                 Authenticate details
               </div>
@@ -436,7 +436,7 @@ function MemberPage() {
                 </svg>
                 Facebook 未認證
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       ) : (
