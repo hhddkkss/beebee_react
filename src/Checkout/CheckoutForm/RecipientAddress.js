@@ -35,12 +35,14 @@ function RecipientAddress({
             <select
               name="city"
               className={validation.cities ? 'form-input error' : 'form-input'}
-              defaultValue="請選擇"
+              value={inputs.city}
               onChange={(e) => {
                 handleChange(e)
               }}
             >
-              <option value="請選擇">請選擇</option>
+              <option value="請選擇" disabled>
+                請選擇
+              </option>
               {cities.map((v) => {
                 return (
                   <option value={v.name} key={v.name}>
@@ -60,7 +62,9 @@ function RecipientAddress({
                 handleChange(e)
               }}
             >
-              <option value="請選擇">請選擇</option>
+              <option value="請選擇" disabled>
+                請選擇
+              </option>
               {disc
                 .filter((v) => {
                   return v.city_name === inputs.city

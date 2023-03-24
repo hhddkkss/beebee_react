@@ -2,13 +2,13 @@ import axios from 'axios'
 import  Dayjs  from 'dayjs'
 import React,{useState,useContext,useEffect,useRef} from 'react'
 import { json } from 'react-router-dom'
-import { MEMBER_POST,POST_PIC,HOST } from '../component/LoginApi'
+import { MEMBER_DELETE_POST,POST_PIC,HOST,GET_SINGLE_ARTICLE_POST,MEMBER_EDIT_POST } from '../component/LoginApi'
 import AuthContext from '../Contexts/AuthContext'
 import HashTagColor from './HashTagColor'
 import ArticleInfo from './ArticleInfo'
 
-function PostPage() {
-      // info
+function EditPostPage({article_id}) {
+    // info
     const [infoState,setInfoState]=useState(1)
     const [infoText,setInfoText]=useState('')
     function infoClass(a, b, c) {
@@ -24,12 +24,12 @@ function PostPage() {
           //失敗
           case 3:
             return c
-    
+          case 4:
+              return c
           default:
             return a
         }
       }
-
     const {memberAuth} = useContext(AuthContext)
     const mainpicbtn= useRef(null)
     const contentpicbtn = useRef(null)
@@ -49,8 +49,40 @@ function PostPage() {
         category:'',
         article_pic_main:'',
         content_1:'',
-       
+        
     })
+
+    // 拿取原本資料
+    const getSinglePost = async(sid)=>{
+        // console.log(article_id);
+        if(!!sid){
+            await axios.post(GET_SINGLE_ARTICLE_POST,{
+                article_id:sid
+            }).then((res)=>{
+                console.log(res.data);
+                const data = res.data[0]
+                console.log('data',data,'hash',data.article_hashtag.toString().replace(',', '#'),'mainpic', data.article_pic_main.length);
+
+                setPostUpload({
+                    article_id:data.article_id,
+                    memberId:data.member_id,
+                    title:data.title,
+                    category:data.article_category_id,
+                    article_pic_main:data.article_pic_main,
+                    // hashtags:'#手機',
+                    hashtags:data.article_hashtag.toString().replace(',', '#'),
+                    content_1:data.content_1,
+                    content_2:data.content_2||'',
+                    article_pic_content:data.article_pic_content||'',
+                    article_Onpublic:data.article_Onpublic
+                    
+                    
+                })
+            })
+        }
+  
+      
+    }
 
   
 //  上傳照片
@@ -117,40 +149,43 @@ const[ogVal,setOgVal]  =useState('')
           }
         }
         }}
-       
 
 
         //檢查通過送出資料
         if(isTrue) {
-          const result = await axios.post(MEMBER_POST,{
+          const result = await axios.post(MEMBER_EDIT_POST,{
             ...postUpload,
             memberId:memberAuth.memberId,
             article_OnPublic:x
           })
            console.log('posted',result);
-        if(result.data.success){
+          if(result.data.success){
             setInfoState(2)
-            x==1?setInfoText('成功發布！'):setInfoText('成功儲存草稿')
+            x==1?setInfoText('成功發布！'):setInfoText('成功下架文章囉！')
           }else{
             setInfoState(3)
             setInfoText('Opps！文章未被儲存')
-          }
-          }else{
+          }} else{
             setInfoState(3)
             setInfoText(`請確認 ${errorMessage.title}${errorMessage.category}${errorMessage.article_pic_main}${errorMessage.content_1} 不得為空`)
           }
+        }}
 
 
-    }
 
-    }
 
+
+
+
+    useEffect(()=>{
+        getSinglePost(article_id)
+        },[article_id])
 
 
   return (
     <div className="article_page">
-
-    <form className="articles_container" onSubmit={(e)=>{e.preventDefault()}}>
+{postUpload.memberId == memberAuth.memberId ?
+<form className="articles_container" onSubmit={(e)=>{e.preventDefault()}}>
     <div className="d-flex gap-3 align-items-center">
                             <label htmlFor="article_order">請選擇文章分類　
                             <i className="fa-solid fa-caret-right"></i></label>
@@ -259,25 +294,27 @@ const[ogVal,setOgVal]  =useState('')
 
 
     <div className="post_form_check_button">
+
+    <button className="btn post_add_button bg_pink"
+            onClick={(e)=>{
+              if(memberAuth.memberId && memberAuth.authorized){
+                setInfoText('確定刪除文章?')
+              setInfoState(4)          }}}>
+                <i className="fa-solid fa-trash"></i> 刪除文章
+                </button>
         <button className="btn post_add_button bg_gray"
          onClick={(e)=>{
                 upLoadPost(0)
             }}>
-            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21 15.5V19.5C21 20.0304 20.7893 20.5391 20.4142 20.9142C20.0391 21.2893 19.5304 21.5 19 21.5H5C4.46957 21.5 3.96086 21.2893 3.58579 20.9142C3.21071 20.5391 3 20.0304 3 19.5V15.5" stroke="#F4F4F4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M7 10.5L12 15.5L17 10.5" stroke="#F4F4F4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M12 15.5V3.5" stroke="#F4F4F4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+            
                 
-            儲存草稿
+           {postUpload.article_Onpublic?<><i className="fa-solid fa-ban" style={{color:" #f0f2f5"}}></i> 取消發布</>:<><i className="fa-solid fa-download"></i> 儲存草稿</>}
             </button>
             <button className="btn post_add_button bg_pink"
             onClick={(e)=>{
                 upLoadPost(1)
             }}>
-                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 8.5L12 16.5L20 8.5" stroke="#233A66" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+               <i className="fa-solid fa-check"></i>
                     
                 確認發布
                 </button>
@@ -289,7 +326,11 @@ const[ogVal,setOgVal]  =useState('')
 
         
 
-    </form>
+    </form>:<><div className="article_page">
+            <div className='searchNoAns'>您無權編輯此文章 <img src="/images/article/search.gif" alt="" /></div>
+           
+        </div></>}
+    
 
 
     <div className="article_side_bar">
@@ -312,7 +353,9 @@ const[ogVal,setOgVal]  =useState('')
     </div>
 
 
-<ArticleInfo infoClass={infoClass} setInfoState={setInfoState} infoState={infoState} infoText={infoText}/>
+  <ArticleInfo infoClass={infoClass} setInfoState={setInfoState} infoState={infoState} infoText={infoText} article_id={postUpload.article_id} setInfoText={setInfoText}/>
+
+
 
     </div>
 
@@ -321,4 +364,4 @@ const[ogVal,setOgVal]  =useState('')
   )
 }
 
-export default PostPage
+export default EditPostPage

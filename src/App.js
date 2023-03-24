@@ -10,6 +10,7 @@ import Checkout from './Checkout'
 import DonePage from './Checkout/DonePage'
 import HomePage from './Home/HomePage'
 import Articles from './Articles'
+import BeeLoginGoogle from './MemberLogin/BeeLoginGoogle'
 
 import MemberPage from './MemberPage'
 import MemberComment_List from './MemberPage/MemberComment_List'
@@ -35,6 +36,7 @@ function App() {
                   element={<ProductDetail />}
                 />
                 <Route path="/member_login" element={<MemberLogin />} />
+                <Route path="/member_login_google" element={<BeeLoginGoogle />} />
                 <Route path="/member_page/edit" element={<MemberPage />} />
                 <Route
                   path="/member_page/shoppinglist"

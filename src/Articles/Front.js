@@ -34,7 +34,7 @@ function Front({frontData,setType}) {
                         <div className="content article_mb_hidden">{frontData[0].content_1}</div>
                         <div className="foot">
                             <div className="article_writer">
-                                <img src={'/images/'+frontData[0].member_pic} alt=""/>
+                                <img src={frontData[0].member_pic} alt=""/>
                                 <div className="writer_name">{frontData[0].email}</div>
                                 <div className="post_time">{Dayjs(frontData[0].created_at).format('YYYY/MM/DD')}</div>
                             </div>
@@ -53,7 +53,7 @@ function Front({frontData,setType}) {
                             </div>
                         </div>
                     </div>
-                    <img onClick={()=>{navigation(HOST+'/articlePic/'+frontData[0].article_id)}} src={'/images/article/'+frontData[0].article_pic_main} alt=""/>
+                    <img onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[0].article_id)}} src={HOST+'/articlePic/'+frontData[0].article_pic_main} alt=""/>
                 </div>
 
             </div>
@@ -72,13 +72,14 @@ function Front({frontData,setType}) {
                 </div>
 
                 <div className="latest_article">
-                    <img onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[1].article_id)}} src={HOST+'/articlePic/'+frontData[1].article_pic_main} alt=""/>
+                <img onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[1].article_id)}} src={HOST+'/articlePic/'+frontData[1].article_pic_main} alt=""/>
+
                     <div className="article">
                         <div className="title"  onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[1].article_id)}} >{frontData[1].title}</div>
                         <div className="content article_mb_hidden">{frontData[1].content_1}</div>
                         <div className="foot">
                             <div className="article_writer">
-                                <img src={'/images/'+frontData[1].member_pic} alt=""/>
+                                <img src={frontData[1].member_pic} alt=""/>
                                 <div className="writer_name">{frontData[1].email}</div>
                                 <div className="post_time">
                                 {Dayjs(frontData[1].created_at).format('YYYY/MM/DD')}
@@ -122,7 +123,7 @@ function Front({frontData,setType}) {
                         <div className="content article_mb_hidden">{frontData[2].content_1}</div>
                         <div className="foot">
                             <div className="article_writer">
-                                <img src={'/images/'+frontData[2].member_pic}alt=""/>
+                                <img src={frontData[2].member_pic}alt=""/>
                                 <div className="writer_name">{frontData[2].email}</div>
                                 <div className="post_time">
                                 {Dayjs(frontData[2].created_at).format('YYYY/MM/DD')}
@@ -143,7 +144,8 @@ function Front({frontData,setType}) {
                             </div>
                         </div>
                     </div>
-                    <img  src={HOST+'/articlePic/'+frontData[2].article_pic_main} alt="" onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[2].article_id)}} />
+                    <img onClick={()=>{navigation('/articles/beebeePostNO/'+frontData[2].article_id)}} src={HOST+'/articlePic/'+frontData[2].article_pic_main} alt=""/>
+
                 </div>
 
             </div>

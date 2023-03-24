@@ -38,6 +38,12 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
             
             
              if(!!his){
+                if(x==4){
+                    setShowMemData(his.filter((v,i)=>{
+                        return v.article_Onpublic==0
+                    }))
+                    return
+                }
                  setShowMemData(his.filter((v,i)=>{
                  return v.article_category_id==x
              }))
@@ -139,7 +145,12 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
                             }} className={changeMemArtCateBtn(3)}>
                                 分享
                             </button>
-                            
+                            {article_id =="postEd"? <button onClick={()=>{
+                                getShowMemData(4)
+                                setMemNowCate(5)
+                            }} className={changeMemArtCateBtn(5)}>
+                               草稿
+                            </button>:''}
                         </div>
                        
                     </div>
@@ -169,6 +180,7 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
                                                 <button className=" article_like_button" 
                                                     onClick={()=>{
                                                         // 跳頁至編輯頁
+                                                        navigation('/articles/editPost/'+v.article_id)
                                                     }}>
                                                     <i className="fa-regular fa-pen-to-square" style={{color:" #5e6673"}}></i>
                                                     
@@ -181,7 +193,7 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
                                 
                                         <div className="foot">
                                             <div className="article_writer">
-                                                <img src={'/images/'+v.member_pic} alt=""/>
+                                                <img src={v.member_pic} alt=""/>
                                                 <div className="writer_name">{v.email}</div>
                                                 <div className="post_time">{Dayjs(v.created_at).format('YYYY/MM/DD')}</div>
                                             </div>

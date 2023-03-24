@@ -343,6 +343,41 @@ body{
   }
 
 
+  .article_info_box{
+    width: 500px;
+    height: 300px;
+    border-radius: 5px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    position: sticky;
+    z-index: 5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-150%, -50%);
+    display: none;
+
+  }
+  .article_info_box.success{
+    display: flex;
+    background-color: #EFB7A5;
+  }
+
+  .article_info_box.fail{
+    display: flex;
+    background-color: #838181dc;
+  }
+
+  .article_info_box>p{
+    color: #4f4f4f;
+    font-size: 30px;
+  }
+  .article_info_box.fail>p{
+    color: #f4f4f4;
+    font-size: 30px;
+  }
+
 /* 手機板 */
 
 @media screen and (max-width: 376px) {

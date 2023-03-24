@@ -111,7 +111,7 @@ const PaymentForm = (setValidation, validation) => {
               number: '4111111112341234',
               expiry: '1225',
               cvc: '366',
-              name: 'CHEN MING MING',
+              name: '王小湖',
             })
           }}
         >

@@ -4,6 +4,10 @@ import SignipForm from './SignupForm'
 import LoginForm from './LoginForm'
 import LoginInfo from './LoginInfo'
 import AuthContext from '../Contexts/AuthContext'
+import { useParams,useLocation } from 'react-router-dom'
+import { GOOGLE_LOGIN_URL,GOOGLE_LOGIN_DATA } from '../component/LoginApi'
+import axios from 'axios'
+import queryString from 'query-string';
 
 
 function MemberLogin() {
@@ -20,13 +24,22 @@ function MemberLogin() {
     mobile: '',
     gender: '',
     birthday: '1990-01-01',
-    address_city: '',
-    address_dist: '',
+    address_city: '請選擇縣市',
+    address_dist: '請選擇鄉鎮區',
     address_rd: '',
   })
   const [infoState, setInfoState] = useState(1)
 
-  // const { setMyAuth } = useContext(AuthContext)
+  const{state} = useLocation()
+
+  const paramsChange=()=>{
+    if(state && Object.keys(state).length>0){
+      setActive(state.isActive)
+      setSignupForm({...signupForm,name:state.name,email:state.email})
+      setErrorMessage({email_s:state.text})
+    }
+      
+  }
 
   function slice() {
     isActive === 1 ? setActive(2) : setActive(1)
@@ -205,6 +218,37 @@ function MemberLogin() {
   // 密碼顯示狀態
   
  const [show,setShow]=useState(false)
+
+
+
+   // 引入google登入的URL
+   const[googleLoginUrl,setGoogleLoginUrl] =useState('')
+   const getGoogleUrl = async()=>{
+   const url = await axios.get(GOOGLE_LOGIN_URL) 
+   console.log(url.data);
+   setGoogleLoginUrl(url.data) 
+   }
+   
+   const parsed = queryString.parse(window.location.search);
+   console.log('qs',typeof parsed);
+   
+   const getGoogleMember = async()=>{
+    if(Object.keys(parsed).length>0){
+      const result =  await axios.post(GOOGLE_LOGIN_DATA,{
+        qq:parsed
+      })
+      console.log('result',result);
+    }
+   }
+
+
+    useEffect(()=>{
+      getGoogleUrl()
+      paramsChange()},[])
+  //  useEffect(()=>{getGoogleMember()},[parsed])
+
+
+
   return (
     <>
       <div className="wrapper">
@@ -394,6 +438,7 @@ function MemberLogin() {
               handleLoginChange={handleLoginChange}
               show={show} 
               setShow={setShow}
+              googleLoginUrl={googleLoginUrl}
             />
 
             {/* 申請 */}
@@ -407,6 +452,7 @@ function MemberLogin() {
               handleSignupChange={handleSignupChange}
               show={show} 
               setShow={setShow}
+              googleLoginUrl={googleLoginUrl}
             />
           </div>
         </div>

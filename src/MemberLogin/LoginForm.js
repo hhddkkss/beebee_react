@@ -1,15 +1,18 @@
 import axios from 'axios'
-import { useContext} from 'react'
-
+import { useContext,useRef} from 'react'
+import { Link,useNavigate } from 'react-router-dom'
 import './../styles/login.css'
 import { LOGIN } from './../component/LoginApi'
 import AuthContext from '../Contexts/AuthContext'
 
 function LoginForm(props) {
-  const { loginForm, setLoginFormValue, activeClass, setInfoState, errorMessage, handleLoginChange,show,setShow } = props
+  const { loginForm, setLoginFormValue, activeClass, setInfoState, errorMessage, handleLoginChange,show,setShow,googleLoginUrl } = props
 
   //引入setAuth
   const { setMemberAuth } = useContext(AuthContext)
+  const navigation = useNavigate()
+  const googleLink = useRef(null)
+
 
 
   
@@ -24,7 +27,9 @@ function LoginForm(props) {
         )}
       >
         <div className="login_form_title">Welcome back</div>
+        
         <div className="now_page login_mobile_hidden">Log in</div>
+   
         <form
           name="login_form"
           className="login_form"
@@ -68,32 +73,24 @@ function LoginForm(props) {
               setShow(false)
             }} 
             className="changeEye">
-              {show?<i  className="fa-solid fa-eye"></i>:<i class="fa-solid fa-eye-slash"></i>}
+              {show?<i  className="fa-solid fa-eye"></i>:<i className="fa-solid fa-eye-slash"></i>}
             </div>
             
             <div className="login_input_alert_info input_alert_true">
               {errorMessage.password_l}
             </div>
           </div>
+          
+         
           <div className="form_btn">
-            <button
-              className="loginPage_button google_login_btn"
-              onClick={(e) => {
-                e.preventDefault()
-              }}
-            >
-              Google 登入
-            </button>
-          </div>
-          <div className="form_btn">
-            <button
+            {/* <button
               onClick={(e) => {
                 e.preventDefault()
               }}
               className="loginPage_button forget_pass_btn"
             >
               忘記密碼
-            </button>
+            </button> */}
             <button 
             onClick={ (e)=>{e.preventDefault()
               if(!!errorMessage.isOkL){
@@ -135,6 +132,21 @@ function LoginForm(props) {
             }} type="submit" className="loginPage_button login_form_btn">
               登入
             </button>
+          </div>
+
+          <div className="form_btn">
+            <button
+              className="loginPage_button google_login_btn"
+              onClick={(e) => {
+                e.preventDefault()
+                if(googleLink){
+                  googleLink.current.click()
+                }
+              }}
+            >
+             <i className="fa-brands fa-google" style={{color: "#DB4437"}}></i> Google 登入
+            </button>
+            <Link ref={googleLink} className='d-none' to={googleLoginUrl}></Link>
           </div>
         </form>
       </div>

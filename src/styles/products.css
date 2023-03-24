@@ -680,6 +680,8 @@ header {
     width: calc((100% / 4));
     text-align: center;
     padding: 0.5rem 0rem;
+    border-bottom: 2px solid #ccc;
+    transition: all 0.5s;
   }
 
   /* hover的效果 */
