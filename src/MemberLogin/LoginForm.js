@@ -6,7 +6,7 @@ import { LOGIN } from './../component/LoginApi'
 import AuthContext from '../Contexts/AuthContext'
 
 function LoginForm(props) {
-  const { loginForm, setLoginFormValue, activeClass, setInfoState, errorMessage, handleLoginChange,show,setShow,googleLoginUrl,setLoginForm } = props
+  const { loginForm, setLoginFormValue, activeClass, setInfoState, errorMessage, handleLoginChange,show,setShow,googleLoginUrl,setLoginForm,handleOpen } = props
 
   //引入setAuth
   const { setMemberAuth } = useContext(AuthContext)
@@ -120,6 +120,8 @@ function LoginForm(props) {
                 )
                 //console.log(memberEmail, memberId)
                 setInfoState(2)
+                handleOpen()
+
                 //setAuth
                 setMemberAuth({
                   authorized: true,
@@ -131,10 +133,12 @@ function LoginForm(props) {
                 //console.log(memberAuth)
               } else {
                 setInfoState(3)
+                handleOpen()
               }
                })
                }else{
                   setInfoState(3)
+                  handleOpen()
               }
             
              
