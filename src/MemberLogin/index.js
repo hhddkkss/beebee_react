@@ -2,16 +2,18 @@ import { useState, useEffect, useContext } from 'react'
 import './../styles/login.css'
 import SignipForm from './SignupForm'
 import LoginForm from './LoginForm'
-import LoginInfo from './LoginInfo'
 import AuthContext from '../Contexts/AuthContext'
-import { useParams,useLocation } from 'react-router-dom'
+import {useLocation,useNavigate } from 'react-router-dom'
 import { GOOGLE_LOGIN_URL,GOOGLE_LOGIN_DATA } from '../component/LoginApi'
 import axios from 'axios'
 import queryString from 'query-string';
 
+import Box from '@mui/material/Box'
+import Modal from '@mui/material/Modal'
+
 
 function MemberLogin() {
-
+  const navigation = useNavigate()
   const [isActive, setActive] = useState(1)
   const [loginForm, setLoginForm] = useState({
     email: '',
@@ -244,6 +246,31 @@ function MemberLogin() {
       console.log('result',result);
     }
    }
+    //modal style
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 250,
+    bgcolor: '#222222de',
+    color: '#fff',
+    // border: '2px solid #000',
+    boxShadow: 24,
+    pt: 2,
+    px: 4,
+    pb: 3,
+    borderRadius: '3px',
+    textAlign:'center',
+  }
+
+   const [open, setOpen] = useState(false)
+   const handleOpen = () => {
+     setOpen(true)
+   }
+   const handleClose = () => {
+     setOpen(false)
+   }
 
 
     useEffect(()=>{
@@ -443,7 +470,7 @@ function MemberLogin() {
               show={show} 
               setShow={setShow}
               googleLoginUrl={googleLoginUrl}
-              setLoginForm={setLoginForm}
+              setLoginForm={setLoginForm}handleOpen={handleOpen}
             />
 
             {/* 申請 */}
@@ -460,12 +487,34 @@ function MemberLogin() {
               googleLoginUrl={googleLoginUrl}
               setSignupForm={setSignupForm}
               setErrorMessage={setErrorMessage}
+              handleOpen={handleOpen}
             />
           </div>
         </div>
 
         {/* 彈跳視窗 */}
-        <LoginInfo infoClass={infoClass} setInfoState={setInfoState} infoState={infoState} />
+        <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style }}>
+          <p id="child-modal-description">{infoClass('', '登入成功！BEEbeE歡迎您', 'Oops! 登入失敗')}</p>
+          <button
+            className="btn btn-cancel"
+            onClick={() => {
+              infoState == 2?
+              navigation('/')
+           :handleClose()
+              
+            }}
+            style={{ color: 'gray' }}
+          >
+            確認
+          </button>
+        </Box>
+      </Modal>
       </div>
     </>
   )
