@@ -276,24 +276,24 @@ function Articles() {
     {/* 需依照nowPage改變區域 */}
 
     {/* 首頁 */}
-    {isShowPage(0, <Front  frontData={frontData} setType={setType}/>)}
+    {isShowPage(0, <Front  frontData={frontData} setType={setType} setInputText={setInputText}/>)}
     {/* <Front/> */}
         
 
 
     {/* 分類頁 */}
-    {isShowPage(1, <CateArticle  frontData={frontData} allArtData={allArtData} type={type} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} setType={setType}/>)}
+    {isShowPage(1, <CateArticle  frontData={frontData} allArtData={allArtData} type={type} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} setType={setType} setInputText={setInputText}/>)}
 
 
 
  
     {/* 單頁面 */}
-    {isShowPage(4, <SingleArticle  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList}/>)}
+    {isShowPage(4, <SingleArticle  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} setInputText={setInputText}/>)}
 
 
         
     {/* 會員文章頁 */} 
-    {isShowPage(2, <ArticleMember  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} artLikeList={artLikeList} getLikedArti={getLikedArti}/>)}
+    {isShowPage(2, <ArticleMember  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} artLikeList={artLikeList} getLikedArti={getLikedArti} setInputText={setInputText}/>)}
      
       
 
@@ -304,7 +304,7 @@ function Articles() {
     {isShowPage(5, <EditPostPage  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} artLikeList={artLikeList} getLikedArti={getLikedArti}/>)}
     
     {/* 搜尋頁 */}
-    {isShowPage(6, <SearchArticles  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} artLikeList={artLikeList} getLikedArti={getLikedArti} />)}
+    {isShowPage(6, <SearchArticles  allArtData={allArtData} type={type} setType={setType} article_id={article_id} addDelLikeArt={addDelLikeArt} likeIdList={likeIdList} artLikeList={artLikeList} getLikedArti={getLikedArti} setInputText={setInputText}/>)}
 
 
 
