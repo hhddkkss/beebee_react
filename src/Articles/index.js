@@ -6,6 +6,10 @@ import { GET_All_ARTICLE_POST,GET_FRONT_ARTICLES,ADD_DEL_ARTI_LIKE,ARTICLE_MEMBE
 import PostPage from './PostPage'
 import axios from 'axios'
 import NavbarControlPanel from '../component/NavbarControlPanel/NavbarControlPanel'
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 
 
@@ -126,6 +130,30 @@ function Articles() {
     // 搜尋功能
     const [inputText,setInputText] = useState('')
 
+    //手機板按鈕
+    const [nowPageButtonVal,setNowPageButtonVal]=useState(0)
+
+    // .article_list_button{
+    //     align-items: center;
+    //     padding: 0px 30px;
+    //     width: 229px;
+    //     height: 46px;
+    //     background: #1D2D64;
+    //     border-radius: 30px 0px 0px 30px;
+    //     color: #f4f4f4;
+    //     margin-left: -40px;
+    // }
+    const style = {
+        width: 110,
+        height: 25,
+        bgcolor: '#1D2D64',
+        color: '#f4f4f4',
+        // border: '2px solid #000',
+        mb:'-40px',
+        borderRadius: '30px 0px 0px 30px',
+        textAlign:'center',
+        
+      }
  
 
 
@@ -223,12 +251,45 @@ function Articles() {
                  onClick={()=>{
                     navigation('/articles/member/liked')
                 }}>會員文章中心</button>:''}
+
+
                 
-                <button className="btn article_list_button article_mb_show ">其他
-                    <svg className='ms-1' width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 6.5L9 14.5L17 6.5" stroke="#F4F4F4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                </button>
+                
+                <FormControl variant="standard"  sx={{...style }}>
+                                    <Select
+                                    displayEmpty
+                                    labelId="demo-simple-select-standard-label"
+                                    id="demo-simple-select-standard"
+                                    sx={{color:'#f4f4f4',fill:'f4f4f4' }}
+                                    value={nowPageButtonVal}
+                                    onChange={(e)=>{
+                                        
+                                        setNowPageButtonVal(e.target.value)
+                                        if(e.target.value !== 5){
+                                           setType(e.target.value)
+                                           setTimeout(()=>{
+                                            navigation('/articles/beebeeArticles')
+                                            },10) 
+                                        }else{
+                                            setTimeout(()=>{
+                                                navigation('/articles/member/liked')
+                                            },20)
+                                        }
+                                        
+                                        
+                                       }}
+                                    label="Age"
+                                    >
+                                     <MenuItem value={0}>
+                                        <em>其他</em>
+                                    </MenuItem>
+                                    <MenuItem value={2} name='推薦版'>推薦版</MenuItem>
+                                    <MenuItem value={3} name='分享版'>分享版</MenuItem>
+                                    {memberAuth.authorized && memberAuth.memberId?<MenuItem value={5} name='會員文章中心'>會員文章中心</MenuItem>:''}
+                                    
+                                    </Select>
+                                </FormControl>
+                
             </div>
             
     {/* <!-- 搜尋 --> */}
