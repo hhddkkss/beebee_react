@@ -13,6 +13,8 @@ import ChangePasswords from './MemberPageComponent/MemberPage_ChangePassword'
 import dayjs from 'dayjs'
 import AuthContext from '../Contexts/AuthContext'
 import MemberPage_ChangeAvatar from './MemberPageComponent/MemberPage_ChangeAvatar'
+import MemberNav2 from './MemberPageComponent/MemberNav2'
+import MemberNavsec from './MemberPageComponent/MemberNavsec'
 
 function MemberPage() {
   const uploadInput = useRef(null)
@@ -168,7 +170,7 @@ function MemberPage() {
     <>
     {console.log(passWordData,8888)}
       <Navbar />
-
+      <MemberNavsec/>
       {!!changeMember ? (
         <div className="member_body">
           <MemberPage_ChangeAvatar avatarOpen={avatarOpen} />
@@ -610,6 +612,7 @@ function MemberPage() {
       ) : (
         ''
       )}
+      <MemberNav2/>
     </>
   )
 }

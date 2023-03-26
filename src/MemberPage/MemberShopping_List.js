@@ -10,6 +10,9 @@ import axios from 'axios'
 import AuthContext from '../Contexts/AuthContext'
 import dayjs from 'dayjs'
 import ProductFunctionContext from '../Contexts/ProductFunctionContext'
+import MemberNav2 from './MemberPageComponent/MemberNav2'
+import MemberNavsec from './MemberPageComponent/MemberNavsec'
+
 
 function MemberShopping_List() {
   //navigate and context
@@ -49,6 +52,7 @@ function MemberShopping_List() {
   return (
     <>
       <Navbar />
+      <MemberNavsec/>
       <div className="member_body">
         <MeberPage_Sidebar />
 
@@ -187,6 +191,7 @@ function MemberShopping_List() {
           </table>
         </div>
       </div>
+      <MemberNav2 />
     </>
   )
 }

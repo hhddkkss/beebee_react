@@ -4,6 +4,8 @@ import MeberPage_Sidebar from './MemberPageComponent/MeberPage_Sidebar'
 import axios from 'axios'
 import AuthContext from '../Contexts/AuthContext'
 import dayjs from 'dayjs'
+import MemberNav2 from './MemberPageComponent/MemberNav2'
+import MemberNavsec from './MemberPageComponent/MemberNavsec'
 
 function MemberCoupon_List() {
   const { setNavbarType } = useContext(AuthContext)
@@ -40,6 +42,7 @@ function MemberCoupon_List() {
     <>
       {/* {console.log(memberCouponArray, 77777)} */}
       <Navbar />
+      <MemberNavsec/>
       <div className="member_body">
         <MeberPage_Sidebar />
 
@@ -156,6 +159,7 @@ function MemberCoupon_List() {
           </table>
         </div>
       </div>
+      <MemberNav2 />
     </>
   )
 }

@@ -147,8 +147,8 @@ function HomePage() {
           </div>
         </div>
       </div>
-
-      <nav className="mobile_nav navbar-fixed-bottom d-sm-none">
+      <NavbarControlPanel />
+      {/* <nav className="mobile_nav navbar-fixed-bottom d-sm-none">
         <div className="row g-0">
           <div className="col-3">
             <div className="mobile_navcol">
@@ -184,7 +184,7 @@ function HomePage() {
             </div>
           </div>
         </div>
-      </nav>
+      </nav> */}
     </>
   )
 }

@@ -1,0 +1,23 @@
+.mobile_nav {
+  width: 375px;
+  height: 50px;
+  border-top: solid 1px #f4f4f4;
+  background-color: white;
+  position: sticky;
+  bottom: 0;
+}
+.NavbarControlPanel_i {
+  font-size: 9px;
+}
+
+.mobile_word {
+  text-align: center;
+  margin-bottom: 10px;
+  line-height: 10px;
+  padding: 10px;
+  font-size: 12px;
+}
+.NavbarControlPanel_ii{font-size: 18px;}
+
+.navsec{background-color: #F8F7F4;}
+

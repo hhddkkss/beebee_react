@@ -8,7 +8,8 @@ import Rating from '@mui/material/Rating'
 import { useParams } from 'react-router'
 import { useNavigate } from 'react-router'
 import MemberComment_Detail from './MemberComment_Detail'
-
+import MemberNav2 from './MemberPageComponent/MemberNav2'
+import MemberNavsec from './MemberPageComponent/MemberNavsec'
 
 function MemberComment_List() {
   const navigation = useNavigate()
@@ -32,6 +33,7 @@ function MemberComment_List() {
   return (
     <>
       <Navbar />
+      <MemberNavsec/>
       <div className="member_body">
         <MeberPage_Sidebar />
 
@@ -127,6 +129,7 @@ function MemberComment_List() {
        
         </div>
       </div>
+      <MemberNav2 />
     </>
   )
 }
