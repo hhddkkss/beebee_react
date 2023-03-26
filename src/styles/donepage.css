@@ -195,6 +195,10 @@
 .checkout-right {
   color: var(--textColorWhite);
 }
+.checkout-right-wrap {
+  position: sticky;
+  top: 32px;
+}
 .checkout-item-card {
   padding: 0 1rem;
   margin-bottom: 1rem;

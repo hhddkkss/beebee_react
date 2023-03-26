@@ -64,8 +64,9 @@ function FunctionalBar({
           {/* <!-- 商品篩選 --> */}
           <div className="product-sort">
             <a className="sort-to-list">
+        
               <i
-                className="fa-solid fa-list"
+                className={cardType ? "fa-solid fa-list card-type" : "fa-solid fa-table-cells-large card-type"}
                 onClick={() => {
                   setCardType(!cardType)
                   console.log(cardType)

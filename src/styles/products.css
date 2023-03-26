@@ -748,9 +748,21 @@ header {
     padding: 0;
   }
 
+  .like-list {
+    font-size: 18px;
+  }
+
+  .card-type {
+    font-size: 18px;
+    color: var(--wordGray);
+  }
+
   .sort-to-list {
     display: block;
     color: var(--wordGray);
+  }
+  .sort-selection {
+    font-size: 18px;
   }
 
   /** card-top */
@@ -819,6 +831,7 @@ header {
 
   .m-my-card {
     display: flex;
+    margin-bottom: 0.5rem;
   }
   .m-my-card .img-wrap {
     width: 120px;
@@ -830,12 +843,16 @@ header {
   }
   .m-card-right {
     width: 100%;
+    padding-left: 0.5rem;
   }
 
   .m-card-top,
   .m-card-middle,
   .m-card-bottom {
     display: flex;
+  }
+  .m-card-middle {
+    justify-content: space-between;
   }
 
   .m-card-top {
@@ -854,6 +871,7 @@ header {
   .m-card-middle .m-discount {
     color: red;
     font-size: 24px;
+    margin: 0;
   }
   .m-card-middle .m-discount::before {
     content: '$';
