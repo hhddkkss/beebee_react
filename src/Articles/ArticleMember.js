@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
+function ArticleMember({addDelLikeArt,likeIdList,artLikeList,setInputText}) {
     const navigation = useNavigate()
     const {article_id}=useParams()
     const {memberAuth}=useContext(AuthContext)
@@ -240,7 +240,14 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,getLikedArti}) {
                                               if(w){
                                                 return(
                                                   <div key={i} className="hashtags"
-                                                  style={{backgroundColor:HashTagColor(v.article_id,i)}}>{w}</div>
+                                                  style={{backgroundColor:HashTagColor(v.article_id,i)}}
+                                                  onClick={()=>{
+                                                    setInputText(w)
+                                                    setTimeout(()=>{
+                                                        navigation('/articles/searchArticles/'+w)
+                                                        setInputText('')
+                                                    },100)
+                                                }}>{w}</div>
                                               )
                                               }
                                               

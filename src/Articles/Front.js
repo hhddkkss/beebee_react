@@ -6,7 +6,7 @@ import { useLocation, useParams,useNavigate } from 'react-router-dom'
 import HashTagColor from './HashTagColor'
 
 
-function Front({frontData,setType}) {
+function Front({frontData,setType,setInputText}) {
     const navigation = useNavigate()
     
 
@@ -44,7 +44,14 @@ function Front({frontData,setType}) {
                                 if(v){
                                     return(
                                     <div key={i} className="hashtags"
-                                    style={{backgroundColor:HashTagColor(frontData[0].article_id,i)}}>{v}</div>
+                                    style={{backgroundColor:HashTagColor(frontData[0].article_id,i)}}
+                                    onClick={()=>{
+                                        setInputText(v)
+                                        setTimeout(()=>{
+                                            navigation('/articles/searchArticles/'+v)
+                                            setInputText('')
+                                        },100)
+                                    }}>{v}</div>
                                 )
                                 }
                                 
@@ -91,7 +98,14 @@ function Front({frontData,setType}) {
                                 if(v){
                                     return(
                                     <div key={i} className="hashtags"
-                                    style={{backgroundColor:HashTagColor(frontData[1].article_id,i)}}>{v}</div>
+                                    style={{backgroundColor:HashTagColor(frontData[1].article_id,i)}}
+                                    onClick={()=>{
+                                        setInputText(v)
+                                        setTimeout(()=>{
+                                            navigation('/articles/searchArticles/'+v)
+                                            setInputText('')
+                                        },100)
+                                    }}>{v}</div>
                                 )
                                 }
                                 
@@ -135,7 +149,14 @@ function Front({frontData,setType}) {
                                 if(v){
                                     return(
                                     <div key={i} className="hashtags"
-                                    style={{backgroundColor:HashTagColor(frontData[2].article_id,i)}}>{v}</div>
+                                    style={{backgroundColor:HashTagColor(frontData[2].article_id,i)}}
+                                    onClick={()=>{
+                                        setInputText(v)
+                                        setTimeout(()=>{
+                                            navigation('/articles/searchArticles/'+v)
+                                            setInputText('')
+                                        },100)
+                                    }}>{v}</div>
                                 )
                                 }
                                 

@@ -12,7 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 
-function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType}) {
+function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType,setInputText}) {
     const navigation = useNavigate()
     const {memberAuth} = useContext(AuthContext)
     // 將所有文章分類呈現
@@ -109,7 +109,14 @@ function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType
                                         if(v){
                                              return(
                                         <div key={i} className="hashtags"
-                                        style={{backgroundColor:HashTagColor(frontData[type-1].article_id,i)}}>{v}</div>
+                                        style={{backgroundColor:HashTagColor(frontData[type-1].article_id,i)}}
+                                        onClick={()=>{
+                                        setInputText(v)
+                                        setTimeout(()=>{
+                                            navigation('/articles/searchArticles/'+v)
+                                            setInputText('')
+                                        },100)
+                                    }}>{v}</div>
                                     )
                                         }
                                    
@@ -184,7 +191,14 @@ function CateArticle({frontData,allArtData,type,addDelLikeArt,likeIdList,setType
                                               if(w){
                                                 return(
                                                     <div key={i} className="hashtags"
-                                                    style={{backgroundColor:HashTagColor(v.article_id,i)}}>{w}</div>
+                                                    style={{backgroundColor:HashTagColor(v.article_id,i)}}
+                                                    onClick={()=>{
+                                                    setInputText(w)
+                                                    setTimeout(()=>{
+                                                        navigation('/articles/searchArticles/'+w)
+                                                        setInputText('')
+                                                    },100)
+                                                }}>{w}</div>
                                                 )
                                               }
                                                 

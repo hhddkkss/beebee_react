@@ -8,7 +8,7 @@ import ArticleSideBar from './ArticleSideBar'
 import HashTagColor from './HashTagColor'
 import { getLocalJustSeen } from './JustSeenArticle'
 
-function SingleArticle({allArtData,type,article_id, setType,addDelLikeArt,likeIdList}) {
+function SingleArticle({allArtData,type,article_id, setType,addDelLikeArt,likeIdList,setInputText}) {
     const navigation = useNavigate()
 
     const {memberAuth}=useContext(AuthContext)
@@ -155,7 +155,14 @@ useEffect(()=>{
                                  if(w){
                                     return(
                                     <div key={i} className="hashtags"
-                                    style={{backgroundColor:HashTagColor(v.article_id,i)}}>{w}</div>
+                                    style={{backgroundColor:HashTagColor(v.article_id,i)}}
+                                    onClick={()=>{
+                                                    setInputText(w)
+                                                    setTimeout(()=>{
+                                                        navigation('/articles/searchArticles/'+w)
+                                                        setInputText('')
+                                                    },100)
+                                                }}>{w}</div>
                                     )
                                  }
                                     
@@ -357,7 +364,14 @@ useEffect(()=>{
                                               if(w){
                                                 return(
                                                   <div key={i} className="hashtags"
-                                                  style={{backgroundColor:HashTagColor(v.article_id,i)}}>{w}</div>
+                                                  style={{backgroundColor:HashTagColor(v.article_id,i)}}
+                                                  onClick={()=>{
+                                                    setInputText(w)
+                                                    setTimeout(()=>{
+                                                        navigation('/articles/searchArticles/'+w)
+                                                        setInputText('')
+                                                    },100)
+                                                }}>{w}</div>
                                               )
                                               }
                                               
