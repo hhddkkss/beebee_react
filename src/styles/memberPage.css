@@ -347,7 +347,7 @@ body{
     gap: 5px;
 }
 .member_List>tbody>tr>td,.member_List>thead>tr>th,.member_shoppingList_detail>thead>tr>th,.member_shoppingList_detail>tbody>tr>td{
-    width: 150px;
+    width: 184px;
     display:flex;
     align-items: center;
     justify-self: center;

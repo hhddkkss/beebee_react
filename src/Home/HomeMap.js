@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Key } from './mapkey' // 引入 API key
 import GoogleMapReact from 'google-map-react'
 import '../../src/styles/Home.css'
-// import googleMapReact from 'google-map-react'
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>
 
@@ -30,11 +29,10 @@ class SimpleMap extends Component {
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
           >
-            <AnyReactComponent lat={59.955413} lng={30.337844} text="BEEbeE"/>
+            <AnyReactComponent lat={59.955413} lng={30.337844} text="BEEbeE" />
             {/* <Marker showingInfoWindow="true" activeMarker="marker" lat={25.033701} lng={121.5433038} /> */}
             {/* <Marker position={{ lat: 25.033701, lng: 121.5433038 }} /> */}
           </GoogleMapReact>
-         
         </div>
       </div>
     )

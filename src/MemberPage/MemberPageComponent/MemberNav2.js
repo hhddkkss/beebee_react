@@ -19,7 +19,7 @@ function NavbarControlPanel() {
         >
           <div className="mobile_navcol">
             <p className="m-0">
-            <i class="fa-solid fa-clipboard-list fa-lg"></i>
+            <i className="fa-solid fa-clipboard-list fa-lg"></i>
             </p>
             <p className="mobile_word">詳細訂單</p>
           </div>
@@ -49,7 +49,7 @@ function NavbarControlPanel() {
         >
           <div className="mobile_navcol">
             <p className="m-0 NavbarControlPanel_ii">
-            <i class="fa-solid fa-star fa-lg"></i>
+            <i className="fa-solid fa-star fa-lg"></i>
             </p>
             <p className="mobile_word">收藏清單</p>
           </div>

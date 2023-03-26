@@ -170,7 +170,7 @@ function MemberPage() {
     <>
     {console.log(passWordData,8888)}
       <Navbar />
-      <MemberNavsec/>
+      <MemberNavsec />
       {!!changeMember ? (
         <div className="member_body">
           <MemberPage_ChangeAvatar avatarOpen={avatarOpen} />
