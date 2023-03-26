@@ -112,6 +112,7 @@
 }
 .payment_shipping_box .member_shipping_detail tbody tr {
   width: 100%;
+  padding: 0.5rem;
 }
 
 .member_bill_detail,
@@ -128,6 +129,7 @@
 }
 .member_bill_detail > thead > tr,
 .member_shipping_detail > thead > tr {
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
   height: 100%;

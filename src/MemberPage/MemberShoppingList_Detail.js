@@ -236,15 +236,17 @@ function MemberShoppingList_Detail() {
                 <div className="formBottom_discription">運費</div>
                 <div className="formBottom_value">{fee} TW</div>
               </div>
-              <div className="formBottom_row">
-                <div className="formBottom_discription">折扣</div>
+
+              {purChaseDetail[0].coupon_name ?  <div className="formBottom_row">
+               <div className="formBottom_discription">折扣</div>
                 <div className="coupon_code">
                   {purChaseDetail[0].coupon_name}
                 </div>
                 <div className="formBottom_value">
-                  - {parseInt(purChaseDetail[0].discount).toLocaleString()} TW
+                  - {Number(purChaseDetail[0].discount).toLocaleString()} TW
                 </div>
-              </div>
+              </div>:""}
+
               <div className="formBottom_row">
                 <div className="formBottom_discription">訂單總額</div>
                 <div className="formBottom_value">

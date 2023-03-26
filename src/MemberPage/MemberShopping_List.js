@@ -88,7 +88,7 @@ function MemberShopping_List() {
                           }, 300)
                         }}
                       >
-                        VEIW MORE
+                        查看更多
                       </button>
                     </td>
                   </tr>
@@ -139,7 +139,7 @@ function MemberShopping_List() {
                           }, 300)
                         }}
                       >
-                        VEIW MORE
+                       查看更多
                       </button>
                     </td>
                   </tr>

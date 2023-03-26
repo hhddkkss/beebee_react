@@ -13,7 +13,7 @@ function MemberComment_Detail() {
   const navigation = useNavigate()
   const {memberAuth} = useContext(AuthContext)
   const [singleComment,setSingleComment] = useState([])
-  const[infoText,setInfoText] = useState('')
+  const[infoText,setInfoText] = useState('必填')
   const {p_comment_id}=useParams()
   const [editComment,setEditComment]=useState({
     star:0,
@@ -106,7 +106,9 @@ const postSingleComment= async()=>{
 
                     <td>
                     <div><Rating name="star" value={editComment.star}  onChange={(e)=>{
-                          setEditComment({...editComment,star:parseInt(e.target.value)})
+                          setEditComment({...editComment,star:parseInt(e.target.value)
+                          } ) 
+                          if(e.target.value>0){setInfoText('')}
                         
                     }}/><p className='rating_star_info'>{infoText}</p></div>
                     </td>
@@ -141,11 +143,14 @@ const postSingleComment= async()=>{
           </button>: 
           <button className="btn basic_infomation_confirm memberPage_button"
           onClick={()=>{
-            if(editComment.star!==0){
+            if(memberAuth.token && memberAuth.authorized){
+               if(editComment.star!==0){
                postSingleComment()
             }else{
               setInfoText('請為商品評分')
             }
+            }
+           
            
           }}>
             送出評價

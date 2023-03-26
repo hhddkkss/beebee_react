@@ -169,7 +169,7 @@ function DonePage() {
                   </div>
                   <div className="checkout-item-info">
                     <p>{v.product_name}</p>
-                    <p>{v.product_price}</p>
+                    <p>{Number(v.product_price).toLocaleString()}</p>
                   </div>
                 </div>
               </div>
@@ -180,7 +180,7 @@ function DonePage() {
           <p className="checkout-detail">付款明細</p>
           <div className="checkout-cal">
             <p>合計</p>
-            <p>{donepageData.orderAll.totalPrice}</p>
+            <p>{Number(donepageData.orderAll.totalPrice).toLocaleString()}</p>
           </div>
           <div className="checkout-fee">
             <p>運費</p>
@@ -189,14 +189,14 @@ function DonePage() {
           {donepageData.orderAll.discount ? (
             <div className="checkout-discount">
               <p>折扣</p>
-              <p>{donepageData.orderAll.discount}</p>
+              <p>{Number(donepageData.orderAll.discount).toLocaleString()}</p>
             </div>
           ) : (
             ''
           )}
           <div className="checkout-total">
             <p>總金額</p>
-            <p>{donepageData.orderAll.finalPrice}</p>
+            <p>{Number(donepageData.orderAll.finalPrice).toLocaleString()}</p>
           </div>
           <div className="bottom-slogan">
             <svg

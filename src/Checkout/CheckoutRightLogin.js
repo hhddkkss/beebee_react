@@ -24,6 +24,10 @@ function CheckoutRightLogin({
   }, [])
   return (
     <>
+
+    <div className='checkout-right-wrap'>
+
+  
       <div className="checkout-items">
         {cartData.map((v) => {
           return (
@@ -105,6 +109,9 @@ function CheckoutRightLogin({
       >
         立即下單
       </button>
+
+  </div>
+
     </>
   )
 }
