@@ -73,7 +73,7 @@ function MemberComment_List() {
                     navigation(`/member_page/membercomment_list/${v.p_comment_id}`,{state:{p_comment_id:v.p_comment_id}})
 
                   }}>
-                   {v.comment_done?'VEIW MORE':<><i className="fa-regular fa-pen-to-square"></i> EDIT</>} 
+                   {v.comment_done?'查看更多':<><i className="fa-regular fa-pen-to-square"></i> 編輯</>} 
                   </button>
                 </td>
               </tr>)

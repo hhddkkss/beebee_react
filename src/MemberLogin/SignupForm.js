@@ -22,7 +22,9 @@ function SignipForm(props) {
     setShow,
     googleLoginUrl,
     setSignupForm,
-    setErrorMessage
+    setErrorMessage,
+    handleOpen
+
   } = props
   const [cityList, setCityList] = useState([])
   const [allDistList, setAllDistList] = useState([])
@@ -392,6 +394,8 @@ function SignipForm(props) {
                         })
                       )
                       setInfoState(2)
+                      handleOpen()
+
                       //setAuth
                       setMemberAuth({
                         authorized: success,
@@ -401,10 +405,14 @@ function SignipForm(props) {
                       })
                     } else {
                       setInfoState(3)
+                      handleOpen()
+
                     }
                   })
                 }else{
                   setInfoState(3)
+                  handleOpen()
+
                 }
   
               }}

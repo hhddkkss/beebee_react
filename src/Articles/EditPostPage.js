@@ -1,13 +1,15 @@
 import axios from 'axios'
 import  Dayjs  from 'dayjs'
 import React,{useState,useContext,useEffect,useRef} from 'react'
-import { json } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { MEMBER_DELETE_POST,POST_PIC,HOST,GET_SINGLE_ARTICLE_POST,MEMBER_EDIT_POST } from '../component/LoginApi'
 import AuthContext from '../Contexts/AuthContext'
 import HashTagColor from './HashTagColor'
-import ArticleInfo from './ArticleInfo'
+import Box from '@mui/material/Box'
+import Modal from '@mui/material/Modal'
 
 function EditPostPage({article_id}) {
+  const navigation = useNavigate()
     // info
     const [infoState,setInfoState]=useState(1)
     const [infoText,setInfoText]=useState('')
@@ -162,18 +164,62 @@ const[ogVal,setOgVal]  =useState('')
           if(result.data.success){
             setInfoState(2)
             x==1?setInfoText('成功發布！'):setInfoText('成功下架文章囉！')
+            handleOpen()
           }else{
             setInfoState(3)
             setInfoText('Opps！文章未被儲存')
+            handleOpen()
+
           }} else{
             setInfoState(3)
             setInfoText(`請確認 ${errorMessage.title}${errorMessage.category}${errorMessage.article_pic_main}${errorMessage.content_1} 不得為空`)
+            handleOpen()
+
           }
         }}
 
 
+         //modal style
+         const style = {
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 250,
+          bgcolor: '#222222de',
+          color: '#fff',
+          // border: '2px solid #000',
+          boxShadow: 24,
+          pt: 2,
+          px: 4,
+          pb: 3,
+          borderRadius: '3px',
+          textAlign:'center',
+        }
+      
+        const [open, setOpen] = useState(false)
+        const handleOpen = () => {
+          setOpen(true)
+        }
+        const handleClose = () => {
+          setOpen(false)
+        }
+      
+ // 刪除文章
+ const DeletePosts = async(aid)=>{
+  const result = await axios.post(MEMBER_DELETE_POST,{
+    article_id:aid
+  })
+  console.log('delete',result);
+  if(result.data.success){
+    setInfoState(2)
+    setInfoText('成功刪除！')
+  }else{
+    setInfoState(3)
+    setInfoText('Opps！文章未被儲存')
+  }
 
-
+}
 
 
 
@@ -299,7 +345,8 @@ const[ogVal,setOgVal]  =useState('')
             onClick={(e)=>{
               if(memberAuth.memberId && memberAuth.authorized){
                 setInfoText('確定刪除文章?')
-              setInfoState(4)          }}}>
+              setInfoState(4)
+              handleOpen()          }}}>
                 <i className="fa-solid fa-trash"></i> 刪除文章
                 </button>
         <button className="btn post_add_button bg_gray"
@@ -353,7 +400,31 @@ const[ogVal,setOgVal]  =useState('')
     </div>
 
 
-  <ArticleInfo infoClass={infoClass} setInfoState={setInfoState} infoState={infoState} infoText={infoText} article_id={postUpload.article_id} setInfoText={setInfoText}/>
+    <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style }}>
+          <p id="child-modal-description">{infoText}</p>
+          <button
+            className="btn btn-cancel"
+            onClick={() => {
+              if(infoState !== 2 && infoState ===4){
+                setInfoState(1)
+                DeletePosts(article_id)
+                navigation('/articles/member/postEd')}
+              if(infoState === 2 && infoState !==4){navigation('/articles/member/postEd')}
+              if(infoState !== 2 && infoState !==4){handleClose()}
+
+            }}
+            style={{ color: 'gray' }}
+          >
+            {infoState !== 2 && infoState === 4 ? '確定刪除':'確定'}
+          </button>
+        </Box>
+      </Modal>
 
 
 
