@@ -393,7 +393,7 @@ function MemberShoppingList_Detail() {
                 {purChaseDetail[0].coupon_name} TW
               </div>
               <div className="formBottom_value">
-                - {parseInt(purChaseDetail[0].discount).toLocaleString()} TW
+                - {Number(purChaseDetail[0].discount).toLocaleString()} TW
               </div>
             </div>
             <div className="formBottom_row">

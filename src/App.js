@@ -20,6 +20,7 @@ import MemberShopping_List_Detail from './MemberPage/MemberShoppingList_Detail'
 import MemberLevel from './MemberPage/MemberLevel'
 import MemberCustomerService from './MemberPage/MemberCustomerService'
 import EventPage from './EventPage.js'
+import Animation from './Animation/Animation'
 
 
 function App() {
@@ -73,6 +74,8 @@ function App() {
                   element={<Articles />}
                 />
                 <Route path='/beebee_event' element={<EventPage/>}/>
+                <Route path='/animation' element={<Animation/>}/>
+              
               </Routes>
             </CompareContextProvider>
           </ProductFunctionContextProvider>

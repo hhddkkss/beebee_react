@@ -6,6 +6,7 @@ import AuthContext from '../Contexts/AuthContext'
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
 import { useNavigate } from 'react-router-dom'
+import Animation from '../Animation/Animation'
 
 function EventPage() {
   const navigation= useNavigate()
@@ -62,6 +63,7 @@ const handleClose = () => {
   },[])
   return (
     <>
+    <Animation/>
        <Navbar />
       <div className="event_head">
         <div className="evnet_word">
