@@ -45,7 +45,7 @@ function NavbarMemberBox({ memberBoxRef }) {
     
 
         <div className="member_info">
-          {memberAuth.authorized
+          {memberAuth.authorized && memberAuth.memberName
             ? '歡迎 ' +
               memberAuth.memberName.substring(memberAuth.memberName.length - 2, memberAuth.memberName.length)
             : '歡迎~請先登入'}

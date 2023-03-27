@@ -74,7 +74,8 @@ function SignipForm(props) {
         <div className="now_page login_mobile_hidden"
          onClick={(e)=>{
           e.preventDefault()
-          setSignupForm({
+          setSignupForm({...signupForm,
+            name:'比比編',
             password: '',
             mobile: '0982034566',
             gender: 'male',
@@ -393,7 +394,7 @@ function SignipForm(props) {
                         })
                       )
                       setInfoState(2)
-                      handleOpen()
+                     
 
                       //setAuth
                       setMemberAuth({
@@ -401,7 +402,11 @@ function SignipForm(props) {
                         memberId: data.sid,
                         memberEmail: data.email,
                         token: token,
-                      })
+                      }) 
+                    setTimeout(()=>{handleOpen()},10)
+                        
+                     
+                      
                     } else {
                       setInfoState(3)
                       handleOpen()
