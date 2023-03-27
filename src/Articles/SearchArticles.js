@@ -7,7 +7,7 @@ import ArticleSideBar from './ArticleSideBar'
 import HashTagColor from './HashTagColor'
 import AuthContext from '../Contexts/AuthContext'
 
-function SearchArticles({frontData,allArtData,type,addDelLikeArt,likeIdList,setType}) {
+function SearchArticles({frontData,allArtData,type,addDelLikeArt,likeIdList,setType,setInputText}) {
     const navigation = useNavigate()
     const { article_id } = useParams()
     const {memberAuth} = useContext(AuthContext)
@@ -99,7 +99,14 @@ function SearchArticles({frontData,allArtData,type,addDelLikeArt,likeIdList,setT
                                               if(w){
                                                 return(
                                                     <div key={i} className="hashtags"
-                                                    style={{backgroundColor:HashTagColor(v.article_id,i)}}>{w}</div>
+                                                    style={{backgroundColor:HashTagColor(v.article_id,i)}}
+                                                    onClick={()=>{
+                                                    setInputText(w)
+                                                    setTimeout(()=>{
+                                                        navigation('/articles/searchArticles/'+w)
+                                                        setInputText('')
+                                                    },100)
+                                                }}>{w}</div>
                                                 )
                                               }
                                                 
