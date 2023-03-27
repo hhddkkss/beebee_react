@@ -67,7 +67,7 @@ const handleClose = () => {
        <Navbar />
       <div className="event_head">
         <div className="evnet_word">
-          你不能錯過的 BEEbeE 優惠
+          <img src="http://localhost:3003/event/coupon-1.png" alt="" />
         </div>
 
 
