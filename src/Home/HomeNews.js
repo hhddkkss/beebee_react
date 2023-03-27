@@ -36,6 +36,9 @@ function HomeNews() {
                           className="home_news_img"
                           src={HOST + '/articlePic/' + v.article_pic_main}
                           alt="news1"
+                          onClick={() => {
+                            navigation('/articles/beebeePostNO/' + v.article_id)
+                          }}
                         />
                       </div>
                       <div className="home_news_word">
