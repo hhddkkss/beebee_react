@@ -27,7 +27,7 @@ function HomeNews() {
         <div className="row home_news2">
           {data.map((v, i) => {
             return (
-              <Fragment key={v.id}>
+              <Fragment key={v.article_id}>
                 <div className="col-sm-4 p-2">
                   <div className="home_news_card">
                     <div className="column">
