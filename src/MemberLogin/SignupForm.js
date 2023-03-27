@@ -75,11 +75,9 @@ function SignipForm(props) {
          onClick={(e)=>{
           e.preventDefault()
           setSignupForm({
-            name: '張筱玥',
-            email: 'bee0329@gmail.com',
             password: '',
             mobile: '0982034566',
-            gender: 'female',
+            gender: 'male',
             birthday: '1999-03-29',
             address_city: '臺北市',
             address_dist: '松山區',
