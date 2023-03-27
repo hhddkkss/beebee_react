@@ -30,6 +30,7 @@ function MemberLogin() {
     address_city: '請選擇縣市',
     address_dist: '請選擇鄉鎮區',
     address_rd: '',
+    memberPic:null
   })
   const [infoState, setInfoState] = useState(1)
 
@@ -37,8 +38,9 @@ function MemberLogin() {
 
   const paramsChange=()=>{
     if(state && state.email){
+      console.log('pic',state.member_pic);
       setActive(state.isActive)
-      setSignupForm({...signupForm,name:state.name,email:state.email})
+      setSignupForm({...signupForm,name:state.name,email:state.email,memberPic:state.member_pic})
       setErrorMessage({email_s:state.text})
     }
     if(state && state.text2){
