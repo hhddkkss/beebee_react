@@ -4,7 +4,7 @@
   border-top: solid 1px #f4f4f4;
   background-color: white;
   position: fixed;
-  bottom: 0;
+  bottom: 0px;
 }
 .NavbarControlPanel_i {
   font-size: 9px;
@@ -14,7 +14,7 @@
   text-align: center;
   margin-bottom: 10px;
   line-height: 10px;
-  padding: 10px;
+  padding-top: 5px;
   font-size: 12px;
 }
 .NavbarControlPanel_ii{font-size: 18px;}
