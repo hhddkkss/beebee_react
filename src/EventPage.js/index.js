@@ -47,7 +47,7 @@ function EventPage() {
           <div className="coupon_card" style={{background:'url(http://localhost:3003/event/coupon_orange.png)'}}>
             <div className="coupon_button_area">
               <div className="title">BEEbeE <br/>COUPON</div>
-              {alreadyHas.includes('17')?<> <button className="btn coupon_check_btn bg_pink"
+              {alreadyHas.includes('1')?<> <button className="btn coupon_check_btn bg_pink"
             onClick={(e)=>{
               e.preventDefault()
             }}>
@@ -56,7 +56,7 @@ function EventPage() {
                 </button></>:<><button className="btn coupon_check_btn bg_pink"
             onClick={(e)=>{
               if(memberAuth.authorized){
-                getCoupon(17)
+                getCoupon(1)
                 setTimeout(()=>{
                   getMemberAlreadyHas()
                 },10)
@@ -82,7 +82,7 @@ function EventPage() {
             <div className="coupon_button_area">
               <div className="title">BEEbeE <br/>COUPON</div>
 
-              {alreadyHas.includes('85')?<> <button className="btn coupon_check_btn bg_pink"
+              {alreadyHas.includes('2')?<> <button className="btn coupon_check_btn bg_pink"
             onClick={(e)=>{
               e.preventDefault()
             }}>
@@ -91,7 +91,7 @@ function EventPage() {
                 </button></>:<><button className="btn coupon_check_btn bg_pink"
             onClick={(e)=>{
               if(memberAuth.authorized){
-                getCoupon(85)
+                getCoupon(2)
                 setTimeout(()=>{
                   getMemberAlreadyHas()
                 },10)
@@ -123,7 +123,7 @@ function EventPage() {
           <div className="coupon_card" style={{background:'url(http://localhost:3003/event/coupon_blue.png)'}}>
             <div className="coupon_button_area">
               <div className="title">BEEbeE <br/>COUPON</div>
-              {alreadyHas.includes('72')?<> <button className="btn coupon_check_btn bg_pink"
+              {alreadyHas.includes('3')?<> <button className="btn coupon_check_btn bg_pink"
             onClick={(e)=>{
               e.preventDefault()
             }}>
@@ -132,7 +132,7 @@ function EventPage() {
                 </button></>:<><button className="btn coupon_check_btn bg_pink"
             onClick={(e)=>{
               if(memberAuth.authorized){
-                getCoupon(72)
+                getCoupon(3)
                 setTimeout(()=>{
                   getMemberAlreadyHas()
                 },10)
@@ -158,7 +158,7 @@ function EventPage() {
             <div className="coupon_button_area">
               <div className="title">BEEbeE <br/>COUPON</div>
 
-              {alreadyHas.includes('30')?<> <button className="btn coupon_check_btn bg_pink"
+              {alreadyHas.includes('4')?<> <button className="btn coupon_check_btn bg_pink"
             onClick={(e)=>{
               e.preventDefault()
             }}>
@@ -167,7 +167,7 @@ function EventPage() {
                 </button></>:<><button className="btn coupon_check_btn bg_pink"
             onClick={(e)=>{
               if(memberAuth.authorized){
-                getCoupon(30)
+                getCoupon(4)
                 setTimeout(()=>{
                   getMemberAlreadyHas()
                 },10)

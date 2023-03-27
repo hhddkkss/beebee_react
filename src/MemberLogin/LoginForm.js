@@ -34,7 +34,7 @@ function LoginForm(props) {
           
           setLoginForm({
             email: 'yen1@test.com',
-            password: '123456',
+            password: 'Qq12345',
           })
         }}>Log in</div>
    
