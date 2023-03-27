@@ -19,6 +19,7 @@ import MemberShopping_List from './MemberPage/MemberShopping_List'
 import MemberShopping_List_Detail from './MemberPage/MemberShoppingList_Detail'
 import MemberLevel from './MemberPage/MemberLevel'
 import MemberCustomerService from './MemberPage/MemberCustomerService'
+import EventPage from './EventPage.js'
 
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
                   path="/articles/:nowPage/:article_id"
                   element={<Articles />}
                 />
+                <Route path='/beebee_event' element={<EventPage/>}/>
               </Routes>
             </CompareContextProvider>
           </ProductFunctionContextProvider>

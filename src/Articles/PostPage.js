@@ -79,8 +79,8 @@ function PostPage() {
       }
 // 分類按鈕
       const changeMemArtCateBtn=(x)=>{
-        if(x == postUpload.category) {return 'btn category_radio active article_mb_hidden'}
-        else{return 'btn category_radio article_mb_hidden'}
+        if(x == postUpload.category) {return 'btn category_radio active '}
+        else{return 'btn category_radio '}
      }
 
 // hashtag

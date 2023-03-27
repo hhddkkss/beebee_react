@@ -142,7 +142,9 @@ function Navbar() {
               >
                 比比會員
               </button>
-              <button className="btn">關於比比</button>
+              <button className="btn" onClick={()=>{
+                navigation('/beebee_event')
+              }}>比比活動</button>
             </div>
           </div>
           <div className="nav_top">
