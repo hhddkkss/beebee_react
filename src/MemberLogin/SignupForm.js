@@ -223,6 +223,7 @@ function SignipForm(props) {
               電話
             </label>
             <input
+              maxLength={10}
               type="text"
               placeholder="09-"
               name="mobile"
