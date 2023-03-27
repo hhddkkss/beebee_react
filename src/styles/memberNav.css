@@ -3,7 +3,7 @@
   height: 50px;
   border-top: solid 1px #f4f4f4;
   background-color: white;
-  position: sticky;
+  position: fixed;
   bottom: 0;
 }
 .NavbarControlPanel_i {
