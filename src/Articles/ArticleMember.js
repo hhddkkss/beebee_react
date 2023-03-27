@@ -128,7 +128,7 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,setInputText}) {
             
 
             <div className="articles_container">
-                <div className={article_id=='liked'?"article_member_page_title like_posts article_mb_hidden":"article_member_page_title his_posts article_mb_hidden"}><span>
+                <div className={article_id=='liked'?"article_member_page_title like_posts ":"article_member_page_title his_posts "}><span>
                 {article_id=='liked'?'收藏':'歷史文章'}</span></div>
                 
                
@@ -152,7 +152,7 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,setInputText}) {
                                     <MenuItem value={2}>由新至舊</MenuItem>
                                     </Select>
                                 </FormControl>
-                            <label htmlFor="article_order">文章分類 　<i className="fa-solid fa-caret-right"></i></label>
+                            <label htmlFor="article_order" className='article_mb_hidden'>文章分類 　<i className="fa-solid fa-caret-right"></i></label>
                             <button onClick={()=>{ 
                                 setMemNowCate(4)
                                 if(article_id=='liked'){
@@ -189,7 +189,12 @@ function ArticleMember({addDelLikeArt,likeIdList,artLikeList,setInputText}) {
                                草稿
                             </button>:''}
                         </div>
-                       
+                        {}
+                        <button onClick={()=>{
+                                article_id=='liked'?navigation('/articles/member/postEd'):navigation('/articles/member/liked')
+                            }} className=' btn category_radio article_mb_show'>
+                               {article_id=='liked'?'歷史文章':'收藏'}
+                            </button>
                     </div>
                     {showMemData[0]?
                         <div className="article_list">

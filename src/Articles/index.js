@@ -255,7 +255,7 @@ function Articles() {
 
                 
                 
-                <FormControl variant="standard"  sx={{...style }}>
+                <FormControl className='article_mb_show' variant="standard"  sx={{...style }}>
                                     <Select
                                     displayEmpty
                                     labelId="demo-simple-select-standard-label"

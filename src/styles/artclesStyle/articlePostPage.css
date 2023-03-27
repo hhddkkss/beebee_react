@@ -183,4 +183,8 @@ input.post_article_box:focus{
     .articles_container{
         padding: 5px
     }
+
+    .post_form_check_button>.post_add_button{
+        font-size: 14px;
+    }
 }

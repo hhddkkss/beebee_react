@@ -16,6 +16,7 @@ function BeeLoginGoogle() {
     const [loginForm, setLoginForm] = useState({
         email: '',
         password: '',
+        member_pic:'',
       })
 
     const getGoogleMember = async()=>{
@@ -28,7 +29,8 @@ function BeeLoginGoogle() {
         setLoginForm({
             email: result.data.email,
             token:result.data.token,
-            name:result.data.name
+            name:result.data.name,
+            member_pic:result.data.pic
         })
        }
      }
@@ -64,7 +66,8 @@ function BeeLoginGoogle() {
                   navigation('/')
                   //console.log(memberAuth)
                 } else {
-                    navigation('/member_login',{state:{isActive:2,text:'您尚未註冊',name:loginForm.name,email:loginForm.email}})
+                  
+                    navigation('/member_login',{state:{isActive:2,text:'您尚未註冊',name:loginForm.name,email:loginForm.email,member_pic:loginForm.member_pic}})
                    }
                  })
         }

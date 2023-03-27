@@ -293,7 +293,7 @@ body{
     stroke:#f4f4f4
 }
 .article_mb_show{
-    display: none;
+    display: none !important;
 }
 
 /** 商品區 搜尋 */
@@ -391,7 +391,7 @@ body{
         display: none !important;
     }
     .article_mb_show{
-        display: inline-block;
+        display: inline-block !important;
     }
 
     .article_title_bar{

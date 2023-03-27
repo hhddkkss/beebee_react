@@ -51,7 +51,7 @@ function MemberPage_ChangePassword({ onHide }) {
             <div className="member_box">
               <label htmlFor="old_password">原密碼</label>
               <input
-                type="text"
+                type="password"
                 name="old_password"
                 value={password.old_password}
                 onChange={(e) => {
@@ -65,7 +65,7 @@ function MemberPage_ChangePassword({ onHide }) {
             <div className="member_box">
               <label htmlFor="new_password">新密碼</label>
               <input
-                type="text"
+                type="password"
                 name="new_password"
                 value={password.new_password}
                 onChange={(e) => {
@@ -77,7 +77,7 @@ function MemberPage_ChangePassword({ onHide }) {
             <div className="member_box">
               <label htmlFor="new_password">請再次輸入新密碼</label>
               <input
-                type="text"
+                type="password"
                 name="confirm_new_password"
                 value={password.confirm_new_password}
                 onChange={(e) => {
@@ -104,7 +104,7 @@ function MemberPage_ChangePassword({ onHide }) {
                   setChangeClick(true)
                   upDatePassword()
                   onHide()
-                  alert("修改成功")
+                  alert('修改成功')
                 } else {
                   setChangeClick(false)
                 }

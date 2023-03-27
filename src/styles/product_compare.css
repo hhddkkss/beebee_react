@@ -381,10 +381,27 @@
 .compare_item_property::-webkit-scrollbar-track {
   box-shadow: transparent;
 }
+.compare_list_box > .compare_tips {
+  font-size: 14px;
+  color: #d32323;
+}
+.compare_list_box > .compare_tips.compare_m_hide {
+  display: block;
+}
 
+.compare_list_box > .compare_tips.compare_m_show {
+  display: none !important;
+}
 /* 手機板 */
 
 @media screen and (max-width: 375px) {
+  .compare_list_box > .compare_tips.compare_m_hide {
+    display: none !important;
+  }
+
+  .compare_list_box > .compare_tips.compare_m_show {
+    display: block !important;
+  }
   .compare_list_box {
     width: 250px;
     height: 600px;

@@ -20,6 +20,8 @@ function ProductCompareListBox(props) {
     <>
       <div className={compareListClass}>
         <p>選擇產品比較</p>
+        <p className='compare_tips compare_m_hide'>請選擇三項商品比較</p>
+        <p className='compare_tips compare_m_show'>請選擇二項商品比較</p>
         <div className="compare_type_btn_group">
           {/*  選擇加"compare_type_btn_hover" */}
           <button
