@@ -74,7 +74,7 @@ const handleClose = () => {
         <div className="coupon_area">
 
 
-          <div className="coupon_card" style={{background:'url(http://localhost:3003/event/coupon_orange.png)'}}>
+          <div className="coupon_card og" >
             <div className="coupon_button_area">
               <div className="title">BEEbeE <br/>COUPON</div>
               {alreadyHas.includes('1')?<> <button className="btn coupon_check_btn bg_pink"
@@ -108,7 +108,7 @@ const handleClose = () => {
 
           </div>
 
-          <div className="coupon_card" style={{background:'url(http://localhost:3003/event/coupon_blue.png)'}}>
+          <div className="coupon_card bl" >
             <div className="coupon_button_area">
               <div className="title">BEEbeE <br/>COUPON</div>
 
@@ -150,7 +150,7 @@ const handleClose = () => {
         <div className="coupon_area">
 
 
-          <div className="coupon_card" style={{background:'url(http://localhost:3003/event/coupon_blue.png)'}}>
+          <div className="coupon_card bl" >
             <div className="coupon_button_area">
               <div className="title">BEEbeE <br/>COUPON</div>
               {alreadyHas.includes('3')?<> <button className="btn coupon_check_btn bg_pink"
@@ -184,7 +184,7 @@ const handleClose = () => {
 
           </div>
 
-          <div className="coupon_card" style={{background:'url(http://localhost:3003/event/coupon_orange.png)'}}>
+          <div className="coupon_card og">
             <div className="coupon_button_area">
               <div className="title">BEEbeE <br/>COUPON</div>
 
