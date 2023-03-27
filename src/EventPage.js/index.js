@@ -3,8 +3,12 @@ import Navbar from '../component/Navbar'
 import './../styles/Event.css'
 import axios from 'axios'
 import AuthContext from '../Contexts/AuthContext'
+import Box from '@mui/material/Box'
+import Modal from '@mui/material/Modal'
+import { useNavigate } from 'react-router-dom'
 
 function EventPage() {
+  const navigation= useNavigate()
   const {memberAuth,setNavbarType} = useContext(AuthContext)
   const getCoupon= async (couponId)=>{
     if(memberAuth.token&&memberAuth.authorized){
@@ -25,6 +29,30 @@ function EventPage() {
     }
 
   }
+ //modal style
+ const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: '#222222de',
+  color: '#fff',
+  // border: '2px solid #000',
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+  borderRadius: '3px',
+}
+
+const [open, setOpen] = useState(false)
+const handleOpen = () => {
+  setOpen(true)
+}
+const handleClose = () => {
+  setOpen(false)
+}
 
 
 
@@ -60,7 +88,7 @@ function EventPage() {
                 setTimeout(()=>{
                   getMemberAlreadyHas()
                 },10)
-              }
+              }else{handleOpen()}
             }}>
                <i className="fa-solid fa-check"></i>
                     
@@ -95,7 +123,7 @@ function EventPage() {
                 setTimeout(()=>{
                   getMemberAlreadyHas()
                 },10)
-              }
+              }else{handleOpen()}
             }}>
                <i className="fa-solid fa-check"></i>
                     
@@ -136,7 +164,7 @@ function EventPage() {
                 setTimeout(()=>{
                   getMemberAlreadyHas()
                 },10)
-              }
+              }else{handleOpen()}
             }}>
                <i className="fa-solid fa-check"></i>
                     
@@ -171,7 +199,7 @@ function EventPage() {
                 setTimeout(()=>{
                   getMemberAlreadyHas()
                 },10)
-              }
+              }else{handleOpen()}
             }}>
                <i className="fa-solid fa-check"></i>
                     
@@ -198,6 +226,25 @@ function EventPage() {
       <div className="event_foot">
         
       </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="child-modal-title"
+        aria-describedby="child-modal-description"
+      >
+        <Box sx={{ ...style, width: 200 }}>
+          <p id="child-modal-description">請登入再進行操作</p>
+          <button
+            className="btn btn-cancel"
+            onClick={() => {
+              navigation('/member_login')
+            }}
+            style={{ color: 'gray' }}
+          >
+            登入
+          </button>
+        </Box>
+      </Modal>
     </>
   )
 }

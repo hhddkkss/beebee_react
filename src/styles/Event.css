@@ -59,6 +59,7 @@
     align-items: center;
     gap: 30px;
     z-index: 5;
+    font-weight: 600;
 }
 
 .coupon_button_area>.coupon_check_btn.bg_pink::before{
@@ -82,7 +83,7 @@
     top:0;
     border-radius: 3px;
     transition: all.3s;
-    background-color: #300d045e;
+    background-color: #f3ce4a5e;
     z-index: -1;
 }
 .coupon_button_area>.coupon_check_btn:hover::after{
