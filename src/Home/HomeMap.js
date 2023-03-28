@@ -1,51 +1,39 @@
-import React, { Component } from 'react'
+import React, { Component, useMemo } from 'react'
 import { Key } from './mapkey' // 引入 API key
-import GoogleMapReact from 'google-map-react'
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api'
 import '../../src/styles/Home.css'
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>
+//
+const containerStyle = {
+  width: '100%',
+  height: '600px',
+}
+export default function HomeMap() {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: Key,
+  })
 
-// const Marker = ({ lat, lng }) => <div className="marker"></div>;
-
-// Map
-class SimpleMap extends Component {
-  static defaultProps = {
-    center: {
-      lat: 25.033701,
-      lng: 121.5433038,
-    },
-    zoom: 17,
-    mapId: 'd2167fcb41691f5e',
-  }
-
-  render() {
-    return (
-      // Important! Always set the container height explicitly
-      <div className="home_map">
-        <div className="home_map_issue">BEEbeE在哪裡，絕對難不倒你</div>
-        <div className="home_map_google">
-          <GoogleMapReact
-            bootstrapURLKeys={{ key: Key }}
-            defaultCenter={this.props.center}
-            defaultZoom={this.props.zoom}
-          >
-            <AnyReactComponent lat={59.955413} lng={30.337844} text="BEEbeE" />
-            {/* <Marker showingInfoWindow="true" activeMarker="marker" lat={25.033701} lng={121.5433038} /> */}
-            {/* <Marker position={{ lat: 25.033701, lng: 121.5433038 }} /> */}
-          </GoogleMapReact>
-        </div>
-      </div>
-    )
-  }
+  if (!isLoaded) return <div>.</div>
+  return <Map />
 }
 
-// App
-function App() {
+function Map() {
+  const center = useMemo(() => ({ lat: 25.0337058, lng: 121.5411098 }), [])
+
   return (
-    <div className="App">
-      <SimpleMap />
+    // Important! Always set the container height explicitly
+    <div className="home_map">
+      <div className="home_map_issue">BEEbeE在哪裡，絕對難不倒你</div>
+      <div className="home_map_google">
+        <GoogleMap
+          zoom={17}
+          center={center}
+          mapContainerClassName="map-container"
+          mapContainerStyle={containerStyle}
+        >
+          <Marker position={center} />
+        </GoogleMap>
+      </div>
     </div>
   )
 }
-
-export default App

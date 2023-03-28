@@ -68,8 +68,6 @@ function MemberPage() {
     }
   }
 
-  
-
   function setLoginFormValue(e) {
     setLoginForm({ ...loginForm, [e.target.name]: e.target.value })
   }
@@ -168,7 +166,7 @@ function MemberPage() {
 
   return (
     <>
-    {console.log(passWordData,8888)}
+      {console.log(passWordData, 8888)}
       <Navbar />
       <MemberNavsec />
       {!!changeMember ? (
@@ -181,25 +179,29 @@ function MemberPage() {
           <div className="member_container">
             <div className="now_memberPage">會員詳細資料</div>
             <div className="avatar_box member_mobile_show">
-            
-            <button className="memberAvatar" onClick={(e) => {
-                e.preventDefault()
-                uploadInput.current.click()
-              }}>
-              <img
-                src={changeMember.member_pic}
-                alt="memberAvatar"
+              <button
                 className="memberAvatar"
-              ></img></button>
+                onClick={(e) => {
+                  e.preventDefault()
+                  uploadInput.current.click()
+                }}
+              >
+                <img
+                  src={changeMember.member_pic}
+                  alt="memberAvatar"
+                  className="memberAvatar"
+                ></img>
+              </button>
               <input
-              type="file"
-              ref={uploadInput}
-              className="d-none"
-              onChange={(e) => {
-                //上傳照片
-                handleUpload(e)
-              }}></input>
-              
+                type="file"
+                ref={uploadInput}
+                className="d-none"
+                onChange={(e) => {
+                  //上傳照片
+                  handleUpload(e)
+                }}
+              ></input>
+
               {/* <img
                 src="https://teameowdev.files.wordpress.com/2016/04/avatar24-01.png"
                 alt="memberAvatar"
@@ -612,7 +614,7 @@ function MemberPage() {
       ) : (
         ''
       )}
-      <MemberNav2/>
+      <MemberNav2 />
     </>
   )
 }

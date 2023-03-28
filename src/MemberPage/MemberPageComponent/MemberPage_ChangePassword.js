@@ -42,7 +42,7 @@ function MemberPage_ChangePassword({ onHide }) {
   return (
     <>
       {console.log(str)}
-      <div className="member_body">
+      {/* <div className="member_body"> */}
         {/* <!-- 要顯示請加 "change_info_true" --> */}
         <div className="changePassword-info change_info_true">
           <p>更改密碼</p>
@@ -173,7 +173,7 @@ function MemberPage_ChangePassword({ onHide }) {
             <i className="fa-solid fa-xmark"></i>
           </button>
         </div>
-      </div>
+      {/* </div> */}
     </>
   )
 }
