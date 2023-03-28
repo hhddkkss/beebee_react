@@ -285,7 +285,9 @@ function MemberLogin() {
   return (
     <>
       <div className="wrapper">
-        <div className="logoImg_solid">
+        <div className="logoImg_solid" onClick={()=>{
+          navigation('/')
+        }}>
           <svg
             width="490"
             height="93"
