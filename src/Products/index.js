@@ -190,6 +190,8 @@ function Products() {
 
   useEffect(() => {
     displayFavorites ? getFavoritesData(memberAuth.memberId) : getProductData()
+    setKeyword('')
+    setInputText('')
   }, [displayFavorites])
 
   useEffect(() => {
