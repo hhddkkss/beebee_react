@@ -6,7 +6,7 @@ function Animation() {
   const animationRef = useRef()
   return (
    <>
-
+  {console.log(animationRef)}
      <div className="animation" ref={animationRef} onAnimationEnd={()=>{
       setTimeout(()=>{
         animationRef.current.style.opacity = "0"

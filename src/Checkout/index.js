@@ -100,6 +100,7 @@ function Checkout() {
 
   //驗證表單用
   const handleValidation = () => {
+    //驗證前要初始化
     setValidation({})
     //判斷input裡面的東西有沒有符合
     let passValidation = true

@@ -1,0 +1,101 @@
+.swiper {
+  width: 100%;
+  height: 650px;
+  margin: 0 auto 1rem;
+}
+.swiper-slide {
+  text-align: center;
+  background: #fff;
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 650px;
+  object-fit: cover;
+}
+
+.swiper .advertise {
+  width: 100%;
+  height: 650px;
+  background-color: rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: 0;
+}
+
+/* 廣告文字在輪播牆圖片上 */
+.swiper .advertise .advertise-text {
+  position: absolute;
+  top: 30%;
+  left: 8%;
+  font-family: creamfont;
+  /* background-color: rgba(255, 228, 196, 0.814); */
+  background-color: #d7d7d74e;
+  padding: 1rem;
+  border-radius: 5px;
+}
+.swiper .advertise .advertise-text h2 {
+  color: var(--deepBlue);
+  margin-bottom: 1rem;
+  font-family: creamfont;
+  text-align: center;
+}
+.swiper .advertise .advertise-text p {
+  width: 300px;
+  /* color: var(--deepBlue); */
+  color: #fff;
+  font-family: creamfont;
+}
+
+.swiper-button-next:after {
+  color: var(--deepBlue);
+}
+.swiper-button-prev:after {
+  color: var(--deepBlue);
+}
+.swiper-pagination-bullet-active {
+  background-color: #233a66 !important;
+}
+
+@media screen and (max-width: 375px) {
+  .swiper .advertise {
+    height: 50vh;
+  }
+
+  .swiper {
+    height: 50vh;
+  }
+
+  .swiper-slide img {
+    width: 100%;
+    height: 50vh;
+  }
+
+  .swiper .advertise .advertise-text {
+    width: 40px;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    top: 50px;
+    left: 50px;
+  }
+  .swiper .advertise .advertise-text h2 {
+    /* color: var(--deepBlue); */
+    color: var(--textColorWhite);
+    text-align: center;
+    font-size: 20px;
+  }
+  .swiper .advertise .advertise-text p {
+    display: none;
+  }
+  .swiper-button-next:after {
+    display: none;
+  }
+  .swiper-button-prev:after {
+    display: none;
+  }
+}

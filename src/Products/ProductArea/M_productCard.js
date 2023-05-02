@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import ProductFunctionContext from '../../Contexts/ProductFunctionContext'
-import '../../styles/products.css'
+import '../../styles/product_page/products.css'
 
 function M_productCard({ productsDisplay }) {
   const { products, pageNow } = useContext(ProductFunctionContext)
